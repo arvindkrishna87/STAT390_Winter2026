@@ -1,0 +1,1 @@
+The naming convention for all files in this folder will be <Documentation_number>_<Team_number>. For example, Documentation1_Team1

@@ -1,0 +1,1 @@
+The naming convention for all files in this folder will be <Recording_number>_<Team_number>. For example, Recording1_Team1
