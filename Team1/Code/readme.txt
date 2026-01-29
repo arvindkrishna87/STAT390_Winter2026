@@ -1,1 +1,3 @@
-The naming convention for all files and folders in this folder will be <Code_number>_<code_description>_<date>_<name_of_person>. For example, Code1_ModelTraining_23Jan_John. If the entire team has worked on the same code, then you may mention it as Code1_ModelTraining_23Jan_team
+The naming convention for all files and folders in this folder will be <Code_number>_<code_description>_<date>_<name_of_person>. For example, Code1_ModelTraining_23Jan_John. If the entire team has worked on the same code, then you may mention it as Code1_ModelTraining_23Jan_team.
+
+Note that "Code_number" is the same as presentation number.
