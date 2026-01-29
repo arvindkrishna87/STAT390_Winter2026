@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=e32998                  # Use your Quest project account (check with 'groups')
 #SBATCH --partition=long                  # 'short', 'normal', or 'long' partition
-#SBATCH --time=18:00:00                    # max run time
+#SBATCH --time=2:00:00                    # max run time
 #SBATCH --nodes=1                         # 1 node
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
@@ -9,7 +9,7 @@
 #SBATCH --output=/projects/e32998/MIL_training/logs/training_logs_%j.log  # Standard output file
 #SBATCH --error=/projects/e32998/MIL_training/logs/training_logs_%j.log   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
-#SBATCH --mail-user=YOUR_NETID@u.northwestern.edu  # Your NU email
+#SBATCH --mail-user=krish@northwestern.edu  # Your NU email
 
 module purge
 eval "$(conda shell.bash hook)"
