@@ -58,6 +58,10 @@ class HierarchicalAttnMIL(nn.Module):
         
         if base_model is None:
             base_model = models.densenet121(pretrained=True)
+            
+            # Load KimiaNet pre-trained weights
+            kimianet_weights = torch.load('./KimiaNetPyTorchWeights.pth')
+            base_model.load_state_dict(kimianet_weights)
         
         # Shared feature extractor (pretrained CNN) - FROZEN
         self.features = base_model.features
@@ -218,7 +222,7 @@ class HierarchicalAttnMIL(nn.Module):
         return logits
 
 
-def create_model(num_classes: int = None, embed_dim: int = None, dropout: float = None, pretrained: bool = True) -> HierarchicalAttnMIL:
+def create_model(num_classes: int = None, embed_dim: int = None, dropout: float = None) -> HierarchicalAttnMIL:
     """
     Factory function to create the MIL model
     """
@@ -230,12 +234,8 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
         from config import TRAINING_CONFIG
         dropout = TRAINING_CONFIG.get('dropout', 0.3)
     
-    # Create base model
-    base_model = models.densenet121(pretrained=pretrained)
-    
     # Create and return MIL model
     model = HierarchicalAttnMIL(
-        base_model=base_model,
         num_classes=num_classes,
         embed_dim=embed_dim,
         dropout=dropout
