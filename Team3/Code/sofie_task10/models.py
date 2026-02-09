@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torchvision.models as models
 from typing import Dict, List, Any, Optional, Tuple
+from collections import OrderedDict
 
 from config import MODEL_CONFIG
 
@@ -65,7 +66,20 @@ class HierarchicalAttnMIL(nn.Module):
             kimianet_weights = torch.load(
                 '../KimiaNetPyTorchWeights.pth',
                 map_location=device)
-            base_model.load_state_dict(kimianet_weights)
+            #deal with mismatching feature names due to DataParallel and model nesting
+            new_state_dict = OrderedDict()
+            for k, v in kimianet_weights.items():
+                # remove DataParallel prefix
+                if k.startswith("module."):
+                    k = k[len("module."):]
+
+                # remove model.0. nesting
+                if k.startswith("model.0."):
+                    k = k[len("model.0."):]
+
+                new_state_dict[k] = v
+
+            base_model.load_state_dict(new_state_dict)
         
         # Shared feature extractor (pretrained CNN) - FROZEN
         self.features = base_model.features
