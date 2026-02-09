@@ -59,8 +59,12 @@ class HierarchicalAttnMIL(nn.Module):
         if base_model is None:
             base_model = models.densenet121(pretrained=True)
             
+            
             # Load KimiaNet pre-trained weights
-            kimianet_weights = torch.load('../KimiaNetPyTorchWeights.pth')
+            device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+            kimianet_weights = torch.load(
+                '../KimiaNetPyTorchWeights.pth',
+                map_location=device)
             base_model.load_state_dict(kimianet_weights)
         
         # Shared feature extractor (pretrained CNN) - FROZEN
