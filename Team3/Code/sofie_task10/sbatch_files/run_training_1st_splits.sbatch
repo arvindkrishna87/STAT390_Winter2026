@@ -28,9 +28,6 @@ export SSL_CERT_FILE="$(python -m certifi)"
 
 cd /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10
 
-# Set CUDA environment variable to tell PyTorch GPU is available
-export CUDA_AVAILABLE=true
-
 # Run hyperparameter tuning
 echo "=================================="
 echo "Starting Hyperparameter Optimization"
