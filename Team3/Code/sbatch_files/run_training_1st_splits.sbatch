@@ -6,8 +6,8 @@
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
 #SBATCH --job-name=MIL_train              # Job name (no spaces)
-#SBATCH --output=test.out  # Standard output file
-#SBATCH --error=test.err   # now writing error to the same log file
+#SBATCH --output=mandatory_changes.out  # Standard output file
+#SBATCH --error=mandatory_changes.err   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
 #SBATCH --mail-user=sofielangenhuizen2026@u.northwestern.edu  # Your NU email
 
