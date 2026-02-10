@@ -71,13 +71,16 @@ class HierarchicalAttnMIL(nn.Module):
             for k, v in kimianet_weights.items():
                 # remove DataParallel prefix
                 if k.startswith("module."):
-                    k = k[len("module."):]
+                    k = "features." + k[len("module."):]
 
                 # remove model.0. nesting
                 if k.startswith("model.0."):
-                    k = k[len("model.0."):]
-                
-                k = "features." + k
+                    k = "features." + k[len("model.0."):]
+
+                # remove fc_4. nesting
+                if k.startswith("fc_4."):
+                    k = "classifier." + k[len("fc_4."):]
+                    
                 new_state_dict[k] = v
 
             base_model.load_state_dict(new_state_dict)
