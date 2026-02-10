@@ -6,8 +6,8 @@
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
 #SBATCH --job-name=MIL_train              # Job name (no spaces)
-#SBATCH --output=task10_sofie.out  # Standard output file
-#SBATCH --error=task10_sofie.err   # now writing error to the same log file
+#SBATCH --output=task10_sofie_feb10.out  # Standard output file
+#SBATCH --error=task10_sofie_feb10.err   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
 #SBATCH --mail-user=sofielangenhuizen2026@u.northwestern.edu  # Your NU email
 
