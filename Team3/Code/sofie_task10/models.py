@@ -66,20 +66,24 @@ class HierarchicalAttnMIL(nn.Module):
             kimianet_weights = torch.load(
                 '../KimiaNetPyTorchWeights.pth',
                 map_location=device)
+            
             #deal with mismatching feature names due to DataParallel and model nesting
             new_state_dict = OrderedDict()
             for k, v in kimianet_weights.items():
                 # remove DataParallel prefix
                 if k.startswith("module."):
-                    k = "features." + k[len("module."):]
+                    k = k[len("module."):]
+                    k = "features." + k
 
                 # remove model.0. nesting
                 if k.startswith("model.0."):
-                    k = "features." + k[len("model.0."):]
+                    k = k[len("model.0."):]
+                    k = "features." + k
 
                 # remove fc_4. nesting
                 if k.startswith("fc_4."):
-                    k = "classifier." + k[len("fc_4."):]
+                    k = k[len("fc_4."):]
+                    k = "classifier." + k
                     
                 new_state_dict[k] = v
 
