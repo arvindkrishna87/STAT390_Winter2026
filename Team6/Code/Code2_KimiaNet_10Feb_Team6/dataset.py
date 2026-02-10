@@ -157,7 +157,6 @@ def create_transforms(is_training: bool = True) -> transforms.Compose:
     if is_training:
         # Training transforms with augmentation
         transform = transforms.Compose([
-            transforms.RandomResizedCrop(IMAGE_CONFIG['image_size'][0]),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.RandomRotation(15),
