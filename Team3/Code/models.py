@@ -77,6 +77,7 @@ class HierarchicalAttnMIL(nn.Module):
                 if k.startswith("model.0."):
                     k = k[len("model.0."):]
 
+                k = "features." + k
                 new_state_dict[k] = v
 
             base_model.load_state_dict(new_state_dict)
