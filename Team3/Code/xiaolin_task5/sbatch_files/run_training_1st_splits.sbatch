@@ -9,7 +9,7 @@
 #SBATCH --output=test.out  # Standard output file
 #SBATCH --error=test.err   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
-#SBATCH --mail-user=sofielangenhuizen2026@u.northwestern.edu  # Your NU email
+#SBATCH --mail-user=xiaolinliu2026@u.northwestern.edu  # Your NU email
 
 module purge
 module load python-anaconda3/2019.10
@@ -26,7 +26,7 @@ python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
 
-cd /projects/e32998/STAT390_Winter2026/Team3/Code/
+cd /projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task5
 
 # without loading checkpoints, trying 5 diff train / test splits
 
