@@ -70,23 +70,21 @@ class HierarchicalAttnMIL(nn.Module):
             #deal with mismatching feature names due to DataParallel and model nesting
             new_state_dict = OrderedDict()
             for k, v in kimianet_weights.items():
-                # remove DataParallel prefix
+                 #remove incorrect prefixes
                 if k.startswith("module."):
                     k = k[len("module."):]
-                    k = "features." + k
-
-                # remove model.0. nesting
                 if k.startswith("model.0."):
                     k = k[len("model.0."):]
-                    k = "features." + k
-
-                # remove fc_4. nesting
                 if k.startswith("fc_4."):
                     k = k[len("fc_4."):]
-                    k = "classifier." + k
-                    
-                new_state_dict[k] = v
 
+                #add correct prefixes
+                if k.startswith(("conv", "norm", "denseblock", "transition")):
+                    k = "features." + k
+                else:
+                    k = "classifier." + k
+                
+                new_state_dict[k] = v
             base_model.load_state_dict(new_state_dict)
         
         # Shared feature extractor (pretrained CNN) - FROZEN
