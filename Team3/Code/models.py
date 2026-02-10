@@ -85,7 +85,12 @@ class HierarchicalAttnMIL(nn.Module):
                 
                 new_state_dict[k] = v
 
-            base_model.load_state_dict(new_state_dict)
+            # Remove classifier weights from checkpoint
+            filtered_state_dict = {
+                k: v for k, v in new_state_dict.items()
+                if not k.startswith("classifier.")
+            }
+            base_model.load_state_dict(filtered_state_dict, strict=False)
         
         # Shared feature extractor (pretrained CNN) - FROZEN
         self.features = base_model.features
