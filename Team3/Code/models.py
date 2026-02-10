@@ -63,7 +63,7 @@ class HierarchicalAttnMIL(nn.Module):
             # Load KimiaNet pre-trained weights
             device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
             kimianet_weights = torch.load(
-                '../KimiaNetPyTorchWeights.pth',
+                './KimiaNetPyTorchWeights.pth',
                 map_location=device)
 
             #deal with mismatching feature names due to DataParallel and model nesting
