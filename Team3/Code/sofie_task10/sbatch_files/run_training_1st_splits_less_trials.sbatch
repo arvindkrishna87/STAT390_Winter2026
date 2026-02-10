@@ -34,7 +34,7 @@ echo "Starting Hyperparameter Optimization"
 echo "=================================="
 
 # Option 1: Use existing data splits (recommended for consistency)
-python3 hyperparameter_tuning.py \
+python3 hyperparameter_tuning_fewer_epochs.py \
     --n_trials 20 \
     --seed 42 \
     --study_name mil_tuning_$(date +%Y%m%d_%H%M%S) \
