@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=e32998                  # Use your Quest project account (check with 'groups')
 #SBATCH --partition=long                  # 'short', 'normal', or 'long' partition
-#SBATCH --time=18:00:00                    # max run time
+#SBATCH --time=46:00:00                    # max run time
 #SBATCH --nodes=1                         # 1 node
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
@@ -35,7 +35,7 @@ echo "=================================="
 
 # Option 1: Use existing data splits (recommended for consistency)
 python3 hyperparameter_tuning.py \
-    --n_trials 50 \
+    --n_trials 5 \
     --seed 42 \
     --study_name mil_tuning_$(date +%Y%m%d_%H%M%S) \
     --data_splits /projects/e32998/STAT390_Winter2026/Team3/Code/data_splits/data_splits_01.npz
