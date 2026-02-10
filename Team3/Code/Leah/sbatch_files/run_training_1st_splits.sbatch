@@ -6,10 +6,10 @@
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
 #SBATCH --job-name=MIL_train              # Job name (no spaces)
-#SBATCH --output=test.out  # Standard output file
-#SBATCH --error=test.err   # now writing error to the same log file
+#SBATCH --output=leahtask11test.out  # Standard output file
+#SBATCH --error=leahtask11test.err   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
-#SBATCH --mail-user=sofielangenhuizen2026@u.northwestern.edu  # Your NU email
+#SBATCH --mail-user=leahtan2026@u.northwestern.edu  # Your NU email
 
 module purge
 module load python-anaconda3/2019.10
