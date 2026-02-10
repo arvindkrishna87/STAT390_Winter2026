@@ -11,7 +11,7 @@ from collections import defaultdict
 # Import our modules
 from config import DATA_PATHS, TRAINING_CONFIG, MODEL_CONFIG
 from data_utils import (
-    load_labels, get_all_patch_files, group_patches_by_slice,
+    load_labels, get_all_patch_files, group_patches_by_slice, split_cases_with_excess_slices,
     build_slice_to_class_map, split_by_case_stratified, build_case_dict,
     report_no_leak, summarize_case_dict
 )
@@ -88,16 +88,24 @@ def prepare_data(args):
     # Group patches by slice
     patches = group_patches_by_slice(all_files, args.patches_dir)
     print(f"Grouped into {len(patches)} slices")
-    
-    ######### NEW SPLITTING LOGIC OF MAX_SLICES > 5 INTO PSUEDO CASES ################
+
+    ######### NEW SPLITTING LOGIC OF MAX_SLICES > 5 INTO PSEUDO CASES ################
     print("\n" + "-" * 40)
-    print('Splitting cases with > 5 slices into pseudo-cases to maximize data usage...')
+    print('Splitting benign cases with > 5 slices into pseudo-cases to maximize data usage...')
     print("\n" + "-" * 40)
-    original_num_slices = len(patches)
+
+    # Save original for comparison
+    original_cases = set(case_id for (case_id, _) in patches.keys())
+
+    # Perform splitting
     patches = split_cases_with_excess_slices(patches, max_slices=args.max_slices_per_stain, random_state=args.seed)
-    new_num_slices = len(patches)
-    print(f"Slices after splitting: {original_num_slices} → {new_num_slices}")
-    print(f"Pseudo-slices added: {new_num_slices - original_num_slices}")
+
+    # Count new cases
+    new_cases = set(case_id for (case_id, _) in patches.keys())
+
+    print(f"Original unique cases: {len(original_cases)}")
+    print(f"New unique cases: {len(new_cases)}")
+    print(f"Pseudo-cases added: {len(new_cases) - len(original_cases)}")
     ##################################################################################
 
     # Build slice to class mapping

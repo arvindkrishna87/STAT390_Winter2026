@@ -85,27 +85,30 @@ def split_cases_with_excess_slices(case_slices: Dict[Tuple[int, str], List[str]]
     Returns: new_case_slices: {(new_case_id, slice_id): [patch_paths]} where new_case_id is either the original case_id or a pseudo-case ID for split cases (i.e. 26_g0, 26_g1, etc.)
     """
     random.seed(random_state)
+    
+    # Define specific cases to split
+    CASES_TO_SPLIT = {26, 22, 24, 25, 27, 82, 65}
 
-    #Group case/stain by slices
+    # Group case/stain by slices
     case_stain_to_slices = defaultdict(list)
     for (case_id, slice_id), paths in case_slices.items():
         stain = '_'.join(slice_id.split('_')[:-1])  # Extract stain from slice_id
         case_stain_to_slices[(case_id, stain)].append((slice_id, paths))
 
-    #Identify cases to split 
+    # Identify cases to split - only split if in CASES_TO_SPLIT
     cases_to_split = set()
     for (case_id, stain), slices in case_stain_to_slices.items():
-        if len(slices) > max_slices:
-            cases_to_split.add((case_id, stain))
+        if case_id in CASES_TO_SPLIT and len(slices) > max_slices:
+            cases_to_split.add(case_id)  # Note: just add case_id, not (case_id, stain)
             print(f"Case {case_id} with stain {stain} has {len(slices)} slices and will be split.")
 
-    #Perform splitting
+    # Perform splitting
     new_case_slices = {}
     case_to_stains = defaultdict(dict)
     for (case_id, stain), slices in case_stain_to_slices.items():
         case_to_stains[case_id][stain] = slices
     
-    #Process/Split each case
+    # Process/Split each case
     for case_id, stain_dict in case_to_stains.items():
         if case_id not in cases_to_split:
             # No splitting needed, just add to new_case_slices
@@ -118,15 +121,17 @@ def split_cases_with_excess_slices(case_slices: Dict[Tuple[int, str], List[str]]
 
             stain_partitions = {}
             for stain, slices in stain_dict.items():
-                random.shuffle(slices)  # Shuffle slices to randomize grouping
-                stain_partitions[stain] = [slices[i:i + max_slices] for i in range(0, len(slices), max_slices)]    
+                shuffled_slices = slices.copy()  # Create a copy before shuffling
+                random.shuffle(shuffled_slices)  # Shuffle slices to randomize grouping
+                stain_partitions[stain] = [shuffled_slices[i:i + max_slices] for i in range(0, len(shuffled_slices), max_slices)]    
 
             for group_idx in range(num_groups):
                 pseudo_case_id = f"{case_id}_g{group_idx}"
                 
                 for stain, partitions in stain_partitions.items():
-                    for slice_id, patch_paths in partitions[group_idx]:
-                        new_case_slices[(pseudo_case_id, slice_id)] = patch_paths
+                    if group_idx < len(partitions):  # Safety check
+                        for slice_id, patch_paths in partitions[group_idx]:
+                            new_case_slices[(pseudo_case_id, slice_id)] = patch_paths
     return new_case_slices
 
 ####NEED TO CREATE NEW HELPER NOW THAT WE HAVE CREATED PSUEDOCASES SO THAT OTHER FUNCTIONS DON'T BREAK WHEN THEY EXPECT CASE IDS TO BE INTEGERS

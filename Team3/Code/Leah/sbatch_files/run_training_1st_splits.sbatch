@@ -26,7 +26,7 @@ python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
 
-cd /projects/e32998/STAT390_Winter2026/Team3/Code/
+cd /projects/e32998/STAT390_Winter2026/Team3/Code/Leah/
 
 # without loading checkpoints, trying 5 diff train / test splits
 
