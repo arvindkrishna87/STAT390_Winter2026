@@ -197,17 +197,20 @@ def create_data_loaders(train_data, val_data, test_data, args):
     # Create data loaders
     train_loader = DataLoader(
         train_ds, batch_size=args.batch_size, shuffle=True,
-        num_workers=args.num_workers, pin_memory=True, collate_fn=case_collate_fn
+        num_workers=args.num_workers, pin_memory=True, collate_fn=case_collate_fn,
+        persistent_workers=True
     )
     
     val_loader = DataLoader(
         val_ds, batch_size=args.batch_size, shuffle=False,
-        num_workers=args.num_workers, pin_memory=True, collate_fn=case_collate_fn
+        num_workers=args.num_workers, pin_memory=True, collate_fn=case_collate_fn,
+        persistent_workers=True
     )
     
     test_loader = DataLoader(
         test_ds, batch_size=args.batch_size, shuffle=False,
-        num_workers=args.num_workers, pin_memory=True, collate_fn=case_collate_fn
+        num_workers=args.num_workers, pin_memory=True, collate_fn=case_collate_fn,
+        persistent_workers=True
     )
     
     print(f"Created data loaders - Train: {len(train_loader)}, Val: {len(val_loader)}, Test: {len(test_loader)}")
