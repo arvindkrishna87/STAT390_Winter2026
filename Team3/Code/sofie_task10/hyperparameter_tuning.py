@@ -12,6 +12,11 @@ from torch.utils.data import DataLoader
 import json
 from datetime import datetime
 from collections import defaultdict
+import optuna.visualization as vis
+import plotly
+import plotly.graph_objects as go
+import plotly.subplots as sp
+import math
 
 # Import your existing modules
 from config import DATA_PATHS, TRAINING_CONFIG, MODEL_CONFIG
@@ -51,6 +56,9 @@ class HyperparameterTuner:
         # Create study directory
         self.study_dir = os.path.join("runs", self.study_name)
         os.makedirs(self.study_dir, exist_ok=True)
+        
+        # Storage for training histories across all trials
+        self.trial_histories = {}
         
         # Load and prepare data once (reused across all trials)
         self.train_data, self.val_data, self.test_data = self._prepare_data()
@@ -175,7 +183,7 @@ class HyperparameterTuner:
             # Training
             'learning_rate': trial.suggest_float('learning_rate', 1e-5, 1e-3, log=True),
             'weight_decay': trial.suggest_float('weight_decay', 1e-6, 1e-3, log=True),
-            'batch_size': trial.suggest_categorical('batch_size', [1]),  # MIL typically uses batch_size=1
+            'batch_size': trial.suggest_categorical('batch_size', [1]),
             
             # Class weights for handling imbalance
             # Weight for benign class (class 0), high-grade class weight fixed at 1.0
@@ -259,6 +267,15 @@ class HyperparameterTuner:
         
         # Train with pruning callback
         best_val_loss = float('inf')
+        epochs_without_improvement = 0
+
+        # Per-trial history tracked here and stored on self for later use in _save_results
+        history = {
+            'train_loss': [],
+            'val_loss': [],
+            'val_acc': [],
+            'params': trial.params,
+        }
         
         for epoch in range(trial_params['epochs']):
             # Train epoch
@@ -266,6 +283,11 @@ class HyperparameterTuner:
             
             # Validate
             val_loss, val_acc = trainer.validate(val_loader)
+
+            # Record epoch metrics
+            history['train_loss'].append(float(train_loss))
+            history['val_loss'].append(float(val_loss))
+            history['val_acc'].append(float(val_acc))
             
             # Update scheduler
             if trainer.scheduler:
@@ -280,6 +302,9 @@ class HyperparameterTuner:
             # Handle pruning
             if trial.should_prune():
                 print(f"Trial {trial.number} pruned at epoch {epoch}")
+                history['pruned'] = True
+                history['pruned_at_epoch'] = epoch
+                self.trial_histories[trial.number] = history
                 raise optuna.TrialPruned()
             
             # Track best validation loss
@@ -295,6 +320,10 @@ class HyperparameterTuner:
                 break
             
             print(f"Epoch {epoch + 1}/{trial_params['epochs']} - Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}")
+
+        history['pruned'] = False
+        history['best_val_loss'] = float(best_val_loss)
+        self.trial_histories[trial.number] = history
         
         # Clean up to free memory
         del model, trainer, train_loader, val_loader
@@ -351,6 +380,13 @@ class HyperparameterTuner:
         trials_csv_path = os.path.join(self.study_dir, "all_trials.csv")
         trials_df.to_csv(trials_csv_path, index=False)
         print(f"All trials saved to: {trials_csv_path}")
+
+        # ── Save all training histories as JSON ──────────────────────────────
+        histories_path = os.path.join(self.study_dir, "trial_histories.json")
+        with open(histories_path, 'w') as f:
+            # Convert int keys to strings for valid JSON
+            json.dump({str(k): v for k, v in self.trial_histories.items()}, f, indent=2)
+        print(f"Training histories saved to: {histories_path}")
         
         # Save study summary
         summary_path = os.path.join(self.study_dir, "optimization_summary.txt")
@@ -372,24 +408,192 @@ class HyperparameterTuner:
         
         print(f"Optimization summary saved to: {summary_path}")
         
-        # Create visualization if optuna.visualization is available
+        # Create visualizations
         try:
-            import optuna.visualization as vis
-            import plotly
-            
-            # Optimization history
-            fig = vis.plot_optimization_history(study)
-            fig.write_html(os.path.join(self.study_dir, "optimization_history.html"))
-            
-            # Parameter importance
+
+            # ── 1. Feature importances (existing) ────────────────────────────
             fig = vis.plot_param_importances(study)
             fig.write_html(os.path.join(self.study_dir, "param_importances.html"))
-            
-            # Parallel coordinate plot
-            fig = vis.plot_parallel_coordinate(study)
-            fig.write_html(os.path.join(self.study_dir, "parallel_coordinate.html"))
-            
+
+            # ── 2. Trial convergence: val_loss curves for every trial ─────────
+            # Separate completed vs pruned for visual clarity
+            completed_trials = {
+                k: v for k, v in self.trial_histories.items()
+                if not v.get('pruned', False) and v.get('val_loss')
+            }
+            pruned_trials = {
+                k: v for k, v in self.trial_histories.items()
+                if v.get('pruned', False) and v.get('val_loss')
+            }
+
+            best_trial_num = study.best_trial.number
+            fig_conv = go.Figure()
+
+            # Pruned trials (faint dashed)
+            for trial_num, hist in pruned_trials.items():
+                epochs = list(range(1, len(hist['val_loss']) + 1))
+                fig_conv.add_trace(go.Scatter(
+                    x=epochs, y=hist['val_loss'],
+                    mode='lines',
+                    line=dict(color='rgba(180,180,180,0.35)', width=1, dash='dot'),
+                    name=f"Trial {trial_num} (pruned)",
+                    showlegend=False,
+                    hovertemplate=f"Trial {trial_num} (pruned)<br>Epoch: %{{x}}<br>Val Loss: %{{y:.4f}}<extra></extra>"
+                ))
+
+            # Completed trials (semi-transparent)
+            colorscale = plotly.colors.sample_colorscale(
+                'Viridis', [i / max(len(completed_trials) - 1, 1) for i in range(len(completed_trials))]
+            )
+            for idx, (trial_num, hist) in enumerate(sorted(completed_trials.items())):
+                epochs = list(range(1, len(hist['val_loss']) + 1))
+                is_best = (trial_num == best_trial_num)
+                fig_conv.add_trace(go.Scatter(
+                    x=epochs, y=hist['val_loss'],
+                    mode='lines',
+                    line=dict(
+                        color='rgba(255,80,80,1.0)' if is_best else colorscale[idx],
+                        width=3 if is_best else 1.5,
+                    ),
+                    name=f"Trial {trial_num}" + (" ★ best" if is_best else ""),
+                    hovertemplate=f"Trial {trial_num}<br>Epoch: %{{x}}<br>Val Loss: %{{y:.4f}}<extra></extra>"
+                ))
+
+            fig_conv.update_layout(
+                title="Validation Loss Convergence — All Trials",
+                xaxis_title="Epoch",
+                yaxis_title="Validation Loss",
+                template="plotly_white",
+                legend=dict(orientation="v", x=1.01, y=1),
+                hovermode="x unified",
+            )
+            fig_conv.write_html(os.path.join(self.study_dir, "trial_convergence.html"))
+
+            # ── 3. Train vs Val loss curves per trial (multi-panel) ───────────
+            all_finished = {k: v for k, v in self.trial_histories.items() if v.get('val_loss')}
+            n_finished = len(all_finished)
+            if n_finished > 0:
+                n_cols = min(4, n_finished)
+                n_rows = math.ceil(n_finished / n_cols)
+                subplot_titles = [f"Trial {k}" + (" ★" if k == best_trial_num else "")
+                                  for k in sorted(all_finished.keys())]
+                fig_panels = sp.make_subplots(
+                    rows=n_rows, cols=n_cols,
+                    subplot_titles=subplot_titles,
+                    shared_xaxes=False,
+                    vertical_spacing=0.08,
+                    horizontal_spacing=0.06,
+                )
+                for idx, (trial_num, hist) in enumerate(sorted(all_finished.items())):
+                    row = idx // n_cols + 1
+                    col = idx % n_cols + 1
+                    epochs = list(range(1, len(hist['val_loss']) + 1))
+                    fig_panels.add_trace(
+                        go.Scatter(x=epochs, y=hist['train_loss'], mode='lines',
+                                   name='train', line=dict(color='steelblue', width=1.5),
+                                   showlegend=(idx == 0)),
+                        row=row, col=col
+                    )
+                    fig_panels.add_trace(
+                        go.Scatter(x=epochs, y=hist['val_loss'], mode='lines',
+                                   name='val', line=dict(color='tomato', width=1.5),
+                                   showlegend=(idx == 0)),
+                        row=row, col=col
+                    )
+                fig_panels.update_layout(
+                    title="Train vs Validation Loss — Per Trial",
+                    template="plotly_white",
+                    height=250 * n_rows + 80,
+                    showlegend=True,
+                )
+                fig_panels.write_html(os.path.join(self.study_dir, "per_trial_loss_curves.html"))
+
+            # ── 4. Parameter vs performance scatter plots ─────────────────────
+            completed_optuna = [t for t in study.trials if t.state == optuna.trial.TrialState.COMPLETE]
+            if completed_optuna:
+                param_names = list(completed_optuna[0].params.keys())
+                trial_values = [t.value for t in completed_optuna]
+
+                n_params = len(param_names)
+                n_cols_p = min(3, n_params)
+                n_rows_p = math.ceil(n_params / n_cols_p)
+
+                fig_scatter = sp.make_subplots(
+                    rows=n_rows_p, cols=n_cols_p,
+                    subplot_titles=param_names,
+                    vertical_spacing=0.10,
+                    horizontal_spacing=0.08,
+                )
+
+                for idx, param in enumerate(param_names):
+                    row = idx // n_cols_p + 1
+                    col = idx % n_cols_p + 1
+
+                    x_vals = []
+                    y_vals = []
+                    trial_nums = []
+                    for t in completed_optuna:
+                        if param in t.params:
+                            raw = t.params[param]
+                            # Categorical params that are None need to be stringified
+                            x_vals.append(str(raw) if raw is None else raw)
+                            y_vals.append(t.value)
+                            trial_nums.append(t.number)
+
+                    # Determine if x is numeric or categorical
+                    numeric_vals = []
+                    for v in x_vals:
+                        try:
+                            numeric_vals.append(float(v))
+                        except (ValueError, TypeError):
+                            numeric_vals = None
+                            break
+
+                    if numeric_vals is not None:
+                        fig_scatter.add_trace(
+                            go.Scatter(
+                                x=numeric_vals, y=y_vals,
+                                mode='markers',
+                                marker=dict(
+                                    color=y_vals,
+                                    colorscale='RdYlGn_r',
+                                    showscale=(idx == 0),
+                                    size=8,
+                                    colorbar=dict(title="Val Loss", x=1.02) if idx == 0 else None,
+                                ),
+                                text=[f"Trial {n}" for n in trial_nums],
+                                hovertemplate=f"{param}: %{{x}}<br>Val Loss: %{{y:.4f}}<br>%{{text}}<extra></extra>",
+                                showlegend=False,
+                            ),
+                            row=row, col=col
+                        )
+                    else:
+                        # Box plot grouping by categorical value
+                        unique_cats = sorted(set(x_vals), key=str)
+                        for cat in unique_cats:
+                            cat_losses = [y for x, y in zip(x_vals, y_vals) if x == cat]
+                            fig_scatter.add_trace(
+                                go.Box(
+                                    y=cat_losses,
+                                    name=str(cat),
+                                    showlegend=False,
+                                    marker_color='steelblue',
+                                    boxpoints='all',
+                                    jitter=0.3,
+                                    pointpos=0,
+                                ),
+                                row=row, col=col
+                            )
+
+                fig_scatter.update_layout(
+                    title="Hyperparameter Values vs Validation Loss",
+                    template="plotly_white",
+                    height=320 * n_rows_p + 80,
+                )
+                fig_scatter.write_html(os.path.join(self.study_dir, "param_vs_performance.html"))
+
             print(f"Visualizations saved to: {self.study_dir}")
+
         except ImportError:
             print("Install plotly for visualizations: pip install plotly")
 
