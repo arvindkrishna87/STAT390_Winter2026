@@ -2,6 +2,7 @@
 Model architectures for MIL training
 """
 import torch
+import os
 import torch.nn as nn
 import torchvision.models as models
 from typing import Dict, List, Any, Optional, Tuple
@@ -217,6 +218,26 @@ class HierarchicalAttnMIL(nn.Module):
         
         return logits
 
+def load_kimianet_densenet(weights_path: str):
+    """
+    Load DenseNet-121 with KimiNet pretrained weights
+    """
+    model = models.densenet121(pretrained=False)
+
+    state_dict = torch.load(weights_path, map_location="cpu")
+
+    # Some KimiNet checkpoints include classifier weights we don't need
+    model_dict = model.state_dict()
+
+    filtered_state_dict = {
+        k: v for k, v in state_dict.items()
+        if k in model_dict and model_dict[k].shape == v.shape
+    }
+
+    model_dict.update(filtered_state_dict)
+    model.load_state_dict(model_dict)
+
+    return model
 
 def create_model(num_classes: int = None, embed_dim: int = None, dropout: float = None, pretrained: bool = True) -> HierarchicalAttnMIL:
     """
@@ -231,7 +252,13 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
         dropout = TRAINING_CONFIG.get('dropout', 0.3)
     
     # Create base model
-    base_model = models.densenet121(pretrained=pretrained)
+    if pretrained:
+        base_model = load_kimianet_densenet(
+            weights_path="KimiaNetPyTorchWeights.pth"
+        )
+    else:
+        base_model = models.densenet121(pretrained=False)   
+    #base_model = models.densenet121(pretrained=pretrained)
     
     # Create and return MIL model
     model = HierarchicalAttnMIL(

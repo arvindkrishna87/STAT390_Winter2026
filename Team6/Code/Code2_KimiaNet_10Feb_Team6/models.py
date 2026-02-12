@@ -232,7 +232,7 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
     
     # Create base model
     base_model = models.densenet121(pretrained=pretrained)
-    base_model.load_state_dict(torch.load('./weights/KimiaNetPyTorchWeights.pth'))
+    base_model.load_state_dict(torch.load('KimiaNetPyTorchWeights.pth'))
     
     # Create and return MIL model
     model = HierarchicalAttnMIL(

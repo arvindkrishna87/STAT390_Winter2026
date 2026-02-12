@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/main.py", line 334, in <module>
+    main()
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/main.py", line 240, in main
+    train_data, val_data, test_data = prepare_data(args)
+                                      ^^^^^^^^^^^^^^^^^^
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/main.py", line 81, in prepare_data
+    labels = load_labels(args.labels_csv)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/data_utils.py", line 21, in load_labels
+    labels = pd.read_csv(csv_path).drop(index=64, errors='ignore').reset_index(drop=True)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/projects/e32998/MIL_training/case_grade_match.csv'
