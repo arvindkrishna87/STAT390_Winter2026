@@ -48,7 +48,7 @@ def analyze_attention_weights(model, test_loader, output_dir: str, top_n: int = 
             stain_slices = case_data["stain_slices"]
             
             # Get predictions with attention weights
-            logits, attention_weights, _ = model(stain_slices, return_attn_weights=True)
+            logits, attention_weights = model(stain_slices, return_attn_weights=True)
             # Track per-case labels/predictions for downstream summaries
             true_label = None
             label_tensor = case_data.get("label")
