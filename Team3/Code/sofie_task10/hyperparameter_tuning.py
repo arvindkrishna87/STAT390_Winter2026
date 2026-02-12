@@ -191,8 +191,8 @@ class HyperparameterTuner:
             'class_weight_high_grade': 1.0,  #fixed
             
             # Data sampling
-            'per_slice_cap': TRAINING_CONFIG['per_slice_cap'],
-            'max_slices_per_stain': TRAINING_CONFIG['max_slices_per_stain'],
+            'per_slice_cap': MODEL_CONFIG['per_slice_cap'],
+            'max_slices_per_stain': MODEL_CONFIG['max_slices_per_stain'],
             
             # Scheduler -- leave all at default
             'use_scheduler':   TRAINING_CONFIG['use_scheduler'], 

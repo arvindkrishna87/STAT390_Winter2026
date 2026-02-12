@@ -35,7 +35,7 @@ echo "=================================="
 
 # Option 1: Use existing data splits (recommended for consistency)
 python3 hyperparameter_tuning.py \
-    --n_trials 5 \
+    --n_trials 10 \
     --seed 42 \
     --study_name mil_tuning_$(date +%Y%m%d_%H%M%S) \
     --data_splits /projects/e32998/STAT390_Winter2026/Team3/Code/data_splits/data_splits_01.npz
