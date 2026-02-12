@@ -6,8 +6,8 @@
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
 #SBATCH --job-name=MIL_train              # Job name (no spaces)
-#SBATCH --output=mandatory_changes.out  # Standard output file
-#SBATCH --error=mandatory_changes.err   # now writing error to the same log file
+#SBATCH --output=first_run.out              # Standard output file
+#SBATCH --error=first_run.err               # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
 #SBATCH --mail-user=xiaolinliu2026@u.northwestern.edu  # Your NU email
 
@@ -27,6 +27,10 @@ export SSL_CERT_FILE="$(python -m certifi)"
 
 
 cd /projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task5
+
+echo "========================================"
+echo "Starting Entropy Regularization Training"
+echo "========================================"
 
 # without loading checkpoints, trying 5 diff train / test splits
 

@@ -52,6 +52,7 @@ class MILTrainer:
                     T_max=TRAINING_CONFIG['epochs'],
                     eta_min=TRAINING_CONFIG.get('scheduler_min_lr', 1e-6)
                 )
+        self.last_epoch_entropies = None
         
         # Early stopping
         self.early_stopping_patience = TRAINING_CONFIG.get('early_stopping_patience', 7)
@@ -72,6 +73,8 @@ class MILTrainer:
         """
         self.model.train()
         running_loss = 0.0
+        # Initialize trackers for each entropy level
+        running_entropies = {'patch': 0.0, 'stain': 0.0, 'case': 0.0}
         
         # Retrieve lambdas from config
         l_patch = TRAINING_CONFIG.get('lambda_patch', 0.0)
@@ -93,7 +96,11 @@ class MILTrainer:
             # Ensure label has batch dimension: scalar -> [1]
             if label.dim() == 0:
                 label = label.unsqueeze(0)
-            
+
+            for key in running_entropies:
+                # Extract scalar value from the tensor and add to running total
+                running_entropies[key] += entropy_dict[key].item()
+
             # Entropy Regularization: Total Loss = CE - (sum of weighted entropies)
             # This pushes entropy higher (more uniform distribution)
             total_entropy_penalty = (l_patch * entropy_dict['patch'] + 
@@ -111,6 +118,11 @@ class MILTrainer:
             running_loss += loss.item()
         
         avg_loss = running_loss / len(train_loader)
+        
+        avg_entropies = {k: v / len(train_loader) for k, v in running_entropies.items()}
+        # Store averages in the class so the main 'train' loop can access them
+        self.last_epoch_entropies = avg_entropies
+        
         self.train_losses.append(avg_loss)
         return avg_loss
     
@@ -239,6 +251,13 @@ class MILTrainer:
             
             # Train
             train_loss = self.train_epoch(train_loader)
+            
+            # Print entropy tracking info
+            ents = self.last_epoch_entropies
+            if ents is not None:
+                print(f"Entropy Tracking - Patch: {ents['patch']:.4f}, Stain: {ents['stain']:.4f}, Case: {ents['case']:.4f}")
+            else:
+                print("Entropy tracking info not available.")
             
             # Validate
             val_loss, val_acc = self.validate(val_loader)
