@@ -177,7 +177,7 @@ class HyperparameterTuner:
         # Suggest hyperparameters
         trial_params = {
             # Model architecture
-            'embed_dim': trial.suggest_categorical('embed_dim', [256, 512, 768, 1024]),
+            'embed_dim': 512,
             'dropout': trial.suggest_float('dropout', 0.1, 0.5),
             
             # Training
@@ -188,21 +188,21 @@ class HyperparameterTuner:
             # Class weights for handling imbalance
             # Weight for benign class (class 0), high-grade class weight fixed at 1.0
             'class_weight_benign': trial.suggest_float('class_weight_benign', 1.0, 5.0),
-            'class_weight_high_grade': 1.0,  # Fixed reference point
+            'class_weight_high_grade': 1.0,  #fixed
             
             # Data sampling
-            'per_slice_cap': trial.suggest_categorical('per_slice_cap', [50, 100, 150, 200]),
-            'max_slices_per_stain': trial.suggest_categorical('max_slices_per_stain', [None, 5, 10, 15, 20]),
+            'per_slice_cap': TRAINING_CONFIG['per_slice_cap'],
+            'max_slices_per_stain': TRAINING_CONFIG['max_slices_per_stain'],
             
-            # Scheduler
-            'use_scheduler': trial.suggest_categorical('use_scheduler', [True, False]),
-            'scheduler_type': trial.suggest_categorical('scheduler_type', ['reduce_on_plateau', 'cosine']),
-            'scheduler_factor': trial.suggest_float('scheduler_factor', 0.3, 0.7),
-            'scheduler_patience': trial.suggest_int('scheduler_patience', 2, 5),
+            # Scheduler -- leave all at default
+            'use_scheduler':   TRAINING_CONFIG['use_scheduler'], 
+            'scheduler_type': TRAINING_CONFIG['scheduler_type'],
+            'scheduler_factor': TRAINING_CONFIG['scheduler_factor'],
+            'scheduler_patience': TRAINING_CONFIG['scheduler_patience'],
             
-            # Early stopping
-            'early_stopping': trial.suggest_categorical('early_stopping', [True]),
-            'early_stopping_patience': trial.suggest_int('early_stopping_patience', 5, 10),
+            # Early stopping #leave as default
+            'early_stopping': TRAINING_CONFIG['early_stopping'], 
+            'early_stopping_patience': TRAINING_CONFIG['early_stopping_patience'],
             
             # Fixed parameters
             'num_workers': TRAINING_CONFIG['num_workers'],
@@ -344,7 +344,7 @@ class HyperparameterTuner:
         study = optuna.create_study(
             study_name=self.study_name,
             direction='minimize',  # Minimize validation loss
-            sampler=TPESampler(seed=self.seed),
+            sampler=TPESampler(seed=self.seed, gamma=0.25),
             pruner=MedianPruner(n_startup_trials=5, n_warmup_steps=10),
         )
         
