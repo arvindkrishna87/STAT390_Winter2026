@@ -261,7 +261,7 @@ def main():
     print("=" * 60)
     model = create_model(
         num_classes=MODEL_CONFIG['num_classes'],
-        kimianet_path=MODEL_CONFIG['kimianet_path']
+        embed_dim=MODEL_CONFIG['embed_dim'],
     )
     print_model_summary(model)
     

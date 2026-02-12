@@ -57,11 +57,15 @@ class HierarchicalAttnMIL(nn.Module):
         super().__init__()
         
         if base_model is None:
-            base_model = models.densenet121(pretrained=True)
+            base_model = models.densenet121(pretrained=False)
+            state_dict = torch.load("/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/KimiaNet.pth",
+                                    map_location=torch.device("cpu"))
+            base_model.load_state_dict(state_dict, strict=False)
+        
         # Shared feature extractor (pretrained CNN) - FROZEN
         self.features = base_model.features
         
-        # Freeze the pretrained feature extractor 
+        # Freeze the pretrained feature extractor
         for param in self.features.parameters():
             param.requires_grad = False
         
@@ -217,54 +221,10 @@ class HierarchicalAttnMIL(nn.Module):
         return logits
 
 
-def load_kimianet_weights(base_model: nn.Module, weights_path: str) -> nn.Module:
+def create_model(num_classes: int = None, embed_dim: int = None, dropout: float = None, pretrained: bool = True) -> HierarchicalAttnMIL:
     """
-    Load KimiaNet pretrained weights into DenseNet121 architecture
-    
-    Args:
-        base_model: DenseNet121 model instance
-        weights_path: Path to KimiaNet weights file
-    
-    Returns:
-        Model with loaded KimiaNet weights
+    Factory function to create the MIL model
     """
-    checkpoint = torch.load(weights_path, map_location='cpu')
-    
-    # Extract state dict (handle different checkpoint formats)
-    state_dict = checkpoint.get('state_dict', checkpoint)
-    
-    # Clean up state dict keys
-    cleaned_state_dict = {}
-    for key, value in state_dict.items():
-        # Remove 'module.' prefix from DataParallel
-        clean_key = key.replace('module.', '')
-        # Only keep feature extractor weights (exclude classifier)
-        if not clean_key.startswith('classifier'):
-            cleaned_state_dict[clean_key] = value
-    
-    # Load weights (strict=False allows missing classifier keys)
-    base_model.load_state_dict(cleaned_state_dict, strict=False)
-    print(f"✓ Loaded KimiaNet weights from {weights_path}")
-    
-    return base_model
-
-
-def create_model(num_classes: int = None,  embed_dim: int = None, dropout: float = None, pretrained: bool = True,
-    kimianet_path: Optional[str] = None) -> HierarchicalAttnMIL:
-    """
-    Factory function to create the hierarchical MIL model
-    
-    Args:
-        num_classes: Number of output classes
-        embed_dim: Embedding dimension for attention pooling
-        dropout: Dropout rate
-        pretrained: Use pretrained weights (ImageNet or KimiaNet)
-        kimianet_path: Path to KimiaNet weights (overrides ImageNet if provided)
-    
-    Returns:
-        HierarchicalAttnMIL model instance
-    """
-    # Set defaults from config
     if num_classes is None:
         num_classes = MODEL_CONFIG['num_classes']
     if embed_dim is None:
@@ -273,47 +233,15 @@ def create_model(num_classes: int = None,  embed_dim: int = None, dropout: float
         from config import TRAINING_CONFIG
         dropout = TRAINING_CONFIG.get('dropout', 0.3)
     
-    # Initialize base model based on weight source
-    if kimianet_path:
-        # KimiaNet: initialize without ImageNet weights, then load KimiaNet
-        base_model = models.densenet121(pretrained=False)
-        base_model = load_kimianet_weights(base_model, kimianet_path)
-    else:
-        # Standard ImageNet pretrained or random initialization
-        base_model = models.densenet121(pretrained=pretrained)
+    # Create base model
+    base_model = models.densenet121(pretrained=False)
+    state_dict = torch.load("/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/KimiaNet.pth",
+                            map_location=torch.device("cpu"))
+    base_model.load_state_dict(state_dict, strict=False)
     
-    # Create hierarchical MIL model
+    # Create and return MIL model
     model = HierarchicalAttnMIL(
         base_model=base_model,
-        num_classes=num_classes,
-        embed_dim=embed_dim,
-        dropout=dropout
-    )
-    
-    return model
-
-
-def create_model(num_classes: int = None, embed_dim: int = None, 
-                 dropout: float = None, kimianet_path: str = None) -> HierarchicalAttnMIL:
-    """Factory function to create the MIL model with optional KimiaNet weights"""
-    if num_classes is None:
-        num_classes = MODEL_CONFIG['num_classes']
-    if embed_dim is None:
-        embed_dim = MODEL_CONFIG['embed_dim']
-    if dropout is None:
-        from config import TRAINING_CONFIG
-        dropout = TRAINING_CONFIG.get('dropout', 0.3)
-    
-    # Create base model with KimiaNet or ImageNet weights
-    if kimianet_path:
-        base_model = models.densenet121(pretrained=False)
-        base_model = load_kimianet_weights(base_model, kimianet_path)
-    else:
-        base_model = models.densenet121(pretrained=True)
-    
-    # Pass the prepared base_model to HierarchicalAttnMIL
-    model = HierarchicalAttnMIL(
-        base_model=base_model,  # Already has KimiaNet weights loaded
         num_classes=num_classes,
         embed_dim=embed_dim,
         dropout=dropout
