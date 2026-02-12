@@ -73,6 +73,11 @@ class MILTrainer:
         self.model.train()
         running_loss = 0.0
         
+        # Retrieve lambdas from config
+        l_patch = TRAINING_CONFIG.get('lambda_patch', 0.0)
+        l_stain = TRAINING_CONFIG.get('lambda_stain', 0.0)
+        l_case = TRAINING_CONFIG.get('lambda_case', 0.0)
+        
         for batch in tqdm(train_loader, desc="Training"):
             case_data = batch[0]  # Get the first (and only) case in the batch
             
@@ -80,17 +85,23 @@ class MILTrainer:
             label = case_data["label"].to(self.device)
             
             # Forward pass - model outputs [num_classes] logits
-            outputs = self.model(stain_slices)
+            logits, entropy_dict = self.model(stain_slices)
             
             # Add batch dimension: [num_classes] -> [1, num_classes]
-            outputs = outputs.unsqueeze(0)
+            logits = logits.unsqueeze(0)
             
             # Ensure label has batch dimension: scalar -> [1]
             if label.dim() == 0:
                 label = label.unsqueeze(0)
             
+            # Entropy Regularization: Total Loss = CE - (sum of weighted entropies)
+            # This pushes entropy higher (more uniform distribution)
+            total_entropy_penalty = (l_patch * entropy_dict['patch'] + 
+                                    l_stain * entropy_dict['stain'] + 
+                                    l_case * entropy_dict['case'])
+            
             # Calculate loss
-            loss = self.criterion(outputs, label)
+            loss = self.criterion(logits, label) - total_entropy_penalty
             
             # Backward pass
             self.optimizer.zero_grad()
@@ -119,7 +130,8 @@ class MILTrainer:
                 stain_slices = case_data["stain_slices"]
                 label = case_data["label"].to(self.device)
                 
-                outputs = self.model(stain_slices)
+                result = self.model(stain_slices)
+                outputs = result[0]  # Get logits, ignore entropy_dict
                 
                 # Add batch dimension for loss calculation
                 outputs = outputs.unsqueeze(0)  # [1, num_classes]
@@ -289,7 +301,8 @@ class MILTrainer:
                 stain_slices = case_data["stain_slices"]
                 label = case_data["label"].to(self.device)
                 
-                outputs = self.model(stain_slices)
+                result = self.model(stain_slices)
+                outputs = result[0]  # Get logits, ignore entropy_dict
                 
                 # Add batch dimension for loss calculation
                 outputs = outputs.unsqueeze(0)

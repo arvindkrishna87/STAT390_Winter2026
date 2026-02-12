@@ -45,6 +45,10 @@ def parse_args():
                        help='Batch size (typically 1 for MIL)')
     parser.add_argument('--num_workers', type=int, default=TRAINING_CONFIG['num_workers'],
                        help='Number of data loader workers')
+    # Entropy Regularization Weights
+    parser.add_argument('--lambda_patch', type=float, default=TRAINING_CONFIG['lambda_patch'])
+    parser.add_argument('--lambda_stain', type=float, default=TRAINING_CONFIG['lambda_stain'])
+    parser.add_argument('--lambda_case', type=float, default=TRAINING_CONFIG['lambda_case'])
     
     # Model arguments
     parser.add_argument('--embed_dim', type=int, default=MODEL_CONFIG['embed_dim'],

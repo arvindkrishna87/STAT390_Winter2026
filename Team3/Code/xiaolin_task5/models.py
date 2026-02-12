@@ -38,11 +38,16 @@ class AttentionPool(nn.Module):
         weights = self.attention(x)  # (B, M, 1)
         weights = torch.softmax(weights, dim=1)  # Normalize attention scores
         
+        # Entropy Regularizaiton Calculation
+        # Add small epsilon to prevent log(0)
+        entropy = -torch.sum(weights * torch.log(weights + 1e-10), dim=1) # (B, 1)
+        entropy_mean = entropy.mean() # Average over batch
+        
         weighted_x = (weights * x).sum(dim=1)  # (B, D)
         
         if return_weights:
-            return weighted_x, weights.squeeze(-1)  # (B, D), (B, M)
-        return weighted_x
+            return weighted_x, weights.squeeze(-1), entropy_mean  # (B, D), (B, M), entropy_mean
+        return weighted_x, entropy_mean 
 
 
 class HierarchicalAttnMIL(nn.Module):
@@ -127,7 +132,10 @@ class HierarchicalAttnMIL(nn.Module):
         """
         slice_embeddings = []
         slice_attention_weights = []
-        
+
+        # Collectors for entropy
+        patch_entropies = []
+
         # Process each slice within this stain
         for slice_tensor in slice_list:
             # slice_tensor shape: (P, C, H, W) where P = number of patches
@@ -143,13 +151,14 @@ class HierarchicalAttnMIL(nn.Module):
             
             # Apply patch-level attention to get slice embedding
             if return_attn_weights:
-                slice_emb, patch_weights = self.patch_attention(
+                slice_emb, patch_weights, patch_H = self.patch_attention(
                     patch_embeddings.unsqueeze(0), return_weights=True
                 )
                 slice_attention_weights.append(patch_weights.squeeze(0).detach())
             else:
-                slice_emb = self.patch_attention(patch_embeddings.unsqueeze(0))
-            
+                slice_emb, patch_H = self.patch_attention(patch_embeddings.unsqueeze(0))
+
+            patch_entropies.append(patch_H)
             slice_embeddings.append(slice_emb.squeeze(0))  # (D,)
             
             # Clear intermediate tensors
@@ -163,7 +172,7 @@ class HierarchicalAttnMIL(nn.Module):
             
             # Apply stain-level attention across slices
             if return_attn_weights:
-                stain_emb, stain_weights = self.stain_attention(
+                stain_emb, stain_weights, stain_H = self.stain_attention(
                     stain_slice_embeddings.unsqueeze(0), return_weights=True
                 )
                 stain_attention_info = {
@@ -171,17 +180,19 @@ class HierarchicalAttnMIL(nn.Module):
                     'patch_weights': slice_attention_weights
                 }
             else:
-                stain_emb = self.stain_attention(stain_slice_embeddings.unsqueeze(0))
+                stain_emb, stain_H = self.stain_attention(stain_slice_embeddings.unsqueeze(0))
                 stain_attention_info = None
             
             # Clean up
             del stain_slice_embeddings
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
-            
-            return stain_emb.squeeze(0), stain_attention_info
+                
+            # Calculate average patch entropy for this stain
+            avg_patch_H = torch.stack(patch_entropies).mean() if patch_entropies else torch.tensor(0.0).to(stain_emb.device)
+            return stain_emb.squeeze(0), stain_attention_info, avg_patch_H, stain_H
         
-        return None, None
+        return None, None, None, None
 
     def forward(self, stain_slices_dict: Dict[str, List[torch.Tensor]], 
                 return_attn_weights: bool = False):
@@ -191,6 +202,9 @@ class HierarchicalAttnMIL(nn.Module):
         stain_embeddings = []
         stain_names = []
         stain_attention_weights = {}
+
+        all_patch_entropies = []
+        all_stain_entropies = []
         
         # Process each stain sequentially
         for stain_name, slice_list in stain_slices_dict.items():
@@ -198,13 +212,16 @@ class HierarchicalAttnMIL(nn.Module):
                 continue
             
             # Process this stain completely
-            stain_emb, stain_attn_info = self.process_single_stain(
+            stain_emb, stain_attn_info, patch_H, stain_H = self.process_single_stain(
                 slice_list, stain_name, return_attn_weights
             )
             
             if stain_emb is not None:
                 stain_embeddings.append(stain_emb)
                 stain_names.append(stain_name)
+
+                all_patch_entropies.append(patch_H)
+                all_stain_entropies.append(stain_H) 
                 
                 if return_attn_weights and stain_attn_info:
                     stain_attention_weights[stain_name] = stain_attn_info
@@ -216,16 +233,19 @@ class HierarchicalAttnMIL(nn.Module):
         # If no stains have data, return zero logits
         if not stain_embeddings:
             logits = torch.zeros(self.classifier.out_features).to(next(self.parameters()).device)
+            # Return zero entropy if empty
+            zero_ent = torch.tensor(0.0).to(logits.device)
+            entropy_dict = {'patch': zero_ent, 'stain': zero_ent, 'case': zero_ent}
             if return_attn_weights:
-                return logits, {}
-            return logits
+                return logits, entropy_dict
+            return logits, entropy_dict
         
         # Stack stain embeddings for case-level attention
         case_stain_embeddings = torch.stack(stain_embeddings)  # (num_stains, D)
         
         # Apply case-level attention across stains
         if return_attn_weights:
-            case_emb, case_weights = self.case_attention(
+            case_emb, case_weights, case_H = self.case_attention(
                 case_stain_embeddings.unsqueeze(0), return_weights=True
             )
             # Package all attention weights for visualization
@@ -235,7 +255,7 @@ class HierarchicalAttnMIL(nn.Module):
                 'stain_order': stain_names
             }
         else:
-            case_emb = self.case_attention(case_stain_embeddings.unsqueeze(0))
+            case_emb, case_H = self.case_attention(case_stain_embeddings.unsqueeze(0))
         
         # Final classification with dropout
         logits = self.classifier(case_emb.squeeze(0))  # (num_classes,) - now includes dropout
@@ -244,11 +264,20 @@ class HierarchicalAttnMIL(nn.Module):
         del case_stain_embeddings, stain_embeddings
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
-        
+
+        final_patch_entropy = torch.stack(all_patch_entropies).mean() if all_patch_entropies else torch.tensor(0.0).to(self.parameters().device)
+        final_stain_entropy = torch.stack(all_stain_entropies).mean() if all_stain_entropies else torch.tensor(0.0).to(self.parameters().device)
+
+        entropy_reg_terms = {
+            'patch': final_patch_entropy,
+            'stain': final_stain_entropy,
+            'case': case_H
+        }
+
         if return_attn_weights:
-            return logits, all_weights
-        
-        return logits
+            return logits, all_weights, entropy_reg_terms
+
+        return logits, entropy_reg_terms
 
 
 def create_model(num_classes: int = None, embed_dim: int = None, dropout: float = None) -> HierarchicalAttnMIL:
