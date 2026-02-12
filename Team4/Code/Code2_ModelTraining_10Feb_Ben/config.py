@@ -19,7 +19,6 @@ MODEL_CONFIG = {
     'per_slice_cap': 800,
     'max_slices_per_stain': None,
     'stains': ('h&e', 'melan', 'sox10'),
-    'kimianet_path': '/home/bdp1083/MIL_trainer_9Dec_JointFinal/KimiaNet.pth',
 }
 
 # Training configuration
