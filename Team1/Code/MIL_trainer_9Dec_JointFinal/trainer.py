@@ -25,7 +25,7 @@ class MILTrainer:
         self.model.to(self.device)
         
         # Initialize optimizer and criterion
-        self.optimizer = optim.Adam(
+        self.optimizer = optim.AdamW(
             self.model.parameters(),
             lr=TRAINING_CONFIG['learning_rate'],
             weight_decay=TRAINING_CONFIG['weight_decay']

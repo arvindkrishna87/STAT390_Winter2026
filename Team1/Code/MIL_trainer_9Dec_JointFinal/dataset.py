@@ -91,6 +91,9 @@ class StainBagCaseDataset(Dataset):
         for p in patch_paths:
             try:
                 img = Image.open(p).convert("RGB")
+                # Filter out patches smaller than 32x32
+                if img.size[0] < 32 or img.size[1] < 32:
+                    continue
                 if self.transform:
                     img = self.transform(img)
                 imgs.append(img)
@@ -153,11 +156,10 @@ def create_transforms(is_training: bool = True) -> transforms.Compose:
     if is_training:
         # Training transforms with augmentation
         transform = transforms.Compose([
-            transforms.RandomResizedCrop(IMAGE_CONFIG['image_size'][0]),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.RandomRotation(15),
-            transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),
+            transforms.ColorJitter(brightness=0.2, contrast=0.2),
             transforms.ToTensor(),
             transforms.Normalize(
                 mean=IMAGE_CONFIG['normalize_mean'],
@@ -167,7 +169,6 @@ def create_transforms(is_training: bool = True) -> transforms.Compose:
     else:
         # Validation/test transforms without augmentation
         transform = transforms.Compose([
-            transforms.Resize(IMAGE_CONFIG['image_size']),
             transforms.ToTensor(),
             transforms.Normalize(
                 mean=IMAGE_CONFIG['normalize_mean'],

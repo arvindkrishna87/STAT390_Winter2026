@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torchvision.models as models
 from typing import Dict, List, Any, Optional, Tuple
+import KimiaNet
 
 from config import MODEL_CONFIG
 
@@ -231,7 +232,7 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
         dropout = TRAINING_CONFIG.get('dropout', 0.3)
     
     # Create base model
-    base_model = models.densenet121(pretrained=pretrained)
+    base_model = KimiaNet.get_pretrained_model('DenseNet121')
     
     # Create and return MIL model
     model = HierarchicalAttnMIL(
