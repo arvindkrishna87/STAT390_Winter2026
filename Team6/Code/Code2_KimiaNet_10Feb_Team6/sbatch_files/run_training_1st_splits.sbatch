@@ -6,7 +6,7 @@
 #SBATCH --ntasks=16                                   # n cores
 #SBATCH --mem=128G                                    # n GB RAM
 #SBATCH --job-name=MIL_train                          # Job name (no spaces)
-#SBATCH --chdir=../                                   # set working directory
+#SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/training_logs_%j.log          # Standard output file
 #SBATCH --error=./logs/training_logs_%j.log           # now writing error to the same log file
 #SBATCH --mail-type=ALL                               # Send email on begin, end, and fail

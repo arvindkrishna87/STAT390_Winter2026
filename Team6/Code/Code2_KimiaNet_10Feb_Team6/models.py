@@ -6,7 +6,8 @@ import torch.nn as nn
 import torchvision.models as models
 from typing import Dict, List, Any, Optional, Tuple
 
-from config import MODEL_CONFIG, DEVICE
+from config import MODEL_CONFIG
+from utils import get_device
 
 
 class AttentionPool(nn.Module):
@@ -232,14 +233,18 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
     
     # Create base model
     base_model = models.densenet121(pretrained=pretrained)
-    kimia_weights = torch.load('KimiaNetPyTorchWeights.pth', map_location=torch.device(DEVICE))
+    kimia_weights = torch.load(
+        'KimiaNetPyTorchWeights.pth', 
+        map_location=torch.device(get_device())
+    )
 
     # remaps kimianet keys to densenet keys
     kimia_translated = {
-        key.replace("module.model.0", "features").replace("module.fc_4", "classifier"): item
-        for key, item in kimia_weights.items() if "num_batches_tracked" not in key
+        key.replace("module.model.0", "features"): item
+        for key, item in kimia_weights.items() 
+        if "module.model.0" in key and "num_batches_tracked" not in key
     }
-    base_model.load_state_dict(kimia_translated)
+    base_model.load_state_dict(kimia_translated, strict=False)
     
     # Create and return MIL model
     model = HierarchicalAttnMIL(

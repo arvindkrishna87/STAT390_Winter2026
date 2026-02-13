@@ -1,5 +1,5 @@
-Job ID: 8326852
-Start time: Tue Feb 10 13:45:50 CST 2026
+Job ID: 8699426
+Start time: Fri Feb 13 13:06:33 CST 2026
 Requirement already satisfied: torch>=1.9.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r requirements.txt (line 2)) (2.9.0)
 Requirement already satisfied: torchvision>=0.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r requirements.txt (line 3)) (0.24.0)
 Requirement already satisfied: numpy>=1.21.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r requirements.txt (line 4)) (2.3.4)
@@ -56,11 +56,11 @@ Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/si
   warnings.warn(msg)
 Random seed set to 42
 Using CPU
-Created run directory: ./runs/run_20260210_134706
+Created run directory: ./runs/run_20260213_130756
 ================================================================================
 HIERARCHICAL ATTENTION MIL TRAINING
 ================================================================================
-Arguments: {'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv', 'patches_dir': '/projects/e32998/patches', 'epochs': 30, 'lr': 0.0003, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': './data_splits/data_splits_01.npz', 'checkpoint_dir': './runs/run_20260210_134706/checkpoints'}
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv', 'patches_dir': '/projects/e32998/patches', 'epochs': 30, 'lr': 0.0003, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': './data_splits/data_splits_01.npz', 'checkpoint_dir': './runs/run_20260213_130756/checkpoints'}
 Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.0003, 'weight_decay': 0.0002, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5, 1.0], 'dropout': 0.3, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 3, 'scheduler_factor': 0.3, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
 ============================================================
 PREPARING DATA
@@ -164,33 +164,31 @@ Created data loaders - Train: 50, Val: 17, Test: 18
 ============================================================
 CREATING MODEL
 ============================================================
-Traceback (most recent call last):
-  File "/gpfs/projects/e32998/STAT390_Winter2026/Team6/Code/Code2_KimiaNet_10Feb_Team6/main.py", line 337, in <module>
-    main()
-  File "/gpfs/projects/e32998/STAT390_Winter2026/Team6/Code/Code2_KimiaNet_10Feb_Team6/main.py", line 261, in main
-    model = create_model(
-            ^^^^^^^^^^^^^
-  File "/gpfs/projects/e32998/STAT390_Winter2026/Team6/Code/Code2_KimiaNet_10Feb_Team6/models.py", line 235, in create_model
-    base_model.load_state_dict(torch.load('KimiaNetPyTorchWeights.pth'))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 1546, in load
-    return _legacy_load(
-           ^^^^^^^^^^^^^
-  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 1812, in _legacy_load
-    result = unpickler.load()
-             ^^^^^^^^^^^^^^^^
-  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_weights_only_unpickler.py", line 535, in load
-    self.append(self.persistent_load(pid))
-                ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 1747, in persistent_load
-    obj = restore_location(obj, location)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 698, in default_restore_location
-    result = fn(storage, location)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 636, in _deserialize
-    device = _validate_device(location, backend_name)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 605, in _validate_device
-    raise RuntimeError(
-RuntimeError: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. If you are running on a CPU-only machine, please use torch.load with map_location=torch.device('cpu') to map your storages to the CPU.
+Using CPU
+
+Model Summary:
+==================================================
+Total parameters: 9,249,925
+Trainable parameters: 2,296,069
+Model size: 35.29 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 9,249,925
+Learning rate scheduler: ReduceLROnPlateau
+Early stopping enabled (patience=8)
+
+Epoch 1/30 (LR: 3.00e-04)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Training:   2%|▏         | 1/50 [00:10<08:11, 10.02s/it]Training:   4%|▍         | 2/50 [00:31<13:16, 16.58s/it]Training:   6%|▌         | 3/50 [00:41<10:39, 13.60s/it]Training:   8%|▊         | 4/50 [00:42<06:38,  8.66s/it]Training:  10%|█         | 5/50 [01:28<16:45, 22.35s/it]Training:  12%|█▏        | 6/50 [01:33<11:52, 16.20s/it]Training:  14%|█▍        | 7/50 [01:39<09:12, 12.85s/it]Training:  16%|█▌        | 8/50 [01:50<08:45, 12.50s/it]Training:  18%|█▊        | 9/50 [02:04<08:41, 12.73s/it]Training:  20%|██        | 10/50 [02:20<09:16, 13.92s/it]Training:  22%|██▏       | 11/50 [02:22<06:41, 10.30s/it]Training:  24%|██▍       | 12/50 [02:45<08:53, 14.05s/it]Training:  26%|██▌       | 13/50 [03:06<09:53, 16.05s/it]Training:  28%|██▊       | 14/50 [03:11<07:41, 12.82s/it]Training:  30%|███       | 15/50 [03:13<05:38,  9.66s/it]Training:  32%|███▏      | 16/50 [03:18<04:32,  8.02s/it]Training:  34%|███▍      | 17/50 [03:25<04:21,  7.93s/it]Training:  36%|███▌      | 18/50 [03:32<04:00,  7.52s/it]Training:  38%|███▊      | 19/50 [03:41<04:11,  8.12s/it]Training:  40%|████      | 20/50 [03:45<03:20,  6.70s/it]Training:  42%|████▏     | 21/50 [04:54<12:20, 25.54s/it]Training:  44%|████▍     | 22/50 [05:06<10:02, 21.53s/it]Training:  46%|████▌     | 23/50 [05:14<07:52, 17.49s/it]Training:  48%|████▊     | 24/50 [05:16<05:29, 12.67s/it]Training:  50%|█████     | 25/50 [05:26<04:57, 11.89s/it]Training:  52%|█████▏    | 26/50 [05:29<03:38,  9.10s/it]Training:  54%|█████▍    | 27/50 [06:10<07:11, 18.75s/it]Training:  56%|█████▌    | 28/50 [06:27<06:42, 18.29s/it]Training:  58%|█████▊    | 29/50 [06:35<05:19, 15.21s/it]Training:  60%|██████    | 30/50 [06:48<04:48, 14.43s/it]Training:  62%|██████▏   | 31/50 [06:51<03:32, 11.18s/it]Training:  64%|██████▍   | 32/50 [07:01<03:12, 10.71s/it]Training:  66%|██████▌   | 33/50 [07:27<04:22, 15.45s/it]Training:  68%|██████▊   | 34/50 [07:28<02:57, 11.07s/it]Training:  70%|███████   | 35/50 [07:41<02:53, 11.54s/it]Training:  72%|███████▏  | 36/50 [07:41<01:55,  8.23s/it]Training:  74%|███████▍  | 37/50 [09:26<08:03, 37.17s/it]Training:  76%|███████▌  | 38/50 [09:29<05:22, 26.86s/it]Training:  78%|███████▊  | 39/50 [11:09<08:58, 48.93s/it]Training:  80%|████████  | 40/50 [11:13<05:52, 35.25s/it]Training:  82%|████████▏ | 41/50 [13:16<09:13, 61.55s/it]Training:  84%|████████▍ | 42/50 [13:19<05:53, 44.21s/it]Training:  86%|████████▌ | 43/50 [14:09<05:21, 45.93s/it]Training:  88%|████████▊ | 44/50 [14:12<03:18, 33.01s/it]Training:  90%|█████████ | 45/50 [14:45<02:45, 33.06s/it]Training:  92%|█████████▏| 46/50 [14:57<01:46, 26.52s/it]Training:  94%|█████████▍| 47/50 [15:27<01:22, 27.66s/it]Training:  96%|█████████▌| 48/50 [15:35<00:43, 21.74s/it]Training:  98%|█████████▊| 49/50 [16:00<00:22, 22.71s/it]Training: 100%|██████████| 50/50 [16:01<00:00, 16.22s/it]Training: 100%|██████████| 50/50 [16:01<00:00, 19.23s/it]
+Train Loss: 1.3182, Val Loss: 0.6504, Val Acc: 0.7059
+Checkpoint saved: ./runs/run_20260213_130756/checkpoints/20260213_132839_HierarchicalAttnMIL_epoch1.pth
+New best validation loss: 0.6504
+
+Epoch 2/30 (LR: 3.00e-04)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:50<41:37, 50.96s/it]Training:   4%|▍         | 2/50 [00:53<17:54, 22.39s/it]Training:   6%|▌         | 3/50 [01:28<22:07, 28.24s/it]Training:   8%|▊         | 4/50 [01:31<14:01, 18.30s/it]Training:  10%|█         | 5/50 [01:33<09:24, 12.55s/it]Training:  12%|█▏        | 6/50 [01:37<07:01,  9.58s/it]Training:  14%|█▍        | 7/50 [01:43<06:02,  8.44s/it]Training:  16%|█▌        | 8/50 [01:46<04:35,  6.56s/it]Training:  18%|█▊        | 9/50 [02:01<06:21,  9.30s/it]Training:  20%|██        | 10/50 [02:04<04:55,  7.38s/it]
