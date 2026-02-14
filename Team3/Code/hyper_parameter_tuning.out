@@ -1,0 +1,312 @@
+Job ID: 8635063
+Start time: Thu Feb 12 10:47:46 CST 2026
+Requirement already satisfied: torch>=1.9.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (2.9.0)
+Requirement already satisfied: torchvision>=0.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 3)) (0.24.0)
+Requirement already satisfied: numpy>=1.21.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 4)) (2.3.4)
+Requirement already satisfied: pandas>=1.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 5)) (2.3.3)
+Requirement already satisfied: scikit-learn>=1.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 6)) (1.7.2)
+Requirement already satisfied: Pillow>=8.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 7)) (12.0.0)
+Requirement already satisfied: tqdm>=4.62.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 8)) (4.67.1)
+Requirement already satisfied: matplotlib>=3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 11)) (3.10.7)
+Requirement already satisfied: seaborn>=0.11.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 12)) (0.13.2)
+Requirement already satisfied: psutil>=5.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 15)) (7.1.2)
+Requirement already satisfied: imbalanced-learn>=0.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 18)) (0.14.0)
+Requirement already satisfied: optuna>=3.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 22)) (4.7.0)
+Requirement already satisfied: plotly>=5.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 24)) (6.5.2)
+Requirement already satisfied: kaleido>=0.2.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (1.2.0)
+Requirement already satisfied: filelock in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (3.20.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (4.15.0)
+Requirement already satisfied: setuptools in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (3.5)
+Requirement already satisfied: jinja2 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (2025.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (1.13.1.3)
+Requirement already satisfied: triton==3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (3.5.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 5)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: scipy>=1.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 6)) (1.16.3)
+Requirement already satisfied: joblib>=1.2.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 6)) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 6)) (3.6.0)
+Requirement already satisfied: contourpy>=1.0.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 11)) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 11)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 11)) (4.60.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 11)) (1.4.9)
+Requirement already satisfied: packaging>=20.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 11)) (25.0)
+Requirement already satisfied: pyparsing>=3 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 11)) (3.2.5)
+Requirement already satisfied: alembic>=1.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 22)) (1.18.3)
+Requirement already satisfied: colorlog in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 22)) (6.10.1)
+Requirement already satisfied: sqlalchemy>=1.4.2 in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 22)) (2.0.46)
+Requirement already satisfied: PyYAML in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 22)) (6.0.3)
+Requirement already satisfied: narwhals>=1.15.1 in /projects/e32998/env/lib/python3.12/site-packages (from plotly>=5.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 24)) (2.16.0)
+Requirement already satisfied: choreographer>=1.1.1 in /projects/e32998/env/lib/python3.12/site-packages (from kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (1.2.1)
+Requirement already satisfied: logistro>=1.0.8 in /projects/e32998/env/lib/python3.12/site-packages (from kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (2.0.1)
+Requirement already satisfied: orjson>=3.10.15 in /projects/e32998/env/lib/python3.12/site-packages (from kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (3.11.7)
+Requirement already satisfied: pytest-timeout>=2.4.0 in /projects/e32998/env/lib/python3.12/site-packages (from kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (2.4.0)
+Requirement already satisfied: Mako in /projects/e32998/env/lib/python3.12/site-packages (from alembic>=1.5.0->optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 22)) (1.3.10)
+Requirement already satisfied: simplejson>=3.19.3 in /projects/e32998/env/lib/python3.12/site-packages (from choreographer>=1.1.1->kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (3.20.2)
+Requirement already satisfied: pytest>=7.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from pytest-timeout>=2.4.0->kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (9.0.2)
+Requirement already satisfied: iniconfig>=1.0.1 in /projects/e32998/env/lib/python3.12/site-packages (from pytest>=7.0.0->pytest-timeout>=2.4.0->kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (2.3.0)
+Requirement already satisfied: pluggy<2,>=1.5 in /projects/e32998/env/lib/python3.12/site-packages (from pytest>=7.0.0->pytest-timeout>=2.4.0->kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (1.6.0)
+Requirement already satisfied: pygments>=2.7.2 in /projects/e32998/env/lib/python3.12/site-packages (from pytest>=7.0.0->pytest-timeout>=2.4.0->kaleido>=0.2.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 25)) (2.19.2)
+Requirement already satisfied: six>=1.5 in /projects/e32998/env/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 5)) (1.17.0)
+Requirement already satisfied: greenlet>=1 in /projects/e32998/env/lib/python3.12/site-packages (from sqlalchemy>=1.4.2->optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 22)) (3.3.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /projects/e32998/env/lib/python3.12/site-packages (from jinja2->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/sofie_task10/requirements.txt (line 2)) (3.0.3)
+Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/site-packages (2026.1.4)
+==================================
+Starting Hyperparameter Optimization
+==================================
+Using CPU
+============================================================
+PREPARING DATA FOR HYPERPARAMETER TUNING
+============================================================
+Loaded 105 labels
+Found 83595 patch files
+All 3808 non-standard file names were handled.
+Grouped into 378 slices
+Mapped 366 slices to classes
+Class distribution: {0: 128, 1: 238}
+Loading existing splits from: /projects/e32998/STAT390_Winter2026/Team3/Code/data_splits/data_splits_01.npz
+Data splits loaded from: /projects/e32998/STAT390_Winter2026/Team3/Code/data_splits/data_splits_01.npz
+Split sizes - Train: 222, Val: 72, Test: 68
+Cases per split: 50 17 18
+Paths per split: 47679 15631 16166
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+================================================================================
+STARTING BAYESIAN HYPERPARAMETER OPTIMIZATION
+Study name: mil_tuning_20260212_104753
+Number of trials: 10
+================================================================================
+
+
+============================================================
+Trial 0: {'dropout': 0.249816047538945, 'learning_rate': 0.0007969454818643932, 'weight_decay': 0.000157029708840554, 'batch_size': 1, 'class_weight_benign': 3.3946339367881464}
+============================================================
+
+Random seed set to 42
+Epoch 1/50 - Train Loss: 2.0390, Val Loss: 0.5986, Val Acc: 0.6471
+Epoch 2/50 - Train Loss: 0.7079, Val Loss: 0.7278, Val Acc: 0.4706
+Epoch 3/50 - Train Loss: 0.7993, Val Loss: 0.5616, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.6138, Val Loss: 0.6917, Val Acc: 0.7059
+Epoch 5/50 - Train Loss: 0.6591, Val Loss: 0.5309, Val Acc: 0.8235
+Epoch 6/50 - Train Loss: 0.7419, Val Loss: 0.5927, Val Acc: 0.7059
+Epoch 7/50 - Train Loss: 0.7056, Val Loss: 0.5743, Val Acc: 0.7059
+Epoch 8/50 - Train Loss: 0.6490, Val Loss: 0.5731, Val Acc: 0.7647
+Epoch 9/50 - Train Loss: 0.6704, Val Loss: 0.5072, Val Acc: 0.8235
+Epoch 10/50 - Train Loss: 0.6734, Val Loss: 0.6380, Val Acc: 0.7059
+Epoch 11/50 - Train Loss: 0.6009, Val Loss: 0.4670, Val Acc: 0.8824
+Epoch 12/50 - Train Loss: 0.6703, Val Loss: 0.7279, Val Acc: 0.7059
+Epoch 13/50 - Train Loss: 0.6348, Val Loss: 0.4963, Val Acc: 0.8824
+Epoch 14/50 - Train Loss: 0.6813, Val Loss: 0.5230, Val Acc: 0.7647
+Epoch 15/50 - Train Loss: 0.5900, Val Loss: 1.1457, Val Acc: 0.7059
+Epoch 16/50 - Train Loss: 0.5836, Val Loss: 0.4943, Val Acc: 0.8235
+Epoch 17/50 - Train Loss: 0.4273, Val Loss: 0.5923, Val Acc: 0.8824
+Epoch 18/50 - Train Loss: 0.3583, Val Loss: 1.0010, Val Acc: 0.7059
+Early stopping at epoch 18
+[I 2026-02-12 15:11:22,570] Trial 0 finished with value: 0.46695634152959375 and parameters: {'dropout': 0.249816047538945, 'learning_rate': 0.0007969454818643932, 'weight_decay': 0.000157029708840554, 'batch_size': 1, 'class_weight_benign': 3.3946339367881464}. Best is trial 0 with value: 0.46695634152959375.
+
+============================================================
+Trial 1: {'dropout': 0.1624074561769746, 'learning_rate': 2.0511104188433963e-05, 'weight_decay': 1.493656855461763e-06, 'batch_size': 1, 'class_weight_benign': 4.46470458309974}
+============================================================
+
+Random seed set to 43
+Epoch 1/50 - Train Loss: 0.7175, Val Loss: 0.6602, Val Acc: 0.7059
+Epoch 2/50 - Train Loss: 0.6667, Val Loss: 0.6146, Val Acc: 0.7059
+Epoch 3/50 - Train Loss: 0.6327, Val Loss: 0.6109, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.6482, Val Loss: 0.6017, Val Acc: 0.7059
+Epoch 5/50 - Train Loss: 0.6332, Val Loss: 0.6014, Val Acc: 0.7059
+Epoch 6/50 - Train Loss: 0.6667, Val Loss: 0.5838, Val Acc: 0.7059
+Epoch 7/50 - Train Loss: 0.6224, Val Loss: 0.5849, Val Acc: 0.7059
+Epoch 8/50 - Train Loss: 0.6118, Val Loss: 0.5723, Val Acc: 0.7059
+Epoch 9/50 - Train Loss: 0.5880, Val Loss: 0.6290, Val Acc: 0.7059
+Epoch 10/50 - Train Loss: 0.6038, Val Loss: 0.5718, Val Acc: 0.7059
+Epoch 11/50 - Train Loss: 0.5838, Val Loss: 0.6352, Val Acc: 0.7059
+Epoch 12/50 - Train Loss: 0.5550, Val Loss: 0.5455, Val Acc: 0.7059
+Epoch 13/50 - Train Loss: 0.5199, Val Loss: 0.6400, Val Acc: 0.7059
+Epoch 14/50 - Train Loss: 0.4958, Val Loss: 0.5556, Val Acc: 0.7059
+Epoch 15/50 - Train Loss: 0.5018, Val Loss: 0.6265, Val Acc: 0.7059
+Epoch 16/50 - Train Loss: 0.4035, Val Loss: 0.5322, Val Acc: 0.8235
+Epoch 17/50 - Train Loss: 0.3902, Val Loss: 0.6154, Val Acc: 0.7059
+Epoch 18/50 - Train Loss: 0.3483, Val Loss: 0.9694, Val Acc: 0.7059
+Epoch 19/50 - Train Loss: 0.3161, Val Loss: 1.2209, Val Acc: 0.7059
+Epoch 20/50 - Train Loss: 0.3867, Val Loss: 1.0440, Val Acc: 0.7059
+Epoch 21/50 - Train Loss: 0.2577, Val Loss: 1.3811, Val Acc: 0.7059
+Epoch 22/50 - Train Loss: 0.2578, Val Loss: 0.7031, Val Acc: 0.7059
+Epoch 23/50 - Train Loss: 0.3435, Val Loss: 0.6715, Val Acc: 0.7059
+Early stopping at epoch 23
+[I 2026-02-12 21:23:11,897] Trial 1 finished with value: 0.532152388464002 and parameters: {'dropout': 0.1624074561769746, 'learning_rate': 2.0511104188433963e-05, 'weight_decay': 1.493656855461763e-06, 'batch_size': 1, 'class_weight_benign': 4.46470458309974}. Best is trial 0 with value: 0.46695634152959375.
+
+============================================================
+Trial 2: {'dropout': 0.34044600469728353, 'learning_rate': 0.0002607024758370766, 'weight_decay': 1.1527987128232402e-06, 'batch_size': 1, 'class_weight_benign': 4.879639408647977}
+============================================================
+
+Random seed set to 44
+Epoch 1/50 - Train Loss: 1.0689, Val Loss: 0.5703, Val Acc: 0.7059
+Epoch 2/50 - Train Loss: 0.7881, Val Loss: 0.5730, Val Acc: 0.7059
+Epoch 3/50 - Train Loss: 0.7342, Val Loss: 0.5911, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.6481, Val Loss: 0.5517, Val Acc: 0.7059
+Epoch 5/50 - Train Loss: 0.5982, Val Loss: 0.6641, Val Acc: 0.7059
+Epoch 6/50 - Train Loss: 0.7485, Val Loss: 0.6323, Val Acc: 0.7059
+Epoch 7/50 - Train Loss: 0.7321, Val Loss: 0.5534, Val Acc: 0.7059
+Epoch 8/50 - Train Loss: 0.6517, Val Loss: 0.6347, Val Acc: 0.7059
+Epoch 9/50 - Train Loss: 0.6053, Val Loss: 0.5159, Val Acc: 0.7059
+Epoch 10/50 - Train Loss: 0.5506, Val Loss: 0.6327, Val Acc: 0.7059
+Epoch 11/50 - Train Loss: 0.6195, Val Loss: 0.4825, Val Acc: 0.7059
+Epoch 12/50 - Train Loss: 0.4927, Val Loss: 0.4558, Val Acc: 0.7647
+Epoch 13/50 - Train Loss: 0.4280, Val Loss: 0.6895, Val Acc: 0.7059
+Epoch 14/50 - Train Loss: 0.5059, Val Loss: 0.5631, Val Acc: 0.8235
+Epoch 15/50 - Train Loss: 0.4580, Val Loss: 0.3781, Val Acc: 0.8824
+Epoch 16/50 - Train Loss: 0.3954, Val Loss: 0.6416, Val Acc: 0.7647
+Epoch 17/50 - Train Loss: 0.3672, Val Loss: 0.6573, Val Acc: 0.7647
+Epoch 18/50 - Train Loss: 0.3748, Val Loss: 1.3364, Val Acc: 0.7059
+Epoch 19/50 - Train Loss: 0.3757, Val Loss: 1.1029, Val Acc: 0.7059
+Epoch 20/50 - Train Loss: 0.3092, Val Loss: 0.6722, Val Acc: 0.7647
+Epoch 21/50 - Train Loss: 0.2479, Val Loss: 0.8547, Val Acc: 0.7059
+Epoch 22/50 - Train Loss: 0.2942, Val Loss: 1.4514, Val Acc: 0.7059
+Early stopping at epoch 22
+[I 2026-02-13 04:57:59,752] Trial 2 finished with value: 0.37813330504714565 and parameters: {'dropout': 0.34044600469728353, 'learning_rate': 0.0002607024758370766, 'weight_decay': 1.1527987128232402e-06, 'batch_size': 1, 'class_weight_benign': 4.879639408647977}. Best is trial 2 with value: 0.37813330504714565.
+
+============================================================
+Trial 3: {'dropout': 0.4329770563201687, 'learning_rate': 2.6587543983272695e-05, 'weight_decay': 3.5113563139704077e-06, 'batch_size': 1, 'class_weight_benign': 1.7336180394137353}
+============================================================
+
+Random seed set to 45
+Epoch 1/50 - Train Loss: 0.6290, Val Loss: 0.5946, Val Acc: 0.7059
+Epoch 2/50 - Train Loss: 0.6568, Val Loss: 0.5871, Val Acc: 0.7059
+Epoch 3/50 - Train Loss: 0.6515, Val Loss: 0.5934, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.6635, Val Loss: 0.5926, Val Acc: 0.7059
+Epoch 5/50 - Train Loss: 0.6404, Val Loss: 0.5773, Val Acc: 0.7059
+Epoch 6/50 - Train Loss: 0.6460, Val Loss: 0.5680, Val Acc: 0.7059
+Epoch 7/50 - Train Loss: 0.6526, Val Loss: 0.5696, Val Acc: 0.7059
+Epoch 8/50 - Train Loss: 0.6275, Val Loss: 0.6199, Val Acc: 0.7059
+Epoch 9/50 - Train Loss: 0.6000, Val Loss: 0.6402, Val Acc: 0.7059
+Epoch 10/50 - Train Loss: 0.6155, Val Loss: 0.5678, Val Acc: 0.7059
+Epoch 11/50 - Train Loss: 0.6435, Val Loss: 0.5840, Val Acc: 0.7059
+Epoch 12/50 - Train Loss: 0.5775, Val Loss: 0.7189, Val Acc: 0.7059
+Epoch 13/50 - Train Loss: 0.6108, Val Loss: 0.6203, Val Acc: 0.7059
+Epoch 14/50 - Train Loss: 0.6037, Val Loss: 0.6282, Val Acc: 0.7059
+Epoch 15/50 - Train Loss: 0.5910, Val Loss: 0.7229, Val Acc: 0.7059
+Epoch 16/50 - Train Loss: 0.5350, Val Loss: 0.7313, Val Acc: 0.7059
+Epoch 17/50 - Train Loss: 0.5442, Val Loss: 0.6392, Val Acc: 0.7059
+Early stopping at epoch 17
+[I 2026-02-13 10:08:33,606] Trial 3 finished with value: 0.5678251000011668 and parameters: {'dropout': 0.4329770563201687, 'learning_rate': 2.6587543983272695e-05, 'weight_decay': 3.5113563139704077e-06, 'batch_size': 1, 'class_weight_benign': 1.7336180394137353}. Best is trial 2 with value: 0.37813330504714565.
+
+============================================================
+Trial 4: {'dropout': 0.2216968971838151, 'learning_rate': 0.00011207606211860574, 'weight_decay': 1.9762189340280066e-05, 'batch_size': 1, 'class_weight_benign': 2.1649165607921677}
+============================================================
+
+Random seed set to 46
+Epoch 1/50 - Train Loss: 0.7657, Val Loss: 0.7385, Val Acc: 0.7059
+Epoch 2/50 - Train Loss: 0.7336, Val Loss: 0.5782, Val Acc: 0.7647
+Epoch 3/50 - Train Loss: 0.6484, Val Loss: 0.6905, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.6345, Val Loss: 0.5535, Val Acc: 0.7059
+Epoch 5/50 - Train Loss: 0.6784, Val Loss: 0.6290, Val Acc: 0.7059
+Epoch 6/50 - Train Loss: 0.5910, Val Loss: 0.5280, Val Acc: 0.7059
+Epoch 7/50 - Train Loss: 0.5451, Val Loss: 1.0154, Val Acc: 0.7059
+Epoch 8/50 - Train Loss: 0.6248, Val Loss: 0.5120, Val Acc: 0.7059
+Epoch 9/50 - Train Loss: 0.6368, Val Loss: 0.8481, Val Acc: 0.7059
+Epoch 10/50 - Train Loss: 0.5568, Val Loss: 0.5011, Val Acc: 0.7059
+Epoch 11/50 - Train Loss: 0.4320, Val Loss: 1.0869, Val Acc: 0.7059
+Epoch 12/50 - Train Loss: 0.3950, Val Loss: 0.7100, Val Acc: 0.7059
+Epoch 13/50 - Train Loss: 0.2998, Val Loss: 0.8570, Val Acc: 0.6471
+Epoch 14/50 - Train Loss: 0.4402, Val Loss: 1.2125, Val Acc: 0.7059
+Epoch 15/50 - Train Loss: 0.3183, Val Loss: 1.6920, Val Acc: 0.7059
+Epoch 16/50 - Train Loss: 0.2693, Val Loss: 0.9037, Val Acc: 0.6471
+Epoch 17/50 - Train Loss: 0.3033, Val Loss: 1.2680, Val Acc: 0.7059
+Early stopping at epoch 17
+[I 2026-02-13 15:34:22,270] Trial 4 finished with value: 0.5011123751892763 and parameters: {'dropout': 0.2216968971838151, 'learning_rate': 0.00011207606211860574, 'weight_decay': 1.9762189340280066e-05, 'batch_size': 1, 'class_weight_benign': 2.1649165607921677}. Best is trial 2 with value: 0.37813330504714565.
+
+============================================================
+Trial 5: {'dropout': 0.34474115788895177, 'learning_rate': 1.9010245319870364e-05, 'weight_decay': 7.523742884534855e-06, 'batch_size': 1, 'class_weight_benign': 2.465447373174767}
+============================================================
+
+Random seed set to 47
+Epoch 1/50 - Train Loss: 0.6686, Val Loss: 0.5784, Val Acc: 0.7059
+Epoch 2/50 - Train Loss: 0.6632, Val Loss: 0.6025, Val Acc: 0.7059
+Epoch 3/50 - Train Loss: 0.6237, Val Loss: 0.6159, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.6690, Val Loss: 0.5754, Val Acc: 0.7059
+Epoch 5/50 - Train Loss: 0.6798, Val Loss: 0.5820, Val Acc: 0.7059
+Epoch 6/50 - Train Loss: 0.6414, Val Loss: 0.5870, Val Acc: 0.7059
+Epoch 7/50 - Train Loss: 0.6751, Val Loss: 0.5856, Val Acc: 0.7059
+Epoch 8/50 - Train Loss: 0.6426, Val Loss: 0.5828, Val Acc: 0.7059
+Epoch 9/50 - Train Loss: 0.5955, Val Loss: 0.5873, Val Acc: 0.7059
+Epoch 10/50 - Train Loss: 0.6170, Val Loss: 0.5694, Val Acc: 0.7059
+Epoch 11/50 - Train Loss: 0.6158, Val Loss: 0.5726, Val Acc: 0.7059
+Epoch 12/50 - Train Loss: 0.6310, Val Loss: 0.5862, Val Acc: 0.7059
+Epoch 13/50 - Train Loss: 0.6094, Val Loss: 0.5589, Val Acc: 0.7059
+Epoch 14/50 - Train Loss: 0.6212, Val Loss: 0.6245, Val Acc: 0.7059
+Epoch 15/50 - Train Loss: 0.6408, Val Loss: 0.5793, Val Acc: 0.7059
+Epoch 16/50 - Train Loss: 0.6069, Val Loss: 0.5756, Val Acc: 0.7059
+Epoch 17/50 - Train Loss: 0.6058, Val Loss: 0.5586, Val Acc: 0.7059
+Epoch 18/50 - Train Loss: 0.5963, Val Loss: 0.5888, Val Acc: 0.7059
+Epoch 19/50 - Train Loss: 0.5784, Val Loss: 0.5751, Val Acc: 0.7059
+Epoch 20/50 - Train Loss: 0.5962, Val Loss: 0.6356, Val Acc: 0.7059
+Epoch 21/50 - Train Loss: 0.6178, Val Loss: 0.5860, Val Acc: 0.7059
+Epoch 22/50 - Train Loss: 0.5885, Val Loss: 0.5762, Val Acc: 0.7059
+Epoch 23/50 - Train Loss: 0.6066, Val Loss: 0.5856, Val Acc: 0.7059
+Epoch 24/50 - Train Loss: 0.5733, Val Loss: 0.6114, Val Acc: 0.7059
+Early stopping at epoch 24
+[I 2026-02-13 23:18:52,374] Trial 5 finished with value: 0.5585993458242977 and parameters: {'dropout': 0.34474115788895177, 'learning_rate': 1.9010245319870364e-05, 'weight_decay': 7.523742884534855e-06, 'batch_size': 1, 'class_weight_benign': 2.465447373174767}. Best is trial 2 with value: 0.37813330504714565.
+
+============================================================
+Trial 6: {'dropout': 0.28242799368681437, 'learning_rate': 0.00037183641805732076, 'weight_decay': 3.972110727381911e-06, 'batch_size': 1, 'class_weight_benign': 3.0569377536544464}
+============================================================
+
+Random seed set to 48
+Epoch 1/50 - Train Loss: 0.9062, Val Loss: 0.5583, Val Acc: 0.7059
+Epoch 2/50 - Train Loss: 0.9365, Val Loss: 1.2369, Val Acc: 0.2941
+Epoch 3/50 - Train Loss: 0.7013, Val Loss: 0.6121, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.7726, Val Loss: 1.0592, Val Acc: 0.2941
+Epoch 5/50 - Train Loss: 0.7192, Val Loss: 0.8590, Val Acc: 0.2941
+Epoch 6/50 - Train Loss: 0.6903, Val Loss: 0.6558, Val Acc: 0.7647
+Epoch 7/50 - Train Loss: 0.6355, Val Loss: 0.6125, Val Acc: 0.7647
+Epoch 8/50 - Train Loss: 0.5939, Val Loss: 0.7174, Val Acc: 0.5294
+Early stopping at epoch 8
+[I 2026-02-14 03:08:18,848] Trial 6 finished with value: 0.5582835122066385 and parameters: {'dropout': 0.28242799368681437, 'learning_rate': 0.00037183641805732076, 'weight_decay': 3.972110727381911e-06, 'batch_size': 1, 'class_weight_benign': 3.0569377536544464}. Best is trial 2 with value: 0.37813330504714565.
+
+============================================================
+Trial 7: {'dropout': 0.33696582754481696, 'learning_rate': 1.2385137298860926e-05, 'weight_decay': 6.647135865318028e-05, 'batch_size': 1, 'class_weight_benign': 1.6820964947491661}
+============================================================
+
+Random seed set to 49
+Epoch 1/50 - Train Loss: 0.6971, Val Loss: 0.6013, Val Acc: 0.7059
+Epoch 2/50 - Train Loss: 0.6741, Val Loss: 0.6349, Val Acc: 0.6471
+Epoch 3/50 - Train Loss: 0.6846, Val Loss: 0.6158, Val Acc: 0.7059
+Epoch 4/50 - Train Loss: 0.6897, Val Loss: 0.5955, Val Acc: 0.7059
+Epoch 5/50 - Train Loss: 0.6417, Val Loss: 0.6197, Val Acc: 0.7059
+Epoch 6/50 - Train Loss: 0.6276, Val Loss: 0.5805, Val Acc: 0.7059
+Epoch 7/50 - Train Loss: 0.6418, Val Loss: 0.6258, Val Acc: 0.6471
+Epoch 8/50 - Train Loss: 0.6435, Val Loss: 0.5779, Val Acc: 0.7059
+Epoch 9/50 - Train Loss: 0.6299, Val Loss: 0.5799, Val Acc: 0.7059
+Epoch 10/50 - Train Loss: 0.6516, Val Loss: 0.5859, Val Acc: 0.7059
+Epoch 11/50 - Train Loss: 0.6179, Val Loss: 0.5826, Val Acc: 0.7059
+Epoch 12/50 - Train Loss: 0.6451, Val Loss: 0.5690, Val Acc: 0.7059
+Epoch 13/50 - Train Loss: 0.6691, Val Loss: 0.5667, Val Acc: 0.7059
+Epoch 14/50 - Train Loss: 0.6251, Val Loss: 0.5561, Val Acc: 0.7059
+Epoch 15/50 - Train Loss: 0.6099, Val Loss: 0.5636, Val Acc: 0.7059
+Epoch 16/50 - Train Loss: 0.6338, Val Loss: 0.5381, Val Acc: 0.7059
+Epoch 17/50 - Train Loss: 0.5823, Val Loss: 0.5423, Val Acc: 0.7059
+Epoch 18/50 - Train Loss: 0.6333, Val Loss: 0.5310, Val Acc: 0.7059
+Epoch 19/50 - Train Loss: 0.6061, Val Loss: 0.5396, Val Acc: 0.7059

@@ -1,0 +1,51 @@
+Hyperparameter Optimization Summary
+============================================================
+
+Study name     : mil_tuning_20260212_104753
+Trials run     : 8 / 10  (job timed out)
+Best trial     : #2
+Best val loss  : 0.3781
+
+Best hyperparameters:
+  dropout: 0.34044600469728353
+  learning_rate: 0.0002607024758370766
+  weight_decay: 1.1527987128232402e-06
+  batch_size: 1
+  class_weight_benign: 4.879639408647977
+
+Top 5 trials (by best val loss):
+
+  1. Trial 2: 0.3781
+     dropout: 0.34044600469728353
+     learning_rate: 0.0002607024758370766
+     weight_decay: 1.1527987128232402e-06
+     batch_size: 1
+     class_weight_benign: 4.879639408647977
+
+  2. Trial 0: 0.4670
+     dropout: 0.249816047538945
+     learning_rate: 0.0007969454818643932
+     weight_decay: 0.000157029708840554
+     batch_size: 1
+     class_weight_benign: 3.3946339367881464
+
+  3. Trial 4: 0.5011
+     dropout: 0.2216968971838151
+     learning_rate: 0.00011207606211860574
+     weight_decay: 1.9762189340280066e-05
+     batch_size: 1
+     class_weight_benign: 2.1649165607921677
+
+  4. Trial 7: 0.5310
+     dropout: 0.33696582754481696
+     learning_rate: 1.2385137298860926e-05
+     weight_decay: 6.647135865318028e-05
+     batch_size: 1
+     class_weight_benign: 1.6820964947491661
+
+  5. Trial 1: 0.5322
+     dropout: 0.1624074561769746
+     learning_rate: 2.0511104188433963e-05
+     weight_decay: 1.493656855461763e-06
+     batch_size: 1
+     class_weight_benign: 4.46470458309974

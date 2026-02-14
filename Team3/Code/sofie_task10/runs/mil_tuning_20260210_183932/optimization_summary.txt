@@ -1,0 +1,106 @@
+Hyperparameter Optimization Summary
+============================================================
+
+Study name: mil_tuning_20260210_183932
+Number of trials: 5
+Best trial: 1
+Best validation loss: 0.4815
+
+Best hyperparameters:
+  embed_dim: 512
+  dropout: 0.33696582754481696
+  learning_rate: 1.2385137298860926e-05
+  weight_decay: 6.647135865318028e-05
+  batch_size: 1
+  class_weight_benign: 1.6820964947491661
+  per_slice_cap: 150
+  max_slices_per_stain: 10
+  use_scheduler: True
+  scheduler_type: reduce_on_plateau
+  scheduler_factor: 0.5650089137415928
+  scheduler_patience: 3
+  early_stopping: True
+  early_stopping_patience: 8
+
+
+Top 5 trials:
+
+1. Trial 1: 0.4815
+   embed_dim: 512
+   dropout: 0.33696582754481696
+   learning_rate: 1.2385137298860926e-05
+   weight_decay: 6.647135865318028e-05
+   batch_size: 1
+   class_weight_benign: 1.6820964947491661
+   per_slice_cap: 150
+   max_slices_per_stain: 10
+   use_scheduler: True
+   scheduler_type: reduce_on_plateau
+   scheduler_factor: 0.5650089137415928
+   scheduler_patience: 3
+   early_stopping: True
+   early_stopping_patience: 8
+
+2. Trial 3: 0.5351
+   embed_dim: 512
+   dropout: 0.4085081386743783
+   learning_rate: 1.4063366777718176e-05
+   weight_decay: 1.1895896737553539e-05
+   batch_size: 1
+   class_weight_benign: 1.4634762381005189
+   per_slice_cap: 50
+   max_slices_per_stain: 20
+   use_scheduler: True
+   scheduler_type: cosine
+   scheduler_factor: 0.5245108790277985
+   scheduler_patience: 5
+   early_stopping: True
+   early_stopping_patience: 7
+
+3. Trial 4: 0.5627
+   embed_dim: 256
+   dropout: 0.11257167427469371
+   learning_rate: 0.000187422109855557
+   weight_decay: 8.771380343280564e-06
+   batch_size: 1
+   class_weight_benign: 3.034282764658811
+   per_slice_cap: 50
+   max_slices_per_stain: 20
+   use_scheduler: True
+   scheduler_type: reduce_on_plateau
+   scheduler_factor: 0.3746280235544143
+   scheduler_patience: 5
+   early_stopping: True
+   early_stopping_patience: 8
+
+4. Trial 0: 0.5904
+   embed_dim: 512
+   dropout: 0.1624074561769746
+   learning_rate: 2.0511104188433963e-05
+   weight_decay: 1.493656855461763e-06
+   batch_size: 1
+   class_weight_benign: 4.46470458309974
+   per_slice_cap: 200
+   max_slices_per_stain: None
+   use_scheduler: True
+   scheduler_type: cosine
+   scheduler_factor: 0.3557975442608167
+   scheduler_patience: 3
+   early_stopping: True
+   early_stopping_patience: 7
+
+5. Trial 2: 0.7993
+   embed_dim: 768
+   dropout: 0.4757995766256756
+   learning_rate: 0.0006161049539380963
+   weight_decay: 6.218704727769077e-05
+   batch_size: 1
+   class_weight_benign: 4.687496940092467
+   per_slice_cap: 200
+   max_slices_per_stain: 10
+   use_scheduler: True
+   scheduler_type: reduce_on_plateau
+   scheduler_factor: 0.6947547746402069
+   scheduler_patience: 5
+   early_stopping: True
+   early_stopping_patience: 6

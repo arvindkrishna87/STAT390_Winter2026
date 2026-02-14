@@ -1,0 +1,16 @@
+{
+  "embed_dim": 512,
+  "dropout": 0.33696582754481696,
+  "learning_rate": 1.2385137298860926e-05,
+  "weight_decay": 6.647135865318028e-05,
+  "batch_size": 1,
+  "class_weight_benign": 1.6820964947491661,
+  "per_slice_cap": 150,
+  "max_slices_per_stain": 10,
+  "use_scheduler": true,
+  "scheduler_type": "reduce_on_plateau",
+  "scheduler_factor": 0.5650089137415928,
+  "scheduler_patience": 3,
+  "early_stopping": true,
+  "early_stopping_patience": 8
+}
