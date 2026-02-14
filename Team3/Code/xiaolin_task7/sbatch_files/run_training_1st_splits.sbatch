@@ -6,8 +6,8 @@
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
 #SBATCH --job-name=MIL_train              # Job name (no spaces)
-#SBATCH --output=task6_third_run.out              # Standard output file
-#SBATCH --error=task6_third_run.err               # now writing error to the same log file
+#SBATCH --output=task7_first_run.out              # Standard output file
+#SBATCH --error=task7_first_run.err               # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
 #SBATCH --mail-user=xiaolinliu2026@u.northwestern.edu  # Your NU email
 
@@ -26,11 +26,11 @@ python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
 
-cd /projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task6
+cd /projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task7
 
-echo "================================="
-echo "Starting Gated Attention Training"
-echo "================================="
+echo "============================================="
+echo "Starting Interaction-Aware Attention Training"
+echo "============================================"
 
 # without loading checkpoints, trying 5 diff train / test splits
 

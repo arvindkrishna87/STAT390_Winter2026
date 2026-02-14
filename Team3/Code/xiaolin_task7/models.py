@@ -18,21 +18,11 @@ class AttentionPool(nn.Module):
     def __init__(self, input_dim: int, hidden_dim: int = 128, dropout: float = 0.0):
         super().__init__()
         # Small neural network to compute attention scores for each patch
-        self.attention_V = nn.Sequential(
+        self.attention = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
-            nn.Tanh()
-        )
-        
-        # Gating mechanism (sigmoid)
-        self.attention_U = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.Sigmoid()
-        )
-        
-        # Final projection to a single score
-        self.attention_weights = nn.Sequential(
+            nn.Tanh(),
             nn.Dropout(dropout),
-            nn.Linear(hidden_dim, 1),
+            nn.Linear(hidden_dim, 1)
         )
     
     def forward(self, x: torch.Tensor, return_weights: bool = False):
@@ -45,19 +35,81 @@ class AttentionPool(nn.Module):
             weighted_x: (B, D) weighted sum of patch embeddings
             weights: (B, M) attention weights (if return_weights=True)
         """
-        # Element-wise multiplication of V and U to get gated attention features
-        v = self.attention_V(x)  # (B, M, H)
-        u = self.attention_U(x)  # (B, M, H)
-        gated = v * u  # (B, M, H)
-        
-        # Compute final attention scores
-        weights = self.attention_weights(gated)  # (B, M, 1)
+        weights = self.attention(x)  # (B, M, 1)
         weights = torch.softmax(weights, dim=1)  # Normalize attention scores
         
         weighted_x = (weights * x).sum(dim=1)  # (B, D)
         
         if return_weights:
             return weighted_x, weights.squeeze(-1)  # (B, D), (B, M)
+        return weighted_x
+
+
+class InteractionAttentionPool(nn.Module):
+    """
+    Interaction-Aware Attention Pooling.
+    Uses Self-Attention to capture relationships between instances (patches/slices)
+    BEFORE computing the weighted sum.
+    
+    Includes heavy regularization (Dropout + LayerNorm) to prevent overfitting on small data.
+    """
+    def __init__(self, input_dim: int, hidden_dim: int = 128, dropout: float = 0.5):
+        super().__init__()
+        
+        # 1. Interaction Layer (Self-Attention)
+        # We use 4 heads to allow different types of interactions
+        self.use_interaction = True
+        self.self_attn = nn.MultiheadAttention(
+            embed_dim=input_dim, 
+            num_heads=4, 
+            dropout=dropout, # High dropout for regularization
+            batch_first=True
+        )
+        self.norm = nn.LayerNorm(input_dim)
+        self.dropout = nn.Dropout(dropout)
+
+        # 2. Standard Attention Scoring (The "Gate")
+        # We use the Gated mechanism (Sigmoid + Tanh) for maximum non-linearity
+        self.attention_V = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.Tanh()
+        )
+        self.attention_U = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.Sigmoid()
+        )
+        self.attention_weights = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, 1)
+        )
+    
+    def forward(self, x: torch.Tensor, return_weights: bool = False):
+        """
+        Args:
+            x: (B, M, D) - Batch, Num_Instances, Dim
+        """
+        # --- Step 1: Interaction ---
+        # Let instances interact. q, k, v are all x.
+        # attn_output: (B, M, D)
+        attn_output, _ = self.self_attn(x, x, x)
+        
+        # Residual connection + Norm + Dropout (Vital for stability)
+        x_interacted = self.norm(x + self.dropout(attn_output))
+        
+        # --- Step 2: Gated Pooling on the Interacted Features ---
+        v = self.attention_V(x_interacted)
+        u = self.attention_U(x_interacted)
+        gated = v * u
+        
+        weights = self.attention_weights(gated) # (B, M, 1)
+        weights = torch.softmax(weights, dim=1)
+        
+        # Weighted sum using the original (or interacted) features
+        # Using interacted features allows the final representation to contain context
+        weighted_x = (weights * x_interacted).sum(dim=1)
+        
+        if return_weights:
+            return weighted_x, weights.squeeze(-1)
         return weighted_x
 
 
@@ -70,7 +122,7 @@ class HierarchicalAttnMIL(nn.Module):
     2. Stain-level: across slices within each stain  
     3. Case-level: across different stains
     """
-    def __init__(self, base_model=None, num_classes: int = 2, embed_dim: int = 512, dropout: float = 0.3):
+    def __init__(self, base_model=None, num_classes: int = 2, embed_dim: int = 512, dropout: float = 0.5):
         super().__init__()
         
         if base_model is None:
@@ -126,9 +178,9 @@ class HierarchicalAttnMIL(nn.Module):
         )
         
         # Three levels of attention with dropout
-        self.patch_attention = AttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
-        self.stain_attention = AttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
-        self.case_attention = AttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
+        self.patch_attention = InteractionAttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
+        self.stain_attention = InteractionAttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
+        self.case_attention = InteractionAttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
         
         # Final classifier with dropout
         self.classifier = nn.Sequential(
@@ -277,7 +329,7 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
         embed_dim = MODEL_CONFIG['embed_dim']
     if dropout is None:
         from config import TRAINING_CONFIG
-        dropout = TRAINING_CONFIG.get('dropout', 0.3)
+        dropout = TRAINING_CONFIG.get('dropout', 0.5)
     
     # Create and return MIL model
     model = HierarchicalAttnMIL(

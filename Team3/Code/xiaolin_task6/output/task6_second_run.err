@@ -1,0 +1,26 @@
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=DenseNet121_Weights.IMAGENET1K_V1`. You can also use `weights=DenseNet121_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Traceback (most recent call last):
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task6/main.py", line 334, in <module>
+    main()
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task6/main.py", line 258, in main
+    model = create_model(
+            ^^^^^^^^^^^^^
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task6/models.py", line 283, in create_model
+    model = HierarchicalAttnMIL(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task6/models.py", line 81, in __init__
+    kimianet_weights = torch.load(
+                       ^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './KimiaNetPyTorchWeights.pth'

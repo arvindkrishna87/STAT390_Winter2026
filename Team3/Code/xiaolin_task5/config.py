@@ -32,9 +32,9 @@ TRAINING_CONFIG = {
     'random_state': 42,
     'class_weights': [2.5, 1.0],  # Increased benign weight from 2.0 to 3.0
     'dropout': 0.3,  # Add dropout for regularization
-    'lambda_patch': 0.001,   # Higher lambda for stability at the patch level
-    'lambda_stain': 0.0005,  # Moderate lambda for the stain level
-    'lambda_case': 0.0001,   # Lower lambda for high selectivity at the case level
+    'lambda_patch': 0.0001,   # Higher lambda for stability at the patch level
+    'lambda_stain': 0.00005,  # Moderate lambda for the stain level
+    'lambda_case': 0.00001,   # Lower lambda for high selectivity at the case level
     # Learning rate scheduler
     'use_scheduler': True,
     'scheduler_type': 'reduce_on_plateau',  # 'reduce_on_plateau' or 'cosine'

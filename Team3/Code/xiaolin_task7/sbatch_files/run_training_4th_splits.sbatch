@@ -6,13 +6,12 @@
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
 #SBATCH --job-name=MIL_train              # Job name (no spaces)
-#SBATCH --output=task6_third_run.out              # Standard output file
-#SBATCH --error=task6_third_run.err               # now writing error to the same log file
+#SBATCH --output=/projects/e32998/MIL_training/logs/training_logs_%j.log  # Standard output file
+#SBATCH --error=/projects/e32998/MIL_training/logs/training_logs_%j.log   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
-#SBATCH --mail-user=xiaolinliu2026@u.northwestern.edu  # Your NU email
+#SBATCH --mail-user=YOUR_NETID@u.northwestern.edu  # Your NU email
 
 module purge
-module load python-anaconda3/2019.10
 eval "$(conda shell.bash hook)"
 conda activate /projects/e32998/env   # you might want to copy the env and put it in your new project directory, if different from e32998
 
@@ -21,16 +20,12 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Start time: $(date)"
 
 # Run training
-python3 -m pip install -r /projects/e32998/STAT390_Winter2026/Team3/Code/requirements.txt
+python3 -m pip install -r /projects/e32998/STAT390_CMIL_Fall2025/Code/MIL/MIL_trainer_9Dec_JointFinal/requirements.txt
 python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
 
-cd /projects/e32998/STAT390_Winter2026/Team3/Code/xiaolin_task6
-
-echo "================================="
-echo "Starting Gated Attention Training"
-echo "================================="
+cd /projects/e32998/STAT390_CMIL_Fall2025/Code/MIL/MIL_trainer_9Dec_JointFinal
 
 # without loading checkpoints, trying 5 diff train / test splits
 
@@ -39,7 +34,7 @@ python3 main.py \
     --attention_top_n 8 \
     --per_slice_cap 500 \
     --max_slices_per_stain 5 \
-    --load_splits /projects/e32998/STAT390_Winter2026/Team3/Code/data_splits/data_splits_01.npz
+    --load_splits data_splits_04.npz
 
 
 
