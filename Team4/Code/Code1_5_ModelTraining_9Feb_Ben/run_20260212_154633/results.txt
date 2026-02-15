@@ -1,0 +1,9 @@
+Test Results:
+Test Loss: 0.5027
+Test Accuracy: 0.8333
+Number of samples: 18
+
+Output files:
+- predictions.csv: Per-case predictions and probabilities
+- confusion_matrix.png: Visual confusion matrix
+- attention_analysis/: Attention visualizations and summary
