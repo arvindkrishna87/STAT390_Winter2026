@@ -112,6 +112,85 @@ class InteractionAttentionPool(nn.Module):
             return weighted_x, weights.squeeze(-1)
         return weighted_x
 
+class LightweightInteractionPool(nn.Module):
+    """
+    Lightweight Interaction-Aware Pooling (Bottleneck Architecture).
+    Projects features down to a low dimension (bottleneck) before applying
+    Self-Attention to drastically reduce parameter count.
+    """
+    def __init__(self, input_dim: int, bottleneck_dim: int = 64, hidden_dim: int = 128, dropout: float = 0.3):
+        super().__init__()
+        
+        # 1. Bottleneck Projection (Down)
+        # Reduces params from 512*512 (262k) to 512*64 (32k)
+        self.proj_down = nn.Linear(input_dim, bottleneck_dim)
+        
+        # 2. Lightweight Interaction (Self-Attention)
+        # Operating on 64 dim instead of 512 is 64x cheaper
+        self.self_attn = nn.MultiheadAttention(
+            embed_dim=bottleneck_dim, 
+            num_heads=4,        # 4 heads of 16 dim each
+            dropout=dropout, 
+            batch_first=True
+        )
+        self.norm = nn.LayerNorm(bottleneck_dim)
+        
+        # 3. Projection Back (Up)
+        self.proj_up = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.Linear(bottleneck_dim, input_dim),
+            nn.ReLU()
+        )
+
+        # 4. Standard Gated Pooling (The "Gate")
+        self.attention_V = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.Tanh()
+        )
+        self.attention_U = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.Sigmoid()
+        )
+        self.attention_weights = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, 1)
+        )
+    
+    def forward(self, x: torch.Tensor, return_weights: bool = False):
+        """
+        Args:
+            x: (B, M, D) - Batch, Num_Instances, Dim
+        """
+        # --- Step 1: Bottleneck Interaction ---
+        
+        # Project Down: (B, M, 512) -> (B, M, 64)
+        x_small = self.proj_down(x)
+        
+        # Self-Attention on small features
+        attn_output, _ = self.self_attn(x_small, x_small, x_small)
+        
+        # Residual + Norm (on the small dimension)
+        x_interacted_small = self.norm(x_small + attn_output)
+        
+        # Project Up + Residual with original input: (B, M, 64) -> (B, M, 512)
+        # This allows the original features to flow through if interaction isn't useful
+        x_context = self.proj_up(x_interacted_small)
+        x_final = x + x_context
+        
+        # --- Step 2: Gated Pooling ---
+        v = self.attention_V(x_final)
+        u = self.attention_U(x_final)
+        gated = v * u
+        
+        weights = self.attention_weights(gated) # (B, M, 1)
+        weights = torch.softmax(weights, dim=1)
+        
+        # Weighted sum
+        weighted_x = (weights * x_final).sum(dim=1)
+        
+        if return_weights:
+            return weighted_x, weights.squeeze(-1)
+        return weighted_x
 
 class HierarchicalAttnMIL(nn.Module):
     """
@@ -122,7 +201,7 @@ class HierarchicalAttnMIL(nn.Module):
     2. Stain-level: across slices within each stain  
     3. Case-level: across different stains
     """
-    def __init__(self, base_model=None, num_classes: int = 2, embed_dim: int = 512, dropout: float = 0.5):
+    def __init__(self, base_model=None, num_classes: int = 2, embed_dim: int = 512, dropout: float = 0.3):
         super().__init__()
         
         if base_model is None:
@@ -178,9 +257,9 @@ class HierarchicalAttnMIL(nn.Module):
         )
         
         # Three levels of attention with dropout
-        self.patch_attention = InteractionAttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
-        self.stain_attention = InteractionAttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
-        self.case_attention = InteractionAttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
+        self.patch_attention = LightweightInteractionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
+        self.stain_attention = LightweightInteractionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
+        self.case_attention = LightweightInteractionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
         
         # Final classifier with dropout
         self.classifier = nn.Sequential(

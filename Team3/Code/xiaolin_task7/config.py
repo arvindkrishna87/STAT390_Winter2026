@@ -26,12 +26,12 @@ TRAINING_CONFIG = {
     'epochs': 30,  # Increased since we have early stopping
     'batch_size': 1,  # MIL typically uses batch_size=1
     'learning_rate': 1e-4,  # Higher initial LR, scheduler will reduce it
-    'weight_decay': 1e-3,  # Increased from 1e-5 for stronger regularization
+    'weight_decay': 2e-4,  # Increased from 1e-5 for stronger regularization
     'num_workers': 2,
     'pin_memory': True,
     'random_state': 42,
     'class_weights': [2.5, 1.0],  # Increased benign weight from 2.0 to 3.0
-    'dropout': 0.5,  # Add dropout for regularization
+    'dropout': 0.3,  # Add dropout for regularization
     # Learning rate scheduler
     'use_scheduler': True,
     'scheduler_type': 'reduce_on_plateau',  # 'reduce_on_plateau' or 'cosine'

@@ -1,5 +1,5 @@
-Job ID: 8742840
-Start time: Fri Feb 13 21:58:19 CST 2026
+Job ID: 8729728
+Start time: Fri Feb 13 18:06:04 CST 2026
 Requirement already satisfied: torch>=1.9.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/requirements.txt (line 2)) (2.9.0)
 Requirement already satisfied: torchvision>=0.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/requirements.txt (line 3)) (0.24.0)
 Requirement already satisfied: numpy>=1.21.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/requirements.txt (line 4)) (2.3.4)
@@ -50,17 +50,17 @@ Requirement already satisfied: six>=1.5 in /projects/e32998/env/lib/python3.12/s
 Requirement already satisfied: mpmath<1.4,>=1.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/requirements.txt (line 2)) (1.3.0)
 Requirement already satisfied: MarkupSafe>=2.0 in /projects/e32998/env/lib/python3.12/site-packages (from jinja2->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/requirements.txt (line 2)) (3.0.3)
 Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/site-packages (2026.1.4)
-========================================
-Starting Entropy Regularization Training
-========================================
+=============================================
+Starting Interaction-Aware Attention Training
+============================================
 Random seed set to 42
 Using CPU
-Created run directory: /projects/e32998/MIL_training/final_runs/run_20260213_215916
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260213_180713
 ================================================================================
 HIERARCHICAL ATTENTION MIL TRAINING
 ================================================================================
-Arguments: {'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv', 'patches_dir': '/projects/e32998/patches', 'epochs': 30, 'lr': 0.0003, 'batch_size': 1, 'num_workers': 2, 'lambda_patch': 0.0001, 'lambda_stain': 5e-05, 'lambda_case': 1e-05, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': '/projects/e32998/STAT390_Winter2026/Team3/Code/data_splits/data_splits_01.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260213_215916/checkpoints'}
-Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.0003, 'weight_decay': 0.0002, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5, 1.0], 'dropout': 0.3, 'lambda_patch': 0.0001, 'lambda_stain': 5e-05, 'lambda_case': 1e-05, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 3, 'scheduler_factor': 0.3, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv', 'patches_dir': '/projects/e32998/patches', 'epochs': 30, 'lr': 0.0001, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': '/projects/e32998/STAT390_Winter2026/Team3/Code/data_splits/data_splits_01.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.0001, 'weight_decay': 0.001, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5, 1.0], 'dropout': 0.5, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 3, 'scheduler_factor': 0.3, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
 ============================================================
 PREPARING DATA
 ============================================================
@@ -166,9 +166,9 @@ CREATING MODEL
 
 Model Summary:
 ==================================================
-Total parameters: 9,249,925
-Trainable parameters: 2,296,069
-Model size: 35.29 MB
+Total parameters: 12,601,861
+Trainable parameters: 5,648,005
+Model size: 48.07 MB
 ==================================================
 
 ============================================================
@@ -176,8 +176,85 @@ TRAINING MODEL
 ============================================================
 Starting training from epoch 1 to 30
 Device: cpu
-Model parameters: 9,249,925
+Model parameters: 12,601,861
 Learning rate scheduler: ReduceLROnPlateau
 Early stopping enabled (patience=8)
 
-Epoch 1/30 (LR: 3.00e-04)
+Epoch 1/30 (LR: 1.00e-04)
+Train Loss: 0.9561, Val Loss: 0.5998, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_183909_HierarchicalAttnMIL_epoch1.pth
+New best validation loss: 0.5998
+
+Epoch 2/30 (LR: 1.00e-04)
+Train Loss: 0.7137, Val Loss: 0.6522, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_191019_HierarchicalAttnMIL_epoch2.pth
+No improvement for 1 epoch(s)
+
+Epoch 3/30 (LR: 1.00e-04)
+Train Loss: 0.7335, Val Loss: 0.6124, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_193926_HierarchicalAttnMIL_epoch3.pth
+No improvement for 2 epoch(s)
+
+Epoch 4/30 (LR: 1.00e-04)
+Train Loss: 0.8060, Val Loss: 0.6672, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_201110_HierarchicalAttnMIL_epoch4.pth
+No improvement for 3 epoch(s)
+
+Epoch 5/30 (LR: 1.00e-04)
+Train Loss: 0.7327, Val Loss: 0.6049, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_204458_HierarchicalAttnMIL_epoch5.pth
+No improvement for 4 epoch(s)
+
+Epoch 6/30 (LR: 3.00e-05)
+Train Loss: 0.7877, Val Loss: 0.6314, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_212046_HierarchicalAttnMIL_epoch6.pth
+No improvement for 5 epoch(s)
+
+Epoch 7/30 (LR: 3.00e-05)
+Train Loss: 0.7225, Val Loss: 0.6043, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_215542_HierarchicalAttnMIL_epoch7.pth
+No improvement for 6 epoch(s)
+
+Epoch 8/30 (LR: 3.00e-05)
+Train Loss: 0.7078, Val Loss: 0.6024, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_222706_HierarchicalAttnMIL_epoch8.pth
+No improvement for 7 epoch(s)
+
+Epoch 9/30 (LR: 3.00e-05)
+Train Loss: 0.7687, Val Loss: 0.6205, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_224802_HierarchicalAttnMIL_epoch9.pth
+No improvement for 8 epoch(s)
+
+Epoch 10/30 (LR: 9.00e-06)
+Train Loss: 0.6087, Val Loss: 0.6031, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260213_180713/checkpoints/20260213_230235_HierarchicalAttnMIL_epoch10.pth
+No improvement for 9 epoch(s)
+
+Early stopping triggered after 10 epochs
+Best validation loss: 0.5998
+
+Training completed!
+
+============================================================
+EVALUATING MODEL
+============================================================
+Predictions saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713/predictions.csv
+Confusion matrix saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713/confusion_matrix.png
+
+Test Results:
+Test Loss: 0.6436
+Test Accuracy: 0.6667
+Samples: 18
+
+============================================================
+ATTENTION ANALYSIS
+============================================================
+Attention summary saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713/attention_analysis/attention_summary.txt
+Per-case effective patch attention distributions saved.
+Per-case & per-stain slice attention rank plots saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713/attention_analysis/slice_attention
+Per-case top 5.0% effective patches CSV saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713/attention_analysis/top_effective_patches_per_case_5.0pct.csv
+Per-case top 5.0% summary saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713/attention_analysis/top_effective_patches_per_case_summary_5.0pct.txt
+Attention analysis saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713/attention_analysis
+
+Results saved to: /projects/e32998/MIL_training/final_runs/run_20260213_180713
+Training completed successfully!
