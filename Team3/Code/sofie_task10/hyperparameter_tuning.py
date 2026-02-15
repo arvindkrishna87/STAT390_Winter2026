@@ -1,7 +1,4 @@
-#!/usr/bin/env python3
-"""
-Bayesian Hyperparameter Tuning for Hierarchical Attention MIL model using Optuna
-"""
+#import necessary libraries
 import os
 import argparse
 import optuna
@@ -13,27 +10,21 @@ import json
 from datetime import datetime
 from collections import defaultdict
 import optuna.visualization as vis
-import plotly
-import plotly.graph_objects as go
-import plotly.subplots as sp
 import math
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import numpy as np
 
-# Import your existing modules
+#import existing modules from other files
 from config import DATA_PATHS, TRAINING_CONFIG, MODEL_CONFIG
-from data_utils import (
-    load_labels, get_all_patch_files, group_patches_by_slice,
-    build_slice_to_class_map, split_by_case_stratified, build_case_dict,
-    report_no_leak, summarize_case_dict
-)
+from data_utils import (load_labels, get_all_patch_files, group_patches_by_slice,
+                        build_slice_to_class_map, split_by_case_stratified, build_case_dict, report_no_leak)
 from models import create_model
 from dataset import StainBagCaseDataset, case_collate_fn, create_transforms
-from trainer import MILTrainer, count_patches_by_class
-from utils import (
-    set_seed, get_device, print_data_summary, create_run_directory,
-    save_data_splits, load_data_splits, print_model_summary, check_data_integrity
-)
+from trainer import MILTrainer
+from utils import (set_seed, get_device, save_data_splits, load_data_splits)
 
-
+#define a hyperparameter tuner class that uses Optuna for Bayesian optimization of hyperparameters for the MIL model
 class HyperparameterTuner:
     """
     Bayesian hyperparameter tuning using Optuna
@@ -42,7 +33,7 @@ class HyperparameterTuner:
     def __init__(self, data_splits_path=None, n_trials=50, seed=42, study_name=None):
         """
         Args:
-            data_splits_path: Path to existing data splits (to ensure consistency across trials)
+            data_splits_path: Path to existing data splits
             n_trials: Number of optimization trials
             seed: Random seed
             study_name: Name for the Optuna study
@@ -53,46 +44,47 @@ class HyperparameterTuner:
         self.study_name = study_name or f"mil_hyperparam_study_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         self.device = get_device()
         
-        # Create study directory
+        #create directory to save study results
         self.study_dir = os.path.join("runs", self.study_name)
         os.makedirs(self.study_dir, exist_ok=True)
         
-        # Storage for training histories across all trials
+        #object for storing training histories across trials
         self.trial_histories = {}
         
-        # Load and prepare data once (reused across all trials)
+        #load and prepare data (same data used in every trial)
         self.train_data, self.val_data, self.test_data = self._prepare_data()
         
     def _prepare_data(self):
-        """Prepare data once for all trials"""
+        """Prepare data for trials"""
+        """Returns train, val, test data in the form of (case_dict, label_map) tuples"""
         print("=" * 60)
         print("PREPARING DATA FOR HYPERPARAMETER TUNING")
         print("=" * 60)
         
-        # Load labels
+        #load labels
         labels = load_labels(DATA_PATHS['labels_csv'])
         print(f"Loaded {len(labels)} labels")
         
-        # Get patch files
+        #get patch files
         all_files = get_all_patch_files(DATA_PATHS['patches_dir'])
         print(f"Found {len(all_files)} patch files")
         
-        # Group patches by slice
+        #group patches by slice
         patches = group_patches_by_slice(all_files, DATA_PATHS['patches_dir'])
         print(f"Grouped into {len(patches)} slices")
         
-        # Build slice to class mapping
+        #build slice to class mapping
         slice_to_class = build_slice_to_class_map(patches, labels)
         print(f"Mapped {len(slice_to_class)} slices to classes")
         
-        # Group slices by class for stratified splitting
+        #group slices by class for stratified splitting
         slices_by_class = defaultdict(list)
         for key, label in slice_to_class.items():
             slices_by_class[label].append(key)
         
         print(f"Class distribution: {dict((k, len(v)) for k, v in slices_by_class.items())}")
         
-        # Load or create data splits
+        #load or create data splits
         if self.data_splits_path and os.path.exists(self.data_splits_path):
             print(f"Loading existing splits from: {self.data_splits_path}")
             splits_data = load_data_splits(self.data_splits_path)
@@ -104,12 +96,12 @@ class HyperparameterTuner:
             val_slices = [(case_id, slice_id) for (case_id, slice_id) in slice_to_class.keys() if case_id in val_cases_set]
             test_slices = [(case_id, slice_id) for (case_id, slice_id) in slice_to_class.keys() if case_id in test_cases_set]
         else:
-            # Create new splits
+            #create new splits
             train_slices, val_slices, test_slices = split_by_case_stratified(
                 slices_by_class, random_state=self.seed
             )
             
-            # Save splits for reproducibility
+            #save splits for reproducibility
             train_cases = list(set([case_id for case_id, _ in train_slices]))
             val_cases = list(set([case_id for case_id, _ in val_slices]))
             test_cases = list(set([case_id for case_id, _ in test_slices]))
@@ -117,53 +109,52 @@ class HyperparameterTuner:
         
         print(f"Split sizes - Train: {len(train_slices)}, Val: {len(val_slices)}, Test: {len(test_slices)}")
         
-        # Build case dictionaries
+        #build case dictionaries
         train_case_dict, train_label_map = build_case_dict(train_slices, patches, slice_to_class)
         val_case_dict, val_label_map = build_case_dict(val_slices, patches, slice_to_class)
         test_case_dict, test_label_map = build_case_dict(test_slices, patches, slice_to_class)
         
-        # Verify no data leakage
+        #verify no data leakage
         report_no_leak(train_case_dict, val_case_dict, test_case_dict)
         
         return (train_case_dict, train_label_map), (val_case_dict, val_label_map), (test_case_dict, test_label_map)
     
-    def _create_data_loaders(self, trial_params):
-        """Create data loaders with trial-specific parameters"""
+    def _create_data_loaders(self):
+        """Create data loaders and datasets for tuning"""
         train_case_dict, train_label_map = self.train_data
         val_case_dict, val_label_map = self.val_data
-        test_case_dict, test_label_map = self.test_data
         
-        # Create transforms
+        #create transforms
         train_transform = create_transforms(is_training=True)
         val_transform = create_transforms(is_training=False)
         
-        # Create datasets with trial parameters
+        #create datasets with trial parameters
         train_ds = StainBagCaseDataset(
             train_case_dict, train_label_map,
             transform=train_transform,
-            per_slice_cap=trial_params['per_slice_cap'],
-            max_slices_per_stain=trial_params['max_slices_per_stain'],
+            per_slice_cap=MODEL_CONFIG['per_slice_cap'],
+            max_slices_per_stain=MODEL_CONFIG['max_slices_per_stain'],
             shuffle_patches=True,
         )
         
         val_ds = StainBagCaseDataset(
             val_case_dict, val_label_map,
             transform=val_transform,
-            per_slice_cap=trial_params['per_slice_cap'],
-            max_slices_per_stain=trial_params['max_slices_per_stain'],
+            per_slice_cap=MODEL_CONFIG['per_slice_cap'],
+            max_slices_per_stain=MODEL_CONFIG['max_slices_per_stain'],
             shuffle_patches=True,
         )
         
-        # Create data loaders
+        #create data loaders
         train_loader = DataLoader(
-            train_ds, batch_size=trial_params['batch_size'], shuffle=True,
-            num_workers=trial_params['num_workers'], pin_memory=True, 
+            train_ds, batch_size=TRAINING_CONFIG['batch_size'], shuffle=True,
+            num_workers=TRAINING_CONFIG['num_workers'], pin_memory=True, 
             collate_fn=case_collate_fn, persistent_workers=True
         )
         
         val_loader = DataLoader(
-            val_ds, batch_size=trial_params['batch_size'], shuffle=False,
-            num_workers=trial_params['num_workers'], pin_memory=True, 
+            val_ds, batch_size=TRAINING_CONFIG['batch_size'], shuffle=False,
+            num_workers=TRAINING_CONFIG['num_workers'], pin_memory=True, 
             collate_fn=case_collate_fn, persistent_workers=True
         )
         
@@ -174,102 +165,64 @@ class HyperparameterTuner:
         Optuna objective function - defines the hyperparameter search space
         and returns the metric to optimize
         """
-        # Suggest hyperparameters
+        #define hyperparameters to tune and their search space
         trial_params = {
-            # Model architecture
-            'embed_dim': 512,
+            #model architecture
             'dropout': trial.suggest_float('dropout', 0.1, 0.5),
             
-            # Training
+            #training
             'learning_rate': trial.suggest_float('learning_rate', 1e-5, 1e-3, log=True),
             'weight_decay': trial.suggest_float('weight_decay', 1e-6, 1e-3, log=True),
-            'batch_size': trial.suggest_categorical('batch_size', [1]),
             
-            # Class weights for handling imbalance
-            # Weight for benign class (class 0), high-grade class weight fixed at 1.0
+            #class weights for handling imbalance
             'class_weight_benign': trial.suggest_float('class_weight_benign', 1.0, 5.0),
-            'class_weight_high_grade': 1.0,  #fixed
+            'class_weight_high_grade': 1.0,  #fixed as reference point
             
-            # Data sampling
-            'per_slice_cap': MODEL_CONFIG['per_slice_cap'],
-            'max_slices_per_stain': MODEL_CONFIG['max_slices_per_stain'],
-            
-            # Scheduler -- leave all at default
-            'use_scheduler':   TRAINING_CONFIG['use_scheduler'], 
-            'scheduler_type': TRAINING_CONFIG['scheduler_type'],
-            'scheduler_factor': TRAINING_CONFIG['scheduler_factor'],
-            'scheduler_patience': TRAINING_CONFIG['scheduler_patience'],
-            
-            # Early stopping #leave as default
-            'early_stopping': TRAINING_CONFIG['early_stopping'], 
-            'early_stopping_patience': TRAINING_CONFIG['early_stopping_patience'],
-            
-            # Fixed parameters
-            'num_workers': TRAINING_CONFIG['num_workers'],
-            'epochs': 50,  # Max epochs, will likely stop early
+            #fixed parameters
+            'epochs': 3,  #make high, will likely stop early
         }
         
         print(f"\n{'=' * 60}")
         print(f"Trial {trial.number}: {trial.params}")
         print(f"{'=' * 60}\n")
         
-        # Set seed for reproducibility
+        #set seed for reproducibility
         set_seed(self.seed + trial.number)
         
-        # Create data loaders
-        train_loader, val_loader = self._create_data_loaders(trial_params)
+        #create data loaders
+        train_loader, val_loader = self._create_data_loaders()
         
-        # Create model with trial parameters
+        #create model with trial parameters
         model = create_model(
             num_classes=MODEL_CONFIG['num_classes'],
-            embed_dim=trial_params['embed_dim'],
+            embed_dim=MODEL_CONFIG['embed_dim'],
             dropout=trial_params['dropout']
         )
         
-        # Create checkpoint directory for this trial
+        #create checkpoint directory for this trial
         trial_checkpoint_dir = os.path.join(self.study_dir, f"trial_{trial.number}", "checkpoints")
         os.makedirs(trial_checkpoint_dir, exist_ok=True)
         
-        # Create trainer
+        #create trainer
         trainer = MILTrainer(model, self.device, checkpoint_dir=trial_checkpoint_dir)
         
-        # Update trainer parameters
+        #update trainer parameters
         for param_group in trainer.optimizer.param_groups:
             param_group['lr'] = trial_params['learning_rate']
             param_group['weight_decay'] = trial_params['weight_decay']
         
-        # Update class weights in loss function
+        #update class weights in loss function
         class_weights = torch.tensor([
             trial_params['class_weight_benign'],
             trial_params['class_weight_high_grade']
         ]).to(self.device)
         trainer.criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
         
-        # Configure scheduler
-        if trial_params['use_scheduler']:
-            if trial_params['scheduler_type'] == 'reduce_on_plateau':
-                trainer.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-                    trainer.optimizer,
-                    mode='min',
-                    factor=trial_params['scheduler_factor'],
-                    patience=trial_params['scheduler_patience'],
-                    min_lr=1e-6
-                )
-            elif trial_params['scheduler_type'] == 'cosine':
-                trainer.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-                    trainer.optimizer,
-                    T_max=trial_params['epochs'],
-                    eta_min=1e-6
-                )
-        
-        # Configure early stopping
-        trainer.early_stopping_patience = trial_params['early_stopping_patience']
-        
-        # Train with pruning callback
+        #train with pruning callback
         best_val_loss = float('inf')
         epochs_without_improvement = 0
 
-        # Per-trial history tracked here and stored on self for later use in _save_results
+        #track training history for each trial
         history = {
             'train_loss': [],
             'val_loss': [],
@@ -278,28 +231,28 @@ class HyperparameterTuner:
         }
         
         for epoch in range(trial_params['epochs']):
-            # Train epoch
+            #train epoch
             train_loss = trainer.train_epoch(train_loader)
             
-            # Validate
+            #validate
             val_loss, val_acc = trainer.validate(val_loader)
 
-            # Record epoch metrics
+            #record epoch metrics
             history['train_loss'].append(float(train_loss))
             history['val_loss'].append(float(val_loss))
             history['val_acc'].append(float(val_acc))
             
-            # Update scheduler
+            #update scheduler
             if trainer.scheduler:
                 if isinstance(trainer.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
                     trainer.scheduler.step(val_loss)
                 else:
                     trainer.scheduler.step()
             
-            # Report intermediate value for pruning
+            #report intermediate value for pruning
             trial.report(val_loss, epoch)
             
-            # Handle pruning
+            #handle pruning
             if trial.should_prune():
                 print(f"Trial {trial.number} pruned at epoch {epoch}")
                 history['pruned'] = True
@@ -307,15 +260,15 @@ class HyperparameterTuner:
                 self.trial_histories[trial.number] = history
                 raise optuna.TrialPruned()
             
-            # Track best validation loss
+            #track best validation loss
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 epochs_without_improvement = 0
             else:
                 epochs_without_improvement += 1
             
-            # Early stopping
-            if trial_params['early_stopping'] and epochs_without_improvement >= trial_params['early_stopping_patience']:
+            #early stopping
+            if TRAINING_CONFIG['early_stopping'] and epochs_without_improvement >= TRAINING_CONFIG['early_stopping_patience']:
                 print(f"Early stopping at epoch {epoch}")
                 break
             
@@ -325,11 +278,11 @@ class HyperparameterTuner:
         history['best_val_loss'] = float(best_val_loss)
         self.trial_histories[trial.number] = history
         
-        # Clean up to free memory
+        #clean up to free memory
         del model, trainer, train_loader, val_loader
         torch.cuda.empty_cache()
         
-        # Return best validation loss (Optuna will minimize this)
+        #return best validation loss (this is what we are aiming to minimize)
         return best_val_loss
     
     def optimize(self):
@@ -340,18 +293,18 @@ class HyperparameterTuner:
         print(f"Number of trials: {self.n_trials}")
         print(f"{'=' * 80}\n")
         
-        # Create Optuna study
+        #create optuna study
         study = optuna.create_study(
             study_name=self.study_name,
-            direction='minimize',  # Minimize validation loss
+            direction='minimize',  #minimize validation loss
             sampler=TPESampler(seed=self.seed, gamma=0.25),
             pruner=MedianPruner(n_startup_trials=5, n_warmup_steps=10),
         )
         
-        # Run optimization
+        #run optimization
         study.optimize(self.objective, n_trials=self.n_trials, show_progress_bar=True)
         
-        # Print results
+        #print results
         print(f"\n{'=' * 80}")
         print("OPTIMIZATION COMPLETED")
         print(f"{'=' * 80}\n")
@@ -362,33 +315,33 @@ class HyperparameterTuner:
         for key, value in study.best_params.items():
             print(f"  {key}: {value}")
         
-        # Save results
+        #save results
         self._save_results(study)
         
         return study
     
     def _save_results(self, study):
         """Save optimization results"""
-        # Save best parameters as JSON
+        #save best parameters as JSON
         best_params_path = os.path.join(self.study_dir, "best_hyperparameters.json")
         with open(best_params_path, 'w') as f:
             json.dump(study.best_params, f, indent=2)
         print(f"\nBest hyperparameters saved to: {best_params_path}")
         
-        # Save all trials as CSV
+        #save all trials as CSV
         trials_df = study.trials_dataframe()
         trials_csv_path = os.path.join(self.study_dir, "all_trials.csv")
         trials_df.to_csv(trials_csv_path, index=False)
         print(f"All trials saved to: {trials_csv_path}")
 
-        # ── Save all training histories as JSON ──────────────────────────────
+        #save all training histories as JSON
         histories_path = os.path.join(self.study_dir, "trial_histories.json")
         with open(histories_path, 'w') as f:
-            # Convert int keys to strings for valid JSON
+            #convert int keys to strings for valid JSON
             json.dump({str(k): v for k, v in self.trial_histories.items()}, f, indent=2)
         print(f"Training histories saved to: {histories_path}")
         
-        # Save study summary
+        #save study summary
         summary_path = os.path.join(self.study_dir, "optimization_summary.txt")
         with open(summary_path, 'w') as f:
             f.write(f"Hyperparameter Optimization Summary\n")
@@ -408,107 +361,87 @@ class HyperparameterTuner:
         
         print(f"Optimization summary saved to: {summary_path}")
         
-        # Create visualizations
+        #create visualizations
         try:
 
-            # ── 1. Feature importances (existing) ────────────────────────────
+            #feature importances 
             fig = vis.plot_param_importances(study)
-            fig.write_html(os.path.join(self.study_dir, "param_importances.html"))
+            fig.write_image(os.path.join(self.study_dir, "param_importances.png"))
 
-            # ── 2. Trial convergence: val_loss curves for every trial ─────────
-            # Separate completed vs pruned for visual clarity
+            #trial convergence: val_loss curves for every trial (completed only)
             completed_trials = {
                 k: v for k, v in self.trial_histories.items()
                 if not v.get('pruned', False) and v.get('val_loss')
             }
-            pruned_trials = {
-                k: v for k, v in self.trial_histories.items()
-                if v.get('pruned', False) and v.get('val_loss')
-            }
 
             best_trial_num = study.best_trial.number
-            fig_conv = go.Figure()
 
-            # Pruned trials (faint dashed)
-            for trial_num, hist in pruned_trials.items():
-                epochs = list(range(1, len(hist['val_loss']) + 1))
-                fig_conv.add_trace(go.Scatter(
-                    x=epochs, y=hist['val_loss'],
-                    mode='lines',
-                    line=dict(color='rgba(180,180,180,0.35)', width=1, dash='dot'),
-                    name=f"Trial {trial_num} (pruned)",
-                    showlegend=False,
-                    hovertemplate=f"Trial {trial_num} (pruned)<br>Epoch: %{{x}}<br>Val Loss: %{{y:.4f}}<extra></extra>"
-                ))
+            fig, ax = plt.subplots(figsize=(10, 6))
 
-            # Completed trials (semi-transparent)
-            colorscale = plotly.colors.sample_colorscale(
-                'Viridis', [i / max(len(completed_trials) - 1, 1) for i in range(len(completed_trials))]
-            )
+            colormap = cm.viridis(np.linspace(0, 1, max(len(completed_trials), 1)))
+
             for idx, (trial_num, hist) in enumerate(sorted(completed_trials.items())):
                 epochs = list(range(1, len(hist['val_loss']) + 1))
                 is_best = (trial_num == best_trial_num)
-                fig_conv.add_trace(go.Scatter(
-                    x=epochs, y=hist['val_loss'],
-                    mode='lines',
-                    line=dict(
-                        color='rgba(255,80,80,1.0)' if is_best else colorscale[idx],
-                        width=3 if is_best else 1.5,
-                    ),
-                    name=f"Trial {trial_num}" + (" ★ best" if is_best else ""),
-                    hovertemplate=f"Trial {trial_num}<br>Epoch: %{{x}}<br>Val Loss: %{{y:.4f}}<extra></extra>"
-                ))
+                ax.plot(
+                    epochs, hist['val_loss'],
+                    color='#FF5050' if is_best else colormap[idx],
+                    linewidth=2.5 if is_best else 1.2,
+                    alpha=1.0 if is_best else 0.7,
+                    label=f"Trial {trial_num} ★ best" if is_best else f"Trial {trial_num}",
+                    zorder=3 if is_best else 2,
+                )
 
-            fig_conv.update_layout(
-                title="Validation Loss Convergence — All Trials",
-                xaxis_title="Epoch",
-                yaxis_title="Validation Loss",
-                template="plotly_white",
-                legend=dict(orientation="v", x=1.01, y=1),
-                hovermode="x unified",
-            )
-            fig_conv.write_html(os.path.join(self.study_dir, "trial_convergence.html"))
+            ax.set_title("Validation Loss Convergence — Completed Trials", fontsize=13)
+            ax.set_xlabel("Epoch")
+            ax.set_ylabel("Validation Loss")
+            ax.legend(loc='upper right', fontsize=7, ncol=2, framealpha=0.7)
+            ax.grid(True, linestyle='--', alpha=0.4)
+            plt.tight_layout()
+            plt.savefig(os.path.join(self.study_dir, "trial_convergence.png"), dpi=150)
+            plt.close(fig)
 
-            # ── 3. Train vs Val loss curves per trial (multi-panel) ───────────
+            #train vs val loss curves per trial
             all_finished = {k: v for k, v in self.trial_histories.items() if v.get('val_loss')}
             n_finished = len(all_finished)
+
             if n_finished > 0:
                 n_cols = min(4, n_finished)
                 n_rows = math.ceil(n_finished / n_cols)
-                subplot_titles = [f"Trial {k}" + (" ★" if k == best_trial_num else "")
-                                  for k in sorted(all_finished.keys())]
-                fig_panels = sp.make_subplots(
-                    rows=n_rows, cols=n_cols,
-                    subplot_titles=subplot_titles,
-                    shared_xaxes=False,
-                    vertical_spacing=0.08,
-                    horizontal_spacing=0.06,
-                )
-                for idx, (trial_num, hist) in enumerate(sorted(all_finished.items())):
-                    row = idx // n_cols + 1
-                    col = idx % n_cols + 1
-                    epochs = list(range(1, len(hist['val_loss']) + 1))
-                    fig_panels.add_trace(
-                        go.Scatter(x=epochs, y=hist['train_loss'], mode='lines',
-                                   name='train', line=dict(color='steelblue', width=1.5),
-                                   showlegend=(idx == 0)),
-                        row=row, col=col
-                    )
-                    fig_panels.add_trace(
-                        go.Scatter(x=epochs, y=hist['val_loss'], mode='lines',
-                                   name='val', line=dict(color='tomato', width=1.5),
-                                   showlegend=(idx == 0)),
-                        row=row, col=col
-                    )
-                fig_panels.update_layout(
-                    title="Train vs Validation Loss — Per Trial",
-                    template="plotly_white",
-                    height=250 * n_rows + 80,
-                    showlegend=True,
-                )
-                fig_panels.write_html(os.path.join(self.study_dir, "per_trial_loss_curves.html"))
 
-            # ── 4. Parameter vs performance scatter plots ─────────────────────
+                fig, axes = plt.subplots(
+                    n_rows, n_cols,
+                    figsize=(4.5 * n_cols, 3 * n_rows),
+                    squeeze=False
+                )
+
+                for idx, (trial_num, hist) in enumerate(sorted(all_finished.items())):
+                    row, col = idx // n_cols, idx % n_cols
+                    ax = axes[row][col]
+                    epochs = list(range(1, len(hist['val_loss']) + 1))
+
+                    ax.plot(epochs, hist['train_loss'], color='steelblue', linewidth=1.5, label='train')
+                    ax.plot(epochs, hist['val_loss'],   color='tomato',    linewidth=1.5, label='val')
+
+                    title = f"Trial {trial_num}" + (" ★" if trial_num == best_trial_num else "")
+                    ax.set_title(title, fontsize=9)
+                    ax.set_xlabel("Epoch", fontsize=7)
+                    ax.set_ylabel("Loss", fontsize=7)
+                    ax.tick_params(labelsize=6)
+                    ax.grid(True, linestyle='--', alpha=0.4)
+                    if idx == 0:
+                        ax.legend(fontsize=7)
+
+                #hide unused subplots
+                for idx in range(n_finished, n_rows * n_cols):
+                    axes[idx // n_cols][idx % n_cols].set_visible(False)
+
+                fig.suptitle("Train vs Validation Loss — Per Trial", fontsize=13, y=1.01)
+                plt.tight_layout()
+                plt.savefig(os.path.join(self.study_dir, "per_trial_loss_curves.png"), dpi=150, bbox_inches='tight')
+                plt.close(fig)
+
+            #parameter vs performance scatter plots
             completed_optuna = [t for t in study.trials if t.state == optuna.trial.TrialState.COMPLETE]
             if completed_optuna:
                 param_names = list(completed_optuna[0].params.keys())
@@ -518,84 +451,53 @@ class HyperparameterTuner:
                 n_cols_p = min(3, n_params)
                 n_rows_p = math.ceil(n_params / n_cols_p)
 
-                fig_scatter = sp.make_subplots(
-                    rows=n_rows_p, cols=n_cols_p,
-                    subplot_titles=param_names,
-                    vertical_spacing=0.10,
-                    horizontal_spacing=0.08,
+                fig, axes = plt.subplots(
+                    n_rows_p, n_cols_p,
+                    figsize=(5 * n_cols_p, 4 * n_rows_p),
+                    squeeze=False
                 )
+
+                norm = plt.Normalize(vmin=min(trial_values), vmax=max(trial_values))
+                cmap = plt.cm.RdYlGn_r
 
                 for idx, param in enumerate(param_names):
-                    row = idx // n_cols_p + 1
-                    col = idx % n_cols_p + 1
+                    row, col = idx // n_cols_p, idx % n_cols_p
+                    ax = axes[row][col]
 
-                    x_vals = []
-                    y_vals = []
-                    trial_nums = []
+                    x_vals, y_vals = [], []
                     for t in completed_optuna:
                         if param in t.params:
-                            raw = t.params[param]
-                            # Categorical params that are None need to be stringified
-                            x_vals.append(str(raw) if raw is None else raw)
+                            x_vals.append(float(t.params[param]))
                             y_vals.append(t.value)
-                            trial_nums.append(t.number)
 
-                    # Determine if x is numeric or categorical
-                    numeric_vals = []
-                    for v in x_vals:
-                        try:
-                            numeric_vals.append(float(v))
-                        except (ValueError, TypeError):
-                            numeric_vals = None
-                            break
+                    sc = ax.scatter(
+                        x_vals, y_vals,
+                        c=y_vals, cmap=cmap, norm=norm,
+                        s=60, edgecolors='grey', linewidths=0.4, zorder=3
+                    )
+                    if idx == 0:
+                        cbar = fig.colorbar(sc, ax=ax, fraction=0.046, pad=0.04)
+                        cbar.set_label("Val Loss", fontsize=7)
 
-                    if numeric_vals is not None:
-                        fig_scatter.add_trace(
-                            go.Scatter(
-                                x=numeric_vals, y=y_vals,
-                                mode='markers',
-                                marker=dict(
-                                    color=y_vals,
-                                    colorscale='RdYlGn_r',
-                                    showscale=(idx == 0),
-                                    size=8,
-                                    colorbar=dict(title="Val Loss", x=1.02) if idx == 0 else None,
-                                ),
-                                text=[f"Trial {n}" for n in trial_nums],
-                                hovertemplate=f"{param}: %{{x}}<br>Val Loss: %{{y:.4f}}<br>%{{text}}<extra></extra>",
-                                showlegend=False,
-                            ),
-                            row=row, col=col
-                        )
-                    else:
-                        # Box plot grouping by categorical value
-                        unique_cats = sorted(set(x_vals), key=str)
-                        for cat in unique_cats:
-                            cat_losses = [y for x, y in zip(x_vals, y_vals) if x == cat]
-                            fig_scatter.add_trace(
-                                go.Box(
-                                    y=cat_losses,
-                                    name=str(cat),
-                                    showlegend=False,
-                                    marker_color='steelblue',
-                                    boxpoints='all',
-                                    jitter=0.3,
-                                    pointpos=0,
-                                ),
-                                row=row, col=col
-                            )
+                    ax.set_title(param, fontsize=9)
+                    ax.set_xlabel(param, fontsize=8)
+                    ax.set_ylabel("Val Loss", fontsize=8)
+                    ax.tick_params(labelsize=6)
+                    ax.grid(True, linestyle='--', alpha=0.4)
 
-                fig_scatter.update_layout(
-                    title="Hyperparameter Values vs Validation Loss",
-                    template="plotly_white",
-                    height=320 * n_rows_p + 80,
-                )
-                fig_scatter.write_html(os.path.join(self.study_dir, "param_vs_performance.html"))
+                # hide unused subplots
+                for idx in range(n_params, n_rows_p * n_cols_p):
+                    axes[idx // n_cols_p][idx % n_cols_p].set_visible(False)
+
+                fig.suptitle("Hyperparameter Values vs Validation Loss", fontsize=13, y=1.01)
+                plt.tight_layout()
+                plt.savefig(os.path.join(self.study_dir, "param_vs_performance.png"), dpi=150, bbox_inches='tight')
+                plt.close(fig)
 
             print(f"Visualizations saved to: {self.study_dir}")
 
         except ImportError:
-            print("Install plotly for visualizations: pip install plotly")
+            print("Install plotly for visualizations: pip install matplotlib")
 
 
 def parse_args():
@@ -618,7 +520,7 @@ def main():
     """Main function"""
     args = parse_args()
     
-    # Create tuner
+    #create tuner
     tuner = HyperparameterTuner(
         data_splits_path=args.data_splits,
         n_trials=args.n_trials,
@@ -626,17 +528,12 @@ def main():
         study_name=args.study_name
     )
     
-    # Run optimization
+    #eun optimization
     study = tuner.optimize()
     
     print("\n" + "=" * 80)
     print("HYPERPARAMETER TUNING COMPLETED")
     print("=" * 80)
-    print("\nTo train with best hyperparameters, update your config.py or use:")
-    print(f"  --embed_dim {study.best_params['embed_dim']}")
-    print(f"  --lr {study.best_params['learning_rate']}")
-    print(f"  --per_slice_cap {study.best_params['per_slice_cap']}")
-    print("  ... etc")
 
 
 if __name__ == "__main__":
