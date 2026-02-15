@@ -365,8 +365,18 @@ class HyperparameterTuner:
         try:
 
             #feature importances 
-            fig = vis.plot_param_importances(study)
-            fig.write_image(os.path.join(self.study_dir, "param_importances.png"))
+            importances = optuna.importance.get_param_importances(study)
+            fig, ax = plt.subplots(figsize=(8, max(3, len(importances) * 0.5)))
+            sorted_pairs = sorted(zip(importances.values(), importances.keys()))
+            values_sorted, params_sorted = zip(*sorted_pairs)
+            ax.barh(params_sorted, values_sorted, color='steelblue', edgecolor='grey', linewidth=0.4)
+            ax.set_xlabel("Importance", fontsize=9)
+            ax.set_title("Hyperparameter Importances", fontsize=13)
+            ax.tick_params(labelsize=8)
+            ax.grid(True, axis='x', linestyle='--', alpha=0.4)
+            plt.tight_layout()
+            plt.savefig(os.path.join(self.study_dir, "param_importances.png"), dpi=150, bbox_inches='tight')
+            plt.close(fig)
 
             #trial convergence: val_loss curves for every trial (completed only)
             completed_trials = {
