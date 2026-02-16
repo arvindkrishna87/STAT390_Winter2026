@@ -16,4 +16,6 @@ psutil>=5.8.0  # For memory monitoring
 
 # For imbalanced learning (if needed)
 imbalanced-learn>=0.8.0
-KimiaNet
+
+# KimiaNet
+# git+https://github.com/KimiaLabMayo/KimiaNet.git

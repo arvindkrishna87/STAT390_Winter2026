@@ -1,0 +1,235 @@
+Job ID: 8819024
+Start time: Sun Feb 15 19:56:38 CST 2026
+Requirement already satisfied: torch>=1.9.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (2.9.0)
+Requirement already satisfied: torchvision>=0.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 3)) (0.24.0)
+Requirement already satisfied: numpy>=1.21.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 4)) (2.3.4)
+Requirement already satisfied: pandas>=1.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 5)) (2.3.3)
+Requirement already satisfied: scikit-learn>=1.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 6)) (1.7.2)
+Requirement already satisfied: Pillow>=8.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 7)) (12.0.0)
+Requirement already satisfied: tqdm>=4.62.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 8)) (4.67.1)
+Requirement already satisfied: matplotlib>=3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 11)) (3.10.7)
+Requirement already satisfied: seaborn>=0.11.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 12)) (0.13.2)
+Requirement already satisfied: psutil>=5.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 15)) (7.1.2)
+Requirement already satisfied: imbalanced-learn>=0.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 18)) (0.14.0)
+Requirement already satisfied: filelock in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (3.20.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (4.15.0)
+Requirement already satisfied: setuptools in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (3.5)
+Requirement already satisfied: jinja2 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (2025.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (1.13.1.3)
+Requirement already satisfied: triton==3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (3.5.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 5)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: scipy>=1.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 6)) (1.16.3)
+Requirement already satisfied: joblib>=1.2.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 6)) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 6)) (3.6.0)
+Requirement already satisfied: contourpy>=1.0.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 11)) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 11)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 11)) (4.60.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 11)) (1.4.9)
+Requirement already satisfied: packaging>=20.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 11)) (25.0)
+Requirement already satisfied: pyparsing>=3 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 11)) (3.2.5)
+Requirement already satisfied: six>=1.5 in /projects/e32998/env/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 5)) (1.17.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /projects/e32998/env/lib/python3.12/site-packages (from jinja2->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 2)) (3.0.3)
+Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/site-packages (2026.1.4)
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Random seed set to 42
+Using CPU
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260215_195728
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv', 'patches_dir': '/projects/e32998/patches', 'epochs': 30, 'lr': 0.0003, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': '/projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.0003, 'weight_decay': 0.0002, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5, 1.0], 'dropout': 0.3, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 3, 'scheduler_factor': 0.3, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10, 'attn_entropy_enable': True, 'attn_entropy_lambda': 0.001, 'attn_entropy_eps': 1e-08}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 105 labels
+Found 83595 patch files
+All 3808 non-standard file names were handled.
+Grouped into 378 slices
+Mapped 366 slices to classes
+Class distribution: {0: 128, 1: 238}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz
+Data splits loaded from: /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz
+Loaded splits - Train: 222, Val: 72, Test: 68
+Cases per split: 50 17 18
+Paths per split: 47679 15631 16166
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    6  12
+train  17  33
+val     5  12
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         409.2          250.9          238.1
+train        470.5          263.2          219.9
+val          504.8          241.9          172.8
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         364.5          173.5          160.0
+train        324.0          194.0          182.0
+val          273.0          175.0          162.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.111          0.000
+train          0.0          0.000          0.020
+val            0.0          0.059          0.059
+
+Total cases: 85
+Total patches: 79,476
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     15639 patches
+  High-grade (1): 32040 patches
+
+Patch count by class for Validation:
+  Benign (0):     5968 patches
+  High-grade (1): 9663 patches
+
+Patch count by class for Test:
+  Benign (0):     4130 patches
+  High-grade (1): 12036 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 50/50 (100.0%)
+  melan: 50/50 (100.0%)
+  sox10: 49/50 (98.0%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 17/17 (100.0%)
+  melan: 16/17 (94.1%)
+  sox10: 16/17 (94.1%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 18/18 (100.0%)
+  melan: 16/18 (88.9%)
+  sox10: 18/18 (100.0%)
+No issues found
+Using existing splits from: /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+Created data loaders - Train: 50, Val: 17, Test: 18
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 9,446,917
+Trainable parameters: 2,493,061
+Model size: 36.04 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 9,446,917
+Learning rate scheduler: ReduceLROnPlateau
+Early stopping enabled (patience=8)
+
+Epoch 1/30 (LR: 3.00e-04)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Training:   2%|▏         | 1/50 [00:45<37:18, 45.68s/it]Training:   4%|▍         | 2/50 [01:05<24:20, 30.42s/it]Training:   6%|▌         | 3/50 [01:22<18:56, 24.19s/it]Training:   8%|▊         | 4/50 [01:32<14:19, 18.68s/it]Training:  10%|█         | 5/50 [02:05<17:52, 23.82s/it]Training:  12%|█▏        | 6/50 [02:18<14:44, 20.10s/it]Training:  14%|█▍        | 7/50 [02:32<13:07, 18.31s/it]Training:  16%|█▌        | 8/50 [02:40<10:22, 14.82s/it]Training:  18%|█▊        | 9/50 [03:11<13:35, 19.88s/it]Training:  20%|██        | 10/50 [03:25<12:07, 18.19s/it]Training:  22%|██▏       | 11/50 [03:55<14:09, 21.78s/it]Training:  24%|██▍       | 12/50 [04:11<12:45, 20.13s/it]Training:  26%|██▌       | 13/50 [04:42<14:21, 23.29s/it]Training:  28%|██▊       | 14/50 [04:55<12:09, 20.27s/it]Training:  30%|███       | 15/50 [05:19<12:24, 21.29s/it]Training:  32%|███▏      | 16/50 [05:22<09:02, 15.94s/it]Training:  34%|███▍      | 17/50 [05:44<09:40, 17.58s/it]Training:  36%|███▌      | 18/50 [05:54<08:15, 15.47s/it]Training:  38%|███▊      | 19/50 [06:21<09:47, 18.94s/it]Training:  40%|████      | 20/50 [06:29<07:45, 15.51s/it]Training:  42%|████▏     | 21/50 [06:59<09:34, 19.79s/it]Training:  44%|████▍     | 22/50 [07:09<07:52, 16.86s/it]Training:  46%|████▌     | 23/50 [07:18<06:33, 14.59s/it]Training:  48%|████▊     | 24/50 [07:30<05:57, 13.73s/it]Training:  50%|█████     | 25/50 [07:43<05:37, 13.49s/it]Training:  52%|█████▏    | 26/50 [07:54<05:11, 12.97s/it]Training:  54%|█████▍    | 27/50 [08:10<05:12, 13.60s/it]Training:  56%|█████▌    | 28/50 [08:22<04:54, 13.37s/it]Training:  58%|█████▊    | 29/50 [08:38<04:55, 14.09s/it]Training:  60%|██████    | 30/50 [09:04<05:55, 17.76s/it]Training:  62%|██████▏   | 31/50 [09:23<05:39, 17.86s/it]Training:  64%|██████▍   | 32/50 [09:36<04:55, 16.40s/it]Training:  66%|██████▌   | 33/50 [09:56<04:57, 17.49s/it]Training:  68%|██████▊   | 34/50 [10:14<04:45, 17.82s/it]Training:  70%|███████   | 35/50 [10:25<03:55, 15.72s/it]Training:  72%|███████▏  | 36/50 [10:41<03:43, 15.94s/it]Training:  74%|███████▍  | 37/50 [10:58<03:29, 16.15s/it]Training:  76%|███████▌  | 38/50 [11:18<03:27, 17.30s/it]Training:  78%|███████▊  | 39/50 [11:26<02:40, 14.58s/it]Training:  80%|████████  | 40/50 [11:39<02:20, 14.07s/it]Training:  82%|████████▏ | 41/50 [11:48<01:51, 12.40s/it]Training:  84%|████████▍ | 42/50 [12:17<02:19, 17.40s/it]Training:  86%|████████▌ | 43/50 [12:22<01:36, 13.85s/it]Training:  88%|████████▊ | 44/50 [12:34<01:20, 13.36s/it]Training:  90%|█████████ | 45/50 [12:48<01:07, 13.41s/it]Training:  92%|█████████▏| 46/50 [13:07<01:00, 15.09s/it]Training:  94%|█████████▍| 47/50 [13:36<00:57, 19.33s/it]Training:  96%|█████████▌| 48/50 [13:47<00:33, 16.87s/it]Training:  98%|█████████▊| 49/50 [13:55<00:14, 14.11s/it]Training: 100%|██████████| 50/50 [14:04<00:00, 12.65s/it]Training: 100%|██████████| 50/50 [14:04<00:00, 16.90s/it]
+Train Loss: 0.7019, Val Loss: 0.4227, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_201503_HierarchicalAttnMIL_epoch1.pth
+New best validation loss: 0.4227
+
+Epoch 2/30 (LR: 3.00e-04)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:19<16:02, 19.65s/it]Training:   4%|▍         | 2/50 [00:36<14:14, 17.81s/it]Training:   6%|▌         | 3/50 [00:49<12:21, 15.77s/it]Training:   8%|▊         | 4/50 [01:05<12:11, 15.90s/it]Training:  10%|█         | 5/50 [01:33<15:04, 20.09s/it]Training:  12%|█▏        | 6/50 [01:43<12:23, 16.90s/it]Training:  14%|█▍        | 7/50 [02:10<14:21, 20.02s/it]Training:  16%|█▌        | 8/50 [02:19<11:42, 16.72s/it]Training:  18%|█▊        | 9/50 [02:31<10:15, 15.01s/it]Training:  20%|██        | 10/50 [02:51<11:00, 16.52s/it]Training:  22%|██▏       | 11/50 [02:59<09:06, 14.02s/it]Training:  24%|██▍       | 12/50 [03:08<08:00, 12.64s/it]Training:  26%|██▌       | 13/50 [03:21<07:52, 12.77s/it]Training:  28%|██▊       | 14/50 [03:45<09:36, 16.01s/it]Training:  30%|███       | 15/50 [03:58<08:53, 15.24s/it]Training:  32%|███▏      | 16/50 [04:04<07:02, 12.41s/it]Training:  34%|███▍      | 17/50 [04:26<08:17, 15.07s/it]Training:  36%|███▌      | 18/50 [04:38<07:41, 14.41s/it]Training:  38%|███▊      | 19/50 [05:10<10:06, 19.56s/it]Training:  40%|████      | 20/50 [05:21<08:26, 16.88s/it]Training:  42%|████▏     | 21/50 [05:25<06:23, 13.21s/it]Training:  44%|████▍     | 22/50 [06:00<09:07, 19.56s/it]Training:  46%|████▌     | 23/50 [06:19<08:47, 19.52s/it]Training:  48%|████▊     | 24/50 [06:34<07:52, 18.17s/it]Training:  50%|█████     | 25/50 [06:44<06:29, 15.59s/it]Training:  52%|█████▏    | 26/50 [07:07<07:08, 17.85s/it]Training:  54%|█████▍    | 27/50 [07:23<06:36, 17.25s/it]Training:  56%|█████▌    | 28/50 [07:32<05:30, 15.03s/it]Training:  58%|█████▊    | 29/50 [07:41<04:34, 13.05s/it]Training:  60%|██████    | 30/50 [08:14<06:19, 18.99s/it]Training:  62%|██████▏   | 31/50 [08:30<05:43, 18.08s/it]Training:  64%|██████▍   | 32/50 [09:00<06:28, 21.61s/it]Training:  66%|██████▌   | 33/50 [09:04<04:39, 16.42s/it]Training:  68%|██████▊   | 34/50 [09:36<05:38, 21.14s/it]Training:  70%|███████   | 35/50 [09:51<04:47, 19.14s/it]Training:  72%|███████▏  | 36/50 [10:05<04:09, 17.83s/it]Training:  74%|███████▍  | 37/50 [10:27<04:05, 18.87s/it]Training:  76%|███████▌  | 38/50 [10:38<03:18, 16.56s/it]Training:  78%|███████▊  | 39/50 [11:03<03:31, 19.23s/it]Training:  80%|████████  | 40/50 [11:18<02:58, 17.89s/it]Training:  82%|████████▏ | 41/50 [11:43<03:00, 20.07s/it]Training:  84%|████████▍ | 42/50 [11:54<02:19, 17.43s/it]Training:  86%|████████▌ | 43/50 [12:07<01:52, 16.09s/it]Training:  88%|████████▊ | 44/50 [12:31<01:50, 18.42s/it]Training:  90%|█████████ | 45/50 [12:43<01:22, 16.44s/it]Training:  92%|█████████▏| 46/50 [12:59<01:05, 16.32s/it]Training:  94%|█████████▍| 47/50 [13:20<00:53, 17.73s/it]Training:  96%|█████████▌| 48/50 [13:47<00:40, 20.42s/it]Training:  98%|█████████▊| 49/50 [14:13<00:22, 22.19s/it]Training: 100%|██████████| 50/50 [14:25<00:00, 19.23s/it]Training: 100%|██████████| 50/50 [14:25<00:00, 17.32s/it]
+Train Loss: 0.4959, Val Loss: 3.2649, Val Acc: 0.3529
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_203302_HierarchicalAttnMIL_epoch2.pth
+No improvement for 1 epoch(s)
+
+Epoch 3/30 (LR: 3.00e-04)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:30<24:51, 30.44s/it]Training:   4%|▍         | 2/50 [01:00<24:01, 30.03s/it]Training:   6%|▌         | 3/50 [01:16<18:46, 23.97s/it]Training:   8%|▊         | 4/50 [01:29<14:57, 19.51s/it]Training:  10%|█         | 5/50 [02:11<20:38, 27.52s/it]Training:  12%|█▏        | 6/50 [02:24<16:38, 22.69s/it]Training:  14%|█▍        | 7/50 [02:53<17:48, 24.85s/it]Training:  16%|█▌        | 8/50 [03:11<15:48, 22.58s/it]Training:  18%|█▊        | 9/50 [03:25<13:38, 19.96s/it]Training:  20%|██        | 10/50 [03:35<11:05, 16.64s/it]Training:  22%|██▏       | 11/50 [03:57<11:52, 18.27s/it]Training:  24%|██▍       | 12/50 [04:13<11:15, 17.77s/it]Training:  26%|██▌       | 13/50 [04:24<09:42, 15.74s/it]Training:  28%|██▊       | 14/50 [04:38<09:04, 15.12s/it]Training:  30%|███       | 15/50 [04:53<08:50, 15.15s/it]Training:  32%|███▏      | 16/50 [05:00<07:13, 12.76s/it]Training:  34%|███▍      | 17/50 [05:11<06:42, 12.20s/it]Training:  36%|███▌      | 18/50 [05:32<07:50, 14.71s/it]Training:  38%|███▊      | 19/50 [05:45<07:24, 14.34s/it]Training:  40%|████      | 20/50 [05:50<05:39, 11.32s/it]Training:  42%|████▏     | 21/50 [06:22<08:30, 17.59s/it]Training:  44%|████▍     | 22/50 [06:48<09:24, 20.18s/it]Training:  46%|████▌     | 23/50 [06:53<07:05, 15.75s/it]Training:  48%|████▊     | 24/50 [07:34<10:02, 23.19s/it]Training:  50%|█████     | 25/50 [07:46<08:12, 19.71s/it]Training:  52%|█████▏    | 26/50 [08:15<09:02, 22.59s/it]Training:  54%|█████▍    | 27/50 [08:28<07:31, 19.63s/it]Training:  56%|█████▌    | 28/50 [08:35<05:53, 16.07s/it]Training:  58%|█████▊    | 29/50 [09:04<06:56, 19.83s/it]Training:  60%|██████    | 30/50 [09:32<07:23, 22.16s/it]Training:  62%|██████▏   | 31/50 [09:43<05:59, 18.90s/it]Training:  64%|██████▍   | 32/50 [09:55<05:06, 17.01s/it]Training:  66%|██████▌   | 33/50 [10:14<04:55, 17.40s/it]Training:  68%|██████▊   | 34/50 [10:27<04:20, 16.30s/it]Training:  70%|███████   | 35/50 [10:36<03:29, 13.98s/it]Training:  72%|███████▏  | 36/50 [11:13<04:51, 20.84s/it]Training:  74%|███████▍  | 37/50 [11:26<04:02, 18.62s/it]Training:  76%|███████▌  | 38/50 [11:34<03:05, 15.45s/it]Training:  78%|███████▊  | 39/50 [11:54<03:03, 16.68s/it]Training:  80%|████████  | 40/50 [12:22<03:20, 20.03s/it]Training:  82%|████████▏ | 41/50 [12:29<02:26, 16.29s/it]Training:  84%|████████▍ | 42/50 [12:39<01:55, 14.45s/it]Training:  86%|████████▌ | 43/50 [13:02<01:57, 16.79s/it]Training:  88%|████████▊ | 44/50 [13:13<01:31, 15.28s/it]Training:  90%|█████████ | 45/50 [13:18<01:00, 12.18s/it]Training:  92%|█████████▏| 46/50 [13:30<00:48, 12.14s/it]Training:  94%|█████████▍| 47/50 [13:49<00:41, 14.00s/it]Training:  96%|█████████▌| 48/50 [13:57<00:24, 12.40s/it]Training:  98%|█████████▊| 49/50 [14:08<00:11, 11.84s/it]Training: 100%|██████████| 50/50 [14:17<00:00, 10.84s/it]Training: 100%|██████████| 50/50 [14:17<00:00, 17.14s/it]
+Train Loss: 0.4709, Val Loss: 3.7697, Val Acc: 0.3529
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_205041_HierarchicalAttnMIL_epoch3.pth
+No improvement for 2 epoch(s)
+
+Epoch 4/30 (LR: 3.00e-04)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:45<36:47, 45.04s/it]Training:   4%|▍         | 2/50 [01:08<25:57, 32.45s/it]Training:   6%|▌         | 3/50 [01:22<18:45, 23.94s/it]Training:   8%|▊         | 4/50 [01:35<14:58, 19.53s/it]Training:  10%|█         | 5/50 [01:46<12:31, 16.70s/it]Training:  12%|█▏        | 6/50 [01:56<10:26, 14.23s/it]Training:  14%|█▍        | 7/50 [02:02<08:12, 11.45s/it]Training:  16%|█▌        | 8/50 [02:16<08:38, 12.35s/it]Training:  18%|█▊        | 9/50 [02:44<11:51, 17.35s/it]Training:  20%|██        | 10/50 [02:56<10:25, 15.64s/it]Training:  22%|██▏       | 11/50 [03:14<10:40, 16.43s/it]Training:  24%|██▍       | 12/50 [03:25<09:19, 14.73s/it]Training:  26%|██▌       | 13/50 [03:45<09:59, 16.19s/it]Training:  28%|██▊       | 14/50 [03:59<09:18, 15.50s/it]Training:  30%|███       | 15/50 [04:11<08:28, 14.54s/it]Training:  32%|███▏      | 16/50 [04:34<09:44, 17.19s/it]Training:  34%|███▍      | 17/50 [05:02<11:13, 20.41s/it]Training:  36%|███▌      | 18/50 [05:10<08:50, 16.58s/it]Training:  38%|███▊      | 19/50 [05:28<08:51, 17.15s/it]Training:  40%|████      | 20/50 [06:00<10:47, 21.57s/it]Training:  42%|████▏     | 21/50 [06:19<10:03, 20.82s/it]Training:  44%|████▍     | 22/50 [06:27<07:56, 17.02s/it]Training:  46%|████▌     | 23/50 [06:39<06:53, 15.33s/it]Training:  48%|████▊     | 24/50 [06:49<05:58, 13.79s/it]Training:  50%|█████     | 25/50 [07:15<07:13, 17.35s/it]Training:  52%|█████▏    | 26/50 [07:30<06:38, 16.62s/it]Training:  54%|█████▍    | 27/50 [07:49<06:42, 17.50s/it]Training:  56%|█████▌    | 28/50 [08:06<06:20, 17.31s/it]Training:  58%|█████▊    | 29/50 [08:11<04:46, 13.62s/it]Training:  60%|██████    | 30/50 [08:22<04:16, 12.81s/it]Training:  62%|██████▏   | 31/50 [08:43<04:49, 15.22s/it]Training:  64%|██████▍   | 32/50 [08:55<04:20, 14.45s/it]Training:  66%|██████▌   | 33/50 [09:07<03:53, 13.72s/it]Training:  68%|██████▊   | 34/50 [09:19<03:30, 13.13s/it]Training:  70%|███████   | 35/50 [09:35<03:29, 13.97s/it]Training:  72%|███████▏  | 36/50 [10:07<04:30, 19.36s/it]Training:  74%|███████▍  | 37/50 [10:20<03:45, 17.36s/it]Training:  76%|███████▌  | 38/50 [10:33<03:13, 16.08s/it]Training:  78%|███████▊  | 39/50 [11:02<03:41, 20.14s/it]Training:  80%|████████  | 40/50 [11:12<02:51, 17.13s/it]Training:  82%|████████▏ | 41/50 [11:23<02:15, 15.08s/it]Training:  84%|████████▍ | 42/50 [11:36<01:54, 14.37s/it]Training:  86%|████████▌ | 43/50 [12:05<02:12, 18.89s/it]Training:  88%|████████▊ | 44/50 [12:32<02:08, 21.45s/it]Training:  90%|█████████ | 45/50 [12:48<01:39, 19.80s/it]Training:  92%|█████████▏| 46/50 [12:52<00:59, 14.84s/it]Training:  94%|█████████▍| 47/50 [13:18<00:54, 18.32s/it]Training:  96%|█████████▌| 48/50 [13:31<00:33, 16.86s/it]Training:  98%|█████████▊| 49/50 [13:56<00:19, 19.14s/it]Training: 100%|██████████| 50/50 [14:03<00:00, 15.62s/it]Training: 100%|██████████| 50/50 [14:03<00:00, 16.88s/it]
+Train Loss: 0.2591, Val Loss: 5.4235, Val Acc: 0.3529
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_210806_HierarchicalAttnMIL_epoch4.pth
+No improvement for 3 epoch(s)
+
+Epoch 5/30 (LR: 3.00e-04)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:57<46:43, 57.21s/it]Training:   4%|▍         | 2/50 [01:27<33:01, 41.28s/it]Training:   6%|▌         | 3/50 [01:36<20:40, 26.39s/it]Training:   8%|▊         | 4/50 [01:50<16:45, 21.85s/it]Training:  10%|█         | 5/50 [02:02<13:38, 18.19s/it]Training:  12%|█▏        | 6/50 [02:19<12:56, 17.66s/it]Training:  14%|█▍        | 7/50 [02:30<11:06, 15.50s/it]Training:  16%|█▌        | 8/50 [02:51<12:01, 17.19s/it]Training:  18%|█▊        | 9/50 [03:00<10:09, 14.87s/it]Training:  20%|██        | 10/50 [03:04<07:40, 11.52s/it]Training:  22%|██▏       | 11/50 [03:30<10:21, 15.94s/it]Training:  24%|██▍       | 12/50 [03:57<12:12, 19.28s/it]Training:  26%|██▌       | 13/50 [04:16<11:48, 19.16s/it]Training:  28%|██▊       | 14/50 [04:31<10:37, 17.71s/it]Training:  30%|███       | 15/50 [04:45<09:42, 16.65s/it]Training:  32%|███▏      | 16/50 [04:57<08:43, 15.41s/it]Training:  34%|███▍      | 17/50 [05:14<08:45, 15.93s/it]Training:  36%|███▌      | 18/50 [05:27<07:55, 14.85s/it]Training:  38%|███▊      | 19/50 [05:48<08:37, 16.70s/it]Training:  40%|████      | 20/50 [06:04<08:18, 16.62s/it]Training:  42%|████▏     | 21/50 [06:07<06:00, 12.42s/it]Training:  44%|████▍     | 22/50 [06:27<06:50, 14.65s/it]Training:  46%|████▌     | 23/50 [06:39<06:19, 14.07s/it]Training:  48%|████▊     | 24/50 [06:56<06:27, 14.91s/it]Training:  50%|█████     | 25/50 [07:08<05:45, 13.83s/it]Training:  52%|█████▏    | 26/50 [07:24<05:52, 14.70s/it]Training:  54%|█████▍    | 27/50 [07:57<07:42, 20.09s/it]Training:  56%|█████▌    | 28/50 [08:12<06:51, 18.71s/it]Training:  58%|█████▊    | 29/50 [08:19<05:14, 14.99s/it]Training:  60%|██████    | 30/50 [08:46<06:14, 18.73s/it]Training:  62%|██████▏   | 31/50 [08:56<05:05, 16.06s/it]Training:  64%|██████▍   | 32/50 [09:19<05:24, 18.00s/it]Training:  66%|██████▌   | 33/50 [09:47<05:59, 21.17s/it]Training:  68%|██████▊   | 34/50 [10:13<06:02, 22.67s/it]Training:  70%|███████   | 35/50 [10:30<05:14, 20.98s/it]Training:  72%|███████▏  | 36/50 [10:44<04:23, 18.82s/it]Training:  74%|███████▍  | 37/50 [10:56<03:37, 16.77s/it]Training:  76%|███████▌  | 38/50 [11:05<02:52, 14.34s/it]Training:  78%|███████▊  | 39/50 [11:33<03:23, 18.53s/it]Training:  80%|████████  | 40/50 [11:44<02:43, 16.35s/it]Training:  82%|████████▏ | 41/50 [11:53<02:06, 14.02s/it]Training:  84%|████████▍ | 42/50 [12:04<01:44, 13.11s/it]Training:  86%|████████▌ | 43/50 [12:22<01:41, 14.52s/it]Training:  88%|████████▊ | 44/50 [12:44<01:41, 16.89s/it]Training:  90%|█████████ | 45/50 [12:59<01:21, 16.40s/it]Training:  92%|█████████▏| 46/50 [13:10<00:58, 14.64s/it]Training:  94%|█████████▍| 47/50 [13:42<00:59, 19.99s/it]Training:  96%|█████████▌| 48/50 [13:49<00:31, 15.99s/it]Training:  98%|█████████▊| 49/50 [14:06<00:16, 16.42s/it]Training: 100%|██████████| 50/50 [14:24<00:00, 16.73s/it]Training: 100%|██████████| 50/50 [14:24<00:00, 17.29s/it]
+Train Loss: 0.3074, Val Loss: 6.6381, Val Acc: 0.3529
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_212618_HierarchicalAttnMIL_epoch5.pth
+No improvement for 4 epoch(s)
+
+Epoch 6/30 (LR: 9.00e-05)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:34<28:21, 34.73s/it]Training:   4%|▍         | 2/50 [00:49<18:23, 22.99s/it]Training:   6%|▌         | 3/50 [01:04<15:07, 19.31s/it]Training:   8%|▊         | 4/50 [01:14<11:53, 15.52s/it]Training:  10%|█         | 5/50 [01:23<10:04, 13.43s/it]Training:  12%|█▏        | 6/50 [01:37<09:50, 13.42s/it]Training:  14%|█▍        | 7/50 [02:11<14:33, 20.32s/it]Training:  16%|█▌        | 8/50 [02:16<10:48, 15.45s/it]Training:  18%|█▊        | 9/50 [02:29<09:59, 14.62s/it]Training:  20%|██        | 10/50 [02:47<10:29, 15.74s/it]Training:  22%|██▏       | 11/50 [03:15<12:30, 19.26s/it]Training:  24%|██▍       | 12/50 [03:43<14:02, 22.18s/it]Training:  26%|██▌       | 13/50 [04:01<12:53, 20.92s/it]Training:  28%|██▊       | 14/50 [04:16<11:25, 19.04s/it]Training:  30%|███       | 15/50 [04:21<08:35, 14.73s/it]Training:  32%|███▏      | 16/50 [04:43<09:39, 17.04s/it]Training:  34%|███▍      | 17/50 [04:54<08:23, 15.26s/it]Training:  36%|███▌      | 18/50 [05:05<07:28, 14.00s/it]Training:  38%|███▊      | 19/50 [05:29<08:39, 16.75s/it]Training:  40%|████      | 20/50 [05:48<08:42, 17.40s/it]Training:  42%|████▏     | 21/50 [05:56<07:02, 14.58s/it]Training:  44%|████▍     | 22/50 [06:06<06:16, 13.44s/it]Training:  46%|████▌     | 23/50 [06:21<06:11, 13.76s/it]Training:  48%|████▊     | 24/50 [06:31<05:32, 12.80s/it]Training:  50%|█████     | 25/50 [06:43<05:13, 12.55s/it]Training:  52%|█████▏    | 26/50 [06:54<04:50, 12.11s/it]Training:  54%|█████▍    | 27/50 [07:25<06:47, 17.73s/it]Training:  56%|█████▌    | 28/50 [07:39<06:01, 16.45s/it]Training:  58%|█████▊    | 29/50 [07:55<05:42, 16.32s/it]Training:  60%|██████    | 30/50 [08:06<04:53, 14.68s/it]Training:  62%|██████▏   | 31/50 [08:24<05:01, 15.87s/it]Training:  64%|██████▍   | 32/50 [08:39<04:39, 15.52s/it]Training:  66%|██████▌   | 33/50 [09:23<06:48, 24.00s/it]Training:  68%|██████▊   | 34/50 [09:41<05:57, 22.34s/it]Training:  70%|███████   | 35/50 [09:58<05:10, 20.68s/it]Training:  72%|███████▏  | 36/50 [10:29<05:32, 23.73s/it]Training:  74%|███████▍  | 37/50 [10:42<04:26, 20.50s/it]Training:  76%|███████▌  | 38/50 [11:11<04:37, 23.09s/it]Training:  78%|███████▊  | 39/50 [11:20<03:26, 18.76s/it]Training:  80%|████████  | 40/50 [11:43<03:22, 20.28s/it]Training:  82%|████████▏ | 41/50 [11:49<02:22, 15.84s/it]Training:  84%|████████▍ | 42/50 [12:23<02:50, 21.30s/it]Training:  86%|████████▌ | 43/50 [12:36<02:12, 18.96s/it]Training:  88%|████████▊ | 44/50 [12:45<01:35, 15.94s/it]Training:  90%|█████████ | 45/50 [12:58<01:15, 15.07s/it]Training:  92%|█████████▏| 46/50 [13:21<01:09, 17.35s/it]Training:  94%|█████████▍| 47/50 [13:32<00:46, 15.49s/it]Training:  96%|█████████▌| 48/50 [13:45<00:29, 14.65s/it]Training:  98%|█████████▊| 49/50 [13:51<00:11, 11.95s/it]Training: 100%|██████████| 50/50 [14:07<00:00, 13.31s/it]Training: 100%|██████████| 50/50 [14:07<00:00, 16.95s/it]
+Train Loss: 0.1157, Val Loss: 8.1239, Val Acc: 0.3529
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_214359_HierarchicalAttnMIL_epoch6.pth
+No improvement for 5 epoch(s)
+
+Epoch 7/30 (LR: 9.00e-05)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:19<16:10, 19.80s/it]Training:   4%|▍         | 2/50 [00:30<11:36, 14.51s/it]Training:   6%|▌         | 3/50 [00:49<12:57, 16.54s/it]Training:   8%|▊         | 4/50 [01:06<12:48, 16.70s/it]Training:  10%|█         | 5/50 [01:32<14:54, 19.87s/it]Training:  12%|█▏        | 6/50 [01:42<12:08, 16.56s/it]Training:  14%|█▍        | 7/50 [01:59<12:04, 16.84s/it]Training:  16%|█▌        | 8/50 [02:19<12:33, 17.94s/it]Training:  18%|█▊        | 9/50 [02:28<10:10, 14.89s/it]Training:  20%|██        | 10/50 [02:52<11:57, 17.93s/it]Training:  22%|██▏       | 11/50 [03:12<11:58, 18.43s/it]Training:  24%|██▍       | 12/50 [03:37<13:02, 20.58s/it]Training:  26%|██▌       | 13/50 [04:06<14:15, 23.12s/it]Training:  28%|██▊       | 14/50 [04:47<17:07, 28.55s/it]Training:  30%|███       | 15/50 [05:03<14:21, 24.60s/it]Training:  32%|███▏      | 16/50 [05:10<10:59, 19.40s/it]Training:  34%|███▍      | 17/50 [05:23<09:30, 17.29s/it]Training:  36%|███▌      | 18/50 [05:41<09:20, 17.51s/it]Training:  38%|███▊      | 19/50 [05:45<06:59, 13.54s/it]Training:  40%|████      | 20/50 [05:49<05:21, 10.71s/it]Training:  42%|████▏     | 21/50 [06:20<08:10, 16.91s/it]Training:  44%|████▍     | 22/50 [06:36<07:46, 16.65s/it]Training:  46%|████▌     | 23/50 [06:49<06:54, 15.35s/it]Training:  48%|████▊     | 24/50 [06:56<05:36, 12.95s/it]Training:  50%|█████     | 25/50 [07:07<05:10, 12.40s/it]Training:  52%|█████▏    | 26/50 [07:18<04:47, 11.97s/it]Training:  54%|█████▍    | 27/50 [07:33<04:51, 12.69s/it]Training:  56%|█████▌    | 28/50 [07:43<04:24, 12.05s/it]Training:  58%|█████▊    | 29/50 [07:56<04:16, 12.21s/it]Training:  60%|██████    | 30/50 [07:59<03:10,  9.53s/it]Training:  62%|██████▏   | 31/50 [08:15<03:35, 11.35s/it]Training:  64%|██████▍   | 32/50 [08:29<03:40, 12.24s/it]Training:  66%|██████▌   | 33/50 [08:47<03:59, 14.10s/it]Training:  68%|██████▊   | 34/50 [09:14<04:47, 18.00s/it]Training:  70%|███████   | 35/50 [09:55<06:13, 24.91s/it]Training:  72%|███████▏  | 36/50 [10:07<04:53, 20.93s/it]Training:  74%|███████▍  | 37/50 [10:35<04:59, 23.01s/it]Training:  76%|███████▌  | 38/50 [10:48<03:59, 19.99s/it]Training:  78%|███████▊  | 39/50 [11:05<03:29, 19.07s/it]Training:  80%|████████  | 40/50 [11:16<02:48, 16.82s/it]Training:  82%|████████▏ | 41/50 [11:35<02:36, 17.40s/it]Training:  84%|████████▍ | 42/50 [12:06<02:50, 21.36s/it]Training:  86%|████████▌ | 43/50 [12:25<02:24, 20.71s/it]Training:  88%|████████▊ | 44/50 [12:40<01:53, 18.93s/it]Training:  90%|█████████ | 45/50 [12:55<01:28, 17.71s/it]Training:  92%|█████████▏| 46/50 [13:11<01:08, 17.23s/it]Training:  94%|█████████▍| 47/50 [13:38<01:00, 20.29s/it]Training:  96%|█████████▌| 48/50 [13:49<00:34, 17.47s/it]Training:  98%|█████████▊| 49/50 [13:58<00:15, 15.05s/it]Training: 100%|██████████| 50/50 [14:06<00:00, 12.72s/it]Training: 100%|██████████| 50/50 [14:06<00:00, 16.92s/it]
+Train Loss: 0.0980, Val Loss: 7.4621, Val Acc: 0.3529
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_220142_HierarchicalAttnMIL_epoch7.pth
+No improvement for 6 epoch(s)
+
+Epoch 8/30 (LR: 9.00e-05)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:49<40:39, 49.79s/it]Training:   4%|▍         | 2/50 [01:00<21:35, 26.98s/it]Training:   6%|▌         | 3/50 [01:14<16:20, 20.86s/it]Training:   8%|▊         | 4/50 [01:26<13:14, 17.28s/it]Training:  10%|█         | 5/50 [01:37<11:21, 15.15s/it]Training:  12%|█▏        | 6/50 [01:53<11:22, 15.51s/it]Training:  14%|█▍        | 7/50 [02:06<10:25, 14.55s/it]Training:  16%|█▌        | 8/50 [02:23<10:43, 15.32s/it]Training:  18%|█▊        | 9/50 [03:02<15:35, 22.81s/it]Training:  20%|██        | 10/50 [03:25<15:17, 22.94s/it]Training:  22%|██▏       | 11/50 [03:48<14:57, 23.01s/it]Training:  24%|██▍       | 12/50 [04:06<13:32, 21.39s/it]Training:  26%|██▌       | 13/50 [04:21<11:55, 19.33s/it]Training:  28%|██▊       | 14/50 [04:26<09:01, 15.03s/it]Training:  30%|███       | 15/50 [04:47<09:48, 16.81s/it]Training:  32%|███▏      | 16/50 [05:13<11:04, 19.54s/it]Training:  34%|███▍      | 17/50 [05:32<10:42, 19.48s/it]Training:  36%|███▌      | 18/50 [05:36<07:56, 14.89s/it]Training:  38%|███▊      | 19/50 [06:05<09:50, 19.04s/it]Training:  40%|████      | 20/50 [06:28<10:06, 20.21s/it]Training:  42%|████▏     | 21/50 [06:57<11:03, 22.89s/it]Training:  44%|████▍     | 22/50 [07:27<11:44, 25.15s/it]Training:  46%|████▌     | 23/50 [07:55<11:40, 25.95s/it]Training:  48%|████▊     | 24/50 [08:24<11:37, 26.82s/it]Training:  50%|█████     | 25/50 [08:34<09:05, 21.80s/it]Training:  52%|█████▏    | 26/50 [08:43<07:09, 17.89s/it]Training:  54%|█████▍    | 27/50 [08:55<06:10, 16.13s/it]Training:  56%|█████▌    | 28/50 [09:15<06:22, 17.39s/it]Training:  58%|█████▊    | 29/50 [09:27<05:30, 15.72s/it]Training:  60%|██████    | 30/50 [09:37<04:39, 13.97s/it]Training:  62%|██████▏   | 31/50 [09:41<03:28, 10.98s/it]Training:  64%|██████▍   | 32/50 [09:54<03:30, 11.69s/it]Training:  66%|██████▌   | 33/50 [10:07<03:23, 11.95s/it]Training:  68%|██████▊   | 34/50 [10:17<03:03, 11.48s/it]Training:  70%|███████   | 35/50 [10:27<02:46, 11.08s/it]Training:  72%|███████▏  | 36/50 [10:39<02:38, 11.32s/it]Training:  74%|███████▍  | 37/50 [10:52<02:32, 11.77s/it]Training:  76%|███████▌  | 38/50 [11:11<02:47, 13.94s/it]Training:  78%|███████▊  | 39/50 [11:38<03:15, 17.80s/it]Training:  80%|████████  | 40/50 [11:49<02:38, 15.85s/it]Training:  82%|████████▏ | 41/50 [12:17<02:54, 19.43s/it]Training:  84%|████████▍ | 42/50 [12:26<02:10, 16.35s/it]Training:  86%|████████▌ | 43/50 [12:36<01:41, 14.54s/it]Training:  88%|████████▊ | 44/50 [12:52<01:28, 14.81s/it]Training:  90%|█████████ | 45/50 [13:02<01:06, 13.32s/it]Training:  92%|█████████▏| 46/50 [13:27<01:07, 16.75s/it]Training:  94%|█████████▍| 47/50 [13:41<00:48, 16.04s/it]Training:  96%|█████████▌| 48/50 [13:51<00:28, 14.24s/it]Training:  98%|█████████▊| 49/50 [14:05<00:14, 14.19s/it]Training: 100%|██████████| 50/50 [14:15<00:00, 12.94s/it]Training: 100%|██████████| 50/50 [14:15<00:00, 17.11s/it]
+Train Loss: 0.0593, Val Loss: 6.8149, Val Acc: 0.3529
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260215_195728/checkpoints/20260215_221918_HierarchicalAttnMIL_epoch8.pth
+No improvement for 7 epoch(s)
+
+Epoch 9/30 (LR: 9.00e-05)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   2%|▏         | 1/50 [00:20<17:08, 20.99s/it]Training:   4%|▍         | 2/50 [00:38<15:04, 18.85s/it]Training:   6%|▌         | 3/50 [01:03<17:10, 21.93s/it]Training:   8%|▊         | 4/50 [01:15<13:41, 17.86s/it]Training:  10%|█         | 5/50 [01:20<09:52, 13.16s/it]Training:  12%|█▏        | 6/50 [01:25<07:31, 10.27s/it]Training:  14%|█▍        | 7/50 [01:49<10:34, 14.75s/it]Training:  16%|█▌        | 8/50 [02:02<09:55, 14.19s/it]Training:  18%|█▊        | 9/50 [02:13<09:09, 13.41s/it]Training:  20%|██        | 10/50 [02:27<09:06, 13.67s/it]Training:  22%|██▏       | 11/50 [02:41<08:46, 13.51s/it]Training:  24%|██▍       | 12/50 [02:53<08:23, 13.24s/it]Training:  26%|██▌       | 13/50 [03:04<07:41, 12.47s/it]Training:  28%|██▊       | 14/50 [03:26<09:14, 15.41s/it]Training:  30%|███       | 15/50 [03:55<11:20, 19.43s/it]Training:  32%|███▏      | 16/50 [04:15<11:03, 19.53s/it]Training:  34%|███▍      | 17/50 [04:31<10:15, 18.65s/it]Training:  36%|███▌      | 18/50 [04:59<11:28, 21.53s/it]Training:  38%|███▊      | 19/50 [05:17<10:31, 20.38s/it]Training:  40%|████      | 20/50 [05:36<10:00, 20.02s/it]Training:  42%|████▏     | 21/50 [05:47<08:16, 17.11s/it]Training:  44%|████▍     | 22/50 [05:55<06:43, 14.40s/it]Training:  46%|████▌     | 23/50 [06:07<06:12, 13.79s/it]Training:  48%|████▊     | 24/50 [06:38<08:08, 18.78s/it]Training:  50%|█████     | 25/50 [06:48<06:49, 16.38s/it]Training:  52%|█████▏    | 26/50 [06:56<05:27, 13.66s/it]Training:  54%|█████▍    | 27/50 [07:12<05:30, 14.38s/it]Training:  56%|█████▌    | 28/50 [07:54<08:20, 22.74s/it]Training:  58%|█████▊    | 29/50 [08:19<08:09, 23.31s/it]Training:  60%|██████    | 30/50 [08:30<06:37, 19.88s/it]Training:  62%|██████▏   | 31/50 [08:44<05:41, 17.99s/it]Training:  64%|██████▍   | 32/50 [08:51<04:25, 14.73s/it]Training:  66%|██████▌   | 33/50 [09:05<04:05, 14.43s/it]Training:  68%|██████▊   | 34/50 [09:10<03:04, 11.51s/it]Training:  70%|███████   | 35/50 [09:23<02:59, 11.94s/it]Training:  72%|███████▏  | 36/50 [09:37<02:55, 12.56s/it]Training:  74%|███████▍  | 37/50 [09:57<03:15, 15.00s/it]Training:  76%|███████▌  | 38/50 [10:10<02:51, 14.27s/it]Training:  78%|███████▊  | 39/50 [10:44<03:42, 20.21s/it]Training:  80%|████████  | 40/50 [10:57<02:59, 17.95s/it]Training:  82%|████████▏ | 41/50 [11:16<02:44, 18.25s/it]Training:  84%|████████▍ | 42/50 [11:31<02:18, 17.27s/it]Training:  86%|████████▌ | 43/50 [12:03<02:32, 21.85s/it]Training:  88%|████████▊ | 44/50 [12:12<01:47, 17.99s/it]

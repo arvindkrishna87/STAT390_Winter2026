@@ -1,11 +1,11 @@
 """
 Model architectures for MIL training
 """
+import os
 import torch
 import torch.nn as nn
 import torchvision.models as models
 from typing import Dict, List, Any, Optional, Tuple
-import KimiaNet
 
 from config import MODEL_CONFIG
 
@@ -219,7 +219,30 @@ class HierarchicalAttnMIL(nn.Module):
         return logits
 
 
-def create_model(num_classes: int = None, embed_dim: int = None, dropout: float = None, pretrained: bool = True) -> HierarchicalAttnMIL:
+def load_kimianet_densenet(weights_path: str):
+    """
+    Load DenseNet-121 and initialize with KimiaNet checkpoint weights.
+    """
+    base_model = models.densenet121(pretrained=False)
+    ckpt = torch.load(weights_path, map_location="cpu")
+
+    model_dict = base_model.state_dict()
+    filtered = {
+        k: v for k, v in ckpt.items()
+        if k in model_dict and model_dict[k].shape == v.shape
+    }
+
+    model_dict.update(filtered)
+    base_model.load_state_dict(model_dict)
+    return base_model
+
+
+def create_model(
+    num_classes: int = None,
+    embed_dim: int = None,
+    dropout: float = None,
+    pretrained: bool = True
+) -> HierarchicalAttnMIL:
     """
     Factory function to create the MIL model
     """
@@ -230,16 +253,22 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
     if dropout is None:
         from config import TRAINING_CONFIG
         dropout = TRAINING_CONFIG.get('dropout', 0.3)
-    
-    # Create base model
-    base_model = KimiaNet.get_pretrained_model('DenseNet121')
-    
-    # Create and return MIL model
+
+    if pretrained: # Prefer config key if present; fallback to local file beside this models.py
+        weights_path = MODEL_CONFIG.get('kimianet_weights_path')
+        if not weights_path:
+            weights_path = os.path.join(
+                os.path.dirname(__file__),
+                "KimiaNetPyTorchWeights.pth"
+            )
+        base_model = load_kimianet_densenet(weights_path)
+    else:
+        base_model = models.densenet121(pretrained=False)
+
     model = HierarchicalAttnMIL(
         base_model=base_model,
         num_classes=num_classes,
         embed_dim=embed_dim,
         dropout=dropout
     )
-    
     return model

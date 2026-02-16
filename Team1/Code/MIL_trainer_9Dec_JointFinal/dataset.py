@@ -3,10 +3,10 @@ Dataset classes for MIL training
 """
 import random
 import torch
+from torchvision import transforms
 from torch.utils.data import Dataset
 from PIL import Image, UnidentifiedImageError
 from typing import Dict, List, Any, Optional, Tuple
-import torchvision.transforms as transforms
 
 from config import MODEL_CONFIG, IMAGE_CONFIG
 
@@ -76,34 +76,33 @@ class StainBagCaseDataset(Dataset):
         return len(self.items)
     
     def _load_slice_tensor(self, paths: List[str]) -> Optional[torch.Tensor]:
-        """
-        Load one slice from list of patch paths -> Tensor(P, C, H, W)
-        Applies transform; shuffles & caps per-slice; skips unreadable images
-        """
-        patch_paths = list(paths)
+        imgs: List[torch.Tensor] = []
+
         if self.shuffle_patches:
-            random.shuffle(patch_paths)
-        
-        if self.per_slice_cap and len(patch_paths) > self.per_slice_cap:
-            patch_paths = patch_paths[:self.per_slice_cap]
-        
-        imgs = []
-        for p in patch_paths:
+            random.shuffle(paths)
+
+        if self.per_slice_cap is not None:
+            paths = paths[: self.per_slice_cap]
+
+        for p in paths:
             try:
-                img = Image.open(p).convert("RGB")
-                # Filter out patches smaller than 32x32
-                if img.size[0] < 32 or img.size[1] < 32:
-                    continue
-                if self.transform:
-                    img = self.transform(img)
-                imgs.append(img)
-            except (Exception, UnidentifiedImageError):
-                # Skip unreadable images
+                with Image.open(p) as im:
+                    im = im.convert("RGB")
+                    t = self.transform(im) if self.transform is not None else transforms.ToTensor()(im)
+                    imgs.append(t)
+            except (FileNotFoundError, UnidentifiedImageError, OSError):
                 continue
-        
-        if len(imgs) == 0:
+
+        if not imgs:
             return None
-        return torch.stack(imgs)  # (P, C, H, W)
+
+        # Safety check: keep only tensors matching first tensor shape
+        base_shape = imgs[0].shape
+        imgs = [t for t in imgs if t.shape == base_shape]
+        if not imgs:
+            return None
+
+        return torch.stack(imgs, dim=0)
     
     def __getitem__(self, idx: int) -> Dict[str, Any]:
         case_id, stain_map = self.items[idx]
@@ -151,29 +150,31 @@ def case_collate_fn(batch):
 
 def create_transforms(is_training: bool = True) -> transforms.Compose:
     """
-    Create image transforms for training or validation
+    Create image transforms for training or validation.
+    Ensures all images are same size before torch.stack.
     """
+    size = IMAGE_CONFIG.get("input_size", 224)
+    if isinstance(size, int):
+        size = (size, size)
+
+    normalize = transforms.Normalize(
+        mean=[0.485, 0.456, 0.406],
+        std=[0.229, 0.224, 0.225],
+    )
+
     if is_training:
-        # Training transforms with augmentation
         transform = transforms.Compose([
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomVerticalFlip(),
-            transforms.RandomRotation(15),
-            transforms.ColorJitter(brightness=0.2, contrast=0.2),
+            transforms.Resize(size),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomVerticalFlip(p=0.5),
             transforms.ToTensor(),
-            transforms.Normalize(
-                mean=IMAGE_CONFIG['normalize_mean'],
-                std=IMAGE_CONFIG['normalize_std']
-            )
+            normalize,
         ])
     else:
-        # Validation/test transforms without augmentation
         transform = transforms.Compose([
+            transforms.Resize(size),
             transforms.ToTensor(),
-            transforms.Normalize(
-                mean=IMAGE_CONFIG['normalize_mean'],
-                std=IMAGE_CONFIG['normalize_std']
-            )
+            normalize,
         ])
-    
+
     return transform

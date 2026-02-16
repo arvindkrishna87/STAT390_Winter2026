@@ -1,0 +1,13 @@
+Job ID: 8785780
+Start time: Sat Feb 14 21:18:50 CST 2026
+Collecting git+https://github.com/KimiaLabMayo/KimiaNet.git (from -r /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/requirements.txt (line 21))
+  Cloning https://github.com/KimiaLabMayo/KimiaNet.git to /tmp/pip-req-build-zgo60zcb
+  ERROR: Error [Errno 2] No such file or directory: 'git' while executing command git version
+ERROR: Cannot find command 'git' - do you have 'git' installed and in your PATH?
+Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/site-packages (2026.1.4)
+Traceback (most recent call last):
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/main.py", line 18, in <module>
+    from models import create_model
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/models.py", line 8, in <module>
+    import KimiaNet
+ModuleNotFoundError: No module named 'KimiaNet'

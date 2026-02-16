@@ -9,6 +9,7 @@ from PIL import Image
 import torch
 from collections import defaultdict
 import csv
+import pandas as pd
 
 from config import IMAGE_CONFIG
 

@@ -20,7 +20,7 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Start time: $(date)"
 
 # Run training
-python3 -m pip install -r /projects/e32998/STAT390_CMIL_Fall2025/Code/MIL/MIL_trainer_9Dec_JointFinal/requirements.txt
+python3 -m pip install -r /projects/e32998/STAT390_CMIL_Winter2026/Code/MIL/MIL_trainer_9Dec_JointFinal/requirements.txt
 python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 

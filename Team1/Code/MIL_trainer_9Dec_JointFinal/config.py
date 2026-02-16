@@ -6,7 +6,7 @@ from typing import Tuple
 
 # Data paths (adjust these for your HPC environment)
 DATA_PATHS = {
-    'labels_csv': '/projects/e32998/MIL_training/case_grade_match.csv',
+    'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv',
     'patches_dir': '/projects/e32998/patches',
     'runs_dir': '/projects/e32998/MIL_training/final_runs'  # Base directory for training runs
 }
@@ -42,7 +42,10 @@ TRAINING_CONFIG = {
     'early_stopping': True,
     'early_stopping_patience': 8,  # Stop if no improvement for 10 epochs
     'early_stopping_min_delta': 0.001,  # Minimum change to qualify as improvement
-    'early_stopping_min_epochs': 10  # Minimum epochs before early stopping can trigger
+    'early_stopping_min_epochs': 10,  # Minimum epochs before early stopping can trigger
+    'attn_entropy_enable': True,
+    'attn_entropy_lambda': 1e-3,
+    'attn_entropy_eps': 1e-8,
 }
 
 # Data split configuration

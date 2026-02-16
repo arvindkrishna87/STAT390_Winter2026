@@ -1,0 +1,156 @@
+Job ID: 8815598
+Start time: Sun Feb 15 18:35:15 CST 2026
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Random seed set to 42
+Using CPU
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260215_183624
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv', 'patches_dir': '/projects/e32998/patches', 'epochs': 30, 'lr': 0.0003, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 800, 'max_slices_per_stain': None, 'seed': 42, 'resume': '/projects/e32998/MIL_training/final_runs/run_20260215_125840/checkpoints/20260215_134859_HierarchicalAttnMIL_epoch3.pth', 'eval_only': True, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': '/projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260215_183624/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.0003, 'weight_decay': 0.0002, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5, 1.0], 'dropout': 0.3, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 3, 'scheduler_factor': 0.3, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10, 'attn_entropy_enable': True, 'attn_entropy_lambda': 0.001, 'attn_entropy_eps': 1e-08}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 105 labels
+Found 83595 patch files
+All 3808 non-standard file names were handled.
+Grouped into 378 slices
+Mapped 366 slices to classes
+Class distribution: {0: 128, 1: 238}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz
+Data splits loaded from: /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz
+Loaded splits - Train: 222, Val: 72, Test: 68
+Cases per split: 50 17 18
+Paths per split: 47679 15631 16166
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    6  12
+train  17  33
+val     5  12
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         409.2          250.9          238.1
+train        470.5          263.2          219.9
+val          504.8          241.9          172.8
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         364.5          173.5          160.0
+train        324.0          194.0          182.0
+val          273.0          175.0          162.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.111          0.000
+train          0.0          0.000          0.020
+val            0.0          0.059          0.059
+
+Total cases: 85
+Total patches: 79,476
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     15639 patches
+  High-grade (1): 32040 patches
+
+Patch count by class for Validation:
+  Benign (0):     5968 patches
+  High-grade (1): 9663 patches
+
+Patch count by class for Test:
+  Benign (0):     4130 patches
+  High-grade (1): 12036 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 50/50 (100.0%)
+  melan: 50/50 (100.0%)
+  sox10: 49/50 (98.0%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 17/17 (100.0%)
+  melan: 16/17 (94.1%)
+  sox10: 16/17 (94.1%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 18/18 (100.0%)
+  melan: 16/18 (88.9%)
+  sox10: 18/18 (100.0%)
+No issues found
+Using existing splits from: /projects/e32998/STAT390_Winter2026/Team1/Code/MIL_trainer_9Dec_JointFinal/data_splits/data_splits_01.npz
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+Created data loaders - Train: 50, Val: 17, Test: 18
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 9,249,925
+Trainable parameters: 2,296,069
+Model size: 35.29 MB
+==================================================
+
+----------------------------------------
+LOADING CHECKPOINT
+----------------------------------------
+Checkpoint loaded from epoch 3
+
+============================================================
+EVALUATING MODEL
+============================================================
+Evaluating:   0%|          | 0/18 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Evaluating:   6%|▌         | 1/18 [00:51<14:37, 51.62s/it]Evaluating:  11%|█         | 2/18 [02:59<25:39, 96.21s/it]Evaluating:  17%|█▋        | 3/18 [03:11<14:31, 58.09s/it]Evaluating:  22%|██▏       | 4/18 [03:22<09:11, 39.37s/it]Evaluating:  28%|██▊       | 5/18 [03:37<06:39, 30.73s/it]Evaluating:  33%|███▎      | 6/18 [03:57<05:21, 26.81s/it]Evaluating:  39%|███▉      | 7/18 [04:11<04:10, 22.73s/it]Evaluating:  44%|████▍     | 8/18 [04:24<03:15, 19.52s/it]Evaluating:  50%|█████     | 9/18 [04:44<02:58, 19.79s/it]Evaluating:  56%|█████▌    | 10/18 [04:52<02:09, 16.19s/it]Evaluating:  61%|██████    | 11/18 [05:10<01:56, 16.71s/it]Evaluating:  67%|██████▋   | 12/18 [05:24<01:36, 16.06s/it]Evaluating:  72%|███████▏  | 13/18 [05:35<01:11, 14.23s/it]Evaluating:  78%|███████▊  | 14/18 [05:41<00:48, 12.01s/it]Evaluating:  83%|████████▎ | 15/18 [05:46<00:29,  9.85s/it]Evaluating:  89%|████████▉ | 16/18 [05:49<00:15,  7.67s/it]Evaluating:  94%|█████████▍| 17/18 [05:51<00:06,  6.09s/it]Evaluating: 100%|██████████| 18/18 [05:54<00:00,  4.97s/it]Evaluating: 100%|██████████| 18/18 [05:54<00:00, 19.67s/it]
+Predictions saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624/predictions.csv
+Confusion matrix saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624/confusion_matrix.png
+
+Test Results:
+Test Loss: 0.5804
+Test Accuracy: 0.7222
+Samples: 18
+
+============================================================
+ATTENTION ANALYSIS
+============================================================
+Attention summary saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624/attention_analysis/attention_summary.txt
+Per-case effective patch attention distributions saved.
+Per-case & per-stain slice attention rank plots saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624/attention_analysis/slice_attention
+Per-case top 5.0% effective patches CSV saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624/attention_analysis/top_effective_patches_per_case_5.0pct.csv
+Per-case top 5.0% summary saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624/attention_analysis/top_effective_patches_per_case_summary_5.0pct.txt
+Attention analysis saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624/attention_analysis
+
+Results saved to: /projects/e32998/MIL_training/final_runs/run_20260215_183624
+Training completed successfully!
+End time: Sun Feb 15 18:50:15 CST 2026
