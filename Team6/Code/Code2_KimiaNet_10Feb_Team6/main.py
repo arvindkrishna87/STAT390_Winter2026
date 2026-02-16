@@ -11,9 +11,9 @@ from collections import defaultdict
 # Import our modules
 from config import DATA_PATHS, TRAINING_CONFIG, MODEL_CONFIG
 from data_utils import (
-    load_labels, get_all_patch_files, group_patches_by_slice,
+    load_labels, clean_all_patch_files, get_all_patch_files, group_patches_by_slice,
     build_slice_to_class_map, split_by_case_stratified, build_case_dict,
-    report_no_leak, summarize_case_dict
+    report_no_leak, summarize_case_dict, make_pseudocases
 )
 from models import create_model
 from dataset import StainBagCaseDataset, case_collate_fn, create_transforms
@@ -80,19 +80,28 @@ def prepare_data(args):
     # Load labels
     labels = load_labels(args.labels_csv)
     print(f"Loaded {len(labels)} labels")
+
+    # Clean patch filenames
+    invalid_files = clean_all_patch_files(args.patches_dir)
     
     # Get patch files
-    all_files = get_all_patch_files(args.patches_dir)
-    print(f"Found {len(all_files)} patch files")
-    
+    valid_files = get_all_patch_files(invalid_files, args.patches_dir)
+    print(f"Found {len(valid_files)} patch files")
+
+    # make new pseudocases
+    make_pseudocases(labels, valid_files, args.max_slices_per_stain)
+
+    # Get patch files after data augmenntation
+    valid_files = get_all_patch_files(invalid_files, args.patches_dir)
+
     # Group patches by slice
-    patches = group_patches_by_slice(all_files, args.patches_dir)
-    print(f"Grouped into {len(patches)} slices")
+    slices = group_patches_by_slice(valid_files, args.patches_dir)
+    print(f"Grouped into {len(slices)} slices")
     
     # Build slice to class mapping
-    slice_to_class = build_slice_to_class_map(patches, labels)
+    slice_to_class = build_slice_to_class_map(slices, labels)
     print(f"Mapped {len(slice_to_class)} slices to classes")
-    
+
     # Group slices by class for stratified splitting
     slices_by_class = defaultdict(list)
     for key, label in slice_to_class.items():
@@ -121,15 +130,15 @@ def prepare_data(args):
     else:
         # Split data by case (stratified)
         train_slices, val_slices, test_slices = split_by_case_stratified(
-            slices_by_class, random_state=args.seed
+            slices_by_class, random_state=args.seed, max_slices_per_stain=args.max_slices_per_stain
         )
         
         print(f"Split sizes - Train: {len(train_slices)}, Val: {len(val_slices)}, Test: {len(test_slices)}")
     
     # Build case dictionaries
-    train_case_dict, train_label_map = build_case_dict(train_slices, patches, slice_to_class)
-    val_case_dict, val_label_map = build_case_dict(val_slices, patches, slice_to_class)
-    test_case_dict, test_label_map = build_case_dict(test_slices, patches, slice_to_class)
+    train_case_dict, train_label_map = build_case_dict(train_slices, slices, slice_to_class)
+    val_case_dict, val_label_map = build_case_dict(val_slices, slices, slice_to_class)
+    test_case_dict, test_label_map = build_case_dict(test_slices, slices, slice_to_class)
     
     # Check for data leakage
     report_no_leak(train_case_dict, val_case_dict, test_case_dict)

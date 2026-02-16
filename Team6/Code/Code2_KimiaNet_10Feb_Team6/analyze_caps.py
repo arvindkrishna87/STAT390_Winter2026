@@ -31,7 +31,7 @@ def build_full_case_dict():
     # 3. Group patches into slices: {(case_id, slice_id): [patch_paths]}
     patches = group_patches_by_slice(
         all_files,
-        root_dir=DATA_PATHS["patches_dir"],
+        patches_dir=DATA_PATHS["patches_dir"],
     )
 
     # 4. Map (case_id, slice_id) -> class label (0/1)
