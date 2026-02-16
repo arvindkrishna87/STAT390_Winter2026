@@ -26,7 +26,7 @@ python3 -m pip install -r requirements.txt
 python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
-# without loading checkpoints, trying 5 diff train / test splits
+# create new splits with augmented data
 
 python3 main.py \
     --analyze_attention \

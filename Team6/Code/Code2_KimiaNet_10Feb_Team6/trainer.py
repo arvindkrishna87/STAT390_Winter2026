@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Tuple
 
 from config import DATA_PATHS, TRAINING_CONFIG, DEVICE
-
+from models import AttentionPool
 
 class MILTrainer:
     """

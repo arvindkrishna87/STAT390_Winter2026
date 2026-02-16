@@ -163,7 +163,7 @@ def make_pseudocases(labels: pd.DataFrame, valid_files: List[str], max_slices: i
             with open(DATA_PATHS['labels_csv'], 'a') as f:
                 f.write(f"\n{pseudocase_id},1")
     print(f'These cases have at least one stain with more than {max_slices} slices per stain')
-    return benign_many_slices
+    print(benign_many_slices)
 
 
 def group_patches_by_slice(valid_files: List[str], patches_dir: str) -> Dict[Tuple[int, str], List[str]]:

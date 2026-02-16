@@ -45,6 +45,8 @@ def parse_args():
                        help='Batch size (typically 1 for MIL)')
     parser.add_argument('--num_workers', type=int, default=TRAINING_CONFIG['num_workers'],
                        help='Number of data loader workers')
+    parser.add_argument('--entropy_lambda', type=float, default=0.001,
+                       help='Strength of entropy regularization (Slide 35 proposal)')
     
     # Model arguments
     parser.add_argument('--embed_dim', type=int, default=MODEL_CONFIG['embed_dim'],
@@ -93,7 +95,11 @@ def prepare_data(args):
     # make new pseudocases
     make_pseudocases(labels, valid_files, args.max_slices_per_stain)
 
-    # Get patch files after data augmenntation
+    # Load new labels
+    labels = load_labels(args.labels_csv)
+    print(f"Loaded new {len(labels)} labels")
+
+    # Get patch files after data augmentation
     valid_files = get_all_patch_files(invalid_files, args.patches_dir)
 
     # Group patches by slice
@@ -132,7 +138,7 @@ def prepare_data(args):
     else:
         # Split data by case (stratified)
         train_slices, val_slices, test_slices = split_by_case_stratified(
-            slices_by_class, random_state=args.seed, max_slices_per_stain=args.max_slices_per_stain
+            slices_by_class, random_state=args.seed
         )
         
         print(f"Split sizes - Train: {len(train_slices)}, Val: {len(val_slices)}, Test: {len(test_slices)}")
@@ -277,6 +283,7 @@ def main():
     
     # Create trainer
     trainer = MILTrainer(model, device, checkpoint_dir=args.checkpoint_dir)
+    trainer.entropy_lambda = args.entropy_lambda
     
     # Update trainer learning rate if different from config
     if args.lr != TRAINING_CONFIG['learning_rate']:
