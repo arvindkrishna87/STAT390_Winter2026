@@ -179,7 +179,7 @@ class HyperparameterTuner:
             'class_weight_high_grade': 1.0,  #fixed as reference point
             
             #fixed parameters
-            'epochs': 3,  #make high, will likely stop early
+            'epochs': 50,  #make high, will likely stop early
         }
         
         print(f"\n{'=' * 60}")
