@@ -7,7 +7,7 @@ from typing import Tuple
 # Data paths (adjust these for your HPC environment)
 DATA_PATHS = {
     'labels_csv': 'case_grade_match.csv',
-    'patches_dir': '/projects/e32998/patches_Team6',
+    'patches_dir': '/projects/e32998/patches_Team6', # Do not use shared patches dir as code will change filenames
     'runs_dir': './runs'  # Base directory for training runs
 }
 

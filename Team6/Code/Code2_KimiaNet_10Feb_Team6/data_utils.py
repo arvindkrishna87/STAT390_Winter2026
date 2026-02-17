@@ -99,10 +99,15 @@ def get_all_patch_files(invalid_files: List[str] = None, patches_dir: str = None
     return valid_files
 
 
-def make_pseudocases(labels: pd.DataFrame, valid_files: List[str], max_slices: int):
+def make_pseudocases(labels: pd.DataFrame, valid_files: List[str], max_slices: int) -> None:
+    """
+    Find instances of stains with more than max slices in benign cases
+    and split their parent case into multiple pseudocases
+    """
     filtered_labels = labels[labels['Class'].isin(VALID_CLASSES)].set_index('Case')
     filtered_labels['Class'] = filtered_labels['Class'].replace({1: 0, 3: 1, 4: 1})
 
+    # Create nested dictionary structure to hold the patch paths
     patch_dict = lambda: defaultdict(patch_dict)
     patch_data = patch_dict()
     for filename in valid_files:
@@ -115,6 +120,7 @@ def make_pseudocases(labels: pd.DataFrame, valid_files: List[str], max_slices: i
             patch_id = match.group(4)
             patch_data[class_id][case_id][stain_id][slice_id][patch_id] = filename
 
+    # Create DataFrame to hold slice counts of benign cases with too many slices per stain
     benign_many_slices = pd.DataFrame()
     for case_id, stain_id in patch_data[0].items():
         num_slices = {}
@@ -123,17 +129,9 @@ def make_pseudocases(labels: pd.DataFrame, valid_files: List[str], max_slices: i
         if max(num_slices.values()) > max_slices: 
             for (case, stain), slices in num_slices.items():
                 benign_many_slices.loc[case, stain] = slices
-
-    benign_many_slices = pd.DataFrame()
-    for case_id, stain_id in patch_data[0].items():
-        num_slices = {}
-        for stain_id, slice_id in stain_id.items(): 
-            num_slices[(case_id, stain_id)] = len(slice_id)
-        if max(num_slices.values()) > 5: 
-            for (case, stain), slices in num_slices.items():
-                benign_many_slices.loc[case, stain] = slices
     benign_many_slices.sort_index(inplace=True)
 
+    # Create the new cases
     for case in benign_many_slices.index:
         stains_count = {}
         for stain_id, slice_id in patch_data[0][case].items():
@@ -146,6 +144,7 @@ def make_pseudocases(labels: pd.DataFrame, valid_files: List[str], max_slices: i
                 np.array_split(list(slice_id.keys()), cases_target)
 
         for i in range(cases_target):
+            # Newly created cases are named xyyy: with x being pseudocase index and yyy being original case
             pseudocase_id = (i+1)*1000+int(case)
             for stain_id, slice_id in patch_data[0][case].items():
                 patch_data[0][pseudocase_id][stain_id] = \
@@ -160,6 +159,7 @@ def make_pseudocases(labels: pd.DataFrame, valid_files: List[str], max_slices: i
                             os.path.join(DATA_PATHS['patches_dir'], path), 
                             os.path.join(DATA_PATHS['patches_dir'], new_path)
                         )
+            # Add newly created cases to labels csv
             with open(DATA_PATHS['labels_csv'], 'a') as f:
                 f.write(f"\n{pseudocase_id},1")
     print(f'These cases have at least one stain with more than {max_slices} slices per stain')

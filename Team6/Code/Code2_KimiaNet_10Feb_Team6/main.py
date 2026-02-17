@@ -92,12 +92,12 @@ def prepare_data(args):
     valid_files = get_all_patch_files(invalid_files, args.patches_dir)
     print(f"Found {len(valid_files)} patch files")
 
-    # make new pseudocases
+    # Make new pseudocases
     make_pseudocases(labels, valid_files, args.max_slices_per_stain)
 
     # Load new labels
     labels = load_labels(args.labels_csv)
-    print(f"Loaded new {len(labels)} labels")
+    print(f"Loaded {len(labels)} new labels")
 
     # Get patch files after data augmentation
     valid_files = get_all_patch_files(invalid_files, args.patches_dir)
