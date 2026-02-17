@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_1_ModelTraining_Optuna14Feb_Ben/main.py", line 334, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Code2_1_ModelTraining_Optuna14Feb_Ben/main.py", line 240, in main
+    train_data, val_data, test_data = prepare_data(args)
+                                      ^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_1_ModelTraining_Optuna14Feb_Ben/main.py", line 110, in prepare_data
+    splits_data = load_data_splits(args.load_splits)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_1_ModelTraining_Optuna14Feb_Ben/utils.py", line 125, in load_data_splits
+    raise FileNotFoundError(f"Data splits file not found: {load_path}")
+FileNotFoundError: Data splits file not found: /projects/e32998/STAT390_Winter2026/Team4/Code/Code2_1_ModelTraining_Optuna14Feb_Ben/data_splits/data_splits_01.npz
