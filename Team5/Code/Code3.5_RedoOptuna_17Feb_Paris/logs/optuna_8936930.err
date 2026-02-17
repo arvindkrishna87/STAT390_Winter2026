@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team5/Code/Code3.5_RedoOptuna_17Feb_Paris/optuna_tuning_2.py", line 10, in <module>
+    from optuna.trial import TrialState
+ModuleNotFoundError: No module named 'optuna.trial'; 'optuna' is not a package
