@@ -53,6 +53,8 @@ def parse_args():
                        help='Maximum patches per slice')
     parser.add_argument('--max_slices_per_stain', type=int, default=MODEL_CONFIG['max_slices_per_stain'],
                        help='Maximum slices per stain (None for unlimited)')
+    parser.add_argument('--entropy_lambda', type=float, default=0.001,
+                       help='Strength of entropy regularization (Slide 35 proposal)')
     
     # Other arguments
     parser.add_argument('--seed', type=int, default=TRAINING_CONFIG['random_state'],

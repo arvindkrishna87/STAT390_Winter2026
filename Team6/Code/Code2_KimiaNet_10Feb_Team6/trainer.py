@@ -80,8 +80,9 @@ class MILTrainer:
             label = case_data["label"].to(self.device)
             
             # Forward pass - model outputs [num_classes] logits
-            outputs = self.model(stain_slices)
-            
+            # outputs = self.model(stain_slices)
+            outputs, weights_dict = self.model(stain_slices, return_attn_weights=True)
+
             # Add batch dimension: [num_classes] -> [1, num_classes]
             outputs = outputs.unsqueeze(0)
             
@@ -89,19 +90,27 @@ class MILTrainer:
             if label.dim() == 0:
                 label = label.unsqueeze(0)
             
-            # Calculate loss
-            loss = self.criterion(outputs, label)
+            # 1. Standard CrossEntropy Loss
+            ce_loss = self.criterion(outputs, label)
+            
+            # 2. Entropy Regularization for each attention layer
+            case_entropy = AttentionPool.compute_entropy(weights_dict['case_weights'])
+            
+            # Penalty = -lambda * H(w)
+            entropy_lambda = getattr(self, 'entropy_lambda', 0.0005)
+            total_loss = ce_loss - (entropy_lambda * case_entropy)
             
             # Backward pass
             self.optimizer.zero_grad()
-            loss.backward()
+            total_loss.backward()
             self.optimizer.step()
             
-            running_loss += loss.item()
+            running_loss += total_loss.item()
         
         avg_loss = running_loss / len(train_loader)
         self.train_losses.append(avg_loss)
         return avg_loss
+    
     
     def validate(self, val_loader: DataLoader) -> Tuple[float, float]:
         """

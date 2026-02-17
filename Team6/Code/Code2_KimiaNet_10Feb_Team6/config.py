@@ -30,7 +30,7 @@ TRAINING_CONFIG = {
     'num_workers': 2,
     'pin_memory': True,
     'random_state': 42,
-    'class_weights': [2.5, 1.0],  # Increased benign weight from 2.0 to 3.0
+    'class_weights': [3.0, 1.0],  # Increased benign weight from 2.0 to 3.0
     'dropout': 0.3,  # Add dropout for regularization
     # Learning rate scheduler
     'use_scheduler': True,

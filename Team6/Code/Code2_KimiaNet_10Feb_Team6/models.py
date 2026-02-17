@@ -17,13 +17,17 @@ class AttentionPool(nn.Module):
     """
     def __init__(self, input_dim: int, hidden_dim: int = 128, dropout: float = 0.0):
         super().__init__()
-        # Small neural network to compute attention scores for each patch
-        self.attention = nn.Sequential(
+        # Gated Attention: V (tanh) and U (sigmoid)
+        self.attention_V = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
-            nn.Tanh(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_dim, 1)
+            nn.Tanh()
         )
+        self.attention_U = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.Sigmoid()
+        )
+        self.attention_weights = nn.Linear(hidden_dim, 1)
+        self.dropout = nn.Dropout(dropout)
     
     def forward(self, x: torch.Tensor, return_weights: bool = False):
         """
@@ -35,14 +39,29 @@ class AttentionPool(nn.Module):
             weighted_x: (B, D) weighted sum of patch embeddings
             weights: (B, M) attention weights (if return_weights=True)
         """
-        weights = self.attention(x)  # (B, M, 1)
-        weights = torch.softmax(weights, dim=1)  # Normalize attention scores
+        A_V = self.attention_V(x)  # (B, M, H)
+        A_U = self.attention_U(x)  # (B, M, H)
         
-        weighted_x = (weights * x).sum(dim=1)  # (B, D)
+        # Element-wise multiplication provides the gating mechanism
+        A = self.attention_weights(A_V * A_U) # (B, M, 1)
+        A = torch.transpose(A, 1, 2)  # (B, 1, M)
+        A = torch.softmax(A, dim=2)  # (B, 1, M)
+        
+        A = self.dropout(A)
+        
+        weighted_x = torch.bmm(A, x).squeeze(1)  # (B, D)
         
         if return_weights:
-            return weighted_x, weights.squeeze(-1)  # (B, D), (B, M)
+            return weighted_x, A.squeeze(1)
         return weighted_x
+
+    @staticmethod
+    def compute_entropy(weights: torch.Tensor, epsilon: float = 1e-8):
+        """
+        Calculates Shannon Entropy: H(w) = -sum(w * log(w))
+        """
+        entropy = -torch.sum(weights * torch.log(weights + epsilon), dim=-1)
+        return entropy.mean()
 
 
 class HierarchicalAttnMIL(nn.Module):
