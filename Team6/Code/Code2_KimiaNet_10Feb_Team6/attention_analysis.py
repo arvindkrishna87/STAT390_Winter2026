@@ -129,6 +129,13 @@ def analyze_attention_weights(model, test_loader, output_dir: str, top_n: int = 
             bins=30
         )
 
+    slice_csv = os.path.join(attention_dir, "slice_attention_records.csv")
+    with open(slice_csv, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["case_id","stain","slice_idx","slice_attn_weight"])
+        writer.writeheader()
+        writer.writerows(slice_attention_records)
+    print("Saved:", slice_csv)
+    
     # Per-case top n% patch analysis
     analyze_top_effective_patches_per_case(
             all_patch_records,
