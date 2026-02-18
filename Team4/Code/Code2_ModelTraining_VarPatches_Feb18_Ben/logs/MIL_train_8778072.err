@@ -1,0 +1,31 @@
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Training:   0%|          | 0/50 [00:33<?, ?it/s]
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 338, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 291, in main
+    trainer.train(
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/trainer.py", line 229, in train
+    train_loss = self.train_epoch(train_loader)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/trainer.py", line 83, in train_epoch
+    outputs = self.model(stain_slices)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/models.py", line 191, in forward
+    stain_emb, stain_attn_info = self.process_single_stain(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/models.py", line 143, in process_single_stain
+    slice_embeddings.append(slice_emb.squeeze(0))  # (D,)
+    ^^^^^^^^^^^^^^^^
+NameError: name 'slice_embeddings' is not defined. Did you mean: 'patch_embeddings'?
