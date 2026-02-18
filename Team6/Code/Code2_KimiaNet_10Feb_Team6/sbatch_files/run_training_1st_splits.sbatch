@@ -10,7 +10,7 @@
 #SBATCH --output=./logs/training_logs_%j.log          # Standard output file
 #SBATCH --error=./logs/training_logs_%j.log           # now writing error to the same log file
 #SBATCH --mail-type=ALL                               # Send email on begin, end, and fail
-#SBATCH --mail-user=henrychau2026@u.northwestern.edu  # Your NU email
+#SBATCH --mail-user=vickyxu2026@u.northwestern.edu  # Your NU email
 
 module purge
 module load python-anaconda3/2019.10

@@ -9,7 +9,6 @@ from typing import Dict, List, Any, Optional, Tuple
 from config import MODEL_CONFIG
 from utils import get_device
 
-
 class AttentionPool(nn.Module):
     """
     Attention pooling mechanism for MIL
@@ -62,7 +61,6 @@ class AttentionPool(nn.Module):
         """
         entropy = -torch.sum(weights * torch.log(weights + epsilon), dim=-1)
         return entropy.mean()
-
 
 class HierarchicalAttnMIL(nn.Module):
     """
