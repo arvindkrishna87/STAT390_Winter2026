@@ -1,0 +1,104 @@
+[I 2026-02-13 22:25:44,061] Using an existing study with name 'mil_optimization' instead of creating a new one.
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+[W 2026-02-13 22:26:22,227] Trial 1 failed with parameters: {'D': 768, 'H': 128, 'p_drop': 0.30000000000000004, 'eta': 0.00039418330956704956, 'lambda': 4.464026789181432e-05, 'B': 2, 'E_max': 25, 'w0': 2.0, 'patience': 2, 'factor': 0.1} because of the following error: RuntimeError('mat1 and mat2 shapes cannot be multiplied (1x1024 and 4096x768)').
+Traceback (most recent call last):
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 397, in <lambda>
+    lambda trial: objective(trial, data_cache, args, device),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 295, in objective
+    outputs = model(stain_slices).unsqueeze(0)
+              ^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/models.py", line 191, in forward
+    stain_emb, stain_attn_info = self.process_single_stain(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/models.py", line 129, in process_single_stain
+    patch_emb = self.patch_projector(pooled)  # (1, D)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x1024 and 4096x768)
+[W 2026-02-13 22:26:22,281] Trial 1 failed with value None.
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 486, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 396, in main
+    study.optimize(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 68, in _optimize
+    _optimize_sequential(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 165, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 263, in _run_trial
+    raise func_err
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 397, in <lambda>
+    lambda trial: objective(trial, data_cache, args, device),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 295, in objective
+    outputs = model(stain_slices).unsqueeze(0)
+              ^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/models.py", line 191, in forward
+    stain_emb, stain_attn_info = self.process_single_stain(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/models.py", line 129, in process_single_stain
+    patch_emb = self.patch_projector(pooled)  # (1, D)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x1024 and 4096x768)

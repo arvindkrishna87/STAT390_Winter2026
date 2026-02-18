@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 18, in <module>
+    from models import create_model
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/models.py", line 177
+    return_attn_weights: bool = False):
+                                     ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '[' on line 176

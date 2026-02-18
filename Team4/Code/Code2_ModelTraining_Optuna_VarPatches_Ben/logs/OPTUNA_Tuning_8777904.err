@@ -1,0 +1,50 @@
+[I 2026-02-14 14:35:21,199] A new study created in memory with name: mil_study
+  0%|          | 0/10 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+                                        0%|          | 0/10 [00:59<?, ?it/s]                                        0%|          | 0/10 [00:59<?, ?it/s]  0%|          | 0/10 [00:59<?, ?it/s]
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 670, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 648, in main
+    study.optimize(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 68, in _optimize
+    _optimize_sequential(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 165, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 263, in _run_trial
+    raise func_err
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 634, in objective_wrapper
+    return objective(
+           ^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 291, in objective
+    best_val_loss, best_val_accuracy = trainer.train_with_pruning(
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 167, in train_with_pruning
+    train_loss = self.train_epoch(train_loader)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/optuna_training.py", line 97, in train_epoch
+    outputs = self.model(stain_slices)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/models.py", line 191, in forward
+    stain_emb, stain_attn_info = self.process_single_stain(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_Optuna_13Feb_Ben/models.py", line 143, in process_single_stain
+    slice_embeddings.append(slice_emb.squeeze(0))  # (D,)
+    ^^^^^^^^^^^^^^^^
+NameError: name 'slice_embeddings' is not defined. Did you mean: 'patch_embeddings'?

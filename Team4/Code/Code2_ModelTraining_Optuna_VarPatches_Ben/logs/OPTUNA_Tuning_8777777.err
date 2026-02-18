@@ -1,0 +1,7 @@
+usage: optuna_training.py [-h] [--labels_csv LABELS_CSV]
+                          [--patches_dir PATCHES_DIR]
+                          [--output_dir OUTPUT_DIR] [--n_trials N_TRIALS]
+                          [--n_epochs N_EPOCHS] [--study_name STUDY_NAME]
+                          [--num_workers NUM_WORKERS] [--seed SEED]
+                          [--load_splits LOAD_SPLITS] [--storage STORAGE]
+optuna_training.py: error: unrecognized arguments: --per_slice_cap 500 --max_slices_per_stain 5

@@ -1,0 +1,23 @@
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 338, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 262, in main
+    model = create_model(
+            ^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/models.py", line 238, in create_model
+    state_dict = torch.load("/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/KimiaNet.pth",
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/KimiaNet.pth'

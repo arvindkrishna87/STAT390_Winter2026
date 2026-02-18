@@ -1,0 +1,47 @@
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Training:   0%|          | 0/50 [00:03<?, ?it/s]
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 338, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 291, in main
+    trainer.train(
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/trainer.py", line 229, in train
+    train_loss = self.train_epoch(train_loader)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/trainer.py", line 76, in train_epoch
+    for batch in tqdm(train_loader, desc="Training"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+               ^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 732, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1506, in _next_data
+    return self._process_data(data, worker_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1541, in _process_data
+    data.reraise()
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_utils.py", line 769, in reraise
+    raise exception
+RuntimeError: Caught RuntimeError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/_utils/worker.py", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/dataset.py", line 125, in __getitem__
+    sl_tensor = self._load_slice_tensor(sl)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/dataset.py", line 106, in _load_slice_tensor
+    return torch.stack(imgs)  # (P, C, H, W)
+           ^^^^^^^^^^^^^^^^^
+RuntimeError: stack expects each tensor to be equal size, but got [3, 539, 539] at entry 0 and [3, 123, 122] at entry 1
+

@@ -1,0 +1,58 @@
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Training:   2%|▏         | 1/50 [01:13<1:00:21, 73.91s/it]Training:   4%|▍         | 2/50 [04:37<2:00:22, 150.46s/it]Training:   6%|▌         | 3/50 [04:47<1:07:26, 86.10s/it] Training:   8%|▊         | 4/50 [05:33<53:48, 70.18s/it]  Training:  10%|█         | 5/50 [06:52<55:10, 73.56s/it]Training:  12%|█▏        | 6/50 [08:47<1:04:11, 87.53s/it]Training:  14%|█▍        | 7/50 [09:43<55:26, 77.37s/it]  Training:  16%|█▌        | 8/50 [10:15<43:55, 62.75s/it]Training:  18%|█▊        | 9/50 [11:50<49:44, 72.79s/it]Training:  20%|██        | 10/50 [16:53<1:35:56, 143.90s/it]Training:  22%|██▏       | 11/50 [19:08<1:31:49, 141.27s/it]Training:  24%|██▍       | 12/50 [20:11<1:14:22, 117.43s/it]Training:  26%|██▌       | 13/50 [22:10<1:12:45, 117.99s/it]Training:  28%|██▊       | 14/50 [22:56<57:44, 96.23s/it]   Training:  30%|███       | 15/50 [24:42<57:47, 99.07s/it]Training:  32%|███▏      | 16/50 [26:08<53:57, 95.22s/it]Training:  34%|███▍      | 17/50 [26:38<41:31, 75.50s/it]Training:  36%|███▌      | 18/50 [28:59<50:45, 95.17s/it]Training:  38%|███▊      | 19/50 [31:08<54:25, 105.34s/it]Training:  40%|████      | 20/50 [32:24<48:20, 96.69s/it] Training:  42%|████▏     | 21/50 [33:31<42:20, 87.61s/it]Training:  44%|████▍     | 22/50 [34:38<38:02, 81.53s/it]Training:  46%|████▌     | 23/50 [35:05<29:16, 65.05s/it]Training:  48%|████▊     | 24/50 [35:38<24:06, 55.63s/it]Training:  50%|█████     | 25/50 [36:27<22:17, 53.49s/it]Training:  52%|█████▏    | 26/50 [38:20<28:32, 71.34s/it]Training:  54%|█████▍    | 27/50 [38:53<22:53, 59.73s/it]Training:  56%|█████▌    | 28/50 [40:14<24:17, 66.24s/it]Training:  58%|█████▊    | 29/50 [42:40<31:34, 90.23s/it]Training:  60%|██████    | 30/50 [45:11<36:09, 108.48s/it]Training:  62%|██████▏   | 31/50 [45:56<28:15, 89.24s/it] Training:  64%|██████▍   | 32/50 [47:59<29:51, 99.51s/it]Training:  66%|██████▌   | 33/50 [52:25<42:22, 149.58s/it]Training:  68%|██████▊   | 34/50 [54:00<35:29, 133.10s/it]Training:  70%|███████   | 35/50 [55:31<30:07, 120.53s/it]Training:  72%|███████▏  | 36/50 [56:07<22:09, 94.96s/it] Training:  74%|███████▍  | 37/50 [56:58<17:45, 81.98s/it]Training:  76%|███████▌  | 38/50 [57:53<14:46, 73.92s/it]Training:  78%|███████▊  | 39/50 [58:46<12:21, 67.45s/it]Training:  80%|████████  | 40/50 [59:57<11:25, 68.58s/it]Training:  82%|████████▏ | 41/50 [1:01:22<11:02, 73.57s/it]Training:  84%|████████▍ | 42/50 [1:01:50<07:59, 59.88s/it]Training:  86%|████████▌ | 43/50 [1:02:53<07:04, 60.64s/it]Training:  88%|████████▊ | 44/50 [1:05:56<09:44, 97.48s/it]Training:  90%|█████████ | 45/50 [1:07:52<08:34, 102.99s/it]Training:  92%|█████████▏| 46/50 [1:08:39<05:44, 86.09s/it] Training:  94%|█████████▍| 47/50 [1:11:01<05:08, 102.87s/it]Training:  96%|█████████▌| 48/50 [1:11:47<02:52, 86.01s/it] Training:  98%|█████████▊| 49/50 [1:13:15<01:26, 86.59s/it]Training: 100%|██████████| 50/50 [1:13:52<00:00, 71.62s/it]Training: 100%|██████████| 50/50 [1:13:52<00:00, 88.65s/it]
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 338, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/main.py", line 291, in main
+    trainer.train(
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/trainer.py", line 232, in train
+    val_loss, val_acc = self.validate(val_loader)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/trainer.py", line 122, in validate
+    outputs = self.model(stain_slices)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/models.py", line 199, in forward
+    stain_emb, stain_attn_info = self.process_single_stain(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Code2_ModelTraining_12Feb_Ben/models.py", line 134, in process_single_stain
+    patch_features = self.features(patch_tensor)  # (1, F, h, w)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/nn/modules/pooling.py", line 781, in forward
+    return F.avg_pool2d(
+           ^^^^^^^^^^^^^
+RuntimeError: Given input size: (512x2x1). Calculated output size: (512x1x0). Output size is too small
