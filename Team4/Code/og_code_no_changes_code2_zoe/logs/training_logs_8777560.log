@@ -1,0 +1,42 @@
+/var/spool/slurmd/job8777560/slurm_script: line 15: conda: command not found
+/var/spool/slurmd/job8777560/slurm_script: line 16: conda: command not found
+Job ID: 8777560
+Start time: Sat Feb 14 13:25:28 CST 2026
+Collecting torch>=1.9.0 (from -r /home/zel9906/Code1_ModelTraining_13Feb_Zoe/requirements.txt (line 2))
+  Using cached https://files.pythonhosted.org/packages/a4/54/81b1c3c574a1ffde54b0c82ed2a37d81395709cdd5f50e59970aeed5d95e/torch-1.10.2-cp36-cp36m-manylinux1_x86_64.whl
+Collecting torchvision>=0.10.0 (from -r /home/zel9906/Code1_ModelTraining_13Feb_Zoe/requirements.txt (line 3))
+  Using cached https://files.pythonhosted.org/packages/38/03/c963ecdf98fae15286437ae533750e2c39e988b7d8c86fad4dbc73a3a146/torchvision-0.11.2-cp36-cp36m-manylinux1_x86_64.whl
+Collecting numpy>=1.21.0 (from -r /home/zel9906/Code1_ModelTraining_13Feb_Zoe/requirements.txt (line 4))
+  Could not find a version that satisfies the requirement numpy>=1.21.0 (from -r /home/zel9906/Code1_ModelTraining_13Feb_Zoe/requirements.txt (line 4)) (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5)
+No matching distribution found for numpy>=1.21.0 (from -r /home/zel9906/Code1_ModelTraining_13Feb_Zoe/requirements.txt (line 4))
+Collecting certifi
+  Using cached https://files.pythonhosted.org/packages/4a/7e/3db2bd1b1f9e95f7cddca6d6e75e2f2bd9f51b1246e546d88addca0106bd/certifi-2025.4.26-py3-none-any.whl
+Installing collected packages: certifi
+Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/pip/basecommand.py", line 215, in main
+    status = self.run(options, args)
+  File "/usr/lib/python3.6/site-packages/pip/commands/install.py", line 365, in run
+    strip_file_prefix=options.strip_file_prefix,
+  File "/usr/lib/python3.6/site-packages/pip/req/req_set.py", line 789, in install
+    **kwargs
+  File "/usr/lib/python3.6/site-packages/pip/req/req_install.py", line 854, in install
+    strip_file_prefix=strip_file_prefix
+  File "/usr/lib/python3.6/site-packages/pip/req/req_install.py", line 1069, in move_wheel_files
+    strip_file_prefix=strip_file_prefix,
+  File "/usr/lib/python3.6/site-packages/pip/wheel.py", line 345, in move_wheel_files
+    clobber(source, lib_dir, True)
+  File "/usr/lib/python3.6/site-packages/pip/wheel.py", line 287, in clobber
+    ensure_dir(dest)  # common for the 'include' path
+  File "/usr/lib/python3.6/site-packages/pip/utils/__init__.py", line 83, in ensure_dir
+    os.makedirs(path)
+  File "/usr/lib64/python3.6/os.py", line 210, in makedirs
+    makedirs(head, mode, exist_ok)
+  File "/usr/lib64/python3.6/os.py", line 220, in makedirs
+    mkdir(name, mode)
+PermissionError: [Errno 13] Permission denied: '/usr/local/lib/python3.6'
+/var/spool/slurmd/job8777560/slurm_script: line 25: python: command not found
+Traceback (most recent call last):
+  File "main.py", line 7, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
