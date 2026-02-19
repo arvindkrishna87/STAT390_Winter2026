@@ -84,7 +84,8 @@ def create_run_directory(base_dir: str = None) -> str:
         base_dir = DATA_PATHS['runs_dir']
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_dir = os.path.join(base_dir, f"run_{timestamp}")
+    job_name = os.environ.get('SLURM_JOB_NAME', 'run')
+    run_dir = os.path.join(base_dir, f"{timestamp}_{job_name}")
     os.makedirs(run_dir, exist_ok=True)
     
     print(f"Created run directory: {run_dir}")
