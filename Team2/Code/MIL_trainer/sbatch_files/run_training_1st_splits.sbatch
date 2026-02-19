@@ -7,9 +7,9 @@
 #SBATCH --mem=128G                          # n GB RAM
 #SBATCH --job-name=MIL_train              # Job name (no spaces)
 #SBATCH --output=/projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer/logs/training_logs_%j.log  # Standard output file
-#SBATCH --error=//projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer/logs/training_logs_%j.log   # now writing error to the same log file
+#SBATCH --error=/projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer/logs/training_logs_%j.log   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
-#SBATCH --mail-user=romahashemi2026@u.northwestern.edu  # Your NU email
+#SBATCH --mail-user=paigeusry2026@u.northwestern.edu  # Your NU email
 
 module purge
 module load python-anaconda3/2019.10
@@ -32,7 +32,6 @@ cd /projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer
 
 python3 main.py \
     --analyze_attention \
-    --attention_top_n 8 \
     --per_slice_cap 500 \
     --max_slices_per_stain 5 \
     --load_splits /projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer/data_splits/data_splits_01.npz

@@ -5,7 +5,7 @@
 #SBATCH --nodes=1                         # 1 node
 #SBATCH --ntasks=16                        # n nores
 #SBATCH --mem=128G                          # n GB RAM
-#SBATCH --job-name=MIL_train              # Job name (no spaces)
+#SBATCH --job-name=MIL_optuna_train              # Job name (no spaces)
 #SBATCH --output=/projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer/logs/training_logs_%j.log  # Standard output file
 #SBATCH --error=/projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer/logs/training_logs_%j.log   # now writing error to the same log file
 #SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
@@ -30,7 +30,7 @@ cd /projects/e32998/STAT390_Winter2026/Team2/Code/MIL_trainer
 
 # without loading checkpoints, trying 5 diff train / test splits
 
-python3 main.py \
+python3 opt_hyperparamsQUICK.py \
     --analyze_attention \
     --attention_top_n 8 \
     --per_slice_cap 500 \

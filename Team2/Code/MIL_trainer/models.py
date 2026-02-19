@@ -5,6 +5,7 @@ import torch
 import os
 import torch.nn as nn
 import torchvision.models as models
+from collections import OrderedDict
 from typing import Dict, List, Any, Optional, Tuple
 
 from config import MODEL_CONFIG
@@ -54,7 +55,7 @@ class HierarchicalAttnMIL(nn.Module):
     2. Stain-level: across slices within each stain  
     3. Case-level: across different stains
     """
-    def __init__(self, base_model=None, num_classes: int = 2, embed_dim: int = 512, dropout: float = 0.3):
+    def __init__(self, base_model=None, num_classes: int = 2, embed_dim: int = 512, dropout: float = 0.3, attention_hidden_dim=128,):
         super().__init__()
         
         if base_model is None:
@@ -81,7 +82,7 @@ class HierarchicalAttnMIL(nn.Module):
         self.patch_attention = AttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
         self.stain_attention = AttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
         self.case_attention = AttentionPool(embed_dim, MODEL_CONFIG['attention_hidden_dim'], dropout=dropout)
-        
+
         # Final classifier with dropout
         self.classifier = nn.Sequential(
             nn.Dropout(dropout),
@@ -218,25 +219,44 @@ class HierarchicalAttnMIL(nn.Module):
         
         return logits
 
+
 def load_kimianet_densenet(weights_path: str):
-    """
-    Load DenseNet-121 with KimiNet pretrained weights
-    """
     model = models.densenet121(pretrained=False)
 
-    state_dict = torch.load(weights_path, map_location="cpu")
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    state_dict = torch.load(weights_path, map_location=device)
 
-    # Some KimiNet checkpoints include classifier weights we don't need
-    model_dict = model.state_dict()
+    #accounting for kimianet weights being wrapped in a state dict 
+    if "state_dict" in state_dict:
+        state_dict = state_dict["state_dict"]
 
+    # fixing the keys to be expected structure
+    new_state_dict = OrderedDict()
+    for k, v in state_dict.items():
+        # fixes prefixes 
+        if k.startswith("module."):
+            k = k[len("module."):]
+        if k.startswith("model.0."):
+            k = k[len("model.0."):]
+        if k.startswith("fc_4."):
+            k = k[len("fc_4."):]
+
+        if k.startswith(("conv", "norm", "denseblock", "transition")):
+            k = "features." + k
+        else:
+            k = "classifier." + k
+
+        new_state_dict[k] = v
+
+    # filtering out classifier weights 
     filtered_state_dict = {
-        k: v for k, v in state_dict.items()
-        if k in model_dict and model_dict[k].shape == v.shape
+        k: v for k, v in new_state_dict.items()
+        if not k.startswith("classifier.")
     }
 
-    model_dict.update(filtered_state_dict)
-    model.load_state_dict(model_dict)
+    print(f"Loaded {len(filtered_state_dict)}/{len(model.state_dict())} layers from KimiaNet checkpoint")
 
+    model.load_state_dict(filtered_state_dict, strict=False)
     return model
 
 def create_model(num_classes: int = None, embed_dim: int = None, dropout: float = None, pretrained: bool = True) -> HierarchicalAttnMIL:
@@ -252,13 +272,7 @@ def create_model(num_classes: int = None, embed_dim: int = None, dropout: float 
         dropout = TRAINING_CONFIG.get('dropout', 0.3)
     
     # Create base model
-    if pretrained:
-        base_model = load_kimianet_densenet(
-            weights_path="KimiaNetPyTorchWeights.pth"
-        )
-    else:
-        base_model = models.densenet121(pretrained=False)   
-    #base_model = models.densenet121(pretrained=pretrained)
+    base_model = load_kimianet_densenet(weights_path="KimiaNetPyTorchWeights.pth")
     
     # Create and return MIL model
     model = HierarchicalAttnMIL(

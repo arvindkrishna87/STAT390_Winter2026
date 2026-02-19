@@ -7,9 +7,9 @@ from torch.utils.data import Dataset
 from PIL import Image, UnidentifiedImageError
 from typing import Dict, List, Any, Optional, Tuple
 import torchvision.transforms as transforms
+import torchvision.transforms.v2 as transforms2
 
 from config import MODEL_CONFIG, IMAGE_CONFIG
-
 
 class StainBagCaseDataset(Dataset):
     """
@@ -91,11 +91,6 @@ class StainBagCaseDataset(Dataset):
         for p in patch_paths:
             try:
                 img = Image.open(p).convert("RGB")
-                
-                # Skip small patches
-                if img.width < 32 or img.height < 32:
-                    continue
-
                 if self.transform:
                     img = self.transform(img)
                 imgs.append(img)
@@ -158,7 +153,11 @@ def create_transforms(is_training: bool = True) -> transforms.Compose:
     if is_training:
         # Training transforms with augmentation
         transform = transforms.Compose([
+            transforms2. RandomResize(
+                min_size= int(0.9 * IMAGE_CONFIG['image_size'][0]), 
+                max_size= int(1.1 * IMAGE_CONFIG['image_size'][1])),
             # transforms.RandomResizedCrop(IMAGE_CONFIG['image_size'][0]),
+            transforms.Resize(IMAGE_CONFIG['image_size']),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.RandomRotation(15),
