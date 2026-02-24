@@ -1,0 +1,305 @@
+Job ID: 8531631
+Start time: Wed Feb 11 17:03:02 CST 2026
+Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/site-packages (2026.1.4)
+Random seed set to 42
+Using CPU
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260211_170431
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Winter2026/Data/case_grade_match.csv', 'patches_dir': '/projects/e32998/patches', 'epochs': 30, 'lr': 0.0003, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': '/projects/e32998/STAT390_Winter2026/Team4/Code/Code1_ModelTraining_29Jan_Ben/data_splits/data_splits_01.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.0003, 'weight_decay': 0.0002, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5, 1.0], 'dropout': 0.3, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 3, 'scheduler_factor': 0.3, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 105 labels
+Found 83595 patch files
+All 3808 non-standard file names were handled.
+Grouped into 378 slices
+Mapped 366 slices to classes
+Class distribution: {0: 128, 1: 238}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /projects/e32998/STAT390_Winter2026/Team4/Code/Code1_ModelTraining_29Jan_Ben/data_splits/data_splits_01.npz
+Data splits loaded from: /projects/e32998/STAT390_Winter2026/Team4/Code/Code1_ModelTraining_29Jan_Ben/data_splits/data_splits_01.npz
+Loaded splits - Train: 222, Val: 72, Test: 68
+Cases per split: 50 17 18
+Paths per split: 47679 15631 16166
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    6  12
+train  17  33
+val     5  12
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         409.2          250.9          238.1
+train        470.5          263.2          219.9
+val          504.8          241.9          172.8
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         364.5          173.5          160.0
+train        324.0          194.0          182.0
+val          273.0          175.0          162.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.111          0.000
+train          0.0          0.000          0.020
+val            0.0          0.059          0.059
+
+Total cases: 85
+Total patches: 79,476
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     15639 patches
+  High-grade (1): 32040 patches
+
+Patch count by class for Validation:
+  Benign (0):     5968 patches
+  High-grade (1): 9663 patches
+
+Patch count by class for Test:
+  Benign (0):     4130 patches
+  High-grade (1): 12036 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 50/50 (100.0%)
+  melan: 50/50 (100.0%)
+  sox10: 49/50 (98.0%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 17/17 (100.0%)
+  melan: 16/17 (94.1%)
+  sox10: 16/17 (94.1%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 18/18 (100.0%)
+  melan: 16/18 (88.9%)
+  sox10: 18/18 (100.0%)
+No issues found
+Using existing splits from: /projects/e32998/STAT390_Winter2026/Team4/Code/Code1_ModelTraining_29Jan_Ben/data_splits/data_splits_01.npz
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+Created data loaders - Train: 50, Val: 17, Test: 18
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 9,249,925
+Trainable parameters: 2,296,069
+Model size: 35.29 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 9,249,925
+Learning rate scheduler: ReduceLROnPlateau
+Early stopping enabled (patience=8)
+
+Epoch 1/30 (LR: 3.00e-04)
+Train Loss: 1.2081, Val Loss: 0.6899, Val Acc: 0.5294
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_172921_HierarchicalAttnMIL_epoch1.pth
+New best validation loss: 0.6899
+
+Epoch 2/30 (LR: 3.00e-04)
+Train Loss: 0.6884, Val Loss: 0.6193, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_180058_HierarchicalAttnMIL_epoch2.pth
+New best validation loss: 0.6193
+
+Epoch 3/30 (LR: 3.00e-04)
+Train Loss: 0.6532, Val Loss: 0.6123, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_182936_HierarchicalAttnMIL_epoch3.pth
+New best validation loss: 0.6123
+
+Epoch 4/30 (LR: 3.00e-04)
+Train Loss: 0.6541, Val Loss: 0.6069, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_190016_HierarchicalAttnMIL_epoch4.pth
+New best validation loss: 0.6069
+
+Epoch 5/30 (LR: 3.00e-04)
+Train Loss: 0.6643, Val Loss: 0.5989, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_193059_HierarchicalAttnMIL_epoch5.pth
+New best validation loss: 0.5989
+
+Epoch 6/30 (LR: 3.00e-04)
+Train Loss: 0.6424, Val Loss: 0.6043, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_200342_HierarchicalAttnMIL_epoch6.pth
+No improvement for 1 epoch(s)
+
+Epoch 7/30 (LR: 3.00e-04)
+Train Loss: 0.6529, Val Loss: 0.5630, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_203526_HierarchicalAttnMIL_epoch7.pth
+New best validation loss: 0.5630
+
+Epoch 8/30 (LR: 3.00e-04)
+Train Loss: 0.6197, Val Loss: 0.5461, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_210800_HierarchicalAttnMIL_epoch8.pth
+New best validation loss: 0.5461
+
+Epoch 9/30 (LR: 3.00e-04)
+Train Loss: 0.6105, Val Loss: 0.5735, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_213727_HierarchicalAttnMIL_epoch9.pth
+No improvement for 1 epoch(s)
+
+Epoch 10/30 (LR: 3.00e-04)
+Train Loss: 0.5257, Val Loss: 0.5593, Val Acc: 0.5882
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_220753_HierarchicalAttnMIL_epoch10.pth
+No improvement for 2 epoch(s)
+
+Epoch 11/30 (LR: 3.00e-04)
+Train Loss: 0.4873, Val Loss: 0.5742, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_223528_HierarchicalAttnMIL_epoch11.pth
+No improvement for 3 epoch(s)
+
+Epoch 12/30 (LR: 3.00e-04)
+Train Loss: 0.4617, Val Loss: 0.5082, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_230532_HierarchicalAttnMIL_epoch12.pth
+New best validation loss: 0.5082
+
+Epoch 13/30 (LR: 3.00e-04)
+Train Loss: 0.4106, Val Loss: 0.6745, Val Acc: 0.5294
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_233045_HierarchicalAttnMIL_epoch13.pth
+No improvement for 1 epoch(s)
+
+Epoch 14/30 (LR: 3.00e-04)
+Train Loss: 0.3219, Val Loss: 0.8238, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260211_235325_HierarchicalAttnMIL_epoch14.pth
+No improvement for 2 epoch(s)
+
+Epoch 15/30 (LR: 3.00e-04)
+Train Loss: 0.4592, Val Loss: 0.5061, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_001556_HierarchicalAttnMIL_epoch15.pth
+New best validation loss: 0.5061
+
+Epoch 16/30 (LR: 3.00e-04)
+Train Loss: 0.3001, Val Loss: 0.6797, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_003812_HierarchicalAttnMIL_epoch16.pth
+No improvement for 1 epoch(s)
+
+Epoch 17/30 (LR: 3.00e-04)
+Train Loss: 0.2657, Val Loss: 1.0959, Val Acc: 0.5882
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_010045_HierarchicalAttnMIL_epoch17.pth
+No improvement for 2 epoch(s)
+
+Epoch 18/30 (LR: 3.00e-04)
+Train Loss: 0.3043, Val Loss: 1.2967, Val Acc: 0.5882
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_012321_HierarchicalAttnMIL_epoch18.pth
+No improvement for 3 epoch(s)
+
+Epoch 19/30 (LR: 3.00e-04)
+Train Loss: 0.2771, Val Loss: 0.6621, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_014626_HierarchicalAttnMIL_epoch19.pth
+No improvement for 4 epoch(s)
+
+Epoch 20/30 (LR: 9.00e-05)
+Train Loss: 0.2614, Val Loss: 0.5520, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_020924_HierarchicalAttnMIL_epoch20.pth
+No improvement for 5 epoch(s)
+
+Epoch 21/30 (LR: 9.00e-05)
+Train Loss: 0.1217, Val Loss: 0.5616, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_023245_HierarchicalAttnMIL_epoch21.pth
+No improvement for 6 epoch(s)
+
+Epoch 22/30 (LR: 9.00e-05)
+Train Loss: 0.2156, Val Loss: 0.6042, Val Acc: 0.8235
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_025540_HierarchicalAttnMIL_epoch22.pth
+No improvement for 7 epoch(s)
+
+Epoch 23/30 (LR: 9.00e-05)
+Train Loss: 0.1797, Val Loss: 0.4521, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_032007_HierarchicalAttnMIL_epoch23.pth
+New best validation loss: 0.4521
+
+Epoch 24/30 (LR: 9.00e-05)
+Train Loss: 0.0985, Val Loss: 0.7318, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_034322_HierarchicalAttnMIL_epoch24.pth
+No improvement for 1 epoch(s)
+
+Epoch 25/30 (LR: 9.00e-05)
+Train Loss: 0.1171, Val Loss: 0.6434, Val Acc: 0.7059
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_040626_HierarchicalAttnMIL_epoch25.pth
+No improvement for 2 epoch(s)
+
+Epoch 26/30 (LR: 9.00e-05)
+Train Loss: 0.1353, Val Loss: 0.6340, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_042943_HierarchicalAttnMIL_epoch26.pth
+No improvement for 3 epoch(s)
+
+Epoch 27/30 (LR: 9.00e-05)
+Train Loss: 0.0929, Val Loss: 0.5410, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_045238_HierarchicalAttnMIL_epoch27.pth
+No improvement for 4 epoch(s)
+
+Epoch 28/30 (LR: 2.70e-05)
+Train Loss: 0.1043, Val Loss: 0.5902, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_051614_HierarchicalAttnMIL_epoch28.pth
+No improvement for 5 epoch(s)
+
+Epoch 29/30 (LR: 2.70e-05)
+Train Loss: 0.2964, Val Loss: 0.6184, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_053859_HierarchicalAttnMIL_epoch29.pth
+No improvement for 6 epoch(s)
+
+Epoch 30/30 (LR: 2.70e-05)
+Train Loss: 0.0775, Val Loss: 0.5220, Val Acc: 0.7647
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260211_170431/checkpoints/20260212_060144_HierarchicalAttnMIL_epoch30.pth
+No improvement for 7 epoch(s)
+
+Training completed!
+
+============================================================
+EVALUATING MODEL
+============================================================
+Predictions saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431/predictions.csv
+Confusion matrix saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431/confusion_matrix.png
+
+Test Results:
+Test Loss: 0.7272
+Test Accuracy: 0.7778
+Samples: 18
+
+============================================================
+ATTENTION ANALYSIS
+============================================================
+Attention summary saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431/attention_analysis/attention_summary.txt
+Per-case effective patch attention distributions saved.
+Per-case & per-stain slice attention rank plots saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431/attention_analysis/slice_attention
+Per-case top 5.0% effective patches CSV saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431/attention_analysis/top_effective_patches_per_case_5.0pct.csv
+Per-case top 5.0% summary saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431/attention_analysis/top_effective_patches_per_case_summary_5.0pct.txt
+Attention analysis saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431/attention_analysis
+
+Results saved to: /projects/e32998/MIL_training/final_runs/run_20260211_170431
+Training completed successfully!
