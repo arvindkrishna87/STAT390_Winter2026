@@ -4,6 +4,9 @@ desktop.ini
 __pycache__
 
 Data/
-checkpoints/ # binaries for model training state, not useful outside of Quest, do not force commit
-case_effective_patches/ # lots of plots, ~50MB in size, `git add -f <file>` if you want to add a specific plot
-patch_attention/ # lots of plots, ~150MB in size, `git add -f <file>` if you want to add a specific plot
+# binaries for model training state, not useful outside of Quest, do not force commit
+checkpoints/
+# lots of plots, ~50MB in size, `git add -f <file>` if you want to add a specific plot
+case_effective_patches/
+# lots of plots, ~150MB in size, `git add -f <file>` if you want to add a specific plot
+patch_attention/
