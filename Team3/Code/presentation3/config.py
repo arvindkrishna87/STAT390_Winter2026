@@ -6,7 +6,7 @@ from typing import Tuple
 
 # Data paths (adjust these for your HPC environment)
 DATA_PATHS = {
-    'labels_csv': '/home/xla6290/Presentation3_BaseCode/extra_benign_case_grade_match.csv',
+    'labels_csv': '/home/<your_netid>/presentation3/extra_benign_case_grade_match.csv',
     'patches_dir': '/projects/e32998/patches_benign_split',
     'runs_dir': '/projects/e32998/MIL_training/final_runs'  # Base directory for training runs
 }
