@@ -29,6 +29,18 @@ from tqdm import tqdm
 
 from config import TRAINING_CONFIG, DEVICE
 
+
+def attention_entropy(w: torch.Tensor, eps: float = 1e-12) -> torch.Tensor:
+    """
+    Entropy of attention weights AFTER softmax.
+    w can be shape (..., M). Returns mean entropy (scalar).
+    """
+    # Softmax outputs should already be >0, but eps prevents log(0) if something odd happens.
+    w = w.clamp_min(eps)
+    H = -(w * w.log()).sum(dim=-1)  # sum over attention dimension
+    return H.mean()
+
+
 class MILTrainer:
     """
     Trainer for MIL model.
@@ -86,6 +98,7 @@ class MILTrainer:
 
         self.best_val_loss = float("inf")
         self.epochs_without_improvement = 0
+        self._printed_entropy_debug = False
 
         # History
         self.train_losses = []
@@ -96,7 +109,7 @@ class MILTrainer:
     # ----------------------------
     # Core helpers
     # ----------------------------
-    def _forward_one_case(self, case_data: Dict[str, Any]) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _forward_one_case(self, case_data: Dict[str, Any], return_attn_weights: bool = False) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Returns (logits_with_batch, label_with_batch)
         logits_with_batch: shape (1, num_classes)
@@ -104,8 +117,14 @@ class MILTrainer:
         """
         stain_slices = case_data["stain_slices"]
         label = case_data["label"].to(self.device)
+        
+        if return_attn_weights:
+            logits, attn_weights = self.model(stain_slices, return_attn_weights=True)
+        else:
+            logits = self.model(stain_slices)  # (num_classes,)
+            attn_weights = None
 
-        logits = self.model(stain_slices)  # (num_classes,)
+
         if logits.dim() != 1:
             raise ValueError(f"Expected model to return (num_classes,), got {tuple(logits.shape)}")
 
@@ -114,6 +133,8 @@ class MILTrainer:
         if label.dim() == 0:
             label = label.unsqueeze(0)  # (1,)
 
+        if return_attn_weights:
+            return logits, label, attn_weights
         return logits, label
 
     def _ensure_dir(self, path: Optional[str]) -> str:
@@ -145,9 +166,70 @@ class MILTrainer:
                 continue
             case_data = batch[0]
 
-            logits, label = self._forward_one_case(case_data)
-            loss = self.criterion(logits, label)
+            lam = TRAINING_CONFIG.get("entropy_lambda", 0.0)
 
+            # Foward pass
+            if lam > 0.0:
+                logits, label, attn = self._forward_one_case(case_data, return_attn_weights=True)
+            else:
+                logits, label = self._forward_one_case(case_data)
+                attn = None
+            
+            base_loss = self.criterion(logits, label)
+            
+            # Entropy regularization averaged across all attention layers
+            entropies = []
+            
+            if lam > 0.0:
+                if attn is None:
+                    raise RuntimeError("Entropy reg enabled but attention weights were not returned correctly.")
+                
+                # Only calculate entropy if the case actually has valid weights
+                if "case_weights" in attn:
+                    entropies.append(attention_entropy(attn["case_weights"]))
+            
+                    for stain, d in attn.get("stain_weights", {}).items():
+                        if "slice_weights" in d:
+                            entropies.append(attention_entropy(d["slice_weights"]))
+                        for pw in d.get("patch_weights", []):
+                            entropies.append(attention_entropy(pw))
+            
+            if len(entropies) > 0:
+                entropy_term = torch.stack(entropies).mean()
+            else:
+                entropy_term = torch.tensor(0.0, device=self.device)
+            
+            # Loss = CE - lambda * H(w)
+            loss = base_loss - lam * entropy_term
+            
+            #### DEBUGGING #####
+            if (lam > 0.0) and (not self._printed_entropy_debug):
+                penalty_mag = (lam * entropy_term).detach().item()
+                base = base_loss.detach().item()
+                ent = entropy_term.detach().item()
+
+                print("\n[EntropyReg DEBUG — first batch only]")
+                print(f"  entropy_lambda (lam): {lam:.3e}")
+                print(f"  base_loss (CE):        {base:.6f}")
+                print(f"  entropy_term (mean H): {ent:.6f}")
+                print(f"  lam * entropy_term:    {penalty_mag:.6f}")
+                if base != 0:
+                    print(f"  (lam*H)/CE ratio:      {penalty_mag / base:.6f}")
+
+                if not torch.isfinite(base_loss):
+                    raise RuntimeError("base_loss is not finite.")
+                if not torch.isfinite(entropy_term):
+                    raise RuntimeError("entropy_term is not finite.")
+                if not torch.isfinite(loss):
+                    raise RuntimeError("total loss is not finite.")
+
+                self._printed_entropy_debug = True
+            #### END DEBUGGING ####
+            
+            if not loss.requires_grad:
+                continue
+
+            # Backward pass
             self.optimizer.zero_grad(set_to_none=True)
             loss.backward()
             self.optimizer.step()

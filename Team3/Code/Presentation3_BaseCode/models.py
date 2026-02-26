@@ -12,17 +12,23 @@ class AttentionPool(nn.Module):
     """
     def __init__(self, input_dim: int, hidden_dim: int = 128, dropout: float = 0.0):
         super().__init__()
-        self.attention = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.Tanh(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_dim, 1),
-        )
+        
+        # Gated attention mechanism
+        self.V = nn.Linear(input_dim, hidden_dim) # tanh branch
+        self.U = nn.Linear(input_dim, hidden_dim) # sigmoid branch
+        
+        # Final attention score
+        self.w = nn.Linear(hidden_dim, 1)
 
     def forward(self, x: torch.Tensor, return_weights: bool = False):
-        weights = self.attention(x)            # (B, M, 1)
-        weights = torch.softmax(weights, dim=1)
-        weighted_x = (weights * x).sum(dim=1)  # (B, D)
+        v = torch.tanh(self.V(x))  # (B, M, H)
+        u = torch.sigmoid(self.U(x))  # (B, M, H)
+        vu = v * u  # (B, M, H)
+        
+        scores = self.w(vu)  # (B, M, 1)
+        weights = torch.softmax(scores, dim=1)  # (B, M, 1)
+        weighted_x = (weights * x).sum(dim=1)  # (B,
+
         if return_weights:
             return weighted_x, weights.squeeze(-1)  # (B, D), (B, M)
         return weighted_x
