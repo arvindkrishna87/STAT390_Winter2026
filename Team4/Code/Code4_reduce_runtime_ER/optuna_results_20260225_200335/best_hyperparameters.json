@@ -1,0 +1,15 @@
+{
+    "best_trial_number": 5,
+    "best_val_loss": 0.3150869778049074,
+    "best_val_accuracy": 0.8823529411764706,
+    "best_params": {
+        "learning_rate": 0.0002658616083788976,
+        "weight_decay": 7.404472559987598e-05,
+        "dropout": 0.21951547789558387,
+        "class_weight_benign": 3.3977710745066663,
+        "scheduler_patience": 5,
+        "scheduler_factor": 0.4425192044349383
+    },
+    "n_trials": 10,
+    "datetime": "2026-02-26 09:47:30"
+}
