@@ -48,6 +48,8 @@ def parse_args():
                        help='Batch size (typically 1 for MIL)')
     parser.add_argument('--num_workers', type=int, default=TRAINING_CONFIG['num_workers'],
                        help='Number of data loader workers')
+    parser.add_argument("--run_tag", type=str, default="", 
+                        help="Optional tag added to run directory name")
     
     # Model arguments
     parser.add_argument('--embed_dim', type=int, default=MODEL_CONFIG['embed_dim'],
@@ -226,7 +228,7 @@ def main():
     device = get_device()
     
     # Create run directory
-    run_dir = create_run_directory()
+    run_dir = create_run_directory(run_tag=args.run_tag)
     
     # Update checkpoint directory to run directory
     args.checkpoint_dir = os.path.join(run_dir, "checkpoints")
