@@ -1,0 +1,8 @@
+usage: main.py [-h] [--labels_csv LABELS_CSV] [--patches_dir PATCHES_DIR]
+               [--epochs EPOCHS] [--lr LR] [--batch_size BATCH_SIZE]
+               [--num_workers NUM_WORKERS] [--embed_dim EMBED_DIM]
+               [--per_slice_cap PER_SLICE_CAP]
+               [--max_slices_per_stain MAX_SLICES_PER_STAIN] [--seed SEED]
+               [--resume RESUME] [--eval_only] [--analyze_attention]
+               [--attention_top_n ATTENTION_TOP_N] [--load_splits LOAD_SPLITS]
+main.py: error: unrecognized arguments: --run_tag customsplit
