@@ -1,0 +1,623 @@
+Job ID: 6742
+Start time: Thu Feb 26 21:13:08 CST 2026
+Requirement already satisfied: torch>=1.9.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (2.9.0)
+Requirement already satisfied: torchvision>=0.10.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 3)) (0.24.0)
+Requirement already satisfied: numpy>=1.21.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 4)) (2.3.4)
+Requirement already satisfied: pandas>=1.3.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 5)) (2.3.3)
+Requirement already satisfied: scikit-learn>=1.0.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 6)) (1.7.2)
+Requirement already satisfied: Pillow>=8.3.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 7)) (12.0.0)
+Requirement already satisfied: tqdm>=4.62.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 8)) (4.67.1)
+Requirement already satisfied: matplotlib>=3.5.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 11)) (3.10.7)
+Requirement already satisfied: seaborn>=0.11.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 12)) (0.13.2)
+Requirement already satisfied: optuna>=3.0.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 15)) (4.7.0)
+Requirement already satisfied: psutil>=5.8.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 18)) (7.1.2)
+Requirement already satisfied: imbalanced-learn>=0.8.0 in /home/sml7045/env/lib/python3.12/site-packages (from -r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 21)) (0.14.0)
+Requirement already satisfied: filelock in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (3.20.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (4.15.0)
+Requirement already satisfied: setuptools in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (3.5)
+Requirement already satisfied: jinja2 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (2025.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (1.13.1.3)
+Requirement already satisfied: triton==3.5.0 in /home/sml7045/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (3.5.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /home/sml7045/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 5)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /home/sml7045/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /home/sml7045/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: scipy>=1.8.0 in /home/sml7045/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 6)) (1.16.3)
+Requirement already satisfied: joblib>=1.2.0 in /home/sml7045/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 6)) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /home/sml7045/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 6)) (3.6.0)
+Requirement already satisfied: contourpy>=1.0.1 in /home/sml7045/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 11)) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /home/sml7045/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 11)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /home/sml7045/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 11)) (4.60.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /home/sml7045/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 11)) (1.4.9)
+Requirement already satisfied: packaging>=20.0 in /home/sml7045/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 11)) (25.0)
+Requirement already satisfied: pyparsing>=3 in /home/sml7045/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 11)) (3.2.5)
+Requirement already satisfied: alembic>=1.5.0 in /home/sml7045/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 15)) (1.18.3)
+Requirement already satisfied: colorlog in /home/sml7045/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 15)) (6.10.1)
+Requirement already satisfied: sqlalchemy>=1.4.2 in /home/sml7045/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 15)) (2.0.46)
+Requirement already satisfied: PyYAML in /home/sml7045/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 15)) (6.0.3)
+Requirement already satisfied: Mako in /home/sml7045/env/lib/python3.12/site-packages (from alembic>=1.5.0->optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 15)) (1.3.10)
+Requirement already satisfied: six>=1.5 in /home/sml7045/env/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=1.3.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 5)) (1.17.0)
+Requirement already satisfied: greenlet>=1 in /home/sml7045/env/lib/python3.12/site-packages (from sqlalchemy>=1.4.2->optuna>=3.0.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 15)) (3.3.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/sml7045/env/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/sml7045/env/lib/python3.12/site-packages (from jinja2->torch>=1.9.0->-r /projects/e32998/STAT390_Winter2026/Team3/Code/presentation3/requirements.txt (line 2)) (3.0.3)
+Requirement already satisfied: certifi in /home/sml7045/env/lib/python3.12/site-packages (2026.2.25)
+Random seed set to 42
+Using CPU
+================================================================================
+OPTUNA HYPERPARAMETER OPTIMIZATION FOR MIL
+================================================================================
+Device: cpu
+Number of trials: 10
+Epochs per trial: 30
+Pruning warmup: 6 epochs
+Per slice cap: 500
+Max slices per stain: 5
+Output directory: ./optuna_results_20260226_211353
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {0: 133, 1: 238}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /home/sml7045/presentation3/data_splits/data_splits.npz
+Data splits loaded from: /home/sml7045/presentation3/data_splits/data_splits.npz
+Loaded splits - Train: 226, Val: 77
+Cases per split: 55 19 0
+Paths per split: 51023 13864 0
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+
+============================================================
+CREATING DATA LOADERS (POOLED FEATURES)
+============================================================
+Created data loaders - Train: 55, Val: 19
+Train batches: 55
+Val batches: 19
+
+============================================================
+CREATING OPTUNA STUDY
+============================================================
+
+============================================================
+STARTING OPTIMIZATION
+============================================================
+
+============================================================
+Trial 0
+============================================================
+Parameters:
+  Learning rate: 1.83e-04
+  Weight decay: 4.46e-04
+  Patch Projector Dropout: 0.420
+  Classifier Dropout: 0.380
+  Class weight (benign): 1.81
+  Entropy lambda: 2.05e-04
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 2.051e-04
+  base_loss (CE):        0.643847
+  entropy_term (mean H): 3.214040
+  lam * entropy_term:    0.000659
+  (lam*H)/CE ratio:      0.001024
+Epoch   1/30 │ Train Loss: 0.7880 │ Val Loss: 0.6403 │ Val Acc: 0.8421 │ LR: 1.83e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.5470 │ Val Loss: 0.4341 │ Val Acc: 0.8421 │ LR: 1.83e-04 ✓ BEST
+Epoch   3/30 │ Train Loss: 0.4929 │ Val Loss: 0.3893 │ Val Acc: 0.8947 │ LR: 1.83e-04 ✓ BEST
+Epoch   4/30 │ Train Loss: 0.2803 │ Val Loss: 0.4226 │ Val Acc: 0.8947 │ LR: 1.83e-04 
+Epoch   5/30 │ Train Loss: 0.3587 │ Val Loss: 0.3594 │ Val Acc: 0.8947 │ LR: 1.83e-04 ✓ BEST
+Epoch   6/30 │ Train Loss: 0.0471 │ Val Loss: 0.4398 │ Val Acc: 0.8947 │ LR: 1.83e-04 
+Epoch   7/30 │ Train Loss: 0.0953 │ Val Loss: 0.3794 │ Val Acc: 0.8421 │ LR: 1.83e-04 
+Epoch   8/30 │ Train Loss: 0.1737 │ Val Loss: 0.6569 │ Val Acc: 0.8947 │ LR: 1.83e-04 
+Epoch   9/30 │ Train Loss: 0.0236 │ Val Loss: 0.5055 │ Val Acc: 0.8947 │ LR: 1.83e-04 
+Epoch  10/30 │ Train Loss: 0.0263 │ Val Loss: 0.5950 │ Val Acc: 0.8947 │ LR: 3.91e-05 [LR: 3.91e-05] 
+Epoch  11/30 │ Train Loss: 0.0045 │ Val Loss: 0.6475 │ Val Acc: 0.8947 │ LR: 3.91e-05 
+Epoch  12/30 │ Train Loss: 0.0063 │ Val Loss: 0.6314 │ Val Acc: 0.8947 │ LR: 3.91e-05 
+Epoch  13/30 │ Train Loss: 0.0022 │ Val Loss: 0.6517 │ Val Acc: 0.8947 │ LR: 3.91e-05 
+
+────────────────────────────────────────────────────────────
+Early stopping triggered at epoch 13
+  No improvement for 8 epochs
+  Best val loss: 0.3594 (epoch 5)
+────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────
+Training Completed
+  Best Val Loss: 0.3594 (epoch 5)
+  Best Val Accuracy: 0.8947
+────────────────────────────────────────────────────────────
+
+Trial 0 completed - Best Val Loss: 0.3594, Best Val Acc: 0.8947
+[I 2026-02-27 00:03:07,561] Trial 0 finished with value: 0.35938038468994865 and parameters: {'learning_rate': 0.00018272261776066238, 'weight_decay': 0.0004463590152176814, 'patch_proj_dropout': 0.4195981825434215, 'classifier_dropout': 0.379597545259111, 'class_weight_benign': 1.812037280884873, 'entropy_lambda': 0.00020511104188433984}. Best is trial 0 with value: 0.35938038468994865.
+
+============================================================
+Trial 1
+============================================================
+Parameters:
+  Learning rate: 1.10e-04
+  Weight decay: 3.67e-04
+  Patch Projector Dropout: 0.380
+  Classifier Dropout: 0.412
+  Class weight (benign): 1.54
+  Entropy lambda: 8.71e-03
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 8.706e-03
+  base_loss (CE):        0.693646
+  entropy_term (mean H): 3.474804
+  lam * entropy_term:    0.030252
+  (lam*H)/CE ratio:      0.043613
+Epoch   1/30 │ Train Loss: 0.7094 │ Val Loss: 0.6247 │ Val Acc: 0.7895 │ LR: 1.10e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.4976 │ Val Loss: 0.7074 │ Val Acc: 0.6316 │ LR: 1.10e-04 
+Epoch   3/30 │ Train Loss: 0.3190 │ Val Loss: 0.6346 │ Val Acc: 0.7368 │ LR: 1.10e-04 
+Epoch   4/30 │ Train Loss: 0.2574 │ Val Loss: 0.5067 │ Val Acc: 0.8947 │ LR: 1.10e-04 ✓ BEST
+Epoch   5/30 │ Train Loss: 0.2617 │ Val Loss: 0.5187 │ Val Acc: 0.8947 │ LR: 1.10e-04 
+Epoch   6/30 │ Train Loss: 0.0821 │ Val Loss: 0.7320 │ Val Acc: 0.7368 │ LR: 1.10e-04 
+Epoch   7/30 │ Train Loss: 0.1882 │ Val Loss: 0.6603 │ Val Acc: 0.6316 │ LR: 1.10e-04 
+Epoch   8/30 │ Train Loss: 0.0599 │ Val Loss: 0.6417 │ Val Acc: 0.8421 │ LR: 1.10e-04 
+Epoch   9/30 │ Train Loss: 0.0911 │ Val Loss: 0.6417 │ Val Acc: 0.8947 │ LR: 2.35e-05 [LR: 2.35e-05] 
+Epoch  10/30 │ Train Loss: -0.0008 │ Val Loss: 0.6142 │ Val Acc: 0.8421 │ LR: 2.35e-05 
+Epoch  11/30 │ Train Loss: -0.0045 │ Val Loss: 0.6071 │ Val Acc: 0.8421 │ LR: 2.35e-05 
+Epoch  12/30 │ Train Loss: -0.0058 │ Val Loss: 0.6192 │ Val Acc: 0.8947 │ LR: 2.35e-05 
+
+────────────────────────────────────────────────────────────
+Early stopping triggered at epoch 12
+  No improvement for 8 epochs
+  Best val loss: 0.5067 (epoch 4)
+────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────
+Training Completed
+  Best Val Loss: 0.5067 (epoch 4)
+  Best Val Accuracy: 0.8947
+────────────────────────────────────────────────────────────
+
+Trial 1 completed - Best Val Loss: 0.5067, Best Val Acc: 0.8947
+[I 2026-02-27 02:37:27,842] Trial 1 finished with value: 0.5067193273398994 and parameters: {'learning_rate': 0.00010979908036596662, 'weight_decay': 0.00036740592026352257, 'patch_proj_dropout': 0.3803345035229626, 'classifier_dropout': 0.4124217733388137, 'class_weight_benign': 1.541168988591605, 'entropy_lambda': 0.008706020878304856}. Best is trial 0 with value: 0.35938038468994865.
+
+============================================================
+Trial 2
+============================================================
+Parameters:
+  Learning rate: 3.82e-04
+  Weight decay: 8.15e-05
+  Patch Projector Dropout: 0.255
+  Classifier Dropout: 0.255
+  Class weight (benign): 2.11
+  Entropy lambda: 1.12e-03
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 1.121e-03
+  base_loss (CE):        0.711175
+  entropy_term (mean H): 3.222818
+  lam * entropy_term:    0.003612
+  (lam*H)/CE ratio:      0.005079
+Epoch   1/30 │ Train Loss: 1.1613 │ Val Loss: 0.6683 │ Val Acc: 0.6842 │ LR: 3.82e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 1.0904 │ Val Loss: 0.6318 │ Val Acc: 0.7895 │ LR: 3.82e-04 ✓ BEST
+Epoch   3/30 │ Train Loss: 0.4064 │ Val Loss: 0.6971 │ Val Acc: 0.7368 │ LR: 3.82e-04 
+Epoch   4/30 │ Train Loss: 0.3472 │ Val Loss: 0.4182 │ Val Acc: 0.8947 │ LR: 3.82e-04 ✓ BEST
+Epoch   5/30 │ Train Loss: 0.1814 │ Val Loss: 0.4917 │ Val Acc: 0.8947 │ LR: 3.82e-04 
+Epoch   6/30 │ Train Loss: 0.0764 │ Val Loss: 0.9200 │ Val Acc: 0.8421 │ LR: 3.82e-04 
+Epoch   7/30 │ Train Loss: 0.0371 │ Val Loss: 1.3686 │ Val Acc: 0.7895 │ LR: 3.82e-04 
+Epoch   8/30 │ Train Loss: 0.0196 │ Val Loss: 0.9992 │ Val Acc: 0.8947 │ LR: 3.82e-04 
+Epoch   9/30 │ Train Loss: 0.0024 │ Val Loss: 1.1681 │ Val Acc: 0.8421 │ LR: 8.17e-05 [LR: 8.17e-05] 
+Epoch  10/30 │ Train Loss: -0.0003 │ Val Loss: 1.1411 │ Val Acc: 0.8421 │ LR: 8.17e-05 
+Epoch  11/30 │ Train Loss: -0.0009 │ Val Loss: 1.1179 │ Val Acc: 0.8947 │ LR: 8.17e-05 
+Epoch  12/30 │ Train Loss: 0.0023 │ Val Loss: 1.1113 │ Val Acc: 0.8947 │ LR: 8.17e-05 
+
+────────────────────────────────────────────────────────────
+Early stopping triggered at epoch 12
+  No improvement for 8 epochs
+  Best val loss: 0.4182 (epoch 4)
+────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────
+Training Completed
+  Best Val Loss: 0.4182 (epoch 4)
+  Best Val Accuracy: 0.8947
+────────────────────────────────────────────────────────────
+
+Trial 2 completed - Best Val Loss: 0.4182, Best Val Acc: 0.8947
+[I 2026-02-27 05:03:59,702] Trial 2 finished with value: 0.41816024422379133 and parameters: {'learning_rate': 0.0003818145165896873, 'weight_decay': 8.152843673110742e-05, 'patch_proj_dropout': 0.2545474901621302, 'classifier_dropout': 0.2550213529560302, 'class_weight_benign': 2.1084844859190754, 'entropy_lambda': 0.0011207606211860567}. Best is trial 0 with value: 0.35938038468994865.
+
+============================================================
+Trial 3
+============================================================
+Parameters:
+  Learning rate: 2.00e-04
+  Weight decay: 9.78e-05
+  Patch Projector Dropout: 0.384
+  Classifier Dropout: 0.242
+  Class weight (benign): 2.08
+  Entropy lambda: 5.40e-04
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 5.404e-04
+  base_loss (CE):        0.677421
+  entropy_term (mean H): 3.293918
+  lam * entropy_term:    0.001780
+  (lam*H)/CE ratio:      0.002628
+Epoch   1/30 │ Train Loss: 0.6486 │ Val Loss: 1.3948 │ Val Acc: 0.6316 │ LR: 2.00e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.6884 │ Val Loss: 0.5634 │ Val Acc: 0.7368 │ LR: 2.00e-04 ✓ BEST
+Epoch   3/30 │ Train Loss: 0.2711 │ Val Loss: 0.4075 │ Val Acc: 0.8947 │ LR: 2.00e-04 ✓ BEST
+Epoch   4/30 │ Train Loss: 0.1880 │ Val Loss: 0.2917 │ Val Acc: 0.9474 │ LR: 2.00e-04 ✓ BEST
+Epoch   5/30 │ Train Loss: 0.0605 │ Val Loss: 0.2539 │ Val Acc: 0.8947 │ LR: 2.00e-04 ✓ BEST
+Epoch   6/30 │ Train Loss: 0.1100 │ Val Loss: 0.4197 │ Val Acc: 0.8421 │ LR: 2.00e-04 
+Epoch   7/30 │ Train Loss: 0.0349 │ Val Loss: 0.9044 │ Val Acc: 0.7895 │ LR: 2.00e-04 
+Epoch   8/30 │ Train Loss: 0.0140 │ Val Loss: 0.3923 │ Val Acc: 0.8421 │ LR: 2.00e-04 
+Epoch   9/30 │ Train Loss: 0.0050 │ Val Loss: 0.5701 │ Val Acc: 0.8421 │ LR: 2.00e-04 
+Epoch  10/30 │ Train Loss: 0.0006 │ Val Loss: 0.5025 │ Val Acc: 0.8947 │ LR: 4.29e-05 [LR: 4.29e-05] 
+Epoch  11/30 │ Train Loss: -0.0000 │ Val Loss: 0.5088 │ Val Acc: 0.8947 │ LR: 4.29e-05 
+Epoch  12/30 │ Train Loss: 0.0001 │ Val Loss: 0.5042 │ Val Acc: 0.8947 │ LR: 4.29e-05 
+Epoch  13/30 │ Train Loss: 0.0027 │ Val Loss: 0.5512 │ Val Acc: 0.8421 │ LR: 4.29e-05 
+
+────────────────────────────────────────────────────────────
+Early stopping triggered at epoch 13
+  No improvement for 8 epochs
+  Best val loss: 0.2539 (epoch 5)
+────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────
+Training Completed
+  Best Val Loss: 0.2539 (epoch 5)
+  Best Val Accuracy: 0.8947
+────────────────────────────────────────────────────────────
+
+Trial 3 completed - Best Val Loss: 0.2539, Best Val Acc: 0.8947
+[I 2026-02-27 06:58:24,805] Trial 3 finished with value: 0.25386953459698514 and parameters: {'learning_rate': 0.0002004087187654155, 'weight_decay': 9.776854331372622e-05, 'patch_proj_dropout': 0.38355586841671385, 'classifier_dropout': 0.24184815819561256, 'class_weight_benign': 2.0842892970704363, 'entropy_lambda': 0.0005404103854647331}. Best is trial 3 with value: 0.25386953459698514.
+
+============================================================
+Trial 4
+============================================================
+Parameters:
+  Learning rate: 2.08e-04
+  Weight decay: 3.05e-04
+  Patch Projector Dropout: 0.260
+  Classifier Dropout: 0.354
+  Class weight (benign): 2.68
+  Entropy lambda: 1.24e-04
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 1.239e-04
+  base_loss (CE):        0.483077
+  entropy_term (mean H): 3.071442
+  lam * entropy_term:    0.000380
+  (lam*H)/CE ratio:      0.000787
+Epoch   1/30 │ Train Loss: 0.7402 │ Val Loss: 0.5927 │ Val Acc: 0.7368 │ LR: 2.08e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.3956 │ Val Loss: 0.6457 │ Val Acc: 0.5789 │ LR: 2.08e-04 
+Epoch   3/30 │ Train Loss: 0.4119 │ Val Loss: 0.7350 │ Val Acc: 0.7368 │ LR: 2.08e-04 
+Epoch   4/30 │ Train Loss: 0.2775 │ Val Loss: 0.5002 │ Val Acc: 0.8947 │ LR: 2.08e-04 ✓ BEST
+Epoch   5/30 │ Train Loss: 0.1918 │ Val Loss: 0.4145 │ Val Acc: 0.8947 │ LR: 2.08e-04 ✓ BEST
+Epoch   6/30 │ Train Loss: 0.0522 │ Val Loss: 0.5839 │ Val Acc: 0.8421 │ LR: 2.08e-04 
+Epoch   7/30 │ Train Loss: 0.0173 │ Val Loss: 0.8050 │ Val Acc: 0.8421 │ LR: 2.08e-04 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  TRIAL PRUNED at epoch 7
+   Reason: Performance not improving compared to other trials
+   Best val loss so far: 0.4145 (epoch 5)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Trial 4 pruned
+[I 2026-02-27 07:56:36,379] Trial 4 pruned. 
+
+============================================================
+Trial 5
+============================================================
+Parameters:
+  Learning rate: 2.66e-04
+  Weight decay: 7.40e-05
+  Patch Projector Dropout: 0.220
+  Classifier Dropout: 0.485
+  Class weight (benign): 3.43
+  Entropy lambda: 4.14e-03
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 4.138e-03
+  base_loss (CE):        0.555738
+  entropy_term (mean H): 3.176625
+  lam * entropy_term:    0.013145
+  (lam*H)/CE ratio:      0.023653
+Epoch   1/30 │ Train Loss: 0.9250 │ Val Loss: 0.6157 │ Val Acc: 0.6316 │ LR: 2.66e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.6138 │ Val Loss: 0.5140 │ Val Acc: 0.8947 │ LR: 2.66e-04 ✓ BEST
+Epoch   3/30 │ Train Loss: 0.5373 │ Val Loss: 1.4887 │ Val Acc: 0.3684 │ LR: 2.66e-04 
+Epoch   4/30 │ Train Loss: 0.6892 │ Val Loss: 0.5491 │ Val Acc: 0.8947 │ LR: 2.66e-04 
+Epoch   5/30 │ Train Loss: 0.3729 │ Val Loss: 0.5938 │ Val Acc: 0.8421 │ LR: 2.66e-04 
+Epoch   6/30 │ Train Loss: 0.2975 │ Val Loss: 0.8113 │ Val Acc: 0.7895 │ LR: 2.66e-04 
+Epoch   7/30 │ Train Loss: 0.1073 │ Val Loss: 0.7601 │ Val Acc: 0.7895 │ LR: 5.69e-05 [LR: 5.69e-05] 
+Epoch   8/30 │ Train Loss: 0.0394 │ Val Loss: 0.5637 │ Val Acc: 0.8947 │ LR: 5.69e-05 
+Epoch   9/30 │ Train Loss: 0.0094 │ Val Loss: 0.5219 │ Val Acc: 0.8947 │ LR: 5.69e-05 
+Epoch  10/30 │ Train Loss: 0.0049 │ Val Loss: 0.5518 │ Val Acc: 0.8947 │ LR: 5.69e-05 
+
+────────────────────────────────────────────────────────────
+Early stopping triggered at epoch 10
+  No improvement for 8 epochs
+  Best val loss: 0.5140 (epoch 2)
+────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────
+Training Completed
+  Best Val Loss: 0.5140 (epoch 2)
+  Best Val Accuracy: 0.8947
+────────────────────────────────────────────────────────────
+
+Trial 5 completed - Best Val Loss: 0.5140, Best Val Acc: 0.8947
+[I 2026-02-27 09:33:04,657] Trial 5 finished with value: 0.5140497924845674 and parameters: {'learning_rate': 0.0002658616083788976, 'weight_decay': 7.404472559987598e-05, 'patch_proj_dropout': 0.21951547789558387, 'classifier_dropout': 0.48466566117599996, 'class_weight_benign': 3.4312640661491187, 'entropy_lambda': 0.004138040112561018}. Best is trial 3 with value: 0.25386953459698514.
+
+============================================================
+Trial 6
+============================================================
+Parameters:
+  Learning rate: 1.63e-04
+  Weight decay: 6.26e-05
+  Patch Projector Dropout: 0.405
+  Classifier Dropout: 0.332
+  Class weight (benign): 1.74
+  Entropy lambda: 9.78e-04
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 9.780e-04
+  base_loss (CE):        0.637509
+  entropy_term (mean H): 3.670081
+  lam * entropy_term:    0.003589
+  (lam*H)/CE ratio:      0.005630
+Epoch   1/30 │ Train Loss: 0.7502 │ Val Loss: 0.7560 │ Val Acc: 0.6316 │ LR: 1.63e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.5136 │ Val Loss: 0.3852 │ Val Acc: 0.9474 │ LR: 1.63e-04 ✓ BEST
+Epoch   3/30 │ Train Loss: 0.3096 │ Val Loss: 0.4528 │ Val Acc: 0.8947 │ LR: 1.63e-04 
+Epoch   4/30 │ Train Loss: 0.1154 │ Val Loss: 0.6597 │ Val Acc: 0.8421 │ LR: 1.63e-04 
+Epoch   5/30 │ Train Loss: 0.1414 │ Val Loss: 0.7687 │ Val Acc: 0.8947 │ LR: 1.63e-04 
+Epoch   6/30 │ Train Loss: 0.2027 │ Val Loss: 0.6689 │ Val Acc: 0.7895 │ LR: 1.63e-04 
+Epoch   7/30 │ Train Loss: 0.0990 │ Val Loss: 0.3005 │ Val Acc: 0.8947 │ LR: 1.63e-04 ✓ BEST
+Epoch   8/30 │ Train Loss: 0.0211 │ Val Loss: 0.2729 │ Val Acc: 0.8947 │ LR: 1.63e-04 ✓ BEST
+Epoch   9/30 │ Train Loss: 0.0211 │ Val Loss: 0.3606 │ Val Acc: 0.8947 │ LR: 1.63e-04 
+Epoch  10/30 │ Train Loss: 0.0020 │ Val Loss: 0.3971 │ Val Acc: 0.8947 │ LR: 1.63e-04 
+Epoch  11/30 │ Train Loss: 0.0010 │ Val Loss: 0.5059 │ Val Acc: 0.8947 │ LR: 1.63e-04 
+Epoch  12/30 │ Train Loss: 0.0022 │ Val Loss: 0.5683 │ Val Acc: 0.8947 │ LR: 1.63e-04 
+Epoch  13/30 │ Train Loss: -0.0011 │ Val Loss: 0.5552 │ Val Acc: 0.8947 │ LR: 3.49e-05 [LR: 3.49e-05] 
+Epoch  14/30 │ Train Loss: -0.0016 │ Val Loss: 0.5549 │ Val Acc: 0.8947 │ LR: 3.49e-05 
+Epoch  15/30 │ Train Loss: -0.0000 │ Val Loss: 0.5695 │ Val Acc: 0.8947 │ LR: 3.49e-05 
+Epoch  16/30 │ Train Loss: -0.0011 │ Val Loss: 0.5683 │ Val Acc: 0.8947 │ LR: 3.49e-05 
+
+────────────────────────────────────────────────────────────
+Early stopping triggered at epoch 16
+  No improvement for 8 epochs
+  Best val loss: 0.2729 (epoch 8)
+────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────
+Training Completed
+  Best Val Loss: 0.2729 (epoch 8)
+  Best Val Accuracy: 0.8947
+────────────────────────────────────────────────────────────
+
+Trial 6 completed - Best Val Loss: 0.2729, Best Val Acc: 0.8947
+[I 2026-02-27 12:28:36,218] Trial 6 finished with value: 0.27291261176999404 and parameters: {'learning_rate': 0.00016327356954687938, 'weight_decay': 6.260977143530197e-05, 'patch_proj_dropout': 0.40526990795364704, 'classifier_dropout': 0.33204574812188037, 'class_weight_benign': 1.7440764696895577, 'entropy_lambda': 0.0009780337016659412}. Best is trial 3 with value: 0.25386953459698514.
+
+============================================================
+Trial 7
+============================================================
+Parameters:
+  Learning rate: 1.06e-04
+  Weight decay: 4.06e-04
+  Patch Projector Dropout: 0.278
+  Classifier Dropout: 0.399
+  Class weight (benign): 2.12
+  Entropy lambda: 1.10e-03
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 1.097e-03
+  base_loss (CE):        0.680600
+  entropy_term (mean H): 2.214652
+  lam * entropy_term:    0.002429
+  (lam*H)/CE ratio:      0.003569
+Epoch   1/30 │ Train Loss: 1.0851 │ Val Loss: 0.9536 │ Val Acc: 0.4211 │ LR: 1.06e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.4909 │ Val Loss: 0.6443 │ Val Acc: 0.7368 │ LR: 1.06e-04 ✓ BEST
+Epoch   3/30 │ Train Loss: 0.4063 │ Val Loss: 0.4776 │ Val Acc: 0.8947 │ LR: 1.06e-04 ✓ BEST
+Epoch   4/30 │ Train Loss: 0.2541 │ Val Loss: 0.4866 │ Val Acc: 0.8947 │ LR: 1.06e-04 
+Epoch   5/30 │ Train Loss: 0.1785 │ Val Loss: 0.4868 │ Val Acc: 0.8947 │ LR: 1.06e-04 
+Epoch   6/30 │ Train Loss: 0.1135 │ Val Loss: 0.5441 │ Val Acc: 0.8947 │ LR: 1.06e-04 
+Epoch   7/30 │ Train Loss: 0.0602 │ Val Loss: 0.7062 │ Val Acc: 0.8947 │ LR: 1.06e-04 
+Epoch   8/30 │ Train Loss: 0.0297 │ Val Loss: 0.7024 │ Val Acc: 0.8947 │ LR: 2.26e-05 [LR: 2.26e-05] 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  TRIAL PRUNED at epoch 8
+   Reason: Performance not improving compared to other trials
+   Best val loss so far: 0.4776 (epoch 3)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Trial 7 pruned
+[I 2026-02-27 13:28:13,317] Trial 7 pruned. 
+
+============================================================
+Trial 8
+============================================================
+Parameters:
+  Learning rate: 2.41e-04
+  Weight decay: 7.65e-05
+  Patch Projector Dropout: 0.491
+  Classifier Dropout: 0.433
+  Class weight (benign): 3.38
+  Entropy lambda: 6.16e-03
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 6.161e-03
+  base_loss (CE):        0.542710
+  entropy_term (mean H): 3.201640
+  lam * entropy_term:    0.019725
+  (lam*H)/CE ratio:      0.036346
+Epoch   1/30 │ Train Loss: 1.1445 │ Val Loss: 0.8671 │ Val Acc: 0.6842 │ LR: 2.41e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.5091 │ Val Loss: 0.9669 │ Val Acc: 0.7895 │ LR: 2.41e-04 
+Epoch   3/30 │ Train Loss: 0.5724 │ Val Loss: 0.4178 │ Val Acc: 0.8947 │ LR: 2.41e-04 ✓ BEST
+Epoch   4/30 │ Train Loss: 0.3676 │ Val Loss: 0.3310 │ Val Acc: 0.9474 │ LR: 2.41e-04 ✓ BEST
+Epoch   5/30 │ Train Loss: 0.1336 │ Val Loss: 0.5639 │ Val Acc: 0.7895 │ LR: 2.41e-04 
+Epoch   6/30 │ Train Loss: 0.1850 │ Val Loss: 0.7212 │ Val Acc: 0.7895 │ LR: 2.41e-04 
+Epoch   7/30 │ Train Loss: 0.0158 │ Val Loss: 0.7663 │ Val Acc: 0.8947 │ LR: 2.41e-04 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  TRIAL PRUNED at epoch 7
+   Reason: Performance not improving compared to other trials
+   Best val loss so far: 0.3310 (epoch 4)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Trial 8 pruned
+[I 2026-02-27 13:38:01,811] Trial 8 pruned. 
+
+============================================================
+Trial 9
+============================================================
+Parameters:
+  Learning rate: 2.62e-04
+  Weight decay: 4.18e-04
+  Patch Projector Dropout: 0.227
+  Classifier Dropout: 0.259
+  Class weight (benign): 1.59
+  Entropy lambda: 4.47e-04
+
+────────────────────────────────────────────────────────────
+Starting Training - 30 epochs
+────────────────────────────────────────────────────────────
+
+[EntropyReg DEBUG — first batch only]
+  entropy_lambda (lam): 4.474e-04
+  base_loss (CE):        0.641722
+  entropy_term (mean H): 3.074366
+  lam * entropy_term:    0.001375
+  (lam*H)/CE ratio:      0.002143
+Epoch   1/30 │ Train Loss: 0.9381 │ Val Loss: 0.4815 │ Val Acc: 0.7895 │ LR: 2.62e-04 ✓ BEST
+Epoch   2/30 │ Train Loss: 0.5712 │ Val Loss: 0.8877 │ Val Acc: 0.6316 │ LR: 2.62e-04 
+Epoch   3/30 │ Train Loss: 0.4256 │ Val Loss: 0.2487 │ Val Acc: 0.8947 │ LR: 2.62e-04 ✓ BEST
+Epoch   4/30 │ Train Loss: 0.3026 │ Val Loss: 0.2719 │ Val Acc: 0.8421 │ LR: 2.62e-04 
+Epoch   5/30 │ Train Loss: 0.2210 │ Val Loss: 0.2362 │ Val Acc: 0.8947 │ LR: 2.62e-04 ✓ BEST
+Epoch   6/30 │ Train Loss: 0.0899 │ Val Loss: 0.3719 │ Val Acc: 0.8947 │ LR: 2.62e-04 
+Epoch   7/30 │ Train Loss: 0.0230 │ Val Loss: 0.3467 │ Val Acc: 0.8947 │ LR: 2.62e-04 
+Epoch   8/30 │ Train Loss: 0.0098 │ Val Loss: 0.6214 │ Val Acc: 0.8421 │ LR: 2.62e-04 
+Epoch   9/30 │ Train Loss: 0.0031 │ Val Loss: 0.5201 │ Val Acc: 0.8947 │ LR: 2.62e-04 
+Epoch  10/30 │ Train Loss: 0.0032 │ Val Loss: 0.4721 │ Val Acc: 0.8947 │ LR: 5.60e-05 [LR: 5.60e-05] 
+Epoch  11/30 │ Train Loss: -0.0002 │ Val Loss: 0.4722 │ Val Acc: 0.8947 │ LR: 5.60e-05 
+Epoch  12/30 │ Train Loss: -0.0004 │ Val Loss: 0.4805 │ Val Acc: 0.8947 │ LR: 5.60e-05 
+Epoch  13/30 │ Train Loss: 0.0000 │ Val Loss: 0.4868 │ Val Acc: 0.8947 │ LR: 5.60e-05 
+
+────────────────────────────────────────────────────────────
+Early stopping triggered at epoch 13
+  No improvement for 8 epochs
+  Best val loss: 0.2362 (epoch 5)
+────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────
+Training Completed
+  Best Val Loss: 0.2362 (epoch 5)
+  Best Val Accuracy: 0.8947
+────────────────────────────────────────────────────────────
+
+Trial 9 completed - Best Val Loss: 0.2362, Best Val Acc: 0.8947
+[I 2026-02-27 14:39:52,912] Trial 9 finished with value: 0.2361700649668915 and parameters: {'learning_rate': 0.00026176655097040057, 'weight_decay': 0.0004176805377655882, 'patch_proj_dropout': 0.22654775061557586, 'classifier_dropout': 0.2587948587257436, 'class_weight_benign': 1.5904545778210761, 'entropy_lambda': 0.0004473636174621269}. Best is trial 9 with value: 0.2361700649668915.
+
+============================================================
+SAVING RESULTS
+============================================================
+
+Best hyperparameters saved to: ./optuna_results_20260226_211353/best_hyperparameters.json
+All trials saved to: ./optuna_results_20260226_211353/all_trials.csv
+
+Generating visualizations...
+  - Optimization history saved
+  - Parameter importances saved
+  - Parallel coordinate plot saved
+  - Slice plot saved
+  - Contour plot saved
+
+============================================================
+OPTIMIZATION SUMMARY
+============================================================
+Number of trials: 10
+Number of pruned trials: 3
+Number of complete trials: 7
+
+Best trial: 9
+Best validation loss: 0.2362
+Best validation accuracy: 0.8947
+
+Best hyperparameters:
+  learning_rate: 2.62e-04
+  weight_decay: 4.18e-04
+  patch_proj_dropout: 0.2265
+  classifier_dropout: 0.2588
+  class_weight_benign: 1.5905
+  entropy_lambda: 4.47e-04
+
+================================================================================
+OPTIMIZATION COMPLETED SUCCESSFULLY
+================================================================================
+Results saved to: ./optuna_results_20260226_211353
+View visualizations by opening the HTML files in: ./optuna_results_20260226_211353
