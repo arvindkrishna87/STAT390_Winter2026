@@ -1,0 +1,356 @@
+Job ID: 6002
+Start time: Thu Feb 26 20:38:03 CST 2026
+Requirement already satisfied: torch>=1.9.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (2.9.0)
+Requirement already satisfied: torchvision>=0.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 3)) (0.24.0)
+Requirement already satisfied: numpy>=1.21.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 4)) (2.3.4)
+Requirement already satisfied: pandas>=1.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 5)) (2.3.3)
+Requirement already satisfied: scikit-learn>=1.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 6)) (1.7.2)
+Requirement already satisfied: Pillow>=8.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 7)) (12.0.0)
+Requirement already satisfied: tqdm>=4.62.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 8)) (4.67.1)
+Requirement already satisfied: matplotlib>=3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 11)) (3.10.7)
+Requirement already satisfied: seaborn>=0.11.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 12)) (0.13.2)
+Requirement already satisfied: optuna>=3.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 15)) (4.7.0)
+Requirement already satisfied: psutil>=5.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 18)) (7.1.2)
+Requirement already satisfied: imbalanced-learn>=0.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 21)) (0.14.0)
+Requirement already satisfied: filelock in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (3.20.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (4.15.0)
+Requirement already satisfied: setuptools in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (3.5)
+Requirement already satisfied: jinja2 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (2025.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (1.13.1.3)
+Requirement already satisfied: triton==3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (3.5.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 5)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: scipy>=1.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 6)) (1.16.3)
+Requirement already satisfied: joblib>=1.2.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 6)) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 6)) (3.6.0)
+Requirement already satisfied: contourpy>=1.0.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 11)) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 11)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 11)) (4.60.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 11)) (1.4.9)
+Requirement already satisfied: packaging>=20.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 11)) (25.0)
+Requirement already satisfied: pyparsing>=3 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 11)) (3.2.5)
+Requirement already satisfied: alembic>=1.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 15)) (1.18.3)
+Requirement already satisfied: colorlog in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 15)) (6.10.1)
+Requirement already satisfied: sqlalchemy>=1.4.2 in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 15)) (2.0.46)
+Requirement already satisfied: PyYAML in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 15)) (6.0.3)
+Requirement already satisfied: Mako in /projects/e32998/env/lib/python3.12/site-packages (from alembic>=1.5.0->optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 15)) (1.3.10)
+Requirement already satisfied: six>=1.5 in /projects/e32998/env/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 5)) (1.17.0)
+Requirement already satisfied: greenlet>=1 in /projects/e32998/env/lib/python3.12/site-packages (from sqlalchemy>=1.4.2->optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 15)) (3.3.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /projects/e32998/env/lib/python3.12/site-packages (from jinja2->torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/requirements.txt (line 2)) (3.0.3)
+Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/site-packages (2026.2.25)
+Random seed set to 42
+Using CPU
+================================================================================
+OPTUNA HYPERPARAMETER OPTIMIZATION FOR MIL
+================================================================================
+Device: cpu
+Number of trials: 4
+Epochs per trial: 30
+Pruning warmup: 3 epochs
+Per slice cap: 500
+Max slices per stain: 5
+Output directory: ./optuna_results_20260226_203853
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {0: 133, 1: 238}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/data_splits/data_splits.npz
+Data splits loaded from: /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/data_splits/data_splits.npz
+Loaded splits - Train: 226, Val: 77
+Cases per split: 55 19 0
+Paths per split: 51023 13864 0
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Patch count by class for Train:
+  Benign (0):     15126 patches
+  High-grade (1): 35897 patches
+
+Patch count by class for Validation:
+  Benign (0):     4493 patches
+  High-grade (1): 9371 patches
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+Train batches: 55
+Val batches: 19
+
+============================================================
+CREATING OPTUNA STUDY
+============================================================
+
+============================================================
+STARTING OPTIMIZATION
+============================================================
+
+============================================================
+Trial 0
+============================================================
+Parameters:
+  Learning rate:          1.83e-04
+  Weight decay:           4.46e-04
+  Dropout:                0.420
+  Class weight (benign):  2.70
+  Entropy lambda:         0.0156
+  Use scheduler:          True
+  Scheduler min lr:       2.05e-06
+[ER DEBUG] lam=1.560e-02 base_loss=0.775393 entropy=3.214040 lam*H=0.050145
+[ER DEBUG] lam=1.560e-02 base_loss=0.014093 entropy=3.265787 lam*H=0.050952
+[ER DEBUG] lam=1.560e-02 base_loss=0.352166 entropy=3.648857 lam*H=0.056929
+[ER DEBUG] lam=1.560e-02 base_loss=0.034881 entropy=3.662584 lam*H=0.057143
+[ER DEBUG] lam=1.560e-02 base_loss=0.018139 entropy=3.065832 lam*H=0.047833
+  Epoch 5/30 - Train Loss: 0.3219, Val Loss: 0.4493, Val Acc: 0.8947
+[ER DEBUG] lam=1.560e-02 base_loss=0.015447 entropy=2.502630 lam*H=0.039046
+[ER DEBUG] lam=1.560e-02 base_loss=0.009916 entropy=1.359548 lam*H=0.021211
+[ER DEBUG] lam=1.560e-02 base_loss=0.000100 entropy=2.974026 lam*H=0.046400
+[ER DEBUG] lam=1.560e-02 base_loss=0.000000 entropy=1.743405 lam*H=0.027200
+[ER DEBUG] lam=1.560e-02 base_loss=0.004877 entropy=2.340103 lam*H=0.036510
+  Epoch 10/30 - Train Loss: -0.0250, Val Loss: 0.7258, Val Acc: 0.8947
+[ER DEBUG] lam=1.560e-02 base_loss=0.001759 entropy=2.564497 lam*H=0.040011
+[ER DEBUG] lam=1.560e-02 base_loss=0.000021 entropy=1.893314 lam*H=0.029539
+[ER DEBUG] lam=1.560e-02 base_loss=0.012078 entropy=1.687878 lam*H=0.026334
+[ER DEBUG] lam=1.560e-02 base_loss=0.000014 entropy=2.506927 lam*H=0.039113
+[ER DEBUG] lam=1.560e-02 base_loss=0.000033 entropy=2.577701 lam*H=0.040217
+  Epoch 15/30 - Train Loss: -0.0335, Val Loss: 0.7692, Val Acc: 0.8947
+[ER DEBUG] lam=1.560e-02 base_loss=0.000098 entropy=2.239982 lam*H=0.034948
+[ER DEBUG] lam=1.560e-02 base_loss=0.000003 entropy=2.138536 lam*H=0.033365
+[ER DEBUG] lam=1.560e-02 base_loss=0.000090 entropy=2.472310 lam*H=0.038573
+[ER DEBUG] lam=1.560e-02 base_loss=0.000000 entropy=2.609760 lam*H=0.040717
+[ER DEBUG] lam=1.560e-02 base_loss=0.022313 entropy=2.662066 lam*H=0.041533
+  Epoch 20/30 - Train Loss: -0.0324, Val Loss: 0.7654, Val Acc: 0.8947
+[ER DEBUG] lam=1.560e-02 base_loss=0.000005 entropy=1.670830 lam*H=0.026068
+[ER DEBUG] lam=1.560e-02 base_loss=0.059780 entropy=1.826080 lam*H=0.028490
+[ER DEBUG] lam=1.560e-02 base_loss=0.000001 entropy=1.164467 lam*H=0.018168
+[ER DEBUG] lam=1.560e-02 base_loss=0.005641 entropy=2.478405 lam*H=0.038668
+[ER DEBUG] lam=1.560e-02 base_loss=0.000592 entropy=2.335564 lam*H=0.036439
+  Epoch 25/30 - Train Loss: -0.0334, Val Loss: 0.7849, Val Acc: 0.8947
+[ER DEBUG] lam=1.560e-02 base_loss=0.000767 entropy=2.689872 lam*H=0.041967
+[ER DEBUG] lam=1.560e-02 base_loss=0.000000 entropy=2.748083 lam*H=0.042875
+[ER DEBUG] lam=1.560e-02 base_loss=0.000036 entropy=2.969679 lam*H=0.046333
+[ER DEBUG] lam=1.560e-02 base_loss=0.000362 entropy=2.538697 lam*H=0.039608
+[ER DEBUG] lam=1.560e-02 base_loss=0.000004 entropy=2.265012 lam*H=0.035338
+  Epoch 30/30 - Train Loss: -0.0339, Val Loss: 0.7874, Val Acc: 0.8947
+Trial 0 completed - Best Val Loss: 0.3485, Best Val Acc: 0.8947
+[I 2026-02-27 03:22:15,974] Trial 0 finished with value: 0.34849489902415753 and parameters: {'learning_rate': 0.00018272261776066238, 'weight_decay': 0.0004463590152176814, 'dropout': 0.4195981825434215, 'class_weight_benign': 2.697316968394073, 'entropy_lambda': 0.015601864044243652, 'scheduler_min_lr': 2.0511104188433975e-06}. Best is trial 0 with value: 0.34849489902415753.
+
+============================================================
+Trial 1
+============================================================
+Parameters:
+  Learning rate:          1.10e-04
+  Weight decay:           3.67e-04
+  Dropout:                0.380
+  Class weight (benign):  2.92
+  Entropy lambda:         0.0021
+  Use scheduler:          True
+  Scheduler min lr:       8.71e-05
+[ER DEBUG] lam=2.058e-03 base_loss=0.412474 entropy=4.064075 lam*H=0.008366
+[ER DEBUG] lam=2.058e-03 base_loss=0.007471 entropy=3.404712 lam*H=0.007008
+[ER DEBUG] lam=2.058e-03 base_loss=0.898691 entropy=3.314821 lam*H=0.006823
+[ER DEBUG] lam=2.058e-03 base_loss=0.001871 entropy=3.437674 lam*H=0.007076
+[ER DEBUG] lam=2.058e-03 base_loss=2.781169 entropy=3.187977 lam*H=0.006562
+  Epoch 5/30 - Train Loss: 0.2348, Val Loss: 0.3157, Val Acc: 0.9474
+[ER DEBUG] lam=2.058e-03 base_loss=0.046330 entropy=2.625119 lam*H=0.005404
+[ER DEBUG] lam=2.058e-03 base_loss=0.000127 entropy=1.941579 lam*H=0.003997
+[ER DEBUG] lam=2.058e-03 base_loss=0.003177 entropy=3.186411 lam*H=0.006559
+[ER DEBUG] lam=2.058e-03 base_loss=0.000392 entropy=2.716365 lam*H=0.005591
+[ER DEBUG] lam=2.058e-03 base_loss=0.000546 entropy=2.203035 lam*H=0.004535
+  Epoch 10/30 - Train Loss: 0.0112, Val Loss: 0.7819, Val Acc: 0.8947
+[ER DEBUG] lam=2.058e-03 base_loss=0.000506 entropy=2.557884 lam*H=0.005265
+[ER DEBUG] lam=2.058e-03 base_loss=0.000000 entropy=1.170265 lam*H=0.002409
+[ER DEBUG] lam=2.058e-03 base_loss=0.003381 entropy=2.537841 lam*H=0.005224
+[ER DEBUG] lam=2.058e-03 base_loss=0.000068 entropy=2.606517 lam*H=0.005365
+[ER DEBUG] lam=2.058e-03 base_loss=0.000017 entropy=2.710013 lam*H=0.005578
+  Epoch 15/30 - Train Loss: -0.0035, Val Loss: 0.7089, Val Acc: 0.8947
+[ER DEBUG] lam=2.058e-03 base_loss=0.000061 entropy=2.230973 lam*H=0.004592
+[ER DEBUG] lam=2.058e-03 base_loss=0.000012 entropy=3.140275 lam*H=0.006464
+[ER DEBUG] lam=2.058e-03 base_loss=0.000036 entropy=2.789757 lam*H=0.005743
+[ER DEBUG] lam=2.058e-03 base_loss=0.000631 entropy=2.393326 lam*H=0.004927
+[ER DEBUG] lam=2.058e-03 base_loss=0.000428 entropy=3.001591 lam*H=0.006179
+  Epoch 20/30 - Train Loss: -0.0041, Val Loss: 0.7236, Val Acc: 0.8947
+[ER DEBUG] lam=2.058e-03 base_loss=0.010802 entropy=1.612337 lam*H=0.003319
+[ER DEBUG] lam=2.058e-03 base_loss=0.000018 entropy=2.310651 lam*H=0.004756
+[ER DEBUG] lam=2.058e-03 base_loss=0.001810 entropy=2.374581 lam*H=0.004888
+[ER DEBUG] lam=2.058e-03 base_loss=0.000025 entropy=2.537467 lam*H=0.005223
+[ER DEBUG] lam=2.058e-03 base_loss=0.001108 entropy=2.346934 lam*H=0.004831
+  Epoch 25/30 - Train Loss: -0.0037, Val Loss: 0.7935, Val Acc: 0.8947
+[ER DEBUG] lam=2.058e-03 base_loss=0.000046 entropy=2.345435 lam*H=0.004828
+[ER DEBUG] lam=2.058e-03 base_loss=0.000006 entropy=2.868648 lam*H=0.005905
+[ER DEBUG] lam=2.058e-03 base_loss=0.000067 entropy=3.199417 lam*H=0.006586
+[ER DEBUG] lam=2.058e-03 base_loss=0.000088 entropy=2.465671 lam*H=0.005075
+[ER DEBUG] lam=2.058e-03 base_loss=0.000095 entropy=2.372058 lam*H=0.004883
+  Epoch 30/30 - Train Loss: -0.0041, Val Loss: 0.8698, Val Acc: 0.8947
+Trial 1 completed - Best Val Loss: 0.2806, Best Val Acc: 0.8947
+[I 2026-02-27 08:04:55,575] Trial 1 finished with value: 0.28055625863115846 and parameters: {'learning_rate': 0.00010979908036596662, 'weight_decay': 0.00036740592026352257, 'dropout': 0.3803345035229626, 'class_weight_benign': 2.916145155592091, 'entropy_lambda': 0.0020584494295802446, 'scheduler_min_lr': 8.706020878304853e-05}. Best is trial 1 with value: 0.28055625863115846.
+
+============================================================
+Trial 2
+============================================================
+Parameters:
+  Learning rate:          3.82e-04
+  Weight decay:           8.15e-05
+  Dropout:                0.255
+  Class weight (benign):  1.87
+  Entropy lambda:         0.0304
+  Use scheduler:          True
+  Scheduler min lr:       1.12e-05
+[ER DEBUG] lam=3.042e-02 base_loss=0.822552 entropy=2.498833 lam*H=0.076025
+[ER DEBUG] lam=3.042e-02 base_loss=0.396376 entropy=3.021585 lam*H=0.091929
+[ER DEBUG] lam=3.042e-02 base_loss=0.001206 entropy=2.215611 lam*H=0.067408
+[ER DEBUG] lam=3.042e-02 base_loss=1.527047 entropy=2.221519 lam*H=0.067588
+[ER DEBUG] lam=3.042e-02 base_loss=0.007292 entropy=2.659068 lam*H=0.080900
+  Epoch 5/30 - Train Loss: 0.0146, Val Loss: 0.8743, Val Acc: 0.6842
+[ER DEBUG] lam=3.042e-02 base_loss=0.047007 entropy=2.222025 lam*H=0.067603
+[ER DEBUG] lam=3.042e-02 base_loss=0.000070 entropy=2.327194 lam*H=0.070803
+[ER DEBUG] lam=3.042e-02 base_loss=0.002871 entropy=2.120939 lam*H=0.064528
+[ER DEBUG] lam=3.042e-02 base_loss=0.000019 entropy=2.612029 lam*H=0.079469
+[ER DEBUG] lam=3.042e-02 base_loss=0.040334 entropy=1.705252 lam*H=0.051881
+  Epoch 10/30 - Train Loss: -0.0601, Val Loss: 0.9351, Val Acc: 0.8947
+[ER DEBUG] lam=3.042e-02 base_loss=0.000704 entropy=2.206037 lam*H=0.067117
+[ER DEBUG] lam=3.042e-02 base_loss=0.000121 entropy=1.609320 lam*H=0.048962
+[ER DEBUG] lam=3.042e-02 base_loss=0.000008 entropy=2.180525 lam*H=0.066341
+[ER DEBUG] lam=3.042e-02 base_loss=0.000077 entropy=2.129166 lam*H=0.064778
+[ER DEBUG] lam=3.042e-02 base_loss=0.000008 entropy=2.066592 lam*H=0.062874
+  Epoch 15/30 - Train Loss: -0.0593, Val Loss: 1.0190, Val Acc: 0.8947
+[ER DEBUG] lam=3.042e-02 base_loss=0.001031 entropy=1.603431 lam*H=0.048783
+[ER DEBUG] lam=3.042e-02 base_loss=0.000000 entropy=2.004047 lam*H=0.060972
+[ER DEBUG] lam=3.042e-02 base_loss=0.000000 entropy=1.469872 lam*H=0.044720
+[ER DEBUG] lam=3.042e-02 base_loss=0.000094 entropy=1.750043 lam*H=0.053244
+[ER DEBUG] lam=3.042e-02 base_loss=0.002464 entropy=2.015753 lam*H=0.061328
+  Epoch 20/30 - Train Loss: -0.0592, Val Loss: 1.0153, Val Acc: 0.8947
+[ER DEBUG] lam=3.042e-02 base_loss=0.000043 entropy=2.239439 lam*H=0.068133
+[ER DEBUG] lam=3.042e-02 base_loss=0.000026 entropy=2.139415 lam*H=0.065090
+[ER DEBUG] lam=3.042e-02 base_loss=0.001552 entropy=2.178693 lam*H=0.066285
+[ER DEBUG] lam=3.042e-02 base_loss=0.000000 entropy=2.400867 lam*H=0.073045
+[ER DEBUG] lam=3.042e-02 base_loss=0.000015 entropy=2.700007 lam*H=0.082146
+  Epoch 25/30 - Train Loss: -0.0609, Val Loss: 1.0186, Val Acc: 0.8947
+[ER DEBUG] lam=3.042e-02 base_loss=0.000007 entropy=1.797157 lam*H=0.054677
+[ER DEBUG] lam=3.042e-02 base_loss=0.000004 entropy=2.056788 lam*H=0.062576
+[ER DEBUG] lam=3.042e-02 base_loss=0.000090 entropy=1.790884 lam*H=0.054486
+[ER DEBUG] lam=3.042e-02 base_loss=0.000025 entropy=1.946742 lam*H=0.059228
+[ER DEBUG] lam=3.042e-02 base_loss=0.009408 entropy=1.553581 lam*H=0.047267
+  Epoch 30/30 - Train Loss: -0.0610, Val Loss: 1.0199, Val Acc: 0.8947
+Trial 2 completed - Best Val Loss: 0.5113, Best Val Acc: 0.7895
+[I 2026-02-27 13:18:50,311] Trial 2 finished with value: 0.511288064734177 and parameters: {'learning_rate': 0.0003818145165896873, 'weight_decay': 8.152843673110742e-05, 'dropout': 0.2545474901621302, 'class_weight_benign': 1.8668090197068676, 'entropy_lambda': 0.030424224295953775, 'scheduler_min_lr': 1.120760621186056e-05}. Best is trial 1 with value: 0.28055625863115846.
+
+============================================================
+Trial 3
+============================================================
+Parameters:
+  Learning rate:          2.00e-04
+  Weight decay:           9.78e-05
+  Dropout:                0.384
+  Class weight (benign):  1.78
+  Entropy lambda:         0.0292
+  Use scheduler:          True
+  Scheduler min lr:       5.40e-06
+[ER DEBUG] lam=2.921e-02 base_loss=0.297589 entropy=2.867354 lam*H=0.083768
+[ER DEBUG] lam=2.921e-02 base_loss=0.005759 entropy=2.061994 lam*H=0.060240
+[ER DEBUG] lam=2.921e-02 base_loss=0.047244 entropy=3.056497 lam*H=0.089294
+[ER DEBUG] lam=2.921e-02 base_loss=0.746568 entropy=3.043335 lam*H=0.088909
+[ER DEBUG] lam=2.921e-02 base_loss=0.000020 entropy=1.606967 lam*H=0.046947
+  Epoch 5/30 - Train Loss: 0.0301, Val Loss: 0.4172, Val Acc: 0.9474
+[ER DEBUG] lam=2.921e-02 base_loss=0.000495 entropy=1.085933 lam*H=0.031725
+[ER DEBUG] lam=2.921e-02 base_loss=0.062657 entropy=2.503714 lam*H=0.073145
+[ER DEBUG] lam=2.921e-02 base_loss=0.620093 entropy=2.855915 lam*H=0.083434
+[ER DEBUG] lam=2.921e-02 base_loss=0.000679 entropy=1.280586 lam*H=0.037412
+[ER DEBUG] lam=2.921e-02 base_loss=0.000199 entropy=2.500848 lam*H=0.073061
+  Epoch 10/30 - Train Loss: -0.0481, Val Loss: 0.5282, Val Acc: 0.8947
+[ER DEBUG] lam=2.921e-02 base_loss=0.009721 entropy=2.195380 lam*H=0.064137
+[ER DEBUG] lam=2.921e-02 base_loss=0.000132 entropy=1.859667 lam*H=0.054329
+[ER DEBUG] lam=2.921e-02 base_loss=0.000424 entropy=2.388972 lam*H=0.069793
+[ER DEBUG] lam=2.921e-02 base_loss=0.000481 entropy=1.981735 lam*H=0.057895
+[ER DEBUG] lam=2.921e-02 base_loss=0.353875 entropy=2.317417 lam*H=0.067702
+  Epoch 15/30 - Train Loss: -0.0568, Val Loss: 0.5503, Val Acc: 0.8947
+[ER DEBUG] lam=2.921e-02 base_loss=0.403704 entropy=2.766242 lam*H=0.080814
+[ER DEBUG] lam=2.921e-02 base_loss=0.000022 entropy=2.472879 lam*H=0.072244
+[ER DEBUG] lam=2.921e-02 base_loss=0.000107 entropy=2.304477 lam*H=0.067324
+[ER DEBUG] lam=2.921e-02 base_loss=0.002430 entropy=2.494883 lam*H=0.072887
+[ER DEBUG] lam=2.921e-02 base_loss=0.003433 entropy=2.238542 lam*H=0.065398
+  Epoch 20/30 - Train Loss: -0.0620, Val Loss: 0.6242, Val Acc: 0.8947
+[ER DEBUG] lam=2.921e-02 base_loss=0.000522 entropy=2.466323 lam*H=0.072052
+[ER DEBUG] lam=2.921e-02 base_loss=0.000458 entropy=2.165684 lam*H=0.063269
+[ER DEBUG] lam=2.921e-02 base_loss=0.001307 entropy=3.068616 lam*H=0.089648
+[ER DEBUG] lam=2.921e-02 base_loss=0.000411 entropy=2.668161 lam*H=0.077949
+[ER DEBUG] lam=2.921e-02 base_loss=0.001183 entropy=1.997024 lam*H=0.058342
+  Epoch 25/30 - Train Loss: -0.0618, Val Loss: 0.6307, Val Acc: 0.8947
+[ER DEBUG] lam=2.921e-02 base_loss=0.000000 entropy=1.503966 lam*H=0.043938
+[ER DEBUG] lam=2.921e-02 base_loss=0.003874 entropy=2.488217 lam*H=0.072692
+[ER DEBUG] lam=2.921e-02 base_loss=0.000042 entropy=2.644336 lam*H=0.077253
+[ER DEBUG] lam=2.921e-02 base_loss=0.000000 entropy=1.788781 lam*H=0.052258
+[ER DEBUG] lam=2.921e-02 base_loss=0.000000 entropy=1.016897 lam*H=0.029708
+  Epoch 30/30 - Train Loss: -0.0623, Val Loss: 0.6352, Val Acc: 0.8947
+Trial 3 completed - Best Val Loss: 0.4172, Best Val Acc: 0.9474
+[I 2026-02-27 14:56:53,377] Trial 3 finished with value: 0.4172177658233193 and parameters: {'learning_rate': 0.0002004087187654155, 'weight_decay': 9.776854331372622e-05, 'dropout': 0.38355586841671385, 'class_weight_benign': 1.7789877213040837, 'entropy_lambda': 0.029214464853521818, 'scheduler_min_lr': 5.404103854647334e-06}. Best is trial 1 with value: 0.28055625863115846.
+
+============================================================
+SAVING RESULTS
+============================================================
+
+Best hyperparameters saved to: ./optuna_results_20260226_203853/best_hyperparameters.json
+All trials saved to: ./optuna_results_20260226_203853/all_trials.csv
+
+Generating visualizations...
+  - Optimization history saved
+  - Parameter importances saved
+  - Parallel coordinate plot saved
+  - Slice plot saved
+  - Contour plot saved
+
+============================================================
+OPTIMIZATION SUMMARY
+============================================================
+Number of trials: 4
+Number of pruned trials: 0
+Number of complete trials: 4
+
+Best trial: 1
+Best validation loss: 0.2806
+Best validation accuracy: 0.8947
+
+Best hyperparameters:
+  learning_rate: 1.10e-04
+  weight_decay: 3.67e-04
+  dropout: 0.3803
+  class_weight_benign: 2.9161
+  entropy_lambda: 2.06e-03
+  scheduler_min_lr: 8.71e-05
+
+================================================================================
+OPTIMIZATION COMPLETED SUCCESSFULLY
+================================================================================
+Results saved to: ./optuna_results_20260226_203853
+View visualizations by opening the HTML files in: ./optuna_results_20260226_203853

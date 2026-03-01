@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/main.py", line 339, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/main.py", line 260, in main
+    model = create_model(
+            ^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB25/models.py", line 189, in create_model
+    return HierarchicalAttnMIL(
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: HierarchicalAttnMIL.__init__() got an unexpected keyword argument 'dropout'

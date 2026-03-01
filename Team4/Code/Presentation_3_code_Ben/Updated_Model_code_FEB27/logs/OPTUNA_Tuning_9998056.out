@@ -1,0 +1,231 @@
+Job ID: 9998056
+Start time: Thu Feb 26 17:46:20 CST 2026
+Requirement already satisfied: torch>=1.9.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (2.9.0)
+Requirement already satisfied: torchvision>=0.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 3)) (0.24.0)
+Requirement already satisfied: numpy>=1.21.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 4)) (2.3.4)
+Requirement already satisfied: pandas>=1.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 5)) (2.3.3)
+Requirement already satisfied: scikit-learn>=1.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 6)) (1.7.2)
+Requirement already satisfied: Pillow>=8.3.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 7)) (12.0.0)
+Requirement already satisfied: tqdm>=4.62.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 8)) (4.67.1)
+Requirement already satisfied: matplotlib>=3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 11)) (3.10.7)
+Requirement already satisfied: seaborn>=0.11.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 12)) (0.13.2)
+Requirement already satisfied: optuna>=3.0.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 15)) (4.7.0)
+Requirement already satisfied: psutil>=5.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 18)) (7.1.2)
+Requirement already satisfied: imbalanced-learn>=0.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from -r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 21)) (0.14.0)
+Requirement already satisfied: filelock in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (3.20.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (4.15.0)
+Requirement already satisfied: setuptools in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (3.5)
+Requirement already satisfied: jinja2 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (2025.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (1.13.1.3)
+Requirement already satisfied: triton==3.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (3.5.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 5)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /projects/e32998/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: scipy>=1.8.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 6)) (1.16.3)
+Requirement already satisfied: joblib>=1.2.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 6)) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 6)) (3.6.0)
+Requirement already satisfied: contourpy>=1.0.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 11)) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 11)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 11)) (4.60.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 11)) (1.4.9)
+Requirement already satisfied: packaging>=20.0 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 11)) (25.0)
+Requirement already satisfied: pyparsing>=3 in /projects/e32998/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 11)) (3.2.5)
+Requirement already satisfied: alembic>=1.5.0 in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 15)) (1.18.3)
+Requirement already satisfied: colorlog in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 15)) (6.10.1)
+Requirement already satisfied: sqlalchemy>=1.4.2 in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 15)) (2.0.46)
+Requirement already satisfied: PyYAML in /projects/e32998/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 15)) (6.0.3)
+Requirement already satisfied: Mako in /projects/e32998/env/lib/python3.12/site-packages (from alembic>=1.5.0->optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 15)) (1.3.10)
+Requirement already satisfied: six>=1.5 in /projects/e32998/env/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=1.3.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 5)) (1.17.0)
+Requirement already satisfied: greenlet>=1 in /projects/e32998/env/lib/python3.12/site-packages (from sqlalchemy>=1.4.2->optuna>=3.0.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 15)) (3.3.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /projects/e32998/env/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /projects/e32998/env/lib/python3.12/site-packages (from jinja2->torch>=1.9.0->-r /home/bdp1083/Presentation_3_code/Updated_Model_code/requirements.txt (line 2)) (3.0.3)
+Requirement already satisfied: certifi in /projects/e32998/env/lib/python3.12/site-packages (2026.2.25)
+Random seed set to 42
+Using CPU
+================================================================================
+OPTUNA HYPERPARAMETER OPTIMIZATION FOR MIL
+================================================================================
+Device: cpu
+Number of trials: 4
+Epochs per trial: 30
+Pruning warmup: 3 epochs
+Per slice cap: 500
+Max slices per stain: 5
+Output directory: ./optuna_results_20260226_174702
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {0: 133, 1: 238}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /home/bdp1083/Presentation_3_code/Updated_Model_code/data_splits/data_splits.npz
+Data splits loaded from: /home/bdp1083/Presentation_3_code/Updated_Model_code/data_splits/data_splits.npz
+Loaded splits - Train: 226, Val: 77
+Cases per split: 55 19 0
+Paths per split: 51023 13864 0
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Patch count by class for Train:
+  Benign (0):     15126 patches
+  High-grade (1): 35897 patches
+
+Patch count by class for Validation:
+  Benign (0):     4493 patches
+  High-grade (1): 9371 patches
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+Train batches: 55
+Val batches: 19
+
+============================================================
+CREATING OPTUNA STUDY
+============================================================
+
+============================================================
+STARTING OPTIMIZATION
+============================================================
+
+============================================================
+Trial 0
+============================================================
+Parameters:
+  Learning rate: 1.83e-04
+  Weight decay: 4.46e-04
+  Dropout: 0.420
+  Class weight (benign): 2.70
+  Use scheduler: True
+  Scheduler min lr: 2.05e-06
+  Epoch 5/30 - Train Loss: 0.0791, Val Loss: 0.5256, Val Acc: 0.8421
+  Epoch 10/30 - Train Loss: 0.0402, Val Loss: 0.6740, Val Acc: 0.8947
+  Epoch 15/30 - Train Loss: 0.0035, Val Loss: 0.7537, Val Acc: 0.8421
+  Epoch 20/30 - Train Loss: 0.0032, Val Loss: 0.7755, Val Acc: 0.8421
+  Epoch 25/30 - Train Loss: 0.0010, Val Loss: 0.7790, Val Acc: 0.8421
+  Epoch 30/30 - Train Loss: 0.0017, Val Loss: 0.7790, Val Acc: 0.8421
+Trial 0 completed - Best Val Loss: 0.4396, Best Val Acc: 0.8947
+[I 2026-02-26 23:52:36,267] Trial 0 finished with value: 0.439589697184601 and parameters: {'learning_rate': 0.00018272261776066238, 'weight_decay': 0.0004463590152176814, 'dropout': 0.4195981825434215, 'class_weight_benign': 2.697316968394073, 'scheduler_min_lr': 2.05133826308745e-06}. Best is trial 0 with value: 0.439589697184601.
+
+============================================================
+Trial 1
+============================================================
+Parameters:
+  Learning rate: 1.29e-04
+  Weight decay: 5.72e-05
+  Dropout: 0.460
+  Class weight (benign): 2.70
+  Use scheduler: True
+  Scheduler min lr: 2.61e-05
+  Epoch 5/30 - Train Loss: 0.1275, Val Loss: 0.3330, Val Acc: 0.8947
+  Epoch 10/30 - Train Loss: 0.0844, Val Loss: 0.5629, Val Acc: 0.8421
+  Epoch 15/30 - Train Loss: 0.0152, Val Loss: 0.6188, Val Acc: 0.8947
+  Epoch 20/30 - Train Loss: 0.0143, Val Loss: 0.6662, Val Acc: 0.8421
+  Epoch 25/30 - Train Loss: 0.0070, Val Loss: 0.6795, Val Acc: 0.8421
+  Epoch 30/30 - Train Loss: 0.0060, Val Loss: 0.7078, Val Acc: 0.8421
+Trial 1 completed - Best Val Loss: 0.2402, Best Val Acc: 0.8947
+[I 2026-02-27 05:20:44,213] Trial 1 finished with value: 0.24022727689791618 and parameters: {'learning_rate': 0.00012853916978930154, 'weight_decay': 5.715491938156613e-05, 'dropout': 0.45985284373248053, 'class_weight_benign': 2.7022300234864174, 'scheduler_min_lr': 2.6070247583707675e-05}. Best is trial 1 with value: 0.24022727689791618.
+
+============================================================
+Trial 2
+============================================================
+Parameters:
+  Learning rate: 1.03e-04
+  Weight decay: 4.67e-04
+  Dropout: 0.450
+  Class weight (benign): 1.92
+  Use scheduler: True
+  Scheduler min lr: 2.31e-06
+  Epoch 5/30 - Train Loss: 0.1005, Val Loss: 0.6741, Val Acc: 0.8421
+  Epoch 10/30 - Train Loss: 0.0102, Val Loss: 0.7317, Val Acc: 0.8421
+  Epoch 15/30 - Train Loss: 0.0053, Val Loss: 0.7803, Val Acc: 0.8421
+  Epoch 20/30 - Train Loss: 0.0035, Val Loss: 0.7915, Val Acc: 0.8421
+  Epoch 25/30 - Train Loss: 0.0042, Val Loss: 0.8133, Val Acc: 0.8421
+  Epoch 30/30 - Train Loss: 0.0022, Val Loss: 0.8127, Val Acc: 0.8421
+Trial 2 completed - Best Val Loss: 0.4516, Best Val Acc: 0.8947
+[I 2026-02-27 09:41:05,846] Trial 2 finished with value: 0.45157504263548426 and parameters: {'learning_rate': 0.00010336843570697407, 'weight_decay': 0.0004665303012212836, 'dropout': 0.4497327922401265, 'class_weight_benign': 1.9246782213565523, 'scheduler_min_lr': 2.310201887845294e-06}. Best is trial 1 with value: 0.24022727689791618.
+
+============================================================
+Trial 3
+============================================================
+Parameters:
+  Learning rate: 1.34e-04
+  Weight decay: 1.01e-04
+  Dropout: 0.357
+  Class weight (benign): 2.36
+  Use scheduler: True
+  Scheduler min lr: 3.82e-06
+  Epoch 5/30 - Train Loss: 0.1548, Val Loss: 0.6113, Val Acc: 0.8947
+  Epoch 10/30 - Train Loss: 0.0116, Val Loss: 0.5469, Val Acc: 0.8947
+  Epoch 15/30 - Train Loss: 0.0036, Val Loss: 0.6073, Val Acc: 0.8947
+  Epoch 20/30 - Train Loss: 0.0038, Val Loss: 0.6198, Val Acc: 0.8947
+  Epoch 25/30 - Train Loss: 0.0026, Val Loss: 0.6304, Val Acc: 0.8947
+  Epoch 30/30 - Train Loss: 0.0023, Val Loss: 0.6386, Val Acc: 0.8947
+Trial 3 completed - Best Val Loss: 0.3988, Best Val Acc: 0.9474
+[I 2026-02-27 13:36:35,953] Trial 3 finished with value: 0.3987570666812596 and parameters: {'learning_rate': 0.00013433656868034314, 'weight_decay': 0.00010074238942079329, 'dropout': 0.35742692948967136, 'class_weight_benign': 2.3638900372842313, 'scheduler_min_lr': 3.823475224675187e-06}. Best is trial 1 with value: 0.24022727689791618.
+
+============================================================
+SAVING RESULTS
+============================================================
+
+Best hyperparameters saved to: ./optuna_results_20260226_174702/best_hyperparameters.json
+All trials saved to: ./optuna_results_20260226_174702/all_trials.csv
+
+Generating visualizations...
+  - Optimization history saved
+  - Parameter importances saved
+  - Parallel coordinate plot saved
+  - Slice plot saved
+  - Contour plot saved
+
+============================================================
+OPTIMIZATION SUMMARY
+============================================================
+Number of trials: 4
+Number of pruned trials: 0
+Number of complete trials: 4
+
+Best trial: 1
+Best validation loss: 0.2402
+Best validation accuracy: 0.8947
+
+Best hyperparameters:
+  learning_rate: 1.29e-04
+  weight_decay: 5.72e-05
+  dropout: 0.4599
+  class_weight_benign: 2.7022
+  scheduler_min_lr: 2.61e-05
+
+================================================================================
+OPTIMIZATION COMPLETED SUCCESSFULLY
+================================================================================
+Results saved to: ./optuna_results_20260226_174702
+View visualizations by opening the HTML files in: ./optuna_results_20260226_174702
