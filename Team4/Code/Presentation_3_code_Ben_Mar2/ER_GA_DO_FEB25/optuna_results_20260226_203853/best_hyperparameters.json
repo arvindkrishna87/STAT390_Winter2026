@@ -1,0 +1,15 @@
+{
+    "best_trial_number": 1,
+    "best_val_loss": 0.28055625863115846,
+    "best_val_accuracy": 0.8947368421052632,
+    "best_params": {
+        "learning_rate": 0.00010979908036596662,
+        "weight_decay": 0.00036740592026352257,
+        "dropout": 0.3803345035229626,
+        "class_weight_benign": 2.916145155592091,
+        "entropy_lambda": 0.0020584494295802446,
+        "scheduler_min_lr": 8.706020878304853e-05
+    },
+    "n_trials": 4,
+    "datetime": "2026-02-27 14:56:53"
+}

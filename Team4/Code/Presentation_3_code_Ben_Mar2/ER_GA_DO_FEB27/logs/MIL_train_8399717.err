@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/main.py", line 340, in <module>
+    main()
+  File "/gpfs/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/main.py", line 265, in main
+    use_kimianet=args.use_kimianet,
+                 ^^^^^^^^^^^^^^^^^
+AttributeError: 'Namespace' object has no attribute 'use_kimianet'

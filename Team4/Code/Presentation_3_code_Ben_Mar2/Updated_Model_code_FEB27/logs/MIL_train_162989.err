@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Presentation_3_code/Updated_Model_code_FEB27/main.py", line 21, in <module>
+    from models import create_model
+  File "/gpfs/home/bdp1083/Presentation_3_code/Updated_Model_code_FEB27/models.py", line 13
+    def __init__(self, input_dim: int, hidden_dim: int = 128)#dropout: float = 0.0):
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: expected ':'

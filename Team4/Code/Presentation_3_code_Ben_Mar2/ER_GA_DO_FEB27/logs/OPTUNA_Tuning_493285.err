@@ -1,0 +1,30 @@
+ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/tmp/pip-ephem-wheel-cache-lm9oajkw'
+
+ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/tmp/pip-ephem-wheel-cache-4ww4odby'
+
+[I 2026-03-01 21:19:23,097] A new study created in memory with name: mil_study
+  0%|          | 0/4 [00:00<?, ?it/s]                                       0%|          | 0/4 [00:00<?, ?it/s]                                       0%|          | 0/4 [00:00<?, ?it/s]  0%|          | 0/4 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 660, in <module>
+    main()
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 639, in main
+    study.optimize(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 68, in _optimize
+    _optimize_sequential(
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 165, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 263, in _run_trial
+    raise func_err
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 626, in objective_wrapper
+    return objective(
+           ^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 304, in objective
+    print(f"  Scheduler min lr:       {OPTUNA_CONFIG['scheduler_min_lr']:.2e}")
+                                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'scheduler_min_lr'

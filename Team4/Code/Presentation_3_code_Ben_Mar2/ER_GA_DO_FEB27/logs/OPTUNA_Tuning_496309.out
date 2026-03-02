@@ -1,0 +1,150 @@
+Job ID: 496309
+Start time: Sun Mar  1 21:22:16 CST 2026
+Random seed set to 42
+Using CPU
+================================================================================
+OPTUNA HYPERPARAMETER OPTIMIZATION FOR MIL
+================================================================================
+Device: cpu
+Number of trials: 4
+Epochs per trial: 30
+Pruning warmup: 3 epochs
+Per slice cap: 500
+Max slices per stain: 5
+Output directory: ./optuna_results_20260301_212300
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/data_splits/data_splits.npz
+Data splits loaded from: /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/data_splits/data_splits.npz
+Loaded splits - Train: 226, Val: 77
+Cases per split: 55 19 0
+Paths per split: 51023 13864 0
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Patch count by class for Train:
+  Benign (0):     15126 patches
+  High-grade (1): 35897 patches
+
+Patch count by class for Validation:
+  Benign (0):     4493 patches
+  High-grade (1): 9371 patches
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+Train batches: 55
+Val batches: 19
+
+============================================================
+CREATING OPTUNA STUDY
+============================================================
+
+============================================================
+STARTING OPTIMIZATION
+============================================================
+
+============================================================
+Trial 0
+============================================================
+Parameters:
+  Learning rate:          5.61e-05
+  Weight decay:           7.11e-03
+  Classifier dropout:     0.140
+  Project dropout:        0.160
+  Class weight (benign):  1.81
+  Entropy lambda:         0.0000
+  Use scheduler:          True
+[W 2026-03-01 21:23:11,636] Trial 0 failed with parameters: {'learning_rate': 5.6115164153345e-05, 'weight_decay': 0.0071144760093434225, 'project_dropout': 0.15979909127171077, 'classifier_dropout': 0.1397987726295555, 'class_weight_benign': 1.812037280884873, 'entropy_lambda': 2.9375384576328295e-05} because of the following error: OSError(28, 'No space left on device').
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 626, in objective_wrapper
+    return objective(
+           ^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 319, in objective
+    trainer = OptunaTrainer(
+              ^^^^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 60, in __init__
+    self.optimizer = optim.AdamW(
+                     ^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/optim/adamw.py", line 37, in __init__
+    super().__init__(
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/optim/adam.py", line 101, in __init__
+    super().__init__(params, defaults)
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/optim/optimizer.py", line 401, in __init__
+    self.add_param_group(cast(dict, param_group))
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_compile.py", line 46, in inner
+    import torch._dynamo
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/__init__.py", line 13, in <module>
+    from . import (
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/aot_compile.py", line 15, in <module>
+    from . import convert_frame
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 57, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 59, in <module>
+    from . import (
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/trace_rules.py", line 58, in <module>
+    from .variables import (
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/variables/__init__.py", line 19, in <module>
+    from .base import VariableTracker
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/variables/base.py", line 650, in <module>
+    from . import builder
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/variables/builder.py", line 94, in <module>
+    from ..side_effects import SideEffects
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/side_effects.py", line 34, in <module>
+    from torch._dynamo.variables.misc import AutogradFunctionContextVariable
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/variables/misc.py", line 61, in <module>
+    from .functions import NestedUserFunctionVariable, UserFunctionVariable
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py", line 88, in <module>
+    from torch.distributed.fsdp._fully_shard import _fsdp_param_group
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/fsdp/__init__.py", line 1, in <module>
+    from ._flat_param import FlatParameter as FlatParameter
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 33, in <module>
+    from ._fsdp_extensions import (
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/fsdp/_fsdp_extensions.py", line 6, in <module>
+    from torch.distributed._shard.sharded_tensor.api import ShardedTensor
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/_shard/__init__.py", line 1, in <module>
+    from .api import _shard_tensor, load_with_process_group, shard_module, shard_parameter
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/_shard/api.py", line 9, in <module>
+    from torch.distributed._shard.sharded_tensor import ShardedTensor
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/_shard/sharded_tensor/__init__.py", line 8, in <module>
+    from .api import (
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/_shard/sharded_tensor/api.py", line 32, in <module>
+    from .reshard import reshard_local_shard, reshuffle_local_shard
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/_shard/sharded_tensor/reshard.py", line 13, in <module>
+    from torch.distributed.nn.functional import all_to_all, all_to_all_single
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/nn/__init__.py", line 7, in <module>
+    from .api.remote_module import RemoteModule
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/nn/api/remote_module.py", line 31, in <module>
+    instantiator.instantiate_non_scriptable_remote_module_template()
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/nn/jit/instantiator.py", line 156, in instantiate_non_scriptable_remote_module_template
+    return _do_instantiate_remote_module_template(generated_module_name, str_dict, True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/nn/jit/instantiator.py", line 90, in _do_instantiate_remote_module_template
+    _write(out_path, generated_code_text)
+  File "/projects/e32998/env/lib/python3.12/site-packages/torch/distributed/nn/jit/instantiator.py", line 74, in _write
+    with open(out_path, "w") as f:
+         ^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 28] No space left on device
+[W 2026-03-01 21:23:12,145] Trial 0 failed with value None.
