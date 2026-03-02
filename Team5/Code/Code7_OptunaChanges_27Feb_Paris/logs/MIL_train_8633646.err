@@ -1,0 +1,8 @@
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: '/projects/e32998/STAT390_Winter2026/Team4/Code/Code1_ModelTraining_29Jan_Benrequirements.txt'
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=DenseNet121_Weights.IMAGENET1K_V1`. You can also use `weights=DenseNet121_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Training:   0%|          | 0/50 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Training:   2%|▏         | 1/50 [00:07<06:14,  7.63s/it]Training:   4%|▍         | 2/50 [00:25<10:43, 13.41s/it]Training:   6%|▌         | 3/50 [00:42<12:04, 15.42s/it]Training:   8%|▊         | 4/50 [00:52<10:09, 13.25s/it]slurmstepd: error: *** JOB 8633646 ON qnode3071 CANCELLED AT 2026-02-12T10:34:26 ***

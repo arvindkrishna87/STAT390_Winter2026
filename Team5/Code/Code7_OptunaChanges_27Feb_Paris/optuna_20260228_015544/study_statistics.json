@@ -1,0 +1,8 @@
+{
+    "best_value": 0.12820468937827492,
+    "best_trial_number": 12,
+    "best_epoch": 30,
+    "best_val_accuracy": 0.9411764705882353,
+    "n_trials": 20,
+    "datetime_completed": "2026-02-28 22:27:48"
+}
