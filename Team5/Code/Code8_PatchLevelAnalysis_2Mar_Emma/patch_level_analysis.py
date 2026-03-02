@@ -243,20 +243,20 @@ def run_patch_level_analysis(
                 case_id         = case_id,
                 img_root        = img_root,
             )
-            _plot_top10_fp_case_grid(
-                preds,
-                probs,
-                patch_paths,
-                case_id,
-                gt_name,
-                hg_name,
-                out_dir,
-                top_k=10
-            )
-            msg = (f"  FALSE POSITIVE  {case_id}  —  "
-                   f"{counts[hg_name]}/{n_total} patches pred {hg_name}  "
-                   f"({pcts[hg_name]:.1f}%)")
-            tqdm.write(msg) if TQDM else print(msg)
+        #     _plot_top10_fp_case_grid(
+        #         preds,
+        #         probs,
+        #         patch_paths,
+        #         case_id,
+        #         gt_name,
+        #         hg_name,
+        #         out_dir,
+        #         top_k=10
+        #     )
+        #     msg = (f"  FALSE POSITIVE  {case_id}  —  "
+        #            f"{counts[hg_name]}/{n_total} patches pred {hg_name}  "
+        #            f"({pcts[hg_name]:.1f}%)")
+        #     tqdm.write(msg) if TQDM else print(msg)
 
         # ---- Save benign-predicted patch images for false-negative cases ---
         if is_fn:
@@ -289,9 +289,9 @@ def run_patch_level_analysis(
 
     _print_summary(df, class_names)
     _save_csv(df, out_dir)
-    _plot_stacked_bars(df, class_names, out_dir)
-    _plot_hg_histogram(df, class_names, out_dir)
-    _plot_top10_misclassified_grid(all_misclassified, class_names, out_dir)
+    # _plot_stacked_bars(df, class_names, out_dir)
+    # _plot_hg_histogram(df, class_names, out_dir)
+    # _plot_top10_misclassified_grid(all_misclassified, class_names, out_dir)
 
     print(f"\n  Patch images for misclassified cases → {img_root}/")
     print("  Patch-level analysis complete.")
@@ -393,293 +393,3 @@ def _save_csv(df, out_dir):
             subset.to_csv(p, index=False)
             print(f"  Saved → {p}")
 
-
-# ---------------------------------------------------------------------------
-# Plots
-# ---------------------------------------------------------------------------
-
-def _plot_stacked_bars(df, class_names, out_dir):
-    benign_name = class_names[0]
-    hg_name     = class_names[1]
-    col_hg      = f"pct_pred_{hg_name}"
-    col_bn      = f"pct_pred_{benign_name}"
-
-    plot_df = df.sort_values(col_hg, ascending=True).reset_index(drop=True)
-    n, y    = len(plot_df), np.arange(len(plot_df))
-
-    fig, ax = plt.subplots(figsize=(10, max(5, n * 0.32)))
-    ax.barh(y, plot_df[col_bn], color="#4C9BE8", label=benign_name)
-    ax.barh(y, plot_df[col_hg], left=plot_df[col_bn], color="#E84C4C", label=hg_name)
-
-    labels = []
-    for _, row in plot_df.iterrows():
-        if row["false_positive"]:
-            marker = "  FP"
-        elif row["false_negative"]:
-            marker = "  FN"
-        else:
-            marker = ""
-        abbrev = "HG" if row["gt_class"] == "HighGrade" else "B"
-        labels.append(f"{row['case_id']}  [{abbrev}]{marker}")
-
-    ax.set_yticks(y)
-    ax.set_yticklabels(labels, fontsize=10)
-    ax.set_xlabel("% Patches")
-    ax.set_title("Patch-Level Class Distribution per Test Case\n(FP = false positive, FN = false negative)")
-    ax.legend(loc="lower right", fontsize=8)
-    plt.tight_layout()
-
-    path = os.path.join(out_dir, "patch_distribution_per_case.png")
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
-    print(f"  Saved → {path}")
-
-
-def _plot_hg_histogram(df, class_names, out_dir):
-    hg_name = class_names[1]
-    col     = f"pct_pred_{hg_name}"
-    bins    = np.linspace(0, 100, 21)
-    colors  = ["#4C9BE8", "#E84C4C"]
-
-    fig, axes = plt.subplots(1, len(class_names),
-                              figsize=(6 * len(class_names), 4))
-    axes = list(axes) if len(class_names) > 1 else [axes]
-
-    for ax, lbl, name in zip(axes, range(len(class_names)), class_names):
-        sub = df[df["gt_label"] == lbl][col]
-        if sub.empty:
-            ax.set_title(f"GT = {name} (0 cases)")
-            continue
-        ax.hist(sub, bins=bins, color=colors[lbl], edgecolor="white", linewidth=0.5)
-        ax.set_title(f"GT = {name}  ({len(sub)} cases)")
-        ax.set_xlabel(f"% patches predicted {hg_name}")
-        ax.set_ylabel("# Cases")
-
-    plt.suptitle(f"Distribution of {hg_name}-predicted patch fraction by GT class",
-                 fontsize=11)
-    plt.tight_layout()
-
-    path = os.path.join(out_dir, "patch_hg_pct_histogram.png")
-    fig.savefig(path, dpi=150, bbox_inches="tight")
-    plt.close(fig)
-
-# ---------------------------------------------------------------------------
-# Top-10 most confidently misclassified patches — summary grid
-# ---------------------------------------------------------------------------
-
-def _plot_top10_misclassified_grid(all_misclassified, class_names, out_dir):
-    """
-    Build a 2-row × 5-column grid showing the 10 patches (across all cases)
-    where the patch-level prediction differs from the case ground truth AND
-    the model was most confident in that wrong prediction.
-
-    Each cell shows:
-      - the patch image
-      - case ID
-      - GT class vs predicted class
-      - confidence in the wrong prediction
-    """
-    from PIL import Image
-
-    if not all_misclassified:
-        print("  No misclassified patches found — skipping top-10 grid.")
-        return
-
-    # Sort globally by confidence in the wrong class, descending
-    ranked = sorted(all_misclassified, key=lambda x: x["confidence"], reverse=True)
-    top10  = ranked[:10]
-
-    n      = len(top10)
-    ncols  = min(5, n)
-    nrows  = (n + ncols - 1) // ncols   # 1 or 2 rows
-
-    fig, axes = plt.subplots(nrows, ncols,
-                              figsize=(ncols * 3, nrows * 3.6))
-
-    # Normalise axes to always be a flat list
-    if nrows == 1 and ncols == 1:
-        axes = [[axes]]
-    elif nrows == 1:
-        axes = [list(axes)]
-    elif ncols == 1:
-        axes = [[ax] for ax in axes]
-    else:
-        axes = [list(row) for row in axes]
-
-    # Border colours: red = patch predicted HighGrade, blue = predicted Benign
-    hg_name     = class_names[1]
-
-    for rank, entry in enumerate(top10):
-        row = rank // ncols
-        col = rank  % ncols
-        ax  = axes[row][col]
-
-        patch_path = entry["patch_path"]
-
-        # Load image if it exists; otherwise show a grey placeholder
-        if os.path.exists(patch_path):
-            try:
-                img = Image.open(patch_path).convert("RGB")
-                ax.imshow(img)
-            except Exception:
-                ax.set_facecolor("#cccccc")
-                ax.text(0.5, 0.5, "load error", ha="center", va="center",
-                        transform=ax.transAxes, fontsize=8)
-        else:
-            ax.set_facecolor("#cccccc")
-            ax.text(0.5, 0.5, "not found", ha="center", va="center",
-                    transform=ax.transAxes, fontsize=8)
-
-        ax.set_xticks([])
-        ax.set_yticks([])
-
-        # Caption under each image
-        ax.set_xlabel(
-            f"#{rank+1}  conf={entry['confidence']:.3f}\n"
-            f"GT: {entry['gt_class']}  →  pred: {entry['pred_class']}\n"
-            f"{entry['case_id']}",
-            fontsize=11,
-            labelpad=2,
-        )
-
-    # Hide any unused axes (if fewer than 10 patches exist)
-    for idx in range(n, nrows * ncols):
-        row = idx // ncols
-        col = idx  % ncols
-        axes[row][col].set_visible(False)
-
-    fig.suptitle(
-        "Top 10 Most Confidently Misclassified Patches\n"
-        "(patch-level prediction ≠ case ground truth, ranked by confidence)",
-        fontsize=14, y=1.01,
-    )
-    plt.tight_layout()
-    # plt.subplots_adjust(hspace=0.5, wspace=0.05)
-
-    path = os.path.join(out_dir, "top10_misclassified_patches.png")
-    fig.savefig(path, dpi=150, bbox_inches="tight")
-    plt.close(fig)
-    print(f"  Saved → {path}")
-
-# ---------------------------------------------------------------------------
-# Top-10 HG patches per FALSE POSITIVE case (one grid per case)
-# ---------------------------------------------------------------------------
-
-def _plot_top10_fp_case_grid(
-    preds,
-    probs,
-    patch_paths,
-    case_id,
-    gt_name,
-    pred_name,
-    out_dir,
-    top_k=10
-):
-    """
-    For ONE false-positive case:
-    - Select patches predicted HighGrade
-    - Rank by confidence
-    - Plot TOP-K in a grid
-    - Save as its own figure
-    """
-
-    from PIL import Image
-
-    # Select HG predicted patches
-    hg_indices = (preds == 1).nonzero(as_tuple=True)[0]
-    if len(hg_indices) == 0:
-        return
-
-    confidences = probs[hg_indices, 1]
-    order = confidences.argsort(descending=True)
-
-    top_indices = hg_indices[order[:top_k]]
-    top_conf    = confidences[order[:top_k]]
-
-    n = len(top_indices)
-    ncols = min(5, n)
-    nrows = (n + ncols - 1) // ncols
-
-    fig, axes = plt.subplots(
-        nrows,
-        ncols,
-        figsize=(ncols * 3, nrows * 3.8)
-    )
-
-    # Normalize axes structure
-    if nrows == 1 and ncols == 1:
-        axes = [[axes]]
-    elif nrows == 1:
-        axes = [list(axes)]
-    elif ncols == 1:
-        axes = [[ax] for ax in axes]
-    else:
-        axes = [list(row) for row in axes]
-
-    for rank in range(n):
-        row = rank // ncols
-        col = rank % ncols
-        ax  = axes[row][col]
-
-        patch_idx  = top_indices[rank].item()
-        patch_path = patch_paths[patch_idx]
-        conf       = top_conf[rank].item()
-
-        if os.path.exists(patch_path):
-            try:
-                img = Image.open(patch_path).convert("RGB")
-                ax.imshow(img)
-            except Exception:
-                ax.set_facecolor("#cccccc")
-                ax.text(0.5, 0.5, "load error",
-                        ha="center", va="center",
-                        transform=ax.transAxes, fontsize=8)
-        else:
-            ax.set_facecolor("#cccccc")
-            ax.text(0.5, 0.5, "not found",
-                    ha="center", va="center",
-                    transform=ax.transAxes, fontsize=8)
-
-        ax.set_xticks([])
-        ax.set_yticks([])
-
-        # Remove borders
-        for spine in ax.spines.values():
-            spine.set_visible(False)
-
-        caption = (
-            f"#{rank+1}  conf={conf:.3f}\n"
-            f"GT: {gt_name} → pred: {pred_name}"
-        )
-
-        ax.text(
-            0.5, -0.15, caption,
-            transform=ax.transAxes,
-            ha="center",
-            va="top",
-            fontsize=7
-        )
-
-    # Hide unused axes
-    for idx in range(n, nrows * ncols):
-        row = idx // ncols
-        col = idx % ncols
-        axes[row][col].set_visible(False)
-
-    fig.suptitle(
-        f"Top {n} Most Confident HG Patches\n"
-        f"FALSE POSITIVE Case: {case_id}",
-        fontsize=14,
-        y=1.02
-    )
-
-    plt.subplots_adjust(hspace=0.6, wspace=0.05)
-
-    save_dir = os.path.join(out_dir, "false_positive_grids")
-    os.makedirs(save_dir, exist_ok=True)
-
-    save_path = os.path.join(save_dir, f"{case_id}_top10_fp_patches.png")
-    fig.savefig(save_path, dpi=150, bbox_inches="tight")
-    plt.close(fig)
-
-    print(f"  Saved FP grid → {save_path}")
