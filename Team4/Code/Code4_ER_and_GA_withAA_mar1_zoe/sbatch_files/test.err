@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/gpfs/projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/main.py", line 28, in <module>
+    from attention_analysis import analyze_attention_weights
+  File "/gpfs/projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/attention_analysis.py", line 718
+    for center, height, count in zip(bin_centers, normalized_counts, counts):
+IndentationError: unexpected indent
