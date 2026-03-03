@@ -1,0 +1,9 @@
+Job ID: 131080
+Start time: Fri Feb 27 17:35:21 CST 2026
+Running on host: qnode0472
+Project dir: /home/zel9906/Code4_reduce_runtime_ER
+Using python: /projects/e32998/env/bin/python
+Python 3.12.12
+Using splits: /home/zel9906/Code4_reduce_runtime_ER/data_splits/data_splits.npz
+main.py path: /gpfs/home/zel9906/Code4_reduce_runtime_ER/main.py
+End time: Fri Feb 27 17:35:58 CST 2026
