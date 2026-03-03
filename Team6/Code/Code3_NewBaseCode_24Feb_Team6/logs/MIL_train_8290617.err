@@ -1,3 +1,0 @@
-ERROR: Could not open requirements file: [Errno 2] No such file or directory: '/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/requirements.txt'
-/var/spool/slurmd/job8290617/slurm_script: line 29: cd: /projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben: No such file or directory
-python3: can't open file '/gpfs/home/bdp1083/MIL_trainer_9Dec_JointFinal/sbatch_files/main.py': [Errno 2] No such file or directory

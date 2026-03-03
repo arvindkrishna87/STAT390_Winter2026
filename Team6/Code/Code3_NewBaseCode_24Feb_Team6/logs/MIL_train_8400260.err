@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/gpfs/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/main.py", line 338, in <module>
-    main()
-  File "/gpfs/projects/e32998/STAT390_Winter2026/Team4/Code/Code2_ModelTraining_10Feb_Ben/main.py", line 264, in main
-    kimianet_path=MODEL_CONFIG["KimiaNet.pth"]
-                  ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-KeyError: 'KimiaNet.pth'

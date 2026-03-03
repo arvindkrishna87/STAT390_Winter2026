@@ -1,8 +1,0 @@
-[I 2026-02-15 18:01:30,232] A new study created in memory with name: mil_study
-  0%|          | 0/10 [00:00<?, ?it/s]/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-  warnings.warn(
-/projects/e32998/env/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=DenseNet121_Weights.IMAGENET1K_V1`. You can also use `weights=DenseNet121_Weights.DEFAULT` to get the most up-to-date weights.
-  warnings.warn(msg)
-/projects/e32998/env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
-  warnings.warn(warn_msg)
-                                        0%|          | 0/10 [2:28:45<?, ?it/s]Best trial: 0. Best value: 0.528989:   0%|          | 0/10 [2:28:45<?, ?it/s]Best trial: 0. Best value: 0.528989:  10%|█         | 1/10 [2:28:45<22:18:46, 8925.18s/it]slurmstepd: error: *** JOB 8815488 ON qnode0471 CANCELLED AT 2026-02-15T22:02:31 ***

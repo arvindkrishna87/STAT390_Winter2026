@@ -84,7 +84,8 @@ def create_run_directory(base_dir: str = None) -> str:
         base_dir = DATA_PATHS['runs_dir']
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_dir = os.path.join(base_dir, f"run_{timestamp}")
+    job_name = os.environ.get('SLURM_JOB_NAME', 'run')
+    run_dir = os.path.join(base_dir, f"{timestamp}_{job_name}")
     os.makedirs(run_dir, exist_ok=True)
     
     print(f"Created run directory: {run_dir}")
@@ -92,7 +93,7 @@ def create_run_directory(base_dir: str = None) -> str:
 
 
 def save_data_splits(train_cases: List, val_cases: List, test_cases: List, 
-                    save_dir: str = "./"):
+                    save_dir: str = "./", name: str = "data_splits.npz"):
     """
     Save data splits for reproducibility
     
@@ -114,7 +115,7 @@ def save_data_splits(train_cases: List, val_cases: List, test_cases: List,
         'test_cases': test_cases
     }
     
-    save_path = os.path.join(save_dir, "data_splits.npz")
+    save_path = os.path.join(save_dir, name)
     np.savez(save_path, **splits)
     print(f"Data splits saved to: {save_path}")
 
