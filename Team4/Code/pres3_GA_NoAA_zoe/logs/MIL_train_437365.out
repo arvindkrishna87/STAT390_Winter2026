@@ -1,0 +1,9 @@
+Job ID: 437365
+Start time: Sun Mar  1 13:20:19 CST 2026
+Running on host: qnode3086
+Project dir: /home/zel9906/Code4_gated_attention
+Using python: /home/zel9906/env/bin/python
+Python 3.12.12
+Using splits: /home/zel9906/Code4_gated_attention/data_splits/data_splits.npz
+main.py path: /gpfs/home/zel9906/Code4_gated_attention/main.py
+End time: Sun Mar  1 13:20:57 CST 2026
