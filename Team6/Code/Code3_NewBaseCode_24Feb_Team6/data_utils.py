@@ -25,7 +25,7 @@ from collections import defaultdict, Counter
 from sklearn.model_selection import train_test_split
 from typing import Dict, List, Tuple, Any, Optional
 
-from config import DATA_PATHS, VALID_CLASSES, SPLIT_CONFIG
+from config import DATA_PATHS, VALID_CLASSES, SPLIT_CONFIG, GROUPED_CASES
 
 
 def load_labels(csv_path: str = None) -> pd.DataFrame:
@@ -281,6 +281,12 @@ def report_no_leak(train_case_dict: Dict, val_case_dict: Dict, test_case_dict: D
     test_cases = get_case_ids(test_case_dict)
 
     print("Cases per split:", len(train_cases), len(val_cases), len(test_cases))
+
+    # Replace pseudo-case id with real case id for accurate leak detection
+    cases_remap = {case: group[0] for group in GROUPED_CASES for case in group}
+    train_cases = {cases_remap.get(item, item) for item in train_cases}
+    val_cases = {cases_remap.get(item, item) for item in val_cases}
+    test_cases = {cases_remap.get(item, item) for item in test_cases}
 
     ok_tv, leak_tv = check_disjoint_sets(train_cases, val_cases, "train", "val")
     ok_tt, leak_tt = check_disjoint_sets(train_cases, test_cases, "train", "test")

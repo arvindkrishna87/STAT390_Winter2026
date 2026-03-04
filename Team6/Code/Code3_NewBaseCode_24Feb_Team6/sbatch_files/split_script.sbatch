@@ -1,15 +1,16 @@
 #!/bin/bash
-#SBATCH --account=e32998                  # Use your Quest project account (check with 'groups')
-#SBATCH --partition=long                  # 'short', 'normal', or 'long' partition
-#SBATCH --time=00:10:00                    # max run time
-#SBATCH --nodes=1                         # 1 node
-#SBATCH --ntasks=16                        # n nores
-#SBATCH --mem=128G                          # n GB RAM
-#SBATCH --job-name=MIL_train              # Job name (no spaces)
-#SBATCH --output=test.out
-#SBATCH --error=test.err
-#SBATCH --mail-type=ALL                   # Send email on begin, end, and fail
-#SBATCH --mail-user=krish@northwestern.edu  # Your NU email
+#SBATCH --account=e32998                              # Use your Quest project account (check with 'groups')
+#SBATCH --partition=short                             # 'short', 'normal', or 'long' partition
+#SBATCH --time=00:05:00                               # max run time
+#SBATCH --nodes=1                                     # 1 node
+#SBATCH --ntasks=16                                   # n cores
+#SBATCH --mem=16G                                     # n GB RAM
+#SBATCH --job-name=data_split                         # Job name (no spaces)
+#SBATCH --chdir=./                                    # set working directory
+#SBATCH --output=./logs/%j_%x.log                     # Standard output file
+#SBATCH --error=./logs/%j_%x.log                      # now writing error to the same log file
+#SBATCH --mail-type=ALL                               # Send email on begin, end, and fail
+#SBATCH --mail-user=henrychau2026@u.northwestern.edu  # Your NU email
 
 module purge
 module load python-anaconda3/2019.10
@@ -21,16 +22,16 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Start time: $(date)"
 
 # Run training
-python3 -m pip install -r /projects/e32998/STAT390_Krish/Code/Code3/requirements.txt
+python3 -m pip install -r requirements.txt
 python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
-cd /projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/
-
-# without loading checkpoints, trying 5 diff train / test splits
-
+# Use preset splits
 python3 make_splits.py \
-    --labels_csv /projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv \
+    --labels_csv extra_benign_case_grade_match.csv \
     --patches_dir /projects/e32998/patches_benign_split \
-    --seed 9 \
-    --save_dir /projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/data_splits 
+    --seed 42
+    --save_dir ./data_splits 
+
+# Outputs job running information
+seff $SLURM_JOB_ID

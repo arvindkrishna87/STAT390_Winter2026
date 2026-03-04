@@ -21,10 +21,7 @@ MODEL_CONFIG = {
     'stains': ('h&e', 'melan', 'sox10')
 }
 
-
-
-#Updating with the most recent Hyperparams from OPTUNA Study
-# Training configuration
+# Updating with the most recent Hyperparams from OPTUNA Study
 # Training configuration
 TRAINING_CONFIG = {
     'epochs': 30,  # Increased since we have early stopping
@@ -49,7 +46,6 @@ TRAINING_CONFIG = {
     'early_stopping_min_epochs': 10  # Minimum epochs before early stopping can trigger
 }
 
-
 # Data split configuration
 SPLIT_CONFIG = {
     'train_ratio': 0.6,
@@ -57,6 +53,9 @@ SPLIT_CONFIG = {
     'test_ratio': 0.2,
     'stratify': True
 }
+
+# Related benign cases
+GROUPED_CASES = [(22, 107, 108), (24, 118), (25, 119), (26, 109, 110, 111)]
 
 # Image preprocessing
 IMAGE_CONFIG = {

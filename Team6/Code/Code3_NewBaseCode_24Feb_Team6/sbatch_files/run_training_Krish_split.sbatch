@@ -5,7 +5,7 @@
 #SBATCH --nodes=1                                     # 1 node
 #SBATCH --ntasks=16                                   # n cores
 #SBATCH --mem=64G                                     # n GB RAM
-#SBATCH --job-name=MIL_split_4                        # Job name (no spaces)
+#SBATCH --job-name=MIL_split_control                  # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.log                     # Standard output file
 #SBATCH --error=./logs/%j_%x.log                      # now writing error to the same log file
@@ -32,7 +32,7 @@ python3 main.py \
     --attention_top_n 8 \
     --per_slice_cap 500 \
     --max_slices_per_stain None \
-    --load_splits ./data_splits/data_splits_new_04.npz
+    --load_splits ./data_splits/data_splits_Krish.npz
 
 # Outputs job running information
 seff $SLURM_JOB_ID
