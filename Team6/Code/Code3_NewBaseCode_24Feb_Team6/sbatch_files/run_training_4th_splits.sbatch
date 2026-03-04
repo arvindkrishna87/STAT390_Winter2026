@@ -31,7 +31,6 @@ python3 main.py \
     --analyze_attention \
     --attention_top_n 8 \
     --per_slice_cap 500 \
-    --max_slices_per_stain None \
     --load_splits ./data_splits/data_splits_new_04.npz
 
 # Outputs job running information

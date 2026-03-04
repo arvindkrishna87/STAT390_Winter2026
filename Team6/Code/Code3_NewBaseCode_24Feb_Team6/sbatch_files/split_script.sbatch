@@ -30,7 +30,6 @@ export SSL_CERT_FILE="$(python -m certifi)"
 python3 make_splits.py \
     --labels_csv extra_benign_case_grade_match.csv \
     --patches_dir /projects/e32998/patches_benign_split \
-    --seed 42
     --save_dir ./data_splits 
 
 # Outputs job running information

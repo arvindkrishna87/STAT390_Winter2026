@@ -153,7 +153,7 @@ def split_by_case_with_constraints(
         np.place(groups, mask, group[0])
     
     # Perform split according to smallest unit that can represent one split set
-    sgkf = StratifiedGroupKFold(n_splits=sum(denom), shuffle=True, random_state=seed)
+    sgkf = StratifiedGroupKFold(n_splits=sum(denom)) # shuffle disabled for causing deviations of labels ratio
     sgkf_splits = sgkf.split(
         np.array(case_ids), 
         np.array([case_to_label[case_ids] for case_ids in case_ids]), 
@@ -190,7 +190,7 @@ def main():
     )
     args = ap.parse_args()
 
-    grouped_cases = ast.literal_eval(grouped_cases)
+    grouped_cases = ast.literal_eval(args.grouped_cases)
 
     # Summary of input case data
     print("=" * 80)
@@ -201,10 +201,7 @@ def main():
     print(f"seed:              {args.seed}")
     print(f"save_dir:          {args.save_dir}")
     print(f"grouped_cases:     {sorted(grouped_cases)}")
-    print(
-        f"ratios (targets):    \
-        train={args.train_ratio}, val={args.val_ratio}, test={args.test_ratio}"
-    )
+    print(f"ratios (targets):  train={args.train_ratio}, val={args.val_ratio}, test={args.test_ratio}")
     print(f"max_ratio_den:     {args.max_ratio_den}")
 
     labels = load_labels(args.labels_csv)
