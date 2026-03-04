@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/gpfs/home/bdp1083/MIL_trainer_9Dec_JointFinal/main.py", line 341, in <module>
+    main()
+  File "/gpfs/home/bdp1083/MIL_trainer_9Dec_JointFinal/main.py", line 263, in main
+    model = create_model(
+            ^^^^^^^^^^^^^
+TypeError: create_model() got an unexpected keyword argument 'use_kimianet'

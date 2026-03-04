@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/gpfs/home/pau3780/Code4_reduce_runtime_paigeoptional/main.py", line 363, in <module>
+    main()
+  File "/gpfs/home/pau3780/Code4_reduce_runtime_paigeoptional/main.py", line 242, in main
+    train_data, val_data, test_data = prepare_data(args)
+                                      ^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/pau3780/Code4_reduce_runtime_paigeoptional/main.py", line 113, in prepare_data
+    splits_data = load_data_splits(args.load_splits)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/pau3780/Code4_reduce_runtime_paigeoptional/utils.py", line 125, in load_data_splits
+    raise FileNotFoundError(f"Data splits file not found: {load_path}")
+FileNotFoundError: Data splits file not found: projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/data_splits/data_splits.npz
