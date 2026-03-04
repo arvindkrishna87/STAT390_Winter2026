@@ -10,21 +10,32 @@ class AttentionPool(nn.Module):
     Input:  x (B, M, D)
     Output: weighted_x (B, D), optionally weights (B, M)
     """
-    def __init__(self, input_dim: int, hidden_dim: int = 128, dropout: float = 0.0):
+    def __init__(self, input_dim: int, hidden_dim: int = 128):
         super().__init__()
-        self.attention = nn.Sequential(
+        # add gated attention
+        self.attention_V = nn.Sequential( 
             nn.Linear(input_dim, hidden_dim),
-            nn.Tanh(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_dim, 1),
+            nn.Tanh()
         )
+        self.attention_U = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.Sigmoid()
+        )
+        self.attention_weights = nn.Linear(hidden_dim, 1)
 
     def forward(self, x: torch.Tensor, return_weights: bool = False):
-        weights = self.attention(x)            # (B, M, 1)
+        A_V = self.attention_V(x)  # (B, M, H)
+        A_U = self.attention_U(x)  # (B, M, H)
+        
+        gated_attention = A_V * A_U  # (B, M, H)
+        
+        weights = self.attention_weights(gated_attention)  # (B, M, 1)
+
         weights = torch.softmax(weights, dim=1)
         weighted_x = (weights * x).sum(dim=1)  # (B, D)
+        
         if return_weights:
-            return weighted_x, weights.squeeze(-1)  # (B, D), (B, M)
+            return weighted_x, weights.squeeze(-1) 
         return weighted_x
 
 
@@ -52,9 +63,9 @@ class HierarchicalAttnMIL(nn.Module):
         )
 
         # Attention modules
-        self.patch_attention = AttentionPool(embed_dim, MODEL_CONFIG["attention_hidden_dim"], dropout=dropout)
-        self.stain_attention = AttentionPool(embed_dim, MODEL_CONFIG["attention_hidden_dim"], dropout=dropout)
-        self.case_attention  = AttentionPool(embed_dim, MODEL_CONFIG["attention_hidden_dim"], dropout=dropout)
+        self.patch_attention = AttentionPool(embed_dim, MODEL_CONFIG["attention_hidden_dim"])
+        self.stain_attention = AttentionPool(embed_dim, MODEL_CONFIG["attention_hidden_dim"])
+        self.case_attention  = AttentionPool(embed_dim, MODEL_CONFIG["attention_hidden_dim"])
 
         # Final classifier
         self.classifier = nn.Sequential(

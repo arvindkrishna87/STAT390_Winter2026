@@ -33,6 +33,7 @@ TRAINING_CONFIG = {
     'random_state': 42,
     'class_weights': [2.5285, 1.0],  # Increased benign weight from 2.0 to 2.5285 (from OPTUNA study)
     'dropout': 0.2599,  # Add dropout for regularization
+    'entropy_lambda': 0.01, # Add entropy regularization
     # Learning rate scheduler
     'use_scheduler': True,
     'scheduler_type': 'reduce_on_plateau',  # 'reduce_on_plateau' or 'cosine'

@@ -29,6 +29,15 @@ from tqdm import tqdm
 
 from config import TRAINING_CONFIG, DEVICE
 
+def attention_entropy(w: torch.Tensor, eps: float = 1e-12) -> torch.Tensor:
+    """
+    Entropy of attention weights AFTER softmax.
+    w can be shape (..., M). Returns mean entropy (scalar).
+    """
+    w = w.clamp_min(eps)
+    H = -(w * w.log()).sum(dim=-1)   # sum over attention dimension
+    return H.mean()
+
 class MILTrainer:
     """
     Trainer for MIL model.
@@ -96,25 +105,63 @@ class MILTrainer:
     # ----------------------------
     # Core helpers
     # ----------------------------
-    def _forward_one_case(self, case_data: Dict[str, Any]) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _calculate_entropy(self, weights: torch.Tensor, epsilon: float = 1e-8) -> torch.Tensor:
         """
-        Returns (logits_with_batch, label_with_batch)
-        logits_with_batch: shape (1, num_classes)
-        label_with_batch:  shape (1,)
+        Task 3 ：H(w) = -sum(p * log(p + epsilon))
+        """
+        return -torch.sum(weights * torch.log(weights + epsilon), dim=-1).mean()
+
+    def _get_all_entropies(self, attn: Dict[str, Any]) -> torch.Tensor:
+        """
+        Case -> Stain -> Slice -> Patch
+        """
+        entropies = []
+        
+        # 1. Case-level
+        if "case_weights" in attn:
+            entropies.append(self._calculate_entropy(attn["case_weights"]))
+            
+        # 2.Stain & Slice-level
+        for _, d in attn.get("stain_weights", {}).items():
+            if "slice_weights" in d:
+                entropies.append(self._calculate_entropy(d["slice_weights"]))
+            # 3.  Patch-level
+            for pw in d.get("patch_weights", []):
+                entropies.append(self._calculate_entropy(pw))
+                
+        return torch.stack(entropies).mean() if entropies else torch.tensor(0.0, device=self.device)
+
+    def _forward_one_case(
+        self,
+        case_data: Dict[str, Any],
+        return_attn: bool = False,
+    ) -> Tuple[torch.Tensor, torch.Tensor, Optional[Dict[str, Any]]]:
+        """
+        Returns (logits_with_batch, label_with_batch, attn_dict_or_None)
+        logits_with_batch: (1, num_classes)
+        label_with_batch:  (1,)
+        attn: dict of attention weights if return_attn=True else None
         """
         stain_slices = case_data["stain_slices"]
         label = case_data["label"].to(self.device)
 
-        logits = self.model(stain_slices)  # (num_classes,)
-        if logits.dim() != 1:
-            raise ValueError(f"Expected model to return (num_classes,), got {tuple(logits.shape)}")
+        if return_attn:
+            out = self.model(stain_slices, return_attn_weights=True)
+            
+            # if not isinstance(out, tuple) or len(out) != 2:
+            #     raise RuntimeError("return_attn=True model didn't return (logits, attn_dict)")
+            
+            logits, attn = out
+        else:
+            logits, attn = self.model(stain_slices), None
 
+        # if logits.dim() != 1:
+        #     raise ValueError(f"Expected model to return (num_classes,), got {logits.shape}")
+        
         logits = logits.unsqueeze(0)  # (1, num_classes)
+        label = label.unsqueeze(0) if label.dim() == 0 else label # (1,)
 
-        if label.dim() == 0:
-            label = label.unsqueeze(0)  # (1,)
-
-        return logits, label
+        return logits, label, attn
 
     def _ensure_dir(self, path: Optional[str]) -> str:
         if path is None:
@@ -127,11 +174,10 @@ class MILTrainer:
     # ----------------------------
     def train_epoch(self, train_loader: DataLoader) -> float:
         """
-        Train for one epoch.
-        Returns average training loss.
+        Train on every epoch, including Task 3 Entropy logic
         """
         self.model.train()
-
+        
         if len(train_loader) == 0:
             print("[WARN] train_loader is empty. Returning loss=0.0")
             self.train_losses.append(0.0)
@@ -140,23 +186,43 @@ class MILTrainer:
         running_loss = 0.0
         num_batches = 0
 
+        # Get lambda
+        lam = float(TRAINING_CONFIG.get("entropy_lambda", 0.0))
+        want_attn = lam > 0.0
+
         for batch in tqdm(train_loader, desc="Training", leave=False):
             if not batch:
                 continue
+            
             case_data = batch[0]
+            
+            logits, label, attn = self._forward_one_case(case_data, return_attn=want_attn)
+            
+            # Cross Entropy
+            base_loss = self.criterion(logits, label)
 
-            logits, label = self._forward_one_case(case_data)
-            loss = self.criterion(logits, label)
+            # Task 3
+            if want_attn and attn is not None:
+                entropy_term = self._get_all_entropies(attn)
+                # Loss = CE - lambda * Entropy 
+                loss = base_loss - lam * entropy_term
+            else:
+                loss = base_loss
 
             self.optimizer.zero_grad(set_to_none=True)
             loss.backward()
             self.optimizer.step()
+
+            if want_attn and num_batches == 0:
+                print(f"[ER DEBUG] lam={lam:.3e} base_loss={base_loss.item():.6f} "
+                      f"entropy={entropy_term.item():.6f} lam*H={(lam*entropy_term).item():.6f}")
 
             running_loss += float(loss.item())
             num_batches += 1
 
         avg_loss = running_loss / max(num_batches, 1)
         self.train_losses.append(avg_loss)
+        
         return avg_loss
 
     def validate(self, val_loader: DataLoader) -> Tuple[float, float]:
@@ -182,7 +248,7 @@ class MILTrainer:
                     continue
                 case_data = batch[0]
 
-                logits, label = self._forward_one_case(case_data)
+                logits, label, _ = self._forward_one_case(case_data, return_attn=False)
                 loss = self.criterion(logits, label)
                 total_loss += float(loss.item())
 
@@ -389,7 +455,7 @@ class MILTrainer:
                 case_data = batch[0]
                 case_id = case_data.get("case_id", None)
 
-                logits, label = self._forward_one_case(case_data)
+                logits, label, _ = self._forward_one_case(case_data, return_attn=False)
                 loss = self.criterion(logits, label)
                 total_loss += float(loss.item())
 
