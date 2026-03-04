@@ -32,4 +32,4 @@ python3 main.py \
     --attention_top_n 8 \
     --per_slice_cap 500 \
     --load_splits ./data_splits/data_splits_new_03.npz \
-    --resume ./runs/20260304_005950_MIL_split_3/checkpoints/20260304_031150_HierarchicalAttnMIL_epoch13.pth
+    --resume ./runs/20260304_082856_MIL_split_3_final/checkpoints/20260304_113655_HierarchicalAttnMIL_epoch28.pth

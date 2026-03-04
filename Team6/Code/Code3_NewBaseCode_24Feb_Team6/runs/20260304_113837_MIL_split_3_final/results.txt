@@ -1,0 +1,12 @@
+Test Results:
+Test Loss: 0.1164
+Test Accuracy: 0.9474
+Test High-Grade Recall: 0.9167
+Test Benign Recall: 1.0000
+Number of samples: 19
+Checkpoint used: ./runs/20260304_082856_MIL_split_3_final/checkpoints/20260304_113655_HierarchicalAttnMIL_epoch28.pth
+
+Output files:
+- predictions.csv: Per-case predictions and probabilities
+- confusion_matrix.png: Visual confusion matrix
+- attention_analysis/: Attention visualizations and summary
