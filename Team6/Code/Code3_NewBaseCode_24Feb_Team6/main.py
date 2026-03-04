@@ -319,6 +319,8 @@ def main():
         f.write(f"Test Results:\n")
         f.write(f"Test Loss: {test_results['test_loss']:.4f}\n")
         f.write(f"Test Accuracy: {test_results['test_accuracy']:.4f}\n")
+        f.write(f"Test High-Grade Recall: {test_results['test_high_grade_recall']:.4f}\n")
+        f.write(f"Test Benign Recall: {test_results['test_benign_recall']:.4f}\n")
         f.write(f"Number of samples: {test_results['num_samples']}\n")
         if args.resume:
             f.write(f"Checkpoint used: {args.resume}\n")

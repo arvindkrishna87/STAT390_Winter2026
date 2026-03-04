@@ -32,6 +32,3 @@ python3 main.py \
     --attention_top_n 8 \
     --per_slice_cap 500 \
     --load_splits ./data_splits/data_splits_Krish.npz
-
-# Outputs job running information
-seff $SLURM_JOB_ID

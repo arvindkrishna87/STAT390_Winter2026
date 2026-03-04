@@ -41,7 +41,7 @@ TRAINING_CONFIG = {
     'scheduler_factor': 0.2139,  # Reduce LR by half
     'scheduler_min_lr': 1e-6,
     # Early stopping
-    'early_stopping': True,
+    'early_stopping': False,
     'early_stopping_patience': 8,  # Stop if no improvement for 10 epochs
     'early_stopping_min_delta': 0.001,  # Minimum change to qualify as improvement
     'early_stopping_min_epochs': 10  # Minimum epochs before early stopping can trigger

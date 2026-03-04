@@ -31,6 +31,3 @@ python3 make_splits.py \
     --labels_csv extra_benign_case_grade_match.csv \
     --patches_dir /projects/e32998/patches_benign_split \
     --save_dir ./data_splits 
-
-# Outputs job running information
-seff $SLURM_JOB_ID

@@ -20,6 +20,7 @@ import time
 import os
 from datetime import datetime
 from typing import Dict, Any, Tuple, Optional
+from sklearn.metrics import recall_score
 
 import torch
 import torch.nn as nn
@@ -472,10 +473,14 @@ class MILTrainer:
 
         avg_loss = total_loss / max(n, 1)
         acc = correct / max(n, 1)
+        h_recall = recall_score(true_labels, predictions)
+        b_recall = recall_score(true_labels, predictions, pos_label=0)
 
         results = {
             "test_loss": avg_loss,
             "test_accuracy": acc,
+            "test_high_grade_recall": h_recall, 
+            "test_benign_recall": b_recall, 
             "predictions": predictions,
             "true_labels": true_labels,
             "case_ids": case_ids,

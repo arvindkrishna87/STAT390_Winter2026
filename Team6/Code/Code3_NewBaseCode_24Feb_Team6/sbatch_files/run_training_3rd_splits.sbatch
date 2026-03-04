@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --account=e32998                              # Use your Quest project account (check with 'groups')
 #SBATCH --partition=long                              # 'short', 'normal', or 'long' partition
-#SBATCH --time=12:00:00                               # max run time
+#SBATCH --time=6:00:00                                # max run time
 #SBATCH --nodes=1                                     # 1 node
 #SBATCH --ntasks=16                                   # n cores
 #SBATCH --mem=64G                                     # n GB RAM
-#SBATCH --job-name=MIL_split_3                        # Job name (no spaces)
+#SBATCH --job-name=MIL_split_3_final                  # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.log                     # Standard output file
 #SBATCH --error=./logs/%j_%x.log                      # now writing error to the same log file
@@ -31,7 +31,5 @@ python3 main.py \
     --analyze_attention \
     --attention_top_n 8 \
     --per_slice_cap 500 \
-    --load_splits ./data_splits/data_splits_new_03.npz
-
-# Outputs job running information
-seff $SLURM_JOB_ID
+    --load_splits ./data_splits/data_splits_new_03.npz \
+    --resume ./runs/20260304_005950_MIL_split_3/checkpoints/20260304_031150_HierarchicalAttnMIL_epoch13.pth

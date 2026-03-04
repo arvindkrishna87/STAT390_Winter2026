@@ -1,0 +1,174 @@
+============================================================
+ATTENTION ANALYSIS SUMMARY
+============================================================
+
+Case 1:
+----------------------------------------
+Most attended stain: sox10
+
+Stain-level attention:
+  h&e: 0.0158
+  melan: 0.2848
+  sox10: 0.6994
+
+Case 3:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.0922
+  melan: 0.6345
+  sox10: 0.2733
+
+Case 7:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.0166
+  melan: 0.9676
+  sox10: 0.0159
+
+Case 21:
+----------------------------------------
+Most attended stain: h&e
+
+Stain-level attention:
+  h&e: 0.6325
+  melan: 0.3675
+
+Case 28:
+----------------------------------------
+Most attended stain: sox10
+
+Stain-level attention:
+  h&e: 0.1145
+  melan: 0.1110
+  sox10: 0.7746
+
+Case 34:
+----------------------------------------
+Most attended stain: sox10
+
+Stain-level attention:
+  h&e: 0.1168
+  melan: 0.2575
+  sox10: 0.6257
+
+Case 51:
+----------------------------------------
+Most attended stain: h&e
+
+Stain-level attention:
+  h&e: 0.5486
+  melan: 0.4078
+  sox10: 0.0436
+
+Case 55:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.0308
+  melan: 0.9644
+  sox10: 0.0048
+
+Case 66:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.0182
+  melan: 0.9514
+  sox10: 0.0304
+
+Case 72:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.2269
+  melan: 0.4734
+  sox10: 0.2997
+
+Case 73:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.1089
+  melan: 0.6464
+  sox10: 0.2447
+
+Case 75:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.1388
+  melan: 0.8180
+  sox10: 0.0432
+
+Case 77:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.2042
+  melan: 0.7256
+  sox10: 0.0701
+
+Case 79:
+----------------------------------------
+Most attended stain: h&e
+
+Stain-level attention:
+  h&e: 0.4836
+  melan: 0.3540
+  sox10: 0.1625
+
+Case 84:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.3825
+  melan: 0.5026
+  sox10: 0.1150
+
+Case 86:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.4006
+  melan: 0.4558
+  sox10: 0.1436
+
+Case 95:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.0982
+  melan: 0.7510
+  sox10: 0.1507
+
+Case 96:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.3047
+  melan: 0.4606
+  sox10: 0.2347
+
+Case 99:
+----------------------------------------
+Most attended stain: melan
+
+Stain-level attention:
+  h&e: 0.0280
+  melan: 0.9212
+  sox10: 0.0508
+
