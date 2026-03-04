@@ -1,0 +1,1507 @@
+Job ID: 764095
+Start time: Tue Mar  3 10:18:01 CST 2026
+Requirement already satisfied: torch>=1.9.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (2.9.0)
+Requirement already satisfied: torchvision>=0.10.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 3)) (0.24.0)
+Requirement already satisfied: numpy>=1.21.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 4)) (2.3.4)
+Requirement already satisfied: pandas>=1.3.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 5)) (2.3.3)
+Requirement already satisfied: scikit-learn>=1.0.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 6)) (1.7.2)
+Requirement already satisfied: Pillow>=8.3.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 7)) (12.0.0)
+Requirement already satisfied: tqdm>=4.62.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 8)) (4.67.1)
+Requirement already satisfied: matplotlib>=3.5.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 11)) (3.10.7)
+Requirement already satisfied: seaborn>=0.11.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 12)) (0.13.2)
+Requirement already satisfied: optuna>=3.0.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 15)) (4.7.0)
+Requirement already satisfied: psutil>=5.8.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 18)) (7.1.2)
+Requirement already satisfied: imbalanced-learn>=0.8.0 in /home/zel9906/env/lib/python3.12/site-packages (from -r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 21)) (0.14.0)
+Requirement already satisfied: filelock in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (3.20.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (4.15.0)
+Requirement already satisfied: setuptools in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (3.5)
+Requirement already satisfied: jinja2 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (2025.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (3.3.20)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (1.13.1.3)
+Requirement already satisfied: triton==3.5.0 in /home/zel9906/env/lib/python3.12/site-packages (from torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (3.5.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /home/zel9906/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 5)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /home/zel9906/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /home/zel9906/env/lib/python3.12/site-packages (from pandas>=1.3.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 5)) (2025.2)
+Requirement already satisfied: scipy>=1.8.0 in /home/zel9906/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 6)) (1.16.3)
+Requirement already satisfied: joblib>=1.2.0 in /home/zel9906/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 6)) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /home/zel9906/env/lib/python3.12/site-packages (from scikit-learn>=1.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 6)) (3.6.0)
+Requirement already satisfied: contourpy>=1.0.1 in /home/zel9906/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 11)) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /home/zel9906/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 11)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /home/zel9906/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 11)) (4.60.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /home/zel9906/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 11)) (1.4.9)
+Requirement already satisfied: packaging>=20.0 in /home/zel9906/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 11)) (25.0)
+Requirement already satisfied: pyparsing>=3 in /home/zel9906/env/lib/python3.12/site-packages (from matplotlib>=3.5.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 11)) (3.2.5)
+Requirement already satisfied: alembic>=1.5.0 in /home/zel9906/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 15)) (1.18.3)
+Requirement already satisfied: colorlog in /home/zel9906/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 15)) (6.10.1)
+Requirement already satisfied: sqlalchemy>=1.4.2 in /home/zel9906/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 15)) (2.0.46)
+Requirement already satisfied: PyYAML in /home/zel9906/env/lib/python3.12/site-packages (from optuna>=3.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 15)) (6.0.3)
+Requirement already satisfied: Mako in /home/zel9906/env/lib/python3.12/site-packages (from alembic>=1.5.0->optuna>=3.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 15)) (1.3.10)
+Requirement already satisfied: six>=1.5 in /home/zel9906/env/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=1.3.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 5)) (1.17.0)
+Requirement already satisfied: greenlet>=1 in /home/zel9906/env/lib/python3.12/site-packages (from sqlalchemy>=1.4.2->optuna>=3.0.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 15)) (3.3.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/zel9906/env/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/zel9906/env/lib/python3.12/site-packages (from jinja2->torch>=1.9.0->-r /home/zel9906/presentation_3_code_mar3_zoe/requirements.txt (line 2)) (3.0.3)
+Requirement already satisfied: certifi in /home/zel9906/env/lib/python3.12/site-packages (2026.2.25)
+=== Generating split for benign family idx=0 ===
+================================================================================
+CREATING DATA SPLITS (EXCLUDE FROM TEST + MATCHED PROPORTIONS)
+================================================================================
+labels_csv:        /projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv
+patches_dir:       /projects/e32998/patches_benign_split
+seed:              42
+save_dir:          data_splits/family_0
+ratios (targets):  train=0.6, val=0.2, test=0.2
+exclude_from_test: [46]
+max_ratio_den:     50
+
+Loaded 118 label rows
+Found 83630 files in patches_dir
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Loaded 4 benign families from benign_families.json
+Forcing benign family idx=0 into TEST: [22, 107, 108]
+
+Overall case counts:
+  Total:  93  |  Benign: 35  |  High: 58
+  Exact global high ratio:   0.623656  (58/93)
+  Enforced approx ratio:     0.625000  (5/8)
+
+Target split sizes (non-empty) and required class counts:
+  Train: N=55  => benign=21, high=34
+  Val:   N=19    => benign=7, high=12
+  Test:  N=19   => benign=7, high=12
+
+Final achieved high-grade ratios:
+  Train: 34/55 = 0.618182
+  Val:   12/19 = 0.631579
+  Test:  12/19 = 0.631579
+
+Slice counts after split:
+  Train slices: 231
+  Val slices:   66
+  Test slices:  74
+
+----------------------------------------
+LEAK CHECK
+----------------------------------------
+Cases per split: 55 19 19
+Paths per split: 47906 16597 15538
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+[OK] None of the excluded cases appear in TEST.
+
+================================================================================
+TRAIN SPLIT
+================================================================================
+Total cases:      55
+Benign (0):       21
+High-grade (1):   34
+High-grade ratio: 0.618182
+
+Benign CASE IDs:
+[2, 24, 25, 27, 28, 30, 36, 43, 46, 56, 77, 78, 79, 85, 86, 93, 94, 96, 111, 118, 119]
+
+High-grade CASE IDs:
+[1, 3, 7, 11, 12, 15, 17, 19, 32, 38, 41, 42, 44, 48, 49, 50, 51, 57, 59, 60, 61, 66, 67, 68, 72, 75, 87, 88, 89, 95, 97, 100, 104, 106]
+
+================================================================================
+VAL SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[4, 23, 26, 34, 53, 109, 110]
+
+High-grade CASE IDs:
+[5, 18, 40, 47, 52, 54, 64, 69, 80, 84, 98, 101]
+
+================================================================================
+TEST SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[21, 22, 45, 82, 90, 107, 108]
+
+High-grade CASE IDs:
+[9, 14, 16, 55, 58, 63, 70, 73, 83, 91, 92, 99]
+Data splits saved to: data_splits/family_0/data_splits.npz
+
+================================================================================
+DONE
+================================================================================
+Saved: data_splits/family_0/data_splits.npz
+Use it like:
+  python main.py --load_splits data_splits/family_0/data_splits.npz
+=== Training/evaluating for benign family idx=0 ===
+Random seed set to 42
+Using CPU
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260303_101951
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv', 'patches_dir': '/projects/e32998/patches_benign_split', 'epochs': 30, 'lr': 0.000208, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': 'data_splits/family_0/data_splits.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.000208, 'weight_decay': 0.000305, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5285, 1.0], 'dropout': 0.2599, 'entropy_lambda': 0.001, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 4, 'scheduler_factor': 0.2139, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: data_splits/family_0/data_splits.npz
+Data splits loaded from: data_splits/family_0/data_splits.npz
+Loaded splits - Train: 231, Val: 66, Test: 74
+Cases per split: 55 19 19
+Paths per split: 47906 16597 15538
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    7  12
+train  21  34
+val     7  12
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         452.7          205.9          159.1
+train        417.3          246.9          206.8
+val          428.1          238.3          207.2
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         275.0          187.0          143.0
+train        323.0          175.0          155.0
+val          436.0          192.0          167.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.053          0.105
+train          0.0          0.018          0.000
+val            0.0          0.000          0.000
+
+Total cases: 93
+Total patches: 80,041
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     14325 patches
+  High-grade (1): 33581 patches
+
+Patch count by class for Validation:
+  Benign (0):     5539 patches
+  High-grade (1): 11058 patches
+
+Patch count by class for Test:
+  Benign (0):     5916 patches
+  High-grade (1): 9622 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 55/55 (100.0%)
+  melan: 54/55 (98.2%)
+  sox10: 55/55 (100.0%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 19/19 (100.0%)
+  sox10: 19/19 (100.0%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 18/19 (94.7%)
+  sox10: 17/19 (89.5%)
+No issues found
+Using existing splits from: data_splits/family_0/data_splits.npz
+
+============================================================
+CREATING DATA LOADERS (POOLED FEATURES)
+============================================================
+Created data loaders - Train: 55, Val: 19, Test: 19
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 2,493,061
+Trainable parameters: 2,493,061
+Model size: 9.51 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 2,493,061
+LR scheduler: ReduceLROnPlateau
+Early stopping enabled (patience=8, min_delta=0.001, min_epochs=10)
+
+Epoch 1/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.765409 entropy=2.785992 lam*H=0.002786
+Train Loss: 1.0865 | Val Loss: 0.4914 | Val Acc: 0.6842
+Epoch Time: 750.42s
+New best validation loss: 0.4914
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_103234_HierarchicalAttnMIL_epoch1.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/best.pth
+
+Epoch 2/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.320854 entropy=2.871165 lam*H=0.002871
+Train Loss: 0.4945 | Val Loss: 0.3738 | Val Acc: 0.8421
+Epoch Time: 691.19s
+New best validation loss: 0.3738
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_104405_HierarchicalAttnMIL_epoch2.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/best.pth
+
+Epoch 3/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=1.090111 entropy=3.743620 lam*H=0.003744
+Train Loss: 0.2017 | Val Loss: 0.4244 | Val Acc: 0.8947
+Epoch Time: 799.08s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_105724_HierarchicalAttnMIL_epoch3.pth
+
+Epoch 4/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.003756 entropy=2.532645 lam*H=0.002533
+Train Loss: 0.2347 | Val Loss: 0.2503 | Val Acc: 0.8947
+Epoch Time: 906.42s
+New best validation loss: 0.2503
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_111231_HierarchicalAttnMIL_epoch4.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/best.pth
+
+Epoch 5/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.027543 entropy=3.172067 lam*H=0.003172
+Train Loss: 0.0904 | Val Loss: 1.1492 | Val Acc: 0.6842
+Epoch Time: 720.18s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_112431_HierarchicalAttnMIL_epoch5.pth
+
+Epoch 6/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000000 entropy=3.301178 lam*H=0.003301
+Train Loss: 0.1631 | Val Loss: 0.2616 | Val Acc: 0.8421
+Epoch Time: 628.13s
+No improvement for 2 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_113459_HierarchicalAttnMIL_epoch6.pth
+
+Epoch 7/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000000 entropy=2.919517 lam*H=0.002920
+Train Loss: 0.2276 | Val Loss: 0.4193 | Val Acc: 0.7895
+Epoch Time: 647.63s
+No improvement for 3 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_114547_HierarchicalAttnMIL_epoch7.pth
+
+Epoch 8/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.112947 entropy=2.635559 lam*H=0.002636
+Train Loss: 0.1436 | Val Loss: 0.2150 | Val Acc: 0.8947
+Epoch Time: 538.05s
+New best validation loss: 0.2150
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_115445_HierarchicalAttnMIL_epoch8.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/best.pth
+
+Epoch 9/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000046 entropy=2.323691 lam*H=0.002324
+Train Loss: 0.0190 | Val Loss: 0.1652 | Val Acc: 0.8947
+Epoch Time: 430.38s
+New best validation loss: 0.1652
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_120155_HierarchicalAttnMIL_epoch9.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/best.pth
+
+Epoch 10/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000000 entropy=2.356416 lam*H=0.002356
+Train Loss: 0.0038 | Val Loss: 0.1688 | Val Acc: 0.8947
+Epoch Time: 472.41s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_120948_HierarchicalAttnMIL_epoch10.pth
+
+Epoch 11/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000104 entropy=2.832079 lam*H=0.002832
+Train Loss: 0.0011 | Val Loss: 0.1942 | Val Acc: 0.8947
+Epoch Time: 446.78s
+No improvement for 2 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_121715_HierarchicalAttnMIL_epoch11.pth
+
+Epoch 12/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.001905 entropy=2.348179 lam*H=0.002348
+Train Loss: -0.0010 | Val Loss: 0.2076 | Val Acc: 0.8947
+Epoch Time: 563.92s
+No improvement for 3 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_122639_HierarchicalAttnMIL_epoch12.pth
+
+Epoch 13/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.001735 entropy=2.415648 lam*H=0.002416
+Train Loss: -0.0013 | Val Loss: 0.2180 | Val Acc: 0.8947
+Epoch Time: 453.28s
+No improvement for 4 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_123412_HierarchicalAttnMIL_epoch13.pth
+
+Epoch 14/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000068 entropy=1.890362 lam*H=0.001890
+Train Loss: -0.0014 | Val Loss: 0.2323 | Val Acc: 0.8947
+Epoch Time: 449.94s
+No improvement for 5 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_124142_HierarchicalAttnMIL_epoch14.pth
+
+Epoch 15/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000016 entropy=2.825830 lam*H=0.002826
+Train Loss: -0.0012 | Val Loss: 0.2346 | Val Acc: 0.8947
+Epoch Time: 417.33s
+No improvement for 6 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_124839_HierarchicalAttnMIL_epoch15.pth
+
+Epoch 16/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.001747 entropy=2.256092 lam*H=0.002256
+Train Loss: -0.0010 | Val Loss: 0.2346 | Val Acc: 0.8947
+Epoch Time: 358.53s
+No improvement for 7 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_125438_HierarchicalAttnMIL_epoch16.pth
+
+Epoch 17/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000020 entropy=1.894030 lam*H=0.001894
+Train Loss: -0.0013 | Val Loss: 0.2359 | Val Acc: 0.8947
+Epoch Time: 358.55s
+No improvement for 8 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_101951/checkpoints/20260303_130036_HierarchicalAttnMIL_epoch17.pth
+
+Early stopping triggered at epoch 17. Best val loss: 0.1652
+
+Training completed!
+Loss curve saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/loss_curve.png
+
+============================================================
+EVALUATING MODEL
+============================================================
+
+Test Results:
+  Test Loss: 0.6516
+  Test Acc:  0.8421
+  Samples:   19
+Predictions saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/predictions.csv
+Confusion matrix saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/confusion_matrix.png
+Deviation plot saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/deviation_plot.png
+
+============================================================
+ATTENTION ANALYSIS
+============================================================
+Attention summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/attention_analysis/attention_summary.txt
+Per-case effective patch attention distributions saved.
+Per-case & per-stain slice attention rank plots saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/attention_analysis/slice_attention
+Per-case top 5.0% effective patches CSV saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/attention_analysis/top_effective_patches_per_case_5.0pct.csv
+Per-case top 5.0% summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/attention_analysis/top_effective_patches_per_case_summary_5.0pct.txt
+Attention analysis saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951/attention_analysis
+
+Results saved to: /projects/e32998/MIL_training/final_runs/run_20260303_101951
+
+Total execution time: 9906.66s (2.75 hours)
+Training completed successfully!
+=== Generating split for benign family idx=1 ===
+================================================================================
+CREATING DATA SPLITS (EXCLUDE FROM TEST + MATCHED PROPORTIONS)
+================================================================================
+labels_csv:        /projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv
+patches_dir:       /projects/e32998/patches_benign_split
+seed:              42
+save_dir:          data_splits/family_1
+ratios (targets):  train=0.6, val=0.2, test=0.2
+exclude_from_test: [46]
+max_ratio_den:     50
+
+Loaded 118 label rows
+Found 83630 files in patches_dir
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Loaded 4 benign families from benign_families.json
+Forcing benign family idx=1 into TEST: [24, 109, 110, 111]
+
+Overall case counts:
+  Total:  93  |  Benign: 35  |  High: 58
+  Exact global high ratio:   0.623656  (58/93)
+  Enforced approx ratio:     0.625000  (5/8)
+
+Target split sizes (non-empty) and required class counts:
+  Train: N=55  => benign=21, high=34
+  Val:   N=19    => benign=7, high=12
+  Test:  N=19   => benign=7, high=12
+
+Final achieved high-grade ratios:
+  Train: 34/55 = 0.618182
+  Val:   12/19 = 0.631579
+  Test:  12/19 = 0.631579
+
+Slice counts after split:
+  Train slices: 229
+  Val slices:   60
+  Test slices:  82
+
+----------------------------------------
+LEAK CHECK
+----------------------------------------
+Cases per split: 55 19 19
+Paths per split: 48855 14234 16952
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+[OK] None of the excluded cases appear in TEST.
+
+================================================================================
+TRAIN SPLIT
+================================================================================
+Total cases:      55
+Benign (0):       21
+High-grade (1):   34
+High-grade ratio: 0.618182
+
+Benign CASE IDs:
+[2, 4, 23, 25, 27, 28, 30, 34, 45, 46, 56, 77, 78, 79, 85, 86, 93, 94, 108, 118, 119]
+
+High-grade CASE IDs:
+[1, 3, 7, 11, 12, 14, 15, 18, 19, 32, 38, 41, 42, 48, 49, 50, 51, 52, 54, 55, 61, 64, 67, 68, 69, 80, 83, 89, 91, 92, 98, 99, 104, 106]
+
+================================================================================
+VAL SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[22, 26, 36, 43, 53, 96, 107]
+
+High-grade CASE IDs:
+[5, 16, 40, 44, 47, 58, 60, 63, 70, 87, 88, 100]
+
+================================================================================
+TEST SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[21, 24, 82, 90, 109, 110, 111]
+
+High-grade CASE IDs:
+[9, 17, 57, 59, 66, 72, 73, 75, 84, 95, 97, 101]
+Data splits saved to: data_splits/family_1/data_splits.npz
+
+================================================================================
+DONE
+================================================================================
+Saved: data_splits/family_1/data_splits.npz
+Use it like:
+  python main.py --load_splits data_splits/family_1/data_splits.npz
+=== Training/evaluating for benign family idx=1 ===
+Random seed set to 42
+Using CPU
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260303_130554
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv', 'patches_dir': '/projects/e32998/patches_benign_split', 'epochs': 30, 'lr': 0.000208, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': 'data_splits/family_1/data_splits.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.000208, 'weight_decay': 0.000305, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5285, 1.0], 'dropout': 0.2599, 'entropy_lambda': 0.001, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 4, 'scheduler_factor': 0.2139, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: data_splits/family_1/data_splits.npz
+Data splits loaded from: data_splits/family_1/data_splits.npz
+Loaded splits - Train: 229, Val: 60, Test: 82
+Cases per split: 55 19 19
+Paths per split: 48855 14234 16952
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    7  12
+train  21  34
+val     7  12
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         489.8          230.3          172.1
+train        437.7          242.1          208.4
+val          331.9          227.7          189.6
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         419.0          194.0          130.0
+train        313.0          175.0          156.0
+val          328.0          192.0          172.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.053          0.053
+train          0.0          0.000          0.000
+val            0.0          0.053          0.053
+
+Total cases: 93
+Total patches: 80,041
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     14805 patches
+  High-grade (1): 34050 patches
+
+Patch count by class for Validation:
+  Benign (0):     5045 patches
+  High-grade (1): 9189 patches
+
+Patch count by class for Test:
+  Benign (0):     5930 patches
+  High-grade (1): 11022 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 55/55 (100.0%)
+  melan: 55/55 (100.0%)
+  sox10: 55/55 (100.0%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 18/19 (94.7%)
+  sox10: 18/19 (94.7%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 18/19 (94.7%)
+  sox10: 18/19 (94.7%)
+No issues found
+Using existing splits from: data_splits/family_1/data_splits.npz
+
+============================================================
+CREATING DATA LOADERS (POOLED FEATURES)
+============================================================
+Created data loaders - Train: 55, Val: 19, Test: 19
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 2,493,061
+Trainable parameters: 2,493,061
+Model size: 9.51 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 2,493,061
+LR scheduler: ReduceLROnPlateau
+Early stopping enabled (patience=8, min_delta=0.001, min_epochs=10)
+
+Epoch 1/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.753345 entropy=2.314331 lam*H=0.002314
+Train Loss: 1.5471 | Val Loss: 0.4839 | Val Acc: 0.7895
+Epoch Time: 392.70s
+New best validation loss: 0.4839
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_131240_HierarchicalAttnMIL_epoch1.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/best.pth
+
+Epoch 2/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.474490 entropy=3.172886 lam*H=0.003173
+Train Loss: 0.5451 | Val Loss: 0.3981 | Val Acc: 0.7895
+Epoch Time: 262.02s
+New best validation loss: 0.3981
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_131702_HierarchicalAttnMIL_epoch2.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/best.pth
+
+Epoch 3/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.582896 entropy=3.368777 lam*H=0.003369
+Train Loss: 0.3205 | Val Loss: 0.2330 | Val Acc: 0.8421
+Epoch Time: 288.62s
+New best validation loss: 0.2330
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_132150_HierarchicalAttnMIL_epoch3.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/best.pth
+
+Epoch 4/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.052069 entropy=3.024092 lam*H=0.003024
+Train Loss: 0.2264 | Val Loss: 0.2543 | Val Acc: 0.8421
+Epoch Time: 270.67s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_132621_HierarchicalAttnMIL_epoch4.pth
+
+Epoch 5/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.007258 entropy=1.195037 lam*H=0.001195
+Train Loss: 0.1816 | Val Loss: 0.2766 | Val Acc: 0.8421
+Epoch Time: 264.80s
+No improvement for 2 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_133046_HierarchicalAttnMIL_epoch5.pth
+
+Epoch 6/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.001269 entropy=2.866616 lam*H=0.002867
+Train Loss: 0.1452 | Val Loss: 0.1583 | Val Acc: 0.8947
+Epoch Time: 296.67s
+New best validation loss: 0.1583
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_133543_HierarchicalAttnMIL_epoch6.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/best.pth
+
+Epoch 7/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000240 entropy=2.878661 lam*H=0.002879
+Train Loss: 0.1884 | Val Loss: 0.2957 | Val Acc: 0.8421
+Epoch Time: 203.24s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_133906_HierarchicalAttnMIL_epoch7.pth
+
+Epoch 8/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000025 entropy=2.304111 lam*H=0.002304
+Train Loss: 0.0184 | Val Loss: 0.3648 | Val Acc: 0.8421
+Epoch Time: 352.12s
+No improvement for 2 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_134458_HierarchicalAttnMIL_epoch8.pth
+
+Epoch 9/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000681 entropy=2.299326 lam*H=0.002299
+Train Loss: 0.0068 | Val Loss: 0.3997 | Val Acc: 0.7895
+Epoch Time: 486.81s
+No improvement for 3 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_135305_HierarchicalAttnMIL_epoch9.pth
+
+Epoch 10/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000000 entropy=1.445191 lam*H=0.001445
+Train Loss: 0.0024 | Val Loss: 0.4991 | Val Acc: 0.7895
+Epoch Time: 437.96s
+No improvement for 4 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_140023_HierarchicalAttnMIL_epoch10.pth
+
+Epoch 11/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000395 entropy=2.979358 lam*H=0.002979
+Train Loss: -0.0002 | Val Loss: 0.5780 | Val Acc: 0.7895
+Epoch Time: 564.81s
+No improvement for 5 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_140948_HierarchicalAttnMIL_epoch11.pth
+
+Epoch 12/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000706 entropy=2.365958 lam*H=0.002366
+Train Loss: -0.0003 | Val Loss: 0.5801 | Val Acc: 0.7895
+Epoch Time: 514.84s
+No improvement for 6 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_141823_HierarchicalAttnMIL_epoch12.pth
+
+Epoch 13/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000352 entropy=2.727897 lam*H=0.002728
+Train Loss: -0.0011 | Val Loss: 0.5870 | Val Acc: 0.7895
+Epoch Time: 581.17s
+No improvement for 7 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_142804_HierarchicalAttnMIL_epoch13.pth
+
+Epoch 14/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000081 entropy=2.217319 lam*H=0.002217
+Train Loss: -0.0011 | Val Loss: 0.5931 | Val Acc: 0.7895
+Epoch Time: 642.19s
+No improvement for 8 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_130554/checkpoints/20260303_143846_HierarchicalAttnMIL_epoch14.pth
+
+Early stopping triggered at epoch 14. Best val loss: 0.1583
+
+Training completed!
+Loss curve saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/loss_curve.png
+
+============================================================
+EVALUATING MODEL
+============================================================
+
+Test Results:
+  Test Loss: 0.4449
+  Test Acc:  0.8947
+  Samples:   19
+Predictions saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/predictions.csv
+Confusion matrix saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/confusion_matrix.png
+Deviation plot saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/deviation_plot.png
+
+============================================================
+ATTENTION ANALYSIS
+============================================================
+Attention summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/attention_analysis/attention_summary.txt
+Per-case effective patch attention distributions saved.
+Per-case & per-stain slice attention rank plots saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/attention_analysis/slice_attention
+Per-case top 5.0% effective patches CSV saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/attention_analysis/top_effective_patches_per_case_5.0pct.csv
+Per-case top 5.0% summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/attention_analysis/top_effective_patches_per_case_summary_5.0pct.txt
+Attention analysis saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554/attention_analysis
+
+Results saved to: /projects/e32998/MIL_training/final_runs/run_20260303_130554
+
+Total execution time: 5957.01s (1.65 hours)
+Training completed successfully!
+=== Generating split for benign family idx=2 ===
+================================================================================
+CREATING DATA SPLITS (EXCLUDE FROM TEST + MATCHED PROPORTIONS)
+================================================================================
+labels_csv:        /projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv
+patches_dir:       /projects/e32998/patches_benign_split
+seed:              42
+save_dir:          data_splits/family_2
+ratios (targets):  train=0.6, val=0.2, test=0.2
+exclude_from_test: [46]
+max_ratio_den:     50
+
+Loaded 118 label rows
+Found 83630 files in patches_dir
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Loaded 4 benign families from benign_families.json
+Forcing benign family idx=2 into TEST: [25, 119]
+
+Overall case counts:
+  Total:  93  |  Benign: 35  |  High: 58
+  Exact global high ratio:   0.623656  (58/93)
+  Enforced approx ratio:     0.625000  (5/8)
+
+Target split sizes (non-empty) and required class counts:
+  Train: N=55  => benign=21, high=34
+  Val:   N=19    => benign=7, high=12
+  Test:  N=19   => benign=7, high=12
+
+Final achieved high-grade ratios:
+  Train: 34/55 = 0.618182
+  Val:   12/19 = 0.631579
+  Test:  12/19 = 0.631579
+
+Slice counts after split:
+  Train slices: 235
+  Val slices:   50
+  Test slices:  86
+
+----------------------------------------
+LEAK CHECK
+----------------------------------------
+Cases per split: 55 19 19
+Paths per split: 49478 14053 16510
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+[OK] None of the excluded cases appear in TEST.
+
+================================================================================
+TRAIN SPLIT
+================================================================================
+Total cases:      55
+Benign (0):       21
+High-grade (1):   34
+High-grade ratio: 0.618182
+
+Benign CASE IDs:
+[2, 23, 24, 26, 27, 30, 34, 36, 43, 53, 56, 77, 78, 79, 85, 86, 93, 107, 108, 109, 111]
+
+High-grade CASE IDs:
+[1, 5, 7, 11, 12, 15, 17, 18, 19, 32, 38, 40, 41, 47, 48, 49, 52, 55, 58, 61, 63, 64, 66, 72, 73, 83, 84, 88, 91, 95, 97, 98, 99, 100]
+
+================================================================================
+VAL SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[4, 22, 28, 46, 94, 96, 110]
+
+High-grade CASE IDs:
+[3, 16, 42, 44, 50, 51, 60, 67, 80, 87, 92, 106]
+
+================================================================================
+TEST SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[21, 25, 45, 82, 90, 118, 119]
+
+High-grade CASE IDs:
+[9, 14, 54, 57, 59, 68, 69, 70, 75, 89, 101, 104]
+Data splits saved to: data_splits/family_2/data_splits.npz
+
+================================================================================
+DONE
+================================================================================
+Saved: data_splits/family_2/data_splits.npz
+Use it like:
+  python main.py --load_splits data_splits/family_2/data_splits.npz
+=== Training/evaluating for benign family idx=2 ===
+Random seed set to 42
+Using CPU
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260303_144553
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv', 'patches_dir': '/projects/e32998/patches_benign_split', 'epochs': 30, 'lr': 0.000208, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': 'data_splits/family_2/data_splits.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.000208, 'weight_decay': 0.000305, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5285, 1.0], 'dropout': 0.2599, 'entropy_lambda': 0.001, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 4, 'scheduler_factor': 0.2139, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: data_splits/family_2/data_splits.npz
+Data splits loaded from: data_splits/family_2/data_splits.npz
+Loaded splits - Train: 235, Val: 50, Test: 86
+Cases per split: 55 19 19
+Paths per split: 49478 14053 16510
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    7  12
+train  21  34
+val     7  12
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         459.2          220.7          189.1
+train        443.9          246.3          209.4
+val          344.6          225.3          169.7
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         323.0          185.0          145.0
+train        323.0          179.0          156.0
+val          345.0          192.0          143.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.000          0.053
+train          0.0          0.018          0.000
+val            0.0          0.053          0.053
+
+Total cases: 93
+Total patches: 80,041
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     15635 patches
+  High-grade (1): 33843 patches
+
+Patch count by class for Validation:
+  Benign (0):     5265 patches
+  High-grade (1): 8788 patches
+
+Patch count by class for Test:
+  Benign (0):     4880 patches
+  High-grade (1): 11630 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 55/55 (100.0%)
+  melan: 54/55 (98.2%)
+  sox10: 55/55 (100.0%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 18/19 (94.7%)
+  sox10: 18/19 (94.7%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 19/19 (100.0%)
+  sox10: 18/19 (94.7%)
+No issues found
+Using existing splits from: data_splits/family_2/data_splits.npz
+
+============================================================
+CREATING DATA LOADERS (POOLED FEATURES)
+============================================================
+Created data loaders - Train: 55, Val: 19, Test: 19
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 2,493,061
+Trainable parameters: 2,493,061
+Model size: 9.51 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 2,493,061
+LR scheduler: ReduceLROnPlateau
+Early stopping enabled (patience=8, min_delta=0.001, min_epochs=10)
+
+Epoch 1/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.604317 entropy=2.743584 lam*H=0.002744
+Train Loss: 1.0500 | Val Loss: 0.5361 | Val Acc: 0.6842
+Epoch Time: 620.23s
+New best validation loss: 0.5361
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_145625_HierarchicalAttnMIL_epoch1.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/best.pth
+
+Epoch 2/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=1.059480 entropy=2.458244 lam*H=0.002458
+Train Loss: 0.4570 | Val Loss: 0.7296 | Val Acc: 0.7895
+Epoch Time: 586.09s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_150611_HierarchicalAttnMIL_epoch2.pth
+
+Epoch 3/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000829 entropy=2.603620 lam*H=0.002604
+Train Loss: 0.2921 | Val Loss: 0.4416 | Val Acc: 0.7895
+Epoch Time: 588.59s
+New best validation loss: 0.4416
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_151600_HierarchicalAttnMIL_epoch3.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/best.pth
+
+Epoch 4/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.394720 entropy=3.712428 lam*H=0.003712
+Train Loss: 0.1487 | Val Loss: 0.3660 | Val Acc: 0.7895
+Epoch Time: 545.45s
+New best validation loss: 0.3660
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_152505_HierarchicalAttnMIL_epoch4.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/best.pth
+
+Epoch 5/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.004831 entropy=3.589233 lam*H=0.003589
+Train Loss: 0.0421 | Val Loss: 0.5016 | Val Acc: 0.8421
+Epoch Time: 675.65s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_153621_HierarchicalAttnMIL_epoch5.pth
+
+Epoch 6/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.013356 entropy=3.134742 lam*H=0.003135
+Train Loss: 0.0090 | Val Loss: 0.5863 | Val Acc: 0.7895
+Epoch Time: 457.05s
+No improvement for 2 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_154358_HierarchicalAttnMIL_epoch6.pth
+
+Epoch 7/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.007036 entropy=2.962811 lam*H=0.002963
+Train Loss: 0.0456 | Val Loss: 0.4937 | Val Acc: 0.8421
+Epoch Time: 582.22s
+No improvement for 3 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_155340_HierarchicalAttnMIL_epoch7.pth
+
+Epoch 8/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000442 entropy=1.699150 lam*H=0.001699
+Train Loss: 0.5742 | Val Loss: 1.2814 | Val Acc: 0.7368
+Epoch Time: 593.80s
+No improvement for 4 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_160334_HierarchicalAttnMIL_epoch8.pth
+
+Epoch 9/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000092 entropy=2.316025 lam*H=0.002316
+Train Loss: 0.1826 | Val Loss: 0.6632 | Val Acc: 0.7895
+Epoch Time: 685.63s
+No improvement for 5 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_161500_HierarchicalAttnMIL_epoch9.pth
+
+Epoch 10/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000126 entropy=3.105379 lam*H=0.003105
+Train Loss: 0.0143 | Val Loss: 0.6822 | Val Acc: 0.7895
+Epoch Time: 780.44s
+No improvement for 6 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_162800_HierarchicalAttnMIL_epoch10.pth
+
+Epoch 11/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000000 entropy=2.221709 lam*H=0.002222
+Train Loss: 0.0065 | Val Loss: 0.6829 | Val Acc: 0.7895
+Epoch Time: 799.74s
+No improvement for 7 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_164120_HierarchicalAttnMIL_epoch11.pth
+
+Epoch 12/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.013893 entropy=1.958125 lam*H=0.001958
+Train Loss: 0.0040 | Val Loss: 0.6904 | Val Acc: 0.7895
+Epoch Time: 798.57s
+No improvement for 8 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_144553/checkpoints/20260303_165439_HierarchicalAttnMIL_epoch12.pth
+
+Early stopping triggered at epoch 12. Best val loss: 0.3660
+
+Training completed!
+Loss curve saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/loss_curve.png
+
+============================================================
+EVALUATING MODEL
+============================================================
+
+Test Results:
+  Test Loss: 0.7437
+  Test Acc:  0.7895
+  Samples:   19
+Predictions saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/predictions.csv
+Confusion matrix saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/confusion_matrix.png
+Deviation plot saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/deviation_plot.png
+
+============================================================
+ATTENTION ANALYSIS
+============================================================
+Attention summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/attention_analysis/attention_summary.txt
+Per-case effective patch attention distributions saved.
+Per-case & per-stain slice attention rank plots saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/attention_analysis/slice_attention
+Per-case top 5.0% effective patches CSV saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/attention_analysis/top_effective_patches_per_case_5.0pct.csv
+Per-case top 5.0% summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/attention_analysis/top_effective_patches_per_case_summary_5.0pct.txt
+Attention analysis saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553/attention_analysis
+
+Results saved to: /projects/e32998/MIL_training/final_runs/run_20260303_144553
+
+Total execution time: 8081.77s (2.24 hours)
+Training completed successfully!
+=== Generating split for benign family idx=3 ===
+================================================================================
+CREATING DATA SPLITS (EXCLUDE FROM TEST + MATCHED PROPORTIONS)
+================================================================================
+labels_csv:        /projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv
+patches_dir:       /projects/e32998/patches_benign_split
+seed:              42
+save_dir:          data_splits/family_3
+ratios (targets):  train=0.6, val=0.2, test=0.2
+exclude_from_test: [46]
+max_ratio_den:     50
+
+Loaded 118 label rows
+Found 83630 files in patches_dir
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Loaded 4 benign families from benign_families.json
+Forcing benign family idx=3 into TEST: [26, 118]
+
+Overall case counts:
+  Total:  93  |  Benign: 35  |  High: 58
+  Exact global high ratio:   0.623656  (58/93)
+  Enforced approx ratio:     0.625000  (5/8)
+
+Target split sizes (non-empty) and required class counts:
+  Train: N=55  => benign=21, high=34
+  Val:   N=19    => benign=7, high=12
+  Test:  N=19   => benign=7, high=12
+
+Final achieved high-grade ratios:
+  Train: 34/55 = 0.618182
+  Val:   12/19 = 0.631579
+  Test:  12/19 = 0.631579
+
+Slice counts after split:
+  Train slices: 230
+  Val slices:   50
+  Test slices:  91
+
+----------------------------------------
+LEAK CHECK
+----------------------------------------
+Cases per split: 55 19 19
+Paths per split: 49074 14053 16914
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+[OK] None of the excluded cases appear in TEST.
+
+================================================================================
+TRAIN SPLIT
+================================================================================
+Total cases:      55
+Benign (0):       21
+High-grade (1):   34
+High-grade ratio: 0.618182
+
+Benign CASE IDs:
+[2, 23, 24, 25, 27, 30, 34, 36, 43, 53, 56, 77, 78, 79, 85, 86, 93, 107, 108, 109, 111]
+
+High-grade CASE IDs:
+[1, 5, 7, 11, 12, 15, 17, 18, 19, 32, 38, 40, 41, 47, 48, 49, 52, 55, 58, 61, 63, 64, 66, 72, 73, 83, 84, 88, 91, 95, 97, 98, 99, 100]
+
+================================================================================
+VAL SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[4, 22, 28, 46, 94, 96, 110]
+
+High-grade CASE IDs:
+[3, 16, 42, 44, 50, 51, 60, 67, 80, 87, 92, 106]
+
+================================================================================
+TEST SPLIT
+================================================================================
+Total cases:      19
+Benign (0):       7
+High-grade (1):   12
+High-grade ratio: 0.631579
+
+Benign CASE IDs:
+[21, 26, 45, 82, 90, 118, 119]
+
+High-grade CASE IDs:
+[9, 14, 54, 57, 59, 68, 69, 70, 75, 89, 101, 104]
+Data splits saved to: data_splits/family_3/data_splits.npz
+
+================================================================================
+DONE
+================================================================================
+Saved: data_splits/family_3/data_splits.npz
+Use it like:
+  python main.py --load_splits data_splits/family_3/data_splits.npz
+=== Training/evaluating for benign family idx=3 ===
+Random seed set to 42
+Using CPU
+Created run directory: /projects/e32998/MIL_training/final_runs/run_20260303_170125
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': '/projects/e32998/STAT390_Krish/Code/Code4_reduce_runtime/extra_benign_case_grade_match.csv', 'patches_dir': '/projects/e32998/patches_benign_split', 'epochs': 30, 'lr': 0.000208, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 500, 'max_slices_per_stain': 5, 'seed': 42, 'resume': None, 'eval_only': False, 'analyze_attention': True, 'attention_top_n': 8, 'load_splits': 'data_splits/family_3/data_splits.npz', 'checkpoint_dir': '/projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.000208, 'weight_decay': 0.000305, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5285, 1.0], 'dropout': 0.2599, 'entropy_lambda': 0.001, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 4, 'scheduler_factor': 0.2139, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: data_splits/family_3/data_splits.npz
+Data splits loaded from: data_splits/family_3/data_splits.npz
+Loaded splits - Train: 230, Val: 50, Test: 91
+Cases per split: 55 19 19
+Paths per split: 49074 14053 16914
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    7  12
+train  21  34
+val     7  12
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         471.7          227.8          190.6
+train        439.6          243.8          208.8
+val          344.6          225.3          169.7
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         356.0          192.0          145.0
+train        322.0          179.0          156.0
+val          345.0          192.0          143.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.000          0.053
+train          0.0          0.018          0.000
+val            0.0          0.053          0.053
+
+Total cases: 93
+Total patches: 80,041
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     15231 patches
+  High-grade (1): 33843 patches
+
+Patch count by class for Validation:
+  Benign (0):     5265 patches
+  High-grade (1): 8788 patches
+
+Patch count by class for Test:
+  Benign (0):     5284 patches
+  High-grade (1): 11630 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 55/55 (100.0%)
+  melan: 54/55 (98.2%)
+  sox10: 55/55 (100.0%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 18/19 (94.7%)
+  sox10: 18/19 (94.7%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 19/19 (100.0%)
+  sox10: 18/19 (94.7%)
+No issues found
+Using existing splits from: data_splits/family_3/data_splits.npz
+
+============================================================
+CREATING DATA LOADERS (POOLED FEATURES)
+============================================================
+Created data loaders - Train: 55, Val: 19, Test: 19
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 2,493,061
+Trainable parameters: 2,493,061
+Model size: 9.51 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 2,493,061
+LR scheduler: ReduceLROnPlateau
+Early stopping enabled (patience=8, min_delta=0.001, min_epochs=10)
+
+Epoch 1/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.604317 entropy=2.743584 lam*H=0.002744
+Train Loss: 1.0369 | Val Loss: 0.5459 | Val Acc: 0.6842
+Epoch Time: 859.85s
+New best validation loss: 0.5459
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_171558_HierarchicalAttnMIL_epoch1.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/best.pth
+
+Epoch 2/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.409188 entropy=3.413589 lam*H=0.003414
+Train Loss: 0.4392 | Val Loss: 1.6299 | Val Acc: 0.6842
+Epoch Time: 803.87s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_172922_HierarchicalAttnMIL_epoch2.pth
+
+Epoch 3/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000892 entropy=3.174436 lam*H=0.003174
+Train Loss: 0.3845 | Val Loss: 0.4207 | Val Acc: 0.8421
+Epoch Time: 761.90s
+New best validation loss: 0.4207
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_174204_HierarchicalAttnMIL_epoch3.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/best.pth
+
+Epoch 4/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000152 entropy=1.675562 lam*H=0.001676
+Train Loss: 0.2039 | Val Loss: 0.3537 | Val Acc: 0.8421
+Epoch Time: 910.86s
+New best validation loss: 0.3537
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_175715_HierarchicalAttnMIL_epoch4.pth
+Best checkpoint updated: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/best.pth
+
+Epoch 5/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.002256 entropy=2.854802 lam*H=0.002855
+Train Loss: 0.1240 | Val Loss: 0.7669 | Val Acc: 0.7895
+Epoch Time: 877.54s
+No improvement for 1 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_181152_HierarchicalAttnMIL_epoch5.pth
+
+Epoch 6/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.015907 entropy=2.990020 lam*H=0.002990
+Train Loss: 0.0560 | Val Loss: 0.8405 | Val Acc: 0.7895
+Epoch Time: 809.51s
+No improvement for 2 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_182522_HierarchicalAttnMIL_epoch6.pth
+
+Epoch 7/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.001284 entropy=2.541941 lam*H=0.002542
+Train Loss: 0.1985 | Val Loss: 0.7605 | Val Acc: 0.8421
+Epoch Time: 646.98s
+No improvement for 3 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_183609_HierarchicalAttnMIL_epoch7.pth
+
+Epoch 8/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000011 entropy=2.029196 lam*H=0.002029
+Train Loss: 0.0900 | Val Loss: 0.8753 | Val Acc: 0.7368
+Epoch Time: 743.89s
+No improvement for 4 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_184833_HierarchicalAttnMIL_epoch8.pth
+
+Epoch 9/30 (LR: 2.08e-04)
+[ER DEBUG] lam=1.000e-03 base_loss=0.479419 entropy=3.463982 lam*H=0.003464
+Train Loss: 0.0153 | Val Loss: 0.6963 | Val Acc: 0.7368
+Epoch Time: 744.83s
+No improvement for 5 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_190058_HierarchicalAttnMIL_epoch9.pth
+
+Epoch 10/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.002195 entropy=2.137653 lam*H=0.002138
+Train Loss: 0.0009 | Val Loss: 0.7040 | Val Acc: 0.7368
+Epoch Time: 707.77s
+No improvement for 6 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_191246_HierarchicalAttnMIL_epoch10.pth
+
+Epoch 11/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000164 entropy=3.291599 lam*H=0.003292
+Train Loss: 0.0009 | Val Loss: 0.7214 | Val Acc: 0.7368
+Epoch Time: 703.71s
+No improvement for 7 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_192429_HierarchicalAttnMIL_epoch11.pth
+
+Epoch 12/30 (LR: 4.45e-05)
+[ER DEBUG] lam=1.000e-03 base_loss=0.000031 entropy=3.210939 lam*H=0.003211
+Train Loss: -0.0000 | Val Loss: 0.7344 | Val Acc: 0.7368
+Epoch Time: 684.84s
+No improvement for 8 epoch(s)
+Checkpoint saved: /projects/e32998/MIL_training/final_runs/run_20260303_170125/checkpoints/20260303_193554_HierarchicalAttnMIL_epoch12.pth
+
+Early stopping triggered at epoch 12. Best val loss: 0.3537
+
+Training completed!
+Loss curve saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/loss_curve.png
+
+============================================================
+EVALUATING MODEL
+============================================================
+
+Test Results:
+  Test Loss: 0.6144
+  Test Acc:  0.8421
+  Samples:   19
+Predictions saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/predictions.csv
+Confusion matrix saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/confusion_matrix.png
+Deviation plot saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/deviation_plot.png
+
+============================================================
+ATTENTION ANALYSIS
+============================================================
+Attention summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/attention_analysis/attention_summary.txt
+Per-case effective patch attention distributions saved.
+Per-case & per-stain slice attention rank plots saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/attention_analysis/slice_attention
+Per-case top 5.0% effective patches CSV saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/attention_analysis/top_effective_patches_per_case_5.0pct.csv
+Per-case top 5.0% summary saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/attention_analysis/top_effective_patches_per_case_summary_5.0pct.txt
+Attention analysis saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125/attention_analysis
+
+Results saved to: /projects/e32998/MIL_training/final_runs/run_20260303_170125
+
+Total execution time: 9596.63s (2.67 hours)
+Training completed successfully!

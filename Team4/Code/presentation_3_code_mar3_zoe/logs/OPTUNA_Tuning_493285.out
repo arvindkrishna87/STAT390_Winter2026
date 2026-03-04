@@ -1,0 +1,85 @@
+Job ID: 493285
+Start time: Sun Mar  1 21:19:01 CST 2026
+Random seed set to 42
+Using CPU
+================================================================================
+OPTUNA HYPERPARAMETER OPTIMIZATION FOR MIL
+================================================================================
+Device: cpu
+Number of trials: 4
+Epochs per trial: 30
+Pruning warmup: 3 epochs
+Per slice cap: 500
+Max slices per stain: 5
+Output directory: ./optuna_results_20260301_211922
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/data_splits/data_splits.npz
+Data splits loaded from: /home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/data_splits/data_splits.npz
+Loaded splits - Train: 226, Val: 77
+Cases per split: 55 19 0
+Paths per split: 51023 13864 0
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Patch count by class for Train:
+  Benign (0):     15126 patches
+  High-grade (1): 35897 patches
+
+Patch count by class for Validation:
+  Benign (0):     4493 patches
+  High-grade (1): 9371 patches
+
+============================================================
+CREATING DATA LOADERS
+============================================================
+Train batches: 55
+Val batches: 19
+
+============================================================
+CREATING OPTUNA STUDY
+============================================================
+
+============================================================
+STARTING OPTIMIZATION
+============================================================
+
+============================================================
+Trial 0
+============================================================
+Parameters:
+  Learning rate:          5.61e-05
+  Weight decay:           7.11e-03
+  Classifier dropout:     0.140
+  Project dropout:        0.160
+  Class weight (benign):  1.81
+  Entropy lambda:         0.0000
+  Use scheduler:          True
+[W 2026-03-01 21:19:23,101] Trial 0 failed with parameters: {'learning_rate': 5.6115164153345e-05, 'weight_decay': 0.0071144760093434225, 'project_dropout': 0.15979909127171077, 'classifier_dropout': 0.1397987726295555, 'class_weight_benign': 1.812037280884873, 'entropy_lambda': 2.9375384576328295e-05} because of the following error: KeyError('scheduler_min_lr').
+Traceback (most recent call last):
+  File "/projects/e32998/env/lib/python3.12/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 626, in objective_wrapper
+    return objective(
+           ^^^^^^^^^^
+  File "/gpfs/home/bdp1083/Presentation_3_code/ER_GA_DO_FEB27/optuna_training_3.py", line 304, in objective
+    print(f"  Scheduler min lr:       {OPTUNA_CONFIG['scheduler_min_lr']:.2e}")
+                                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'scheduler_min_lr'
+[W 2026-03-01 21:19:23,103] Trial 0 failed with value None.
