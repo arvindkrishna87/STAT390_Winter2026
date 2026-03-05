@@ -31,4 +31,4 @@ cd /projects/e32998/STAT390_Winter2026/Team4/Code/presentation_3_code_mar3_zoe
 mkdir -p /projects/e32998/STAT390_Winter2026/Team4/Code/presentation_3_code_mar3_zoe/logs
 set -euo pipefail
 
-bash run_benign_family_sweeps.sh
+bash run_benign_famisweeps.sh
