@@ -143,13 +143,6 @@ def analyze_attention_weights(model, test_loader, output_dir: str, top_n: int = 
     )
 
     print(f"Attention analysis saved to: {attention_dir}")
-    
-    
-    import pandas as pd
-    
-    weights_df_path = os.path.join(attention_dir, "weights_df.csv")
-    pd.DataFrame(all_patch_records).to_csv(weights_df_path, index=False)
-    print(f"Saved full weights_df to: {weights_df_path}")
 
 # ---------------------------------------------------------------------
 # Case-level analysis
